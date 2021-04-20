@@ -32,9 +32,6 @@ namespace BuddyAPI
             {
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "BuddyAPI", Version = "v1" });
             });
-
-            //services.AddDbContext<BuddyDB>(options =>
-            //options.UseSqlServer(Configuration.GetConnectionString("BuddyDb")));
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
