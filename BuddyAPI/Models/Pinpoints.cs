@@ -1,8 +1,9 @@
 ﻿using System;
+using System.Collections.Generic;
 
-public class Pinpoints
+namespace BuddyAPI
 {
-	public Pinpoints()
+	public class Pinpoints
 	{
 		public int pinpointId { get; set; }
 		public int pinTypeId { get; set; }
@@ -12,6 +13,6 @@ public class Pinpoints
 		public string pinpointName { get; set; }
 		public string pinpointDesc { get; set; }
 
-		public virtual ICollection<Pinpoints> Pinpoints { get; set; }
+		public virtual ICollection<Pinpoints> pinpoints { get; set; }
 	}
 }
