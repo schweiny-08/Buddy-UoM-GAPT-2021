@@ -16,24 +16,24 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Content Include="StaticFile\images\PngTiles\15\17701\12878.png" />
+    <Content Include="StaticFile\images\PngTiles\15\17702\12878.png" />
+    <Content Include="StaticFile\images\PngTiles\16\35403\25757.png" />
+    <Content Include="StaticFile\images\PngTiles\16\35404\25756.png" />
+    <Content Include="StaticFile\images\PngTiles\16\35404\25757.png" />
+    <Content Include="StaticFile\images\PngTiles\16\35405\25756.png" />
+    <Content Include="StaticFile\images\PngTiles\16\35405\25757.png" />
+    <Content Include="StaticFile\images\PngTiles\googlemaps.html" />
+    <Content Include="StaticFile\images\PngTiles\index.html" />
+    <Content Include="StaticFile\images\PngTiles\leaflet.html" />
+    <Content Include="StaticFile\images\PngTiles\openlayers.html" />
+    <Content Include="StaticFile\images\PngTiles\Png Tiles.mbtiles" />
     <Content Include="StaticFile\Index.html" />
   </ItemGroup>
 
   <ItemGroup>
     <None Include="wwwroot\css\site.css" />
     <None Include="wwwroot\favicon.ico" />
-    <None Include="wwwroot\images\PngTiles\15\17701\12878.png" />
-    <None Include="wwwroot\images\PngTiles\15\17702\12878.png" />
-    <None Include="wwwroot\images\PngTiles\16\35403\25757.png" />
-    <None Include="wwwroot\images\PngTiles\16\35404\25756.png" />
-    <None Include="wwwroot\images\PngTiles\16\35404\25757.png" />
-    <None Include="wwwroot\images\PngTiles\16\35405\25756.png" />
-    <None Include="wwwroot\images\PngTiles\16\35405\25757.png" />
-    <None Include="wwwroot\images\PngTiles\googlemaps.html" />
-    <None Include="wwwroot\images\PngTiles\index.html" />
-    <None Include="wwwroot\images\PngTiles\leaflet.html" />
-    <None Include="wwwroot\images\PngTiles\openlayers.html" />
-    <None Include="wwwroot\images\PngTiles\Png Tiles.mbtiles" />
     <None Include="wwwroot\js\site.js" />
     <None Include="wwwroot\lib\bootstrap\dist\css\bootstrap-grid.css" />
     <None Include="wwwroot\lib\bootstrap\dist\css\bootstrap-reboot.css" />
