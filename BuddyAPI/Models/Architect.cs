@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 
 namespace BuddyAPI
@@ -11,3 +11,4 @@ namespace BuddyAPI
 		public virtual ICollection<Architect> architects { get; set; }
 	}
 }
+
