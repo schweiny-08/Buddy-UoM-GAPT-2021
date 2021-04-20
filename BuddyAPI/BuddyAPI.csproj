@@ -5,6 +5,52 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="Models\**" />
+    <Content Remove="Models\**" />
+    <EmbeddedResource Remove="Models\**" />
+    <None Remove="Models\**" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Remove="StaticFile\Index.html" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Include="StaticFile\Index.html" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Include="wwwroot\css\site.css" />
+    <None Include="wwwroot\favicon.ico" />
+    <None Include="wwwroot\images\PngTiles\15\17701\12878.png" />
+    <None Include="wwwroot\images\PngTiles\15\17702\12878.png" />
+    <None Include="wwwroot\images\PngTiles\16\35403\25757.png" />
+    <None Include="wwwroot\images\PngTiles\16\35404\25756.png" />
+    <None Include="wwwroot\images\PngTiles\16\35404\25757.png" />
+    <None Include="wwwroot\images\PngTiles\16\35405\25756.png" />
+    <None Include="wwwroot\images\PngTiles\16\35405\25757.png" />
+    <None Include="wwwroot\images\PngTiles\googlemaps.html" />
+    <None Include="wwwroot\images\PngTiles\index.html" />
+    <None Include="wwwroot\images\PngTiles\leaflet.html" />
+    <None Include="wwwroot\images\PngTiles\openlayers.html" />
+    <None Include="wwwroot\images\PngTiles\Png Tiles.mbtiles" />
+    <None Include="wwwroot\js\site.js" />
+    <None Include="wwwroot\lib\bootstrap\dist\css\bootstrap-grid.css" />
+    <None Include="wwwroot\lib\bootstrap\dist\css\bootstrap-reboot.css" />
+    <None Include="wwwroot\lib\bootstrap\dist\css\bootstrap.css" />
+    <None Include="wwwroot\lib\bootstrap\dist\js\bootstrap.bundle.js" />
+    <None Include="wwwroot\lib\bootstrap\dist\js\bootstrap.js" />
+    <None Include="wwwroot\lib\bootstrap\LICENSE" />
+    <None Include="wwwroot\lib\jquery-validation-unobtrusive\jquery.validate.unobtrusive.js" />
+    <None Include="wwwroot\lib\jquery-validation-unobtrusive\LICENSE.txt" />
+    <None Include="wwwroot\lib\jquery-validation\dist\additional-methods.js" />
+    <None Include="wwwroot\lib\jquery-validation\dist\jquery.validate.js" />
+    <None Include="wwwroot\lib\jquery-validation\LICENSE.md" />
+    <None Include="wwwroot\lib\jquery\dist\jquery.js" />
+    <None Include="wwwroot\lib\jquery\LICENSE.txt" />
+  </ItemGroup>
+
+  <ItemGroup>
     <PackageReference Include="Swashbuckle.AspNetCore" Version="5.6.3" />
   </ItemGroup>
 

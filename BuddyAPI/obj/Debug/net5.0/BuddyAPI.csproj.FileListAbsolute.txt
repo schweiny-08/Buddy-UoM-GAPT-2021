@@ -27,3 +27,14 @@ D:\University\2nd Year\2nd Semester\GAPT\Buddy-UoM-GAPT-2021\BuddyAPI\obj\Debug\
 D:\University\2nd Year\2nd Semester\GAPT\Buddy-UoM-GAPT-2021\BuddyAPI\obj\Debug\net5.0\ref\BuddyAPI.dll
 D:\University\2nd Year\2nd Semester\GAPT\Buddy-UoM-GAPT-2021\BuddyAPI\obj\Debug\net5.0\BuddyAPI.pdb
 D:\University\2nd Year\2nd Semester\GAPT\Buddy-UoM-GAPT-2021\BuddyAPI\obj\Debug\net5.0\BuddyAPI.genruntimeconfig.cache
+D:\University\2nd Year\2nd Semester\GAPT\Buddy-UoM-GAPT-2021\BuddyAPI\obj\Debug\net5.0\BuddyAPI.RazorAssemblyInfo.cache
+D:\University\2nd Year\2nd Semester\GAPT\Buddy-UoM-GAPT-2021\BuddyAPI\obj\Debug\net5.0\BuddyAPI.RazorAssemblyInfo.cs
+D:\University\2nd Year\2nd Semester\GAPT\Buddy-UoM-GAPT-2021\BuddyAPI\obj\Debug\net5.0\BuddyAPI.TagHelpers.input.cache
+D:\University\2nd Year\2nd Semester\GAPT\Buddy-UoM-GAPT-2021\BuddyAPI\obj\Debug\net5.0\BuddyAPI.TagHelpers.output.cache
+D:\University\2nd Year\2nd Semester\GAPT\Buddy-UoM-GAPT-2021\BuddyAPI\obj\Debug\net5.0\BuddyAPI.RazorCoreGenerate.cache
+D:\University\2nd Year\2nd Semester\GAPT\Buddy-UoM-GAPT-2021\BuddyAPI\obj\Debug\net5.0\Razor\Views\Home\Privacy.cshtml.g.cs
+D:\University\2nd Year\2nd Semester\GAPT\Buddy-UoM-GAPT-2021\BuddyAPI\obj\Debug\net5.0\Razor\Views\_ViewStart.cshtml.g.cs
+D:\University\2nd Year\2nd Semester\GAPT\Buddy-UoM-GAPT-2021\BuddyAPI\obj\Debug\net5.0\BuddyAPI.RazorTargetAssemblyInfo.cs
+D:\University\2nd Year\2nd Semester\GAPT\Buddy-UoM-GAPT-2021\BuddyAPI\bin\Debug\net5.0\BuddyAPI.Views.dll
+D:\University\2nd Year\2nd Semester\GAPT\Buddy-UoM-GAPT-2021\BuddyAPI\bin\Debug\net5.0\BuddyAPI.Views.pdb
+D:\University\2nd Year\2nd Semester\GAPT\Buddy-UoM-GAPT-2021\BuddyAPI\obj\Debug\net5.0\BuddyAPI.Views.pdb
