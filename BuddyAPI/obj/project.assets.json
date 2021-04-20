@@ -193,25 +193,20 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\andre\\.nuget\\packages\\": {},
-    "C:\\Program Files (x86)\\Microsoft\\Xamarin\\NuGet\\": {}
+    "C:\\Users\\owner\\.nuget\\packages\\": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "D:\\University\\2nd Year\\2nd Semester\\GAPT\\Buddy-UoM-GAPT-2021\\BuddyAPI\\BuddyAPI.csproj",
+      "projectUniqueName": "Z:\\CodeProjects\\Buddy-UoM-GAPT-2021\\BuddyAPI\\BuddyAPI.csproj",
       "projectName": "BuddyAPI",
-      "projectPath": "D:\\University\\2nd Year\\2nd Semester\\GAPT\\Buddy-UoM-GAPT-2021\\BuddyAPI\\BuddyAPI.csproj",
-      "packagesPath": "C:\\Users\\andre\\.nuget\\packages\\",
-      "outputPath": "D:\\University\\2nd Year\\2nd Semester\\GAPT\\Buddy-UoM-GAPT-2021\\BuddyAPI\\obj\\",
+      "projectPath": "Z:\\CodeProjects\\Buddy-UoM-GAPT-2021\\BuddyAPI\\BuddyAPI.csproj",
+      "packagesPath": "C:\\Users\\owner\\.nuget\\packages\\",
+      "outputPath": "Z:\\CodeProjects\\Buddy-UoM-GAPT-2021\\BuddyAPI\\obj\\",
       "projectStyle": "PackageReference",
-      "fallbackFolders": [
-        "C:\\Program Files (x86)\\Microsoft\\Xamarin\\NuGet\\"
-      ],
       "configFilePaths": [
-        "C:\\Users\\andre\\AppData\\Roaming\\NuGet\\NuGet.Config",
-        "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config",
-        "C:\\Program Files (x86)\\NuGet\\Config\\Xamarin.Offline.config"
+        "C:\\Users\\owner\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
       "originalTargetFrameworks": [
         "net5.0"
@@ -259,7 +254,7 @@
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.202\\RuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.200\\RuntimeIdentifierGraph.json"
       }
     }
   }
