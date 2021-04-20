@@ -1,8 +1,9 @@
 ﻿using System;
+using System.Collections.Generic;
 
-public class PrivateEvents
+namespace BuddyAPI
 {
-	public PrivateEvents()
+	public class PrivateEvents
 	{
 		public int privEventId { get; set; }
 		public int pinpointId { get; set; }
@@ -11,6 +12,6 @@ public class PrivateEvents
 		public DateTime startTime { get; set; }
 		public DateTime endTime { get; set; }
 
-		public virtual ICollection<PrivateEvents> PrivateEvents { get; set; }
+		public virtual ICollection<PrivateEvents> privateEvents { get; set; }
 	}
 }
