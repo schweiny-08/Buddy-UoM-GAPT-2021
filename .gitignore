@@ -251,3 +251,8 @@ __pycache__/
 
 # Windows thumbnail cache files
 Thumbs.db
+
+############################### Created by Andrew ################################
+*.cache
+.csproj.nuget.dgspec.json
+*.props
