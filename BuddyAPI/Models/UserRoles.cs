@@ -1,13 +1,12 @@
 ﻿using System;
-using System.Collections.Generic;
 
-namespace BuddyAPI
+public class UserRoles
 {
-	public class UserRoles
+	public UserRoles()
 	{
 		public int userId { get; set; }
 		public int roleId { get; set; }
 
-		public virtual ICollection<UserRoles> userRoles { get; set; }
+		public virtual ICollection<UserRoles> userRole { get; set; }
 	}
 }

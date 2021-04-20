@@ -1,14 +1,12 @@
 ﻿using System;
-using System.Collections.Generic;
 
-namespace BuddyAPI
+public class Hazards
 {
-	public class Hazards
+	public Hazards()
 	{
-
 		public int hazardId { get; set; }
 		public string hazardType { get; set; }
 
-		public virtual ICollection<Hazards> hazard { get; set; }
+		public virtual ICollection<Hazards> Hazards { get; set; }
 	}
 }

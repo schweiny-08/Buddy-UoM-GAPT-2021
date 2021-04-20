@@ -1,9 +1,8 @@
 ﻿using System;
-using System.Collections.Generic;
 
-namespace BuddyAPI
+public class User
 {
-	public class User
+	public User()
 	{
 		public int userId { get; set; }
 		public string username { get; set; }
