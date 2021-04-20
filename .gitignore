@@ -256,6 +256,8 @@ Thumbs.db
 *.cache
 .csproj.nuget.dgspec.json
 *.props
+
+### Created by Liam ###
 /BuddyAPI/.vs/BuddyAPI/config/applicationhost.config
 /BuddyAPI/bin/Debug/net5.0/BuddyAPI.dll
 /BuddyAPI/bin/Debug/net5.0/BuddyAPI.exe
@@ -278,3 +280,5 @@ Thumbs.db
 /BuddyAPI/obj/Debug/net5.0/ref/BuddyAPI.dll
 /BuddyAPI/obj/project.assets.json
 /BuddyAPI/obj/project.nuget.cache
+/BuddyAPI/.vs/BuddyAPI/v16/.suo
+/BuddyAPI/obj/Debug/net5.0/BuddyAPI.csprojAssemblyReference.cache
