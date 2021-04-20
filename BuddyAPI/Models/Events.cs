@@ -1,9 +1,11 @@
 ﻿using System;
+using System.Collections.Generic;
 
-public class Events
+namespace BuddyAPI
 {
-	public Events()
+	public class Events
 	{
+
 		public int eventId { get; set; }
 		public int pinpointId { get; set; }
 		public string eventName { get; set; }
@@ -11,6 +13,6 @@ public class Events
 		public DateTime startTime { get; set; }
 		public DateTime endTime { get; set; }
 
-		public virtual ICollection<Events> Events { get; set; }
+		public virtual ICollection<Events> Event { get; set; }
 	}
 }
