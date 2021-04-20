@@ -254,7 +254,7 @@ Thumbs.db
 
 ############################### Created by Andrew ################################
 *.cache
-.csproj.nuget.dgspec.json
+*.csproj.nuget.dgspec.json
 *.props
-/BuddyAPI/.vs/BuddyAPI/v16/.suo
-/BuddyAPI/obj/Debug/net5.0/BuddyAPI.csprojAssemblyReference.cache
+*project.assets.json
+*project.nuget.cache
