@@ -27,3 +27,32 @@ D:\University\2nd Year\2nd Semester\GAPT\Buddy-UoM-GAPT-2021\BuddyAPI\obj\Debug\
 D:\University\2nd Year\2nd Semester\GAPT\Buddy-UoM-GAPT-2021\BuddyAPI\obj\Debug\net5.0\ref\BuddyAPI.dll
 D:\University\2nd Year\2nd Semester\GAPT\Buddy-UoM-GAPT-2021\BuddyAPI\obj\Debug\net5.0\BuddyAPI.pdb
 D:\University\2nd Year\2nd Semester\GAPT\Buddy-UoM-GAPT-2021\BuddyAPI\obj\Debug\net5.0\BuddyAPI.genruntimeconfig.cache
+Z:\CodeProjects\Buddy-UoM-GAPT-2021\BuddyAPI\obj\Debug\net5.0\BuddyAPI.csprojAssemblyReference.cache
+Z:\CodeProjects\Buddy-UoM-GAPT-2021\BuddyAPI\obj\Debug\net5.0\BuddyAPI.GeneratedMSBuildEditorConfig.editorconfig
+Z:\CodeProjects\Buddy-UoM-GAPT-2021\BuddyAPI\obj\Debug\net5.0\BuddyAPI.AssemblyInfoInputs.cache
+Z:\CodeProjects\Buddy-UoM-GAPT-2021\BuddyAPI\obj\Debug\net5.0\BuddyAPI.AssemblyInfo.cs
+Z:\CodeProjects\Buddy-UoM-GAPT-2021\BuddyAPI\obj\Debug\net5.0\BuddyAPI.csproj.CoreCompileInputs.cache
+Z:\CodeProjects\Buddy-UoM-GAPT-2021\BuddyAPI\obj\Debug\net5.0\BuddyAPI.MvcApplicationPartsAssemblyInfo.cs
+Z:\CodeProjects\Buddy-UoM-GAPT-2021\BuddyAPI\obj\Debug\net5.0\BuddyAPI.MvcApplicationPartsAssemblyInfo.cache
+Z:\CodeProjects\Buddy-UoM-GAPT-2021\BuddyAPI\obj\Debug\net5.0\BuddyAPI.dll
+Z:\CodeProjects\Buddy-UoM-GAPT-2021\BuddyAPI\obj\Debug\net5.0\ref\BuddyAPI.dll
+Z:\CodeProjects\Buddy-UoM-GAPT-2021\BuddyAPI\obj\Debug\net5.0\BuddyAPI.pdb
+Z:\CodeProjects\Buddy-UoM-GAPT-2021\BuddyAPI\bin\Debug\net5.0\appsettings.Development.json
+Z:\CodeProjects\Buddy-UoM-GAPT-2021\BuddyAPI\bin\Debug\net5.0\appsettings.json
+Z:\CodeProjects\Buddy-UoM-GAPT-2021\BuddyAPI\bin\Debug\net5.0\BuddyAPI.exe
+Z:\CodeProjects\Buddy-UoM-GAPT-2021\BuddyAPI\bin\Debug\net5.0\BuddyAPI.deps.json
+Z:\CodeProjects\Buddy-UoM-GAPT-2021\BuddyAPI\bin\Debug\net5.0\BuddyAPI.runtimeconfig.json
+Z:\CodeProjects\Buddy-UoM-GAPT-2021\BuddyAPI\bin\Debug\net5.0\BuddyAPI.runtimeconfig.dev.json
+Z:\CodeProjects\Buddy-UoM-GAPT-2021\BuddyAPI\bin\Debug\net5.0\BuddyAPI.dll
+Z:\CodeProjects\Buddy-UoM-GAPT-2021\BuddyAPI\bin\Debug\net5.0\ref\BuddyAPI.dll
+Z:\CodeProjects\Buddy-UoM-GAPT-2021\BuddyAPI\bin\Debug\net5.0\BuddyAPI.pdb
+Z:\CodeProjects\Buddy-UoM-GAPT-2021\BuddyAPI\bin\Debug\net5.0\Microsoft.OpenApi.dll
+Z:\CodeProjects\Buddy-UoM-GAPT-2021\BuddyAPI\bin\Debug\net5.0\Swashbuckle.AspNetCore.Swagger.dll
+Z:\CodeProjects\Buddy-UoM-GAPT-2021\BuddyAPI\bin\Debug\net5.0\Swashbuckle.AspNetCore.SwaggerGen.dll
+Z:\CodeProjects\Buddy-UoM-GAPT-2021\BuddyAPI\bin\Debug\net5.0\Swashbuckle.AspNetCore.SwaggerUI.dll
+Z:\CodeProjects\Buddy-UoM-GAPT-2021\BuddyAPI\obj\Debug\net5.0\staticwebassets\BuddyAPI.StaticWebAssets.Manifest.cache
+Z:\CodeProjects\Buddy-UoM-GAPT-2021\BuddyAPI\obj\Debug\net5.0\staticwebassets\BuddyAPI.StaticWebAssets.xml
+Z:\CodeProjects\Buddy-UoM-GAPT-2021\BuddyAPI\obj\Debug\net5.0\scopedcss\bundle\BuddyAPI.styles.css
+Z:\CodeProjects\Buddy-UoM-GAPT-2021\BuddyAPI\obj\Debug\net5.0\BuddyAPI.RazorTargetAssemblyInfo.cache
+Z:\CodeProjects\Buddy-UoM-GAPT-2021\BuddyAPI\obj\Debug\net5.0\BuddyAPI.csproj.CopyComplete
+Z:\CodeProjects\Buddy-UoM-GAPT-2021\BuddyAPI\obj\Debug\net5.0\BuddyAPI.genruntimeconfig.cache

@@ -1,8 +1,9 @@
 ﻿using System;
+using System.Collections.Generic;
 
-public class Buildings
+namespace BuddyAPI
 {
-	public Buildings()
+	public class Buildings
 	{
 		public int buildingId { get; set; }
 		public int architectId { get; set; }
@@ -10,6 +11,6 @@ public class Buildings
 		public string buildingName { get; set; }
 		public string buildingDesc { get; set; }
 
-		public virtual ICollection<Buildings> Buildings { get; set; }
+		public virtual ICollection<Buildings> buildings { get; set; }
 	}
 }

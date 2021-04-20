@@ -1,14 +1,15 @@
 ﻿using System;
+using System.Collections.Generic;
 
-public class Locations
+namespace BuddyAPI
 {
-	public Locations()
+	public class Locations
 	{
 		public int locationId { get; set; }
 		public int longitude { get; set; }
 		public int latitude { get; set; }
 
 
-		public virtual ICollection<Locations> Locations { get; set; }
+		public virtual ICollection<Locations> locations { get; set; }
 	}
 }
