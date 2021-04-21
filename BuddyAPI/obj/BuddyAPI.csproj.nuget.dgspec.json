@@ -1,20 +1,23 @@
 {
   "format": 1,
   "restore": {
-    "Z:\\CodeProjects\\Buddy-UoM-GAPT-2021\\BuddyAPI\\BuddyAPI.csproj": {}
+    "C:\\Users\\liamc\\source\\repos\\Buddy-UoM-GAPT-2021\\BuddyAPI\\BuddyAPI.csproj": {}
   },
   "projects": {
-    "Z:\\CodeProjects\\Buddy-UoM-GAPT-2021\\BuddyAPI\\BuddyAPI.csproj": {
+    "C:\\Users\\liamc\\source\\repos\\Buddy-UoM-GAPT-2021\\BuddyAPI\\BuddyAPI.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "Z:\\CodeProjects\\Buddy-UoM-GAPT-2021\\BuddyAPI\\BuddyAPI.csproj",
+        "projectUniqueName": "C:\\Users\\liamc\\source\\repos\\Buddy-UoM-GAPT-2021\\BuddyAPI\\BuddyAPI.csproj",
         "projectName": "BuddyAPI",
-        "projectPath": "Z:\\CodeProjects\\Buddy-UoM-GAPT-2021\\BuddyAPI\\BuddyAPI.csproj",
-        "packagesPath": "C:\\Users\\owner\\.nuget\\packages\\",
-        "outputPath": "Z:\\CodeProjects\\Buddy-UoM-GAPT-2021\\BuddyAPI\\obj\\",
+        "projectPath": "C:\\Users\\liamc\\source\\repos\\Buddy-UoM-GAPT-2021\\BuddyAPI\\BuddyAPI.csproj",
+        "packagesPath": "C:\\Users\\liamc\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\liamc\\source\\repos\\Buddy-UoM-GAPT-2021\\BuddyAPI\\obj\\",
         "projectStyle": "PackageReference",
+        "fallbackFolders": [
+          "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
+        ],
         "configFilePaths": [
-          "C:\\Users\\owner\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\liamc\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
@@ -40,9 +43,31 @@
         "net5.0": {
           "targetAlias": "net5.0",
           "dependencies": {
+            "Microsoft.EntityFrameworkCore": {
+              "target": "Package",
+              "version": "[5.0.5, )"
+            },
+            "Microsoft.EntityFrameworkCore.InMemory": {
+              "target": "Package",
+              "version": "[5.0.5, )"
+            },
+            "Microsoft.EntityFrameworkCore.SqlServer": {
+              "target": "Package",
+              "version": "[5.0.5, )"
+            },
+            "Microsoft.EntityFrameworkCore.Tools": {
+              "include": "Runtime, Build, Native, ContentFiles, Analyzers, BuildTransitive",
+              "suppressParent": "All",
+              "target": "Package",
+              "version": "[5.0.5, )"
+            },
+            "Microsoft.VisualStudio.Web.CodeGeneration.Design": {
+              "target": "Package",
+              "version": "[5.0.2, )"
+            },
             "Swashbuckle.AspNetCore": {
               "target": "Package",
-              "version": "[5.6.3, )"
+              "version": "[6.1.3, )"
             }
           },
           "imports": [
@@ -63,7 +88,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.200\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.201\\RuntimeIdentifierGraph.json"
         }
       }
     }
