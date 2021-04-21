@@ -622,3 +622,13 @@ MigrationBackup/
 
 # Fody - auto-generated XML schema
 FodyWeavers.xsd
+
+## Added by Liam ###
+/BuddyAPI/.vs/BuddyAPI/DesignTimeBuild/.dtbcache.v2
+/BuddyAPI/obj/BuddyAPI.csproj.nuget.dgspec.json
+/BuddyAPI/obj/BuddyAPI.csproj.nuget.g.props
+/BuddyAPI/obj/Debug/net5.0/BuddyAPI.assets.cache
+/BuddyAPI/obj/Debug/net5.0/BuddyAPI.csproj.CoreCompileInputs.cache
+/BuddyAPI/obj/Debug/net5.0/BuddyAPI.csproj.FileListAbsolute.txt
+/BuddyAPI/obj/project.assets.json
+/BuddyAPI/obj/project.nuget.cache
