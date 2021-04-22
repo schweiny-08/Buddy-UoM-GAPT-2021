@@ -821,25 +821,25 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\andre\\.nuget\\packages\\": {},
-    "C:\\Program Files (x86)\\Microsoft\\Xamarin\\NuGet\\": {}
+    "C:\\Users\\schem\\.nuget\\packages\\": {},
+    "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "D:\\University\\2nd Year\\2nd Semester\\GAPT\\Buddy-UoM-GAPT-2021\\BuddyAPI\\BuddyAPI.csproj",
+      "projectUniqueName": "C:\\Users\\schem\\source\\repos\\Buddy-UoM-GAPT-2021\\BuddyAPI\\BuddyAPI.csproj",
       "projectName": "BuddyAPI",
-      "projectPath": "D:\\University\\2nd Year\\2nd Semester\\GAPT\\Buddy-UoM-GAPT-2021\\BuddyAPI\\BuddyAPI.csproj",
-      "packagesPath": "C:\\Users\\andre\\.nuget\\packages\\",
-      "outputPath": "D:\\University\\2nd Year\\2nd Semester\\GAPT\\Buddy-UoM-GAPT-2021\\BuddyAPI\\obj\\",
+      "projectPath": "C:\\Users\\schem\\source\\repos\\Buddy-UoM-GAPT-2021\\BuddyAPI\\BuddyAPI.csproj",
+      "packagesPath": "C:\\Users\\schem\\.nuget\\packages\\",
+      "outputPath": "C:\\Users\\schem\\source\\repos\\Buddy-UoM-GAPT-2021\\BuddyAPI\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
-        "C:\\Program Files (x86)\\Microsoft\\Xamarin\\NuGet\\"
+        "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
       ],
       "configFilePaths": [
-        "C:\\Users\\andre\\AppData\\Roaming\\NuGet\\NuGet.Config",
-        "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config",
-        "C:\\Program Files (x86)\\NuGet\\Config\\Xamarin.Offline.config"
+        "C:\\Users\\schem\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
+        "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
       "originalTargetFrameworks": [
         "net5.0"

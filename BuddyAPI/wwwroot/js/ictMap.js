@@ -1,10 +1,23 @@
-﻿//Creating the map centred over UOM with default zoom level 15
+﻿var port = location.port;
+
+//Creating the map centred over UOM with default zoom level 15
 function initMap() {
     const ict = new google.maps.LatLng(35.901810199007215, 14.485197413626922);
     const map = new google.maps.Map(document.getElementById("map"), {
         center: ict,
         zoom: 15,
     });    
+    const coordInfoWindow = new google.maps.InfoWindow();
+    coordInfoWindow.setContent(createInfoWindowContent(ict, map.getZoom()));
+    coordInfoWindow.setPosition(ict);
+    coordInfoWindow.open(map);
+    //event listener that fires when zoom level changes
+    map.addListener("zoom_changed", () => {
+        coordInfoWindow.setContent(
+            createInfoWindowContent(ict, map.getZoom())
+        );
+        coordInfoWindow.open(map);
+    });
     //setting the bounds of UOM. Bounds [zoom][coord.x][coord.y]
     //bounds are generated from map tiler folder structure when tiles are created
     const bounds = {
@@ -40,7 +53,9 @@ function initMap() {
             //returning the required tiles by requesting the specific png images
             //link is according to the port being used 
             return [
-                "https://localhost:44346/images/ICTTiles/BlockA/",
+                "https://localhost:",
+                port,
+                "/images/ICTTiles/BlockA/",
                 zoom,
                 "/",
                 coord.x,
@@ -67,7 +82,9 @@ function initMap() {
             //returning the required tiles by requesting the specific png images
             //link is according to the port being used 
             return [
-                "https://localhost:44346/images/ICTTiles/BlockB/",
+                "https://localhost:",
+                port,
+                "/images/ICTTiles/BlockB/",
                 zoom,
                 "/",
                 coord.x,
