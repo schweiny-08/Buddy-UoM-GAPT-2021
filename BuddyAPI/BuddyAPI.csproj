@@ -16,6 +16,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Content Include="StaticFile\ictMap.js" />
     <Content Include="StaticFile\images\PngTiles\15\17701\12878.png" />
     <Content Include="StaticFile\images\PngTiles\15\17702\12878.png" />
     <Content Include="StaticFile\images\PngTiles\16\35403\25757.png" />
@@ -32,6 +33,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <None Include="wwwroot\Controls\js\infoWindow.js" />
     <None Include="wwwroot\css\site.css" />
     <None Include="wwwroot\favicon.ico" />
     <None Include="wwwroot\js\site.js" />
