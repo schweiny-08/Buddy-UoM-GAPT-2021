@@ -1,0 +1,13 @@
+{
+  "name": "Png Tiles",
+  "version": "1.1.0",
+  "description": "",
+  "attribution": "Rendered with <a href=\"https://www.maptiler.com/desktop/\">MapTiler Desktop</a>",
+  "type": "overlay",
+  "format": "png",
+  "minzoom": "15",
+  "maxzoom": "16",
+  "scale": "1.000000",
+  "bounds": [14.47905564, 35.89828338, 14.48952656, 35.90558393],
+  "profile": "mercator"
+}
