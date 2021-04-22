@@ -1,24 +1,25 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\liamc\\source\\repos\\Buddy-UoM-GAPT-2021\\BuddyAPI\\BuddyAPI.csproj": {}
+    "D:\\University\\2nd Year\\2nd Semester\\GAPT\\Buddy-UoM-GAPT-2021\\BuddyAPI\\BuddyAPI.csproj": {}
   },
   "projects": {
-    "C:\\Users\\liamc\\source\\repos\\Buddy-UoM-GAPT-2021\\BuddyAPI\\BuddyAPI.csproj": {
+    "D:\\University\\2nd Year\\2nd Semester\\GAPT\\Buddy-UoM-GAPT-2021\\BuddyAPI\\BuddyAPI.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\liamc\\source\\repos\\Buddy-UoM-GAPT-2021\\BuddyAPI\\BuddyAPI.csproj",
+        "projectUniqueName": "D:\\University\\2nd Year\\2nd Semester\\GAPT\\Buddy-UoM-GAPT-2021\\BuddyAPI\\BuddyAPI.csproj",
         "projectName": "BuddyAPI",
-        "projectPath": "C:\\Users\\liamc\\source\\repos\\Buddy-UoM-GAPT-2021\\BuddyAPI\\BuddyAPI.csproj",
-        "packagesPath": "C:\\Users\\liamc\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\liamc\\source\\repos\\Buddy-UoM-GAPT-2021\\BuddyAPI\\obj\\",
+        "projectPath": "D:\\University\\2nd Year\\2nd Semester\\GAPT\\Buddy-UoM-GAPT-2021\\BuddyAPI\\BuddyAPI.csproj",
+        "packagesPath": "C:\\Users\\andre\\.nuget\\packages\\",
+        "outputPath": "D:\\University\\2nd Year\\2nd Semester\\GAPT\\Buddy-UoM-GAPT-2021\\BuddyAPI\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
-          "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
+          "C:\\Program Files (x86)\\Microsoft\\Xamarin\\NuGet\\"
         ],
         "configFilePaths": [
-          "C:\\Users\\liamc\\AppData\\Roaming\\NuGet\\NuGet.Config",
-          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
+          "C:\\Users\\andre\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Xamarin.Offline.config"
         ],
         "originalTargetFrameworks": [
           "net5.0"
@@ -43,27 +44,9 @@
         "net5.0": {
           "targetAlias": "net5.0",
           "dependencies": {
-            "Microsoft.EntityFrameworkCore": {
+            "Microsoft.AspNetCore.StaticFiles": {
               "target": "Package",
-              "version": "[5.0.5, )"
-            },
-            "Microsoft.EntityFrameworkCore.InMemory": {
-              "target": "Package",
-              "version": "[5.0.5, )"
-            },
-            "Microsoft.EntityFrameworkCore.SqlServer": {
-              "target": "Package",
-              "version": "[5.0.5, )"
-            },
-            "Microsoft.EntityFrameworkCore.Tools": {
-              "include": "Runtime, Build, Native, ContentFiles, Analyzers, BuildTransitive",
-              "suppressParent": "All",
-              "target": "Package",
-              "version": "[5.0.5, )"
-            },
-            "Microsoft.VisualStudio.Web.CodeGeneration.Design": {
-              "target": "Package",
-              "version": "[5.0.2, )"
+              "version": "[2.2.0, )"
             },
             "Swashbuckle.AspNetCore": {
               "target": "Package",
@@ -88,7 +71,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.201\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.202\\RuntimeIdentifierGraph.json"
         }
       }
     }
