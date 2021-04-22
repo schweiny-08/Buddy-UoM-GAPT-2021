@@ -46,11 +46,14 @@ namespace BuddyAPI
                 app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "BuddyAPI v1"));
             }
 
-            app.UseFileServer(new FileServerOptions { 
+            /*app.UseFileServer(new FileServerOptions { 
                 FileProvider = new PhysicalFileProvider(
                         Path.Combine(Directory.GetCurrentDirectory(), "StaticFile")),
                 RequestPath = "/StaticFile"
             });
+*/
+
+            app.UseStaticFiles();
 
             app.UseHttpsRedirection();
 

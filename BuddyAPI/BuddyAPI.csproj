@@ -16,22 +16,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Content Include="StaticFile\images\PngTiles\15\17701\12878.png" />
-    <Content Include="StaticFile\images\PngTiles\15\17702\12878.png" />
-    <Content Include="StaticFile\images\PngTiles\16\35403\25757.png" />
-    <Content Include="StaticFile\images\PngTiles\16\35404\25756.png" />
-    <Content Include="StaticFile\images\PngTiles\16\35404\25757.png" />
-    <Content Include="StaticFile\images\PngTiles\16\35405\25756.png" />
-    <Content Include="StaticFile\images\PngTiles\16\35405\25757.png" />
-    <Content Include="StaticFile\images\PngTiles\googlemaps.html" />
-    <Content Include="StaticFile\images\PngTiles\index.html" />
-    <Content Include="StaticFile\images\PngTiles\leaflet.html" />
-    <Content Include="StaticFile\images\PngTiles\openlayers.html" />
-    <Content Include="StaticFile\images\PngTiles\Png Tiles.mbtiles" />
-    <Content Include="StaticFile\Index.html" />
-  </ItemGroup>
-
-  <ItemGroup>
     <None Include="wwwroot\css\site.css" />
     <None Include="wwwroot\favicon.ico" />
     <None Include="wwwroot\js\site.js" />
@@ -41,6 +25,18 @@
     <None Include="wwwroot\lib\bootstrap\dist\js\bootstrap.bundle.js" />
     <None Include="wwwroot\lib\bootstrap\dist\js\bootstrap.js" />
     <None Include="wwwroot\lib\bootstrap\LICENSE" />
+    <None Include="wwwroot\lib\images\PngTiles\15\17701\12878.png" />
+    <None Include="wwwroot\lib\images\PngTiles\15\17702\12878.png" />
+    <None Include="wwwroot\lib\images\PngTiles\16\35403\25757.png" />
+    <None Include="wwwroot\lib\images\PngTiles\16\35404\25756.png" />
+    <None Include="wwwroot\lib\images\PngTiles\16\35404\25757.png" />
+    <None Include="wwwroot\lib\images\PngTiles\16\35405\25756.png" />
+    <None Include="wwwroot\lib\images\PngTiles\16\35405\25757.png" />
+    <None Include="wwwroot\lib\images\PngTiles\googlemaps.html" />
+    <None Include="wwwroot\lib\images\PngTiles\index.html" />
+    <None Include="wwwroot\lib\images\PngTiles\leaflet.html" />
+    <None Include="wwwroot\lib\images\PngTiles\openlayers.html" />
+    <None Include="wwwroot\lib\images\PngTiles\Png Tiles.mbtiles" />
     <None Include="wwwroot\lib\jquery-validation-unobtrusive\jquery.validate.unobtrusive.js" />
     <None Include="wwwroot\lib\jquery-validation-unobtrusive\LICENSE.txt" />
     <None Include="wwwroot\lib\jquery-validation\dist\additional-methods.js" />
@@ -51,7 +47,12 @@
   </ItemGroup>
 
   <ItemGroup>
+    <PackageReference Include="Microsoft.AspNetCore.StaticFiles" Version="2.2.0" />
     <PackageReference Include="Swashbuckle.AspNetCore" Version="5.6.3" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="StaticFile\" />
   </ItemGroup>
 
 </Project>

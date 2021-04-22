@@ -38,4 +38,3 @@ D:\University\2nd Year\2nd Semester\GAPT\Buddy-UoM-GAPT-2021\BuddyAPI\obj\Debug\
 D:\University\2nd Year\2nd Semester\GAPT\Buddy-UoM-GAPT-2021\BuddyAPI\bin\Debug\net5.0\BuddyAPI.Views.dll
 D:\University\2nd Year\2nd Semester\GAPT\Buddy-UoM-GAPT-2021\BuddyAPI\bin\Debug\net5.0\BuddyAPI.Views.pdb
 D:\University\2nd Year\2nd Semester\GAPT\Buddy-UoM-GAPT-2021\BuddyAPI\obj\Debug\net5.0\BuddyAPI.Views.pdb
-D:\University\2nd Year\2nd Semester\GAPT\Buddy-UoM-GAPT-2021\BuddyAPI\bin\Debug\net5.0\StaticFile\images\PngTiles\metadata.json
