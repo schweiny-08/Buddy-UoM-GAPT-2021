@@ -101,11 +101,11 @@
               "type": "Microsoft.ApiManagement/service/apis",
               "name": "GAPTBuddyAPIManagement/buddyapi",
               "properties": {
-                "displayName": "BuddyAPI",
+                "displayName": "buddyapi",
                 "apiRevision": "1",
-                "description": "",
+                "description": null,
                 "subscriptionRequired": true,
-                "serviceUrl": null,
+                "serviceUrl": "https://buddyapi.azurewebsites.net",
                 "path": "v1",
                 "protocols": [
                   "https"
