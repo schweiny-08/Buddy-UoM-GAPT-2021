@@ -52,5 +52,5 @@ jobs:
       with:
         app-name: 'BuddyAPI'
         slot-name: 'production'
-        publish-profile: ${{ secrets.AzureAppService_PublishProfile_a445333de6124ebdaee3058bf2792c0a }}
+        publish-profile: ${{ secrets.AzureAppService_PublishProfile_142d137deed54407877454d0282d634b }}
         package: .
