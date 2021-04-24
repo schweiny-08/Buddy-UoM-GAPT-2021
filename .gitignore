@@ -632,4 +632,4 @@ FodyWeavers.xsd
 #/BuddyAPI/obj/Debug/net5.0/BuddyAPI.csproj.FileListAbsolute.txt
 #/BuddyAPI/obj/project.assets.json
 #/BuddyAPI/obj/project.nuget.cache
-/obj/Release/net5.0/BuddyAPI.csprojAssemblyReference.cache
+#/obj/Release/net5.0/BuddyAPI.csprojAssemblyReference.cache
