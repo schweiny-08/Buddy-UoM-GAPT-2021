@@ -28,10 +28,18 @@ namespace BuddyAPI
         {
 
             services.AddControllers();
-            services.AddSwaggerGen(c =>
+            services.AddSwaggerGen(config =>
             {
-                c.SwaggerDoc("v1", new OpenApiInfo { Title = "BuddyAPI", Version = "v1" });
+                config.SwaggerDoc("v1", new Microsoft.OpenApi.Models.OpenApiInfo
+                {
+                    Title = "buddyapi",
+                    Version = "v1"
+                });
             });
+            //    services.AddSwaggerGen(c =>
+            //    {
+            //        c.SwaggerDoc("v1", new OpenApiInfo { Title = "BuddyAPI", Version = "v1" });
+            //    });
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

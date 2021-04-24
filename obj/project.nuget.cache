@@ -1,15 +1,15 @@
 {
   "version": 2,
-  "dgSpecHash": "srOY7OjVfUBzBNzYZcLRJm8wh59GAUQm0UFJVYvXzNRo6N5iIzW5NiAiPnASp0Uc7fuI8t1sUHwiuHOXH5JNsQ==",
+  "dgSpecHash": "s0kuwkrN66ll0KMxSvAaozW3iX0HdIBRvBzhDpoEvhOyo0B4UaW8v25+hL9KAPUMIkrk4v3D4vGRdG2BVVRfUA==",
   "success": true,
   "projectFilePath": "C:\\Users\\liamc\\source\\repos\\Buddy-UoM-GAPT-2021\\BuddyAPI.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\liamc\\.nuget\\packages\\microsoft.extensions.apidescription.server\\3.0.0\\microsoft.extensions.apidescription.server.3.0.0.nupkg.sha512",
     "C:\\Users\\liamc\\.nuget\\packages\\microsoft.openapi\\1.2.3\\microsoft.openapi.1.2.3.nupkg.sha512",
-    "C:\\Users\\liamc\\.nuget\\packages\\swashbuckle.aspnetcore\\5.6.3\\swashbuckle.aspnetcore.5.6.3.nupkg.sha512",
-    "C:\\Users\\liamc\\.nuget\\packages\\swashbuckle.aspnetcore.swagger\\5.6.3\\swashbuckle.aspnetcore.swagger.5.6.3.nupkg.sha512",
-    "C:\\Users\\liamc\\.nuget\\packages\\swashbuckle.aspnetcore.swaggergen\\5.6.3\\swashbuckle.aspnetcore.swaggergen.5.6.3.nupkg.sha512",
-    "C:\\Users\\liamc\\.nuget\\packages\\swashbuckle.aspnetcore.swaggerui\\5.6.3\\swashbuckle.aspnetcore.swaggerui.5.6.3.nupkg.sha512"
+    "C:\\Users\\liamc\\.nuget\\packages\\swashbuckle.aspnetcore\\6.1.3\\swashbuckle.aspnetcore.6.1.3.nupkg.sha512",
+    "C:\\Users\\liamc\\.nuget\\packages\\swashbuckle.aspnetcore.swagger\\6.1.3\\swashbuckle.aspnetcore.swagger.6.1.3.nupkg.sha512",
+    "C:\\Users\\liamc\\.nuget\\packages\\swashbuckle.aspnetcore.swaggergen\\6.1.3\\swashbuckle.aspnetcore.swaggergen.6.1.3.nupkg.sha512",
+    "C:\\Users\\liamc\\.nuget\\packages\\swashbuckle.aspnetcore.swaggerui\\6.1.3\\swashbuckle.aspnetcore.swaggerui.6.1.3.nupkg.sha512"
   ],
   "logs": []
 }

@@ -8,7 +8,6 @@ using System.Threading.Tasks;
 namespace BuddyAPI.Controllers
 {
     [ApiController]
-    [Route("[controller]")]
     public class WeatherForecastController : ControllerBase
     {
         private static readonly string[] Summaries = new[]
@@ -24,6 +23,7 @@ namespace BuddyAPI.Controllers
         }
 
         [HttpGet]
+        [Route("/")]
         public IEnumerable<WeatherForecast> Get()
         {
             var rng = new Random();
