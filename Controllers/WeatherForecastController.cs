@@ -12,9 +12,9 @@ namespace BuddyAPI.Controllers
     {
         private static readonly string[] Summaries = new[]
         {
-          //  "Freezing", "Bracing", "Chilly", "Cool", "Mild", "Warm", "Balmy", "Hot", "Sweltering", "Scorching",
+            "Freezing", "Bracing", "Chilly", "Cool", "Mild", "Warm", "Balmy", "Hot", "Sweltering", "Scorching",
            // "Sexy", "Annoying", "Testing", "Testing2", "Testing3", "Testing4", 
-           "bla1","bla2","bla3","bla4","bla5","bla6","bla7","bla8",
+           //"bla1","bla2","bla3","bla4","bla5","bla6","bla7","bla8",
         };
 
         private readonly ILogger<WeatherForecastController> _logger;
