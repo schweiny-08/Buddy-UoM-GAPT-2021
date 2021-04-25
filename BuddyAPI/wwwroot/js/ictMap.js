@@ -7,6 +7,17 @@ function initMap() {
         center: ict,
         zoom: 15,
     });
+
+    //map.addListener("click", (mapsMouseEvent) => {
+    //   new google.maps.Marker({
+    //        position: mapsMouseEvent.latLng,//{ lat: 35.901810199007215, lng: 14.485197413626922 },
+    //        map,
+    //        title: "Basic Marker",
+    //   })
+    //});
+    
+   
+
     const coordInfoWindow = new google.maps.InfoWindow();
     coordInfoWindow.setContent(createInfoWindowContent(ict, map.getZoom()));
     coordInfoWindow.setPosition(ict);
@@ -172,4 +183,13 @@ function initMap() {
             }
         }
     }
+
+    // Adds marker when user clicks on map
+    map.addListener("click", (mapsMouseEvent) => {
+        new google.maps.Marker({
+            position: mapsMouseEvent.latLng,
+            map,
+            title: "Basic Marker",
+        });
+    });
 }
