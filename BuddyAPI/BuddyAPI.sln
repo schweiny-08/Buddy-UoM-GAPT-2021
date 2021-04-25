@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.31112.23
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BuddyAPI", "BuddyAPI.csproj", "{63AE0A1F-3740-479F-86A2-109C763A2E32}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{63AE0A1F-3740-479F-86A2-109C763A2E32}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{63AE0A1F-3740-479F-86A2-109C763A2E32}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{63AE0A1F-3740-479F-86A2-109C763A2E32}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{63AE0A1F-3740-479F-86A2-109C763A2E32}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {EDFC0E38-B356-43F7-99A9-A0F8A95B0EDA}
+	EndGlobalSection
+EndGlobal
