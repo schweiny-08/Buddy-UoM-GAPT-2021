@@ -1,4 +1,7 @@
 ﻿var port = location.port;
+var markers = [];
+var level;
+
 
 //Creating the map centred over UOM with default zoom level 15
 function initMap() {
@@ -8,14 +11,12 @@ function initMap() {
         zoom: 15,
     });
 
-    //map.addListener("click", (mapsMouseEvent) => {
-    //   new google.maps.Marker({
-    //        position: mapsMouseEvent.latLng,//{ lat: 35.901810199007215, lng: 14.485197413626922 },
-    //        map,
-    //        title: "Basic Marker",
-    //   })
-    //});
-    
+    //Creating an array of objects
+    //Object with level and googleMarker
+    //var markers = [
+    //    { level: 0, marker: new google.maps.Marker({ position: { lat: 35.901810199007214, lng: 15.485197413626921 }, map, title: "Level 0 Marker" }) },
+    //   { level: -1, marker: new google.maps.Marker({ position: { lat: 34.901810199007216, lng: 14.485197413626923 }, map, title: "Level -1 Marker" }) }
+    //]; 
    
 
     const coordInfoWindow = new google.maps.InfoWindow();
@@ -167,17 +168,42 @@ function initMap() {
     for (var i = 0; i < radio.length; i++) {
         radio[i].onclick = function () {
             if (document.getElementById('level -1').checked) {
+                level = -1;
+
                 map.overlayMapTypes.clear();
                 map.overlayMapTypes.push(ictLvlMinOne);
                 document.getElementById('status').innerHTML = "Level -1";
+
+                //Show appropriate markers
+                for (let j = 0; j < markers.length; j++) {
+                    if (markers[j].level == -1) {
+                        markers[j].marker.setMap(map);
+                    } else {
+                        markers[j].marker.setMap(null);
+                    }
+                }
+
             }
             if (document.getElementById('level 0').checked) {
+                level = 0;
+
                 map.overlayMapTypes.clear();
                 map.overlayMapTypes.push(ictLvlZeroBlkA);
                 map.overlayMapTypes.push(ictLvlZeroBlkB);
                 document.getElementById('status').innerHTML = "Level 0";
+
+                //Show appropriate markers
+                for (let j = 0; j < markers.length; j++) {
+                    if (markers[j].level == 0) {
+                        markers[j].marker.setMap(map);
+                    } else {
+                        markers[j].marker.setMap(null);
+                    }
+                }
             }
             if (document.getElementById('no-overlay').checked) {
+                level = -999;
+
                 map.overlayMapTypes.clear();
                 document.getElementById('status').innerHTML = "No Overlay";
             }
@@ -186,10 +212,15 @@ function initMap() {
 
     // Adds marker when user clicks on map
     map.addListener("click", (mapsMouseEvent) => {
-        new google.maps.Marker({
+        addMarker(map, mapsMouseEvent)
+    });  
+}
+
+function addMarker(map, mapsMouseEvent) {
+    markers.push({
+        level : level, marker : new google.maps.Marker({
             position: mapsMouseEvent.latLng,
             map,
             title: "Basic Marker",
-        });
-    });
+        })})
 }
