@@ -258,6 +258,7 @@ Thumbs.db
 *.props
 *project.assets.json
 *project.nuget.cache
+*.config
 
 ################################# Visual Studio 2019 ###############################
 ## Ignore Visual Studio temporary files, build results, and
