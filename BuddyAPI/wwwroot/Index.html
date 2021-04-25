@@ -1,0 +1,46 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <!-- https://developers.google.com/maps/documentation/javascript/examples/map-simple#all -->
+    <title>Simple Map</title>
+    <style type="text/css">
+        /* Always set the map height explicitly to define the size of the div
+        * element that contains the map. */
+        #map {
+            height: 550px;
+            width: 1200px;
+            margin: auto;
+            padding: 10px;
+        }
+        #radio-buttons{
+            margin: auto;
+            width: 50%;
+            text-align: center;
+        }
+    </style>
+    
+</head>
+<body>
+    <div id="map"></div>
+    <div id="radio-buttons">
+        <form name="level-selector">
+            <label><input type="radio" id="no-overlay" name="level" value="no overlay" checked="checked" />No Overlay</label>
+            <br />
+            <label><input type="radio" id="level 0" name="level" value="Level 0" />Level 0</label>
+            <br />
+            <label><input type="radio" id="level -1" name="level" value="Level -1" />Level -1</label>
+            <h1 id="status">No Overlay</h1>
+        </form>
+    </div>
+
+    <!-- calling the google maps api using a custom API key. CHECK IF SAME KEY WORKS ACROSS DIFFERENT DEVICES!! -->
+
+    <script src="../js/ictMap.js"></script>
+    <script src="../js/infoWindow.js"></script>
+    <!--<script src="../js/mapMarkers.js"></script>-->
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyChmvdq02aq8Sa68jTYFghQZz_1LFFUp8o&callback=initMap&libraries=&v=weekly"
+            async></script>
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=default"></script>
+</body>
+</html>
+
