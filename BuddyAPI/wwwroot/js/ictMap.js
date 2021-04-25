@@ -1,7 +1,7 @@
 ﻿var port = location.port;
 var markers = [];
 var level;
-
+var id = 0;
 
 //Creating the map centred over UOM with default zoom level 15
 function initMap() {
@@ -217,10 +217,28 @@ function initMap() {
 }
 
 function addMarker(map, mapsMouseEvent) {
+    var marker = new google.maps.Marker({
+        position: mapsMouseEvent.latLng,
+        map,
+        title: "Basic Marker"
+    });
+
+    //Add listener to the marker to splice element from array and remove from map on rightclick
+    marker.addListener("rightclick", function () {
+        for (let i = 0; i < markers.length; i++) {
+            if (markers[i].marker == marker) {
+                //alert("IN IF STATEMENT");
+                //delete markers[i];
+                markers.splice(i, 1);
+                marker.setMap(null);
+                console.log(markers);
+            }
+        }
+    });
+
     markers.push({
-        level : level, marker : new google.maps.Marker({
-            position: mapsMouseEvent.latLng,
-            map,
-            title: "Basic Marker",
-        })})
+        id: id , level: level, marker: marker
+    });
+
+    id++;
 }
