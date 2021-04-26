@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace BuddyAPI.Models
 {
@@ -8,6 +9,7 @@ namespace BuddyAPI.Models
 	{
 
 		[Key]
+		[DatabaseGenerated(DatabaseGeneratedOption.Identity)]
 		public int pinpoint_Id { get; set; }
 
 		[Required]
