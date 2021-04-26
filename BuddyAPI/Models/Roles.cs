@@ -1,14 +1,15 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 
-namespace BuddyAPI
+namespace BuddyAPI.Models
 {
 	public class Roles
 	{
+		[Key]
+		public int Role_Id { get; set; }
+		public string RoleType { get; set; }
 
-		public int roleId { get; set; }
-		public string roleType { get; set; }
-
-		public virtual ICollection<Roles> roles { get; set; }
+		//public virtual ICollection<Roles> roles { get; set; }
 	}
 }
