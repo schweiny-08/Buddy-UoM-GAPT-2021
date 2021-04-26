@@ -13,10 +13,12 @@ namespace BuddyAPI.Data
         public BuddyAPIContext(DbContextOptions<BuddyAPIContext> options) : base(options) { }
 
         public DbSet<Roles> Roles {get; set;}
+        public DbSet<Pinpoints> Pinpoints { get; set; }
+        public DbSet<BuddyAPI.Models.PinpointTypes> PinpointTypes { get; set; }
 
-        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        /*protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.Entity<Roles>().ToTable("Roles");
-        }
+        }*/
     }
 }
