@@ -1,7 +1,7 @@
 using System;
 using System.Collections.Generic;
 
-namespace BuddyAPI
+namespace BuddyAPI.Models
 {
 	public class Architect
 	{
