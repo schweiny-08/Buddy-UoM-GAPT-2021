@@ -1,6 +1,6 @@
 ﻿var port = location.port;
 var markers = [];
-var level;
+var level = 0;
 var id = 0;
 
 //Creating the map centred over UOM with default zoom level 15
@@ -236,9 +236,16 @@ function addMarker(map, mapsMouseEvent) {
         }
     });
 
+    marker.addListener("click", (mapsMouseEvent) => {
+        pinpointWindow(map, mapsMouseEvent)
+    });
+
     markers.push({
         id: id , level: level, marker: marker
     });
+
+    //calling the pinpoint window function
+    pinpointWindow(map, mapsMouseEvent);
 
     id++;
 }
