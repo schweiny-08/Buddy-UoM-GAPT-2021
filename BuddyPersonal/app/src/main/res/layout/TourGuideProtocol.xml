@@ -1,0 +1,279 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#30aD60"
+    tools:context=".MainActivity">
+
+    <ImageView
+        android:id="@+id/imageView8"
+        android:layout_width="144dp"
+        android:layout_height="72dp"
+        android:layout_marginEnd="42dp"
+        android:layout_marginRight="42dp"
+        android:layout_marginBottom="25dp"
+        android:background="#e4ffd7"
+        android:tint="#007848"
+        app:layout_constraintBottom_toTopOf="@+id/FAQ"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/imageView6"
+        app:srcCompat="@android:drawable/ic_menu_mapmode" />
+
+    <ImageView
+        android:id="@+id/imageView7"
+        android:layout_width="144dp"
+        android:layout_height="72dp"
+        android:layout_marginTop="36dp"
+        android:layout_marginEnd="41dp"
+        android:layout_marginRight="41dp"
+        android:background="#e4ffd7"
+        android:tint="#007848"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toEndOf="@+id/imageView6"
+        app:layout_constraintTop_toBottomOf="@+id/ScanNewItem"
+        app:srcCompat="@android:drawable/ic_menu_mapmode" />
+
+    <EditText
+        android:id="@+id/DescriptionInput"
+        android:layout_width="327dp"
+        android:layout_height="70dp"
+        android:layout_marginStart="42dp"
+        android:layout_marginLeft="42dp"
+        android:layout_marginEnd="42dp"
+        android:layout_marginRight="42dp"
+        android:layout_marginBottom="57dp"
+        android:background="#e4ffd7"
+        android:ems="10"
+        android:gravity="start|top"
+        android:inputType="textMultiLine"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <EditText
+        android:id="@+id/editTextTextPersonName"
+        android:layout_width="327dp"
+        android:layout_height="40dp"
+        android:layout_marginStart="42dp"
+        android:layout_marginLeft="42dp"
+        android:layout_marginEnd="42dp"
+        android:layout_marginRight="42dp"
+        android:background="#e4ffd7"
+        android:ems="10"
+        android:inputType="textPersonName"
+        android:text="Item Name"
+        app:layout_constraintBottom_toTopOf="@+id/Creator"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <EditText
+        android:id="@+id/Location"
+        android:layout_width="327dp"
+        android:layout_height="25dp"
+        android:layout_marginStart="42dp"
+        android:layout_marginLeft="42dp"
+        android:layout_marginEnd="42dp"
+        android:layout_marginRight="42dp"
+        android:background="#e4ffd7"
+        android:ems="10"
+        android:inputType="textPersonName"
+        android:text="Location: "
+        android:textStyle="bold"
+        app:layout_constraintBottom_toTopOf="@+id/location"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <EditText
+        android:id="@+id/DateOfCreation"
+        android:layout_width="327dp"
+        android:layout_height="25dp"
+        android:layout_marginStart="42dp"
+        android:layout_marginLeft="42dp"
+        android:layout_marginEnd="42dp"
+        android:layout_marginRight="42dp"
+        android:background="#e4ffd7"
+        android:ems="10"
+        android:inputType="textPersonName"
+        android:text="Date of Creation: "
+        android:textStyle="bold"
+        app:layout_constraintBottom_toTopOf="@+id/editTextDate"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <EditText
+        android:id="@+id/PhoneNumber"
+        android:layout_width="327dp"
+        android:layout_height="25dp"
+        android:layout_marginStart="42dp"
+        android:layout_marginLeft="42dp"
+        android:layout_marginEnd="42dp"
+        android:layout_marginRight="42dp"
+        android:background="#e4ffd7"
+        android:ems="10"
+        android:inputType="textPersonName"
+        android:text=" Phone number:"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toTopOf="@+id/PhoneNo"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <EditText
+        android:id="@+id/location"
+        android:layout_width="327dp"
+        android:layout_height="40dp"
+        android:layout_marginStart="42dp"
+        android:layout_marginLeft="42dp"
+        android:layout_marginEnd="42dp"
+        android:layout_marginRight="42dp"
+        android:background="#e4ffd7"
+        android:ems="10"
+        android:inputType="textPersonName"
+        android:text="Location"
+        app:layout_constraintBottom_toTopOf="@+id/DateOfCreation"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <EditText
+        android:id="@+id/editTextDate"
+        android:layout_width="327dp"
+        android:layout_height="40dp"
+        android:layout_marginStart="42dp"
+        android:layout_marginLeft="42dp"
+        android:layout_marginEnd="42dp"
+        android:layout_marginRight="42dp"
+        android:background="#e4ffd7"
+        android:ems="10"
+        android:inputType="date"
+        app:layout_constraintBottom_toTopOf="@+id/Description"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <EditText
+        android:id="@+id/creator"
+        android:layout_width="327dp"
+        android:layout_height="40dp"
+        android:layout_marginStart="42dp"
+        android:layout_marginLeft="42dp"
+        android:layout_marginEnd="42dp"
+        android:layout_marginRight="42dp"
+        android:background="#e4ffd7"
+        android:ems="10"
+        android:inputType="textPersonName"
+        android:text="Creator"
+        app:layout_constraintBottom_toTopOf="@+id/PhoneNumber"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <EditText
+        android:id="@+id/FAQ"
+        android:layout_width="327dp"
+        android:layout_height="25dp"
+        android:layout_marginStart="43dp"
+        android:layout_marginLeft="43dp"
+        android:layout_marginEnd="42dp"
+        android:layout_marginRight="42dp"
+        android:background="#e4ffd7"
+        android:ems="10"
+        android:inputType="textPersonName"
+        android:text="Item Name:"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toTopOf="@+id/editTextTextPersonName"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <EditText
+        android:id="@+id/PhoneNo"
+        android:layout_width="327dp"
+        android:layout_height="40dp"
+        android:layout_marginStart="42dp"
+        android:layout_marginLeft="42dp"
+        android:layout_marginEnd="42dp"
+        android:layout_marginRight="42dp"
+        android:background="#e4ffd7"
+        android:ems="10"
+        android:inputType="phone"
+        app:layout_constraintBottom_toTopOf="@+id/Location"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <EditText
+        android:id="@+id/Description"
+        android:layout_width="327dp"
+        android:layout_height="25dp"
+        android:layout_marginStart="42dp"
+        android:layout_marginLeft="42dp"
+        android:layout_marginEnd="42dp"
+        android:layout_marginRight="42dp"
+        android:background="#e4ffd7"
+        android:ems="10"
+        android:inputType="textPersonName"
+        android:text=" Decription: "
+        android:textStyle="bold"
+        app:layout_constraintBottom_toTopOf="@+id/DescriptionInput"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <EditText
+        android:id="@+id/Creator"
+        android:layout_width="327dp"
+        android:layout_height="25dp"
+        android:layout_marginStart="42dp"
+        android:layout_marginLeft="42dp"
+        android:layout_marginEnd="42dp"
+        android:layout_marginRight="42dp"
+        android:background="#e4ffd7"
+        android:ems="10"
+        android:inputType="textPersonName"
+        android:text=" Creator:"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toTopOf="@+id/creator"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <ImageButton
+        android:id="@+id/ScanNewItem"
+        android:layout_width="225dp"
+        android:layout_height="46dp"
+        android:layout_marginStart="37dp"
+        android:layout_marginLeft="37dp"
+        android:layout_marginTop="7dp"
+        android:layout_marginEnd="45dp"
+        android:layout_marginRight="45dp"
+        android:background="#007848"
+        android:tint="#FFFFFF"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/BackButton"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@android:drawable/ic_menu_camera" />
+
+    <Button
+        android:id="@+id/BackButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginLeft="16dp"
+        android:layout_marginTop="7dp"
+        android:background="#007848"
+        android:text="Buddy View"
+        android:textColor="#FFFFFF"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <ImageView
+        android:id="@+id/imageView6"
+        android:layout_width="184dp"
+        android:layout_height="139dp"
+        android:layout_marginStart="42dp"
+        android:layout_marginLeft="42dp"
+        android:layout_marginTop="35dp"
+        android:background="#e4ffd7"
+        android:tint="#007848"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/BackButton"
+        app:srcCompat="@android:drawable/ic_menu_mapmode" />
+
+
+</android.support.constraint.ConstraintLayout>

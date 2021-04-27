@@ -1,0 +1,261 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#FBB964"
+    tools:context=".MainActivity">
+
+    <EditText
+        android:id="@+id/PhoneNumber"
+        android:layout_width="327dp"
+        android:layout_height="30dp"
+        android:layout_marginStart="28dp"
+        android:layout_marginLeft="28dp"
+        android:layout_marginEnd="56dp"
+        android:layout_marginRight="56dp"
+        android:background="#FFE0B2"
+        android:ems="10"
+        android:inputType="textPersonName"
+        android:text=" Phone number:"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toTopOf="@+id/MobNumber"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <EditText
+        android:id="@+id/MobNumber"
+        android:layout_width="327dp"
+        android:layout_height="45dp"
+        android:layout_marginStart="27dp"
+        android:layout_marginLeft="27dp"
+        android:layout_marginEnd="57dp"
+        android:layout_marginRight="57dp"
+        android:layout_marginBottom="9dp"
+        android:background="#FFE0B2"
+        android:ems="10"
+        android:inputType="phone"
+        app:layout_constraintBottom_toTopOf="@+id/Location"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <EditText
+        android:id="@+id/Location"
+        android:layout_width="327dp"
+        android:layout_height="30dp"
+        android:layout_marginStart="29dp"
+        android:layout_marginLeft="29dp"
+        android:layout_marginEnd="55dp"
+        android:layout_marginRight="55dp"
+        android:background="#FFE0B2"
+        android:ems="10"
+        android:inputType="textPersonName"
+        android:text=" Email:"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toTopOf="@+id/EmailInput"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <EditText
+        android:id="@+id/DateOfCreation"
+        android:layout_width="327dp"
+        android:layout_height="30dp"
+        android:layout_marginStart="27dp"
+        android:layout_marginLeft="27dp"
+        android:layout_marginEnd="57dp"
+        android:layout_marginRight="57dp"
+        android:background="#FFE0B2"
+        android:ems="10"
+        android:inputType="textPersonName"
+        android:text=" Address:"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toTopOf="@+id/imageButton3"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <ImageButton
+        android:id="@+id/imageButton3"
+        android:layout_width="50dp"
+        android:layout_height="45dp"
+        android:layout_marginStart="1dp"
+        android:layout_marginLeft="1dp"
+        android:layout_marginEnd="57dp"
+        android:layout_marginRight="57dp"
+        android:layout_marginBottom="10dp"
+        android:tint="#E44513"
+        app:layout_constraintBottom_toTopOf="@+id/Description"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/Address2"
+        app:srcCompat="@android:drawable/ic_dialog_map" />
+
+    <EditText
+        android:id="@+id/Address2"
+        android:layout_width="277dp"
+        android:layout_height="45dp"
+        android:layout_marginStart="26dp"
+        android:layout_marginLeft="26dp"
+        android:layout_marginEnd="1dp"
+        android:layout_marginRight="1dp"
+        android:layout_marginBottom="10dp"
+        android:background="#FFE0B2"
+        android:ems="10"
+        android:inputType="textPostalAddress"
+        app:layout_constraintBottom_toTopOf="@+id/Description"
+        app:layout_constraintEnd_toStartOf="@+id/imageButton3"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <EditText
+        android:id="@+id/Description"
+        android:layout_width="327dp"
+        android:layout_height="30dp"
+        android:layout_marginStart="26dp"
+        android:layout_marginLeft="26dp"
+        android:layout_marginEnd="58dp"
+        android:layout_marginRight="58dp"
+        android:background="#FFE0B2"
+        android:ems="10"
+        android:inputType="textPersonName"
+        android:text=" Decription: "
+        android:textStyle="bold"
+        app:layout_constraintBottom_toTopOf="@+id/DescriptionInput"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <EditText
+        android:id="@+id/DescriptionInput"
+        android:layout_width="327dp"
+        android:layout_height="70dp"
+        android:layout_marginStart="26dp"
+        android:layout_marginLeft="26dp"
+        android:layout_marginEnd="58dp"
+        android:layout_marginRight="58dp"
+        android:layout_marginBottom="49dp"
+        android:background="#FFE0B2"
+        android:ems="10"
+        android:gravity="start|top"
+        android:inputType="textMultiLine"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <EditText
+        android:id="@+id/EmailInput"
+        android:layout_width="327dp"
+        android:layout_height="45dp"
+        android:layout_marginStart="29dp"
+        android:layout_marginLeft="29dp"
+        android:layout_marginEnd="56dp"
+        android:layout_marginRight="56dp"
+        android:layout_marginBottom="9dp"
+        android:background="#FFE0B2"
+        android:ems="10"
+        android:inputType="textEmailAddress"
+        app:layout_constraintBottom_toTopOf="@+id/DateOfCreation"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <EditText
+        android:id="@+id/VenueName"
+        android:layout_width="191dp"
+        android:layout_height="62dp"
+        android:layout_marginStart="28dp"
+        android:layout_marginLeft="28dp"
+        android:layout_marginTop="89dp"
+        android:background="#FFE0B2"
+        android:ems="10"
+        android:inputType="textPersonName"
+        android:text="          Venue Name"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toStartOf="@+id/imageButton"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/BackButton" />
+
+    <EditText
+        android:id="@+id/Creator"
+        android:layout_width="242dp"
+        android:layout_height="30dp"
+        android:layout_marginStart="28dp"
+        android:layout_marginLeft="28dp"
+        android:background="#FFE0B2"
+        android:ems="10"
+        android:inputType="textPersonName"
+        android:text=" Hours:"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toTopOf="@+id/HoursFropDown"
+        app:layout_constraintEnd_toStartOf="@+id/CompanyLogo"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <EditText
+        android:id="@+id/HoursFropDown"
+        android:layout_width="327dp"
+        android:layout_height="45dp"
+        android:layout_marginStart="28dp"
+        android:layout_marginLeft="28dp"
+        android:layout_marginEnd="56dp"
+        android:layout_marginRight="56dp"
+        android:layout_marginBottom="11dp"
+        android:background="#FFE0B2"
+        android:ems="10"
+        android:inputType="textPersonName"
+        android:text="8:00-18:00"
+        app:layout_constraintBottom_toTopOf="@+id/PhoneNumber"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <Button
+        android:id="@+id/BackButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginLeft="16dp"
+        android:layout_marginTop="36dp"
+        android:background="#E44513"
+        android:text="Booking View"
+        android:textColor="#FFFFFF"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <EditText
+        android:id="@+id/ChooseAvailableTimes"
+        android:layout_width="219dp"
+        android:layout_height="48dp"
+        android:layout_marginStart="37dp"
+        android:layout_marginLeft="37dp"
+        android:layout_marginTop="36dp"
+        android:layout_marginEnd="41dp"
+        android:layout_marginRight="41dp"
+        android:background="#FFE0B2"
+        android:ems="10"
+        android:inputType="textPersonName"
+        android:text="   Choose Available Times"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/BackButton"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <ImageButton
+        android:id="@+id/imageButton"
+        android:layout_width="56dp"
+        android:layout_height="62dp"
+        android:layout_marginStart="1dp"
+        android:layout_marginLeft="1dp"
+        android:layout_marginTop="88dp"
+        android:tint="#E44513"
+        app:layout_constraintEnd_toStartOf="@+id/CompanyLogo"
+        app:layout_constraintStart_toEndOf="@+id/VenueName"
+        app:layout_constraintTop_toBottomOf="@+id/ChooseAvailableTimes"
+        app:srcCompat="@android:drawable/btn_star_big_on" />
+
+    <ImageButton
+        android:id="@+id/CompanyLogo"
+        android:layout_width="85dp"
+        android:layout_height="100dp"
+        android:layout_marginTop="89dp"
+        android:layout_marginEnd="56dp"
+        android:layout_marginRight="56dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/ChooseAvailableTimes"
+        tools:srcCompat="@tools:sample/avatars" />
+
+
+</android.support.constraint.ConstraintLayout>

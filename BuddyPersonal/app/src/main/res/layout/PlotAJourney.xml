@@ -1,0 +1,241 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#7E57C2"
+    tools:context=".MainActivity">
+
+
+    <TextView
+        android:id="@+id/eventName4"
+        android:layout_width="218dp"
+        android:layout_height="31dp"
+        android:layout_marginStart="43dp"
+        android:layout_marginLeft="43dp"
+        android:layout_marginTop="37dp"
+        android:layout_marginEnd="1dp"
+        android:layout_marginRight="1dp"
+        android:background="#EDE7F6"
+        android:text="Event Name"
+        app:layout_constraintEnd_toStartOf="@+id/eventTime3"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/eventLocation2" />
+
+    <TextView
+        android:id="@+id/eventLocation3"
+        android:layout_width="313dp"
+        android:layout_height="16dp"
+        android:layout_marginStart="43dp"
+        android:layout_marginLeft="43dp"
+        android:layout_marginEnd="55dp"
+        android:layout_marginRight="55dp"
+        android:text="Event location"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/eventName4" />
+
+    <TextView
+        android:id="@+id/eventTime3"
+        android:layout_width="95dp"
+        android:layout_height="31dp"
+        android:layout_marginStart="1dp"
+        android:layout_marginLeft="1dp"
+        android:layout_marginEnd="55dp"
+        android:layout_marginRight="55dp"
+        android:background="#EDE7F6"
+        android:text="Event Time"
+        app:layout_constraintBottom_toTopOf="@+id/eventLocation3"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/eventName4" />
+
+    <TextView
+        android:id="@+id/eventLocation4"
+        android:layout_width="313dp"
+        android:layout_height="16dp"
+        android:layout_marginStart="43dp"
+        android:layout_marginLeft="43dp"
+        android:layout_marginBottom="27dp"
+        android:background="#EDE7F6"
+        android:text="Event location"
+        app:layout_constraintBottom_toTopOf="@+id/AddMeander"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/eventName4" />
+
+    <TextView
+        android:id="@+id/eventName2"
+        android:layout_width="218dp"
+        android:layout_height="31dp"
+        android:layout_marginStart="43dp"
+        android:layout_marginLeft="43dp"
+        android:layout_marginTop="33dp"
+        android:background="#EDE7F6"
+        android:text="Event Name"
+        app:layout_constraintEnd_toStartOf="@+id/eventTime2"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/eventLocation" />
+
+    <TextView
+        android:id="@+id/eventTime2"
+        android:layout_width="95dp"
+        android:layout_height="31dp"
+        android:layout_marginEnd="55dp"
+        android:layout_marginRight="55dp"
+        android:background="#EDE7F6"
+        android:text="Event Time"
+        app:layout_constraintBottom_toTopOf="@+id/eventLocation2"
+        app:layout_constraintEnd_toEndOf="parent" />
+
+    <TextView
+        android:id="@+id/eventLocation2"
+        android:layout_width="313dp"
+        android:layout_height="16dp"
+        android:layout_marginStart="43dp"
+        android:layout_marginLeft="43dp"
+        android:layout_marginEnd="55dp"
+        android:layout_marginRight="55dp"
+        android:background="#EDE7F6"
+        android:text="Event location"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/eventName2" />
+
+    <TextView
+        android:id="@+id/eventLocation"
+        android:layout_width="313dp"
+        android:layout_height="16dp"
+        android:layout_marginStart="43dp"
+        android:layout_marginLeft="43dp"
+        android:layout_marginEnd="55dp"
+        android:layout_marginRight="55dp"
+        android:background="#EDE7F6"
+        android:text="Event location"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/eventName" />
+
+    <TextView
+        android:id="@+id/eventName"
+        android:layout_width="218dp"
+        android:layout_height="31dp"
+        android:layout_marginStart="43dp"
+        android:layout_marginLeft="43dp"
+        android:layout_marginTop="58dp"
+        android:layout_marginEnd="1dp"
+        android:layout_marginRight="1dp"
+        android:background="#EDE7F6"
+        android:text="Event Name"
+        app:layout_constraintEnd_toStartOf="@+id/eventTime"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/Journeyname" />
+
+    <TextView
+        android:id="@+id/eventTime"
+        android:layout_width="95dp"
+        android:layout_height="31dp"
+        android:layout_marginStart="1dp"
+        android:layout_marginLeft="1dp"
+        android:layout_marginTop="58dp"
+        android:layout_marginEnd="55dp"
+        android:layout_marginRight="55dp"
+        android:background="#EDE7F6"
+        android:text="Event Time"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/eventName"
+        app:layout_constraintTop_toBottomOf="@+id/Journeyname" />
+
+    <Button
+        android:id="@+id/BackButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginLeft="16dp"
+        android:layout_marginTop="36dp"
+        android:background="#5321C1"
+        android:text="Event View"
+        android:textColor="#FFFFFF"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <EditText
+        android:id="@+id/Journeyname"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="104dp"
+        android:layout_marginLeft="104dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginEnd="94dp"
+        android:layout_marginRight="94dp"
+        android:background="#EDE7F6"
+        android:ems="10"
+        android:inputType="textPersonName"
+        android:text="         Journey Name"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/BackButton" />
+
+    <Button
+        android:id="@+id/ViewJourneyOnMapButton"
+        android:layout_width="88dp"
+        android:layout_height="94dp"
+        android:layout_marginStart="34dp"
+        android:layout_marginLeft="34dp"
+        android:layout_marginBottom="109dp"
+        android:background="#5321C1"
+        android:text="View Journey On Map"
+        android:textColor="#FFFFFF"
+        android:textSize="13sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <Button
+        android:id="@+id/AddToItineraryButton"
+        android:layout_width="88dp"
+        android:layout_height="94dp"
+        android:layout_marginStart="51dp"
+        android:layout_marginLeft="51dp"
+        android:layout_marginEnd="46dp"
+        android:layout_marginRight="46dp"
+        android:layout_marginBottom="110dp"
+        android:background="#5321C1"
+        android:text="Add To Itinerary "
+        android:textColor="#FFFFFF"
+        android:textSize="13sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/FinishButton"
+        app:layout_constraintStart_toEndOf="@+id/ViewJourneyOnMapButton" />
+
+    <Button
+        android:id="@+id/FinishButton"
+        android:layout_width="88dp"
+        android:layout_height="94dp"
+        android:layout_marginEnd="16dp"
+        android:layout_marginRight="16dp"
+        android:layout_marginBottom="109dp"
+        android:background="#5321C1"
+        android:text="Finish"
+        android:textColor="#FFFFFF"
+        android:textSize="13sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
+
+    <Button
+        android:id="@+id/AddMeander"
+        android:layout_width="159dp"
+        android:layout_height="45dp"
+        android:layout_marginStart="114dp"
+        android:layout_marginLeft="114dp"
+        android:layout_marginTop="27dp"
+        android:layout_marginEnd="138dp"
+        android:layout_marginRight="138dp"
+        android:background="#5321C1"
+        android:text="Add Meander"
+        android:textColor="#FFFFFF"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/eventLocation3" />
+
+</android.support.constraint.ConstraintLayout>
