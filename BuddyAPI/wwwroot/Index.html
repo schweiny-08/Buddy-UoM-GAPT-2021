@@ -41,10 +41,14 @@
             <button type="submit" onclick="AddPinpointType()">Add Pinpoint Type</button>
         </div>
         <div id="pinpointTypeSearch">
-            <input type="text" class="form-control" id="pinpointTypeIdSearch"/>
+            <input type="text" class="form-control" id="pinpointTypeIdSearch" />
 
-            <button type="submit", onclick="GetPinpointTypeById(document.getElementById('pinpointTypeIdSearch').value)">Search Pinpoint Type by Id</button>
+            <button type="submit" , onclick="GetPinpointTypeById(document.getElementById('pinpointTypeIdSearch').value)">Search Pinpoint Type by Id</button>
             <div id="searchPinpointByIdOutput"></div>
+        </div>
+        <div id="pinpointTypeDisplayAll">
+            <button type= "Button" , onclick="displayItems()">Getting All Pinpoint Types</button>
+            <div id="pinpointTypeDisplayAll"></div>
         </div>
     </div>
 
