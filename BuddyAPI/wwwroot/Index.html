@@ -36,9 +36,14 @@
     <div id="pinpointTypes">
         <div id="pinpointTypeAdd">
             <input type="text" id="pinpointTypeName" />
-            <input type="text" id="pinpointTypeIcon" />
+            <input type="text" id="PinpointTypeIcon" />
 
             <button type="submit" onclick="AddPinpointType()">Add Pinpoint Type</button>
+        </div>
+        <div id="pinpointTypeSearch">
+            <input type="text" class="form-control" id="pinpointTypeIdSearch"/>
+
+            <button type="submit", onclick="GetPinpointTypeById()">Search Pinpoint Type by Id</button>
         </div>
     </div>
 
