@@ -22,27 +22,15 @@ function AddPinpointType() {
     };
 }
 
-function GetPinpointTypeById() {
-
-    const itemId = document.getElementById('pinpointTypeIdSearch').value;
-    let getUrl = `${url + "/getPinpointType?id="}${itemId}`;
+function GetPinpointTypeById(id) {
+    console.log(id);
+    //const itemId = document.getElementById('pinpointTypeIdSearch').value;
+    let getUrl = `${url + "/getPinpointType?id="}${id}`;
 
     fetch(getUrl)
         .then(response => response.json())
         .then(data => document.getElementById("searchPinpointByIdOutput").innerHTML = JSON.stringify(data))
         .catch(error => console.error('Unable to get Pinpoint Type.', error))
 
-   /* var xhttp = new XMLHttpRequest();
-    xhttp.open("GET", url + "/getPinpointType", document.getElementById("pinpointTypeIdSearch").value, true);
-    console.log(document.getElementById("pinpointTypeIdSearch").value);
-    xhttp.send();
 
-    xhttp.onreadystatechange = function () {
-        if (this.readyState == 4 && this.status == 200) {
-            var response = JSON.parse(this.responseText);
-            alert(response);
-        } else {
-            alert("Something went wrong while sarching!" + this.status);
-        }
-    }*/
 }
