@@ -38,6 +38,7 @@ function pinpointWindow(map, mapsMouseEvent) {
         '<br />' +
         '<label for="pinpointDescription">Description: </label>' +
         '<textarea id="pinpointDescription"></textarea>' +
+        '<button>Create</button>'+
         '</div >';
 
     const pinpointWindow = new google.maps.InfoWindow({

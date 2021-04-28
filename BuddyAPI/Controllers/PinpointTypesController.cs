@@ -44,7 +44,7 @@ namespace BuddyAPI.Controllers
 
         // PUT: api/PinpointTypes/5
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
-        [HttpPut("addPinpointType")]
+        [HttpPut("editPinpointType")]
         public async Task<IActionResult> PutPinpointTypes(int id, PinpointTypes pinpointTypes)
         {
             if (id != pinpointTypes.pinpointType_Id)
@@ -75,7 +75,7 @@ namespace BuddyAPI.Controllers
 
         // POST: api/PinpointTypes
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
-        [HttpPost("editPinpointType")]
+        [HttpPost("addPinpointType")]
         public async Task<ActionResult<PinpointTypes>> PostPinpointTypes(PinpointTypes pinpointTypes)
         {
             _context.PinpointTypes.Add(pinpointTypes);
