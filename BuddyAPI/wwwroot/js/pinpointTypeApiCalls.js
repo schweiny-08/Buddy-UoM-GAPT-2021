@@ -29,7 +29,7 @@ function GetPinpointTypeById() {
 
     fetch(getUrl)
         .then(response => response.json())
-        .then(data => console.log(data))
+        .then(data => document.getElementById("searchPinpointByIdOutput").innerHTML = JSON.stringify(data))
         .catch(error => console.error('Unable to get Pinpoint Type.', error))
 
    /* var xhttp = new XMLHttpRequest();
