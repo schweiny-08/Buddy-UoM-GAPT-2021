@@ -19,7 +19,7 @@ function initMap() {
     //    { level: 0, marker: new google.maps.Marker({ position: { lat: 35.901810199007214, lng: 15.485197413626921 }, map, title: "Level 0 Marker" }) },
     //   { level: -1, marker: new google.maps.Marker({ position: { lat: 34.901810199007216, lng: 14.485197413626923 }, map, title: "Level -1 Marker" }) }
     //]; 
-   
+
 
     const coordInfoWindow = new google.maps.InfoWindow();
     coordInfoWindow.setContent(createInfoWindowContent(ict, map.getZoom()));
@@ -48,29 +48,29 @@ function initMap() {
             [412112, 412115],
         ],
         21: [
-            [1132956, 1132960],
+            [1132956, 1132961],
             [824225, 824231],
         ],
         22: [
-            [2265913, 2265920],
+            [2265913, 2265922],
             [1648450, 1648462],
         ],
     };
 
-    const bounds2 = {
-        19: [
-            [283239, 283240],
-            [206056, 206057],
-        ],
-        20: [
-            [566478, 566480],
-            [412112, 412115],
-        ],
-        21: [
-            [1132957, 1132960],
-            [824225, 824231],
-        ],
-    };
+    //const bounds2 = {
+    //    19: [
+    //        [283239, 283240],
+    //        [206056, 206057],
+    //    ],
+    //    20: [
+    //        [566478, 566480],
+    //        [412112, 412115],
+    //    ],
+    //    21: [
+    //        [1132957, 1132960],
+    //        [824225, 824231],
+    //    ],
+    //};
 
     //https://developers.google.com/maps/documentation/javascript/examples/maptype-image-overlay#maps_maptype_image_overlay-javascript
     //creating the imageMapType for the image to be overlayed over the map
@@ -94,7 +94,7 @@ function initMap() {
             return [
                 "https://localhost:",
                 port,
-                "/images/Lvl-1/",
+                "/images/Level-1/",
                 zoom,
                 "/",
                 coord.x,
@@ -106,16 +106,16 @@ function initMap() {
         tileSize: new google.maps.Size(256, 256),
     });
 
-    const ictLvlZeroBlkA = new google.maps.ImageMapType({
+    const ictLvlZero = new google.maps.ImageMapType({
         getTileUrl: function (coord, zoom) {
             //if statement to not render the image if outside the bounds or outside the max/min zoom levels
             if (
-                zoom < 19 ||
-                zoom > 21 ||
-                bounds2[zoom][0][0] > coord.x ||
-                coord.x > bounds2[zoom][0][1] ||
-                bounds2[zoom][1][0] > coord.y ||
-                coord.y > bounds2[zoom][1][1]
+                zoom < 18 ||
+                zoom > 22 ||
+                bounds[zoom][0][0] > coord.x ||
+                coord.x > bounds[zoom][0][1] ||
+                bounds[zoom][1][0] > coord.y ||
+                coord.y > bounds[zoom][1][1]
             ) {
                 return "";
             }
@@ -124,7 +124,7 @@ function initMap() {
             return [
                 "https://localhost:",
                 port,
-                "/images/ICTTiles/BlockA/",
+                "/images/Level0/",
                 zoom,
                 "/",
                 coord.x,
@@ -136,16 +136,16 @@ function initMap() {
         tileSize: new google.maps.Size(256, 256),
     });
 
-    const ictLvlZeroBlkB = new google.maps.ImageMapType({
+    const ictLvlMinTwo = new google.maps.ImageMapType({
         getTileUrl: function (coord, zoom) {
             //if statement to not render the image if outside the bounds or outside the max/min zoom levels
             if (
-                zoom < 19 ||
-                zoom > 21 ||
-                bounds2[zoom][0][0] > coord.x ||
-                coord.x > bounds2[zoom][0][1] ||
-                bounds2[zoom][1][0] > coord.y ||
-                coord.y > bounds2[zoom][1][1]
+                zoom < 18 ||
+                zoom > 22 ||
+                bounds[zoom][0][0] > coord.x ||
+                coord.x > bounds[zoom][0][1] ||
+                bounds[zoom][1][0] > coord.y ||
+                coord.y > bounds[zoom][1][1]
             ) {
                 return "";
             }
@@ -154,7 +154,37 @@ function initMap() {
             return [
                 "https://localhost:",
                 port,
-                "/images/ICTTiles/BlockB/",
+                "/images/Level-2/",
+                zoom,
+                "/",
+                coord.x,
+                "/",
+                coord.y,
+                ".png",
+            ].join("");
+        },
+        tileSize: new google.maps.Size(256, 256),
+    });
+
+    const ictLvlOne = new google.maps.ImageMapType({
+        getTileUrl: function (coord, zoom) {
+            //if statement to not render the image if outside the bounds or outside the max/min zoom levels
+            if (
+                zoom < 18 ||
+                zoom > 22 ||
+                bounds[zoom][0][0] > coord.x ||
+                coord.x > bounds[zoom][0][1] ||
+                bounds[zoom][1][0] > coord.y ||
+                coord.y > bounds[zoom][1][1]
+            ) {
+                return "";
+            }
+            //returning the required tiles by requesting the specific png images
+            //link is according to the port being used 
+            return [
+                "https://localhost:",
+                port,
+                "/images/Level1/",
                 zoom,
                 "/",
                 coord.x,
@@ -169,6 +199,22 @@ function initMap() {
     var radio = document.forms["level-selector"].elements["level"];
     for (var i = 0; i < radio.length; i++) {
         radio[i].onclick = function () {
+            if (document.getElementById('level -2').checked) {
+                level = -2;
+
+                map.overlayMapTypes.clear();
+                map.overlayMapTypes.push(ictLvlMinTwo);
+                document.getElementById('status').innerHTML = "Level -2 Parking";
+
+                //Show appropriate markers
+                for (let j = 0; j < markers.length; j++) {
+                    if (markers[j].level == -2) {
+                        markers[j].marker.setMap(map);
+                    } else {
+                        markers[j].marker.setMap(null);
+                    }
+                }
+            }
             if (document.getElementById('level -1').checked) {
                 level = -1;
 
@@ -190,8 +236,7 @@ function initMap() {
                 level = 0;
 
                 map.overlayMapTypes.clear();
-                map.overlayMapTypes.push(ictLvlZeroBlkA);
-                map.overlayMapTypes.push(ictLvlZeroBlkB);
+                map.overlayMapTypes.push(ictLvlZero);
                 document.getElementById('status').innerHTML = "Level 0";
 
                 //Show appropriate markers
@@ -203,6 +248,24 @@ function initMap() {
                     }
                 }
             }
+
+            if (document.getElementById('level 1').checked) {
+                level = 1;
+
+                map.overlayMapTypes.clear();
+                map.overlayMapTypes.push(ictLvlOne);
+                document.getElementById('status').innerHTML = "Level 1";
+
+                //Show appropriate markers
+                for (let j = 0; j < markers.length; j++) {
+                    if (markers[j].level == 1) {
+                        markers[j].marker.setMap(map);
+                    } else {
+                        markers[j].marker.setMap(null);
+                    }
+                }
+            }
+
             if (document.getElementById('no-overlay').checked) {
                 level = -999;
 
@@ -210,34 +273,35 @@ function initMap() {
                 document.getElementById('status').innerHTML = "No Overlay";
             }
         }
+
+        // Adds marker when user clicks on map
+        map.addListener("click", (mapsMouseEvent) => {
+            addMarker(map, mapsMouseEvent)
+        });
     }
 
-    // Adds marker when user clicks on map
-    map.addListener("click", (mapsMouseEvent) => {
-        //pinpointWindow(map, mapsMouseEvent);
-        addMarker(map, mapsMouseEvent);
-    });  
-}
 
-function addMarker(map, mapsMouseEvent) {
-    var marker = new google.maps.Marker({
-        position: mapsMouseEvent.latLng,
-        map,
-        title: "Basic Marker"
-    });
+    function addMarker(map, mapsMouseEvent) {
+        var marker = new google.maps.Marker({
+            position: mapsMouseEvent.latLng,
+            map,
+            title: "Basic Marker"
+        });
 
-    //Add listener to the marker to splice element from array and remove from map on rightclick
-    marker.addListener("rightclick", function () {
-        for (let i = 0; i < markers.length; i++) {
-            if (markers[i].marker == marker) {
-                //alert("IN IF STATEMENT");
-                //delete markers[i];
-                markers.splice(i, 1);
-                marker.setMap(null);
-                console.log(markers);
+
+        //Add listener to the marker to splice element from array and remove from map on rightclick
+        marker.addListener("rightclick", function () {
+            for (let i = 0; i < markers.length; i++) {
+                if (markers[i].marker == marker) {
+                    //alert("IN IF STATEMENT");
+                    //delete markers[i];
+                    markers.splice(i, 1);
+                    marker.setMap(null);
+                    console.log(markers);
+                }
             }
-        }
-    });
+        });
+
 
     marker.addListener("dblclick", (mapsMouseEvent) => {
         //pinpointWindow(map, mapsMouseEvent)
