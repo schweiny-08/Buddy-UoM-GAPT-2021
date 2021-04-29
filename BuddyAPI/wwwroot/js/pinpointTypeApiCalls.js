@@ -1,5 +1,5 @@
 var port = location.port;
-const url = "https://localhost:" + port + "/api/PinpointTypes";
+var url = "https://localhost:" + port + "/api/PinpointTypes";
 
 function AddPinpointType() {
     var xhttp = new XMLHttpRequest();
@@ -27,11 +27,16 @@ function GetPinpointTypeById(id) {
     //const itemId = document.getElementById('pinpointTypeIdSearch').value;
     let getUrl = `${url + "/getPinpointType?id="}${id}`;
 
+    var retData;
+
     fetch(getUrl)
         .then(response => response.json())
-        .then(data => document.getElementById("searchPinpointByIdOutput").innerHTML = JSON.stringify(data))
+        .then(data => retData = data)//document.getElementById("searchPinpointByIdOutput").innerHTML = JSON.stringify(data))
         .catch(error => console.error('Unable to get Pinpoint Type.', error))
+    return retData;
 }
+
+function EditPinpointTypeById(id) {}
 
 function GetAllPinpointTypes() {
     //const itemId = document.getElementById('pinpointTypeIdSearch').value;
@@ -44,4 +49,5 @@ function GetAllPinpointTypes() {
             .then(data => document.getElementById("searchPinpointByIdOutput").innerHTML = JSON.stringify(data))
             .catch(error => console.error('Unable to get Pinpoint Type.', error))
     }
+
 }
