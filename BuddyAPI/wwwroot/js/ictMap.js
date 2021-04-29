@@ -214,7 +214,8 @@ function initMap() {
 
     // Adds marker when user clicks on map
     map.addListener("click", (mapsMouseEvent) => {
-        addMarker(map, mapsMouseEvent)
+        //pinpointWindow(map, mapsMouseEvent);
+        addMarker(map, mapsMouseEvent);
     });  
 }
 
@@ -238,21 +239,33 @@ function addMarker(map, mapsMouseEvent) {
         }
     });
 
-    marker.addListener("click", (mapsMouseEvent) => {
-        pinpointWindow(map, mapsMouseEvent)
+    marker.addListener("dblclick", (mapsMouseEvent) => {
+        //pinpointWindow(map, mapsMouseEvent)
     });
 
     var markerObj = {
         id: id, level: level, marker: marker
     }
 
-    //markers.push(markerObj);
+    markers.push(markerObj);
 
     //calling the pinpoint window function
-    pinpointWindow(map, mapsMouseEvent);
+    //pinpointWindow(map, mapsMouseEvent);
 
     id++;
 
-    /*    AddPinpoint(markerObj);*/
+    console.log("LAT"+ JSON.stringify(marker.position.lng()));
+
+    AddPinpoint(
+        1,
+        level,
+        marker.position.lat(),
+        marker.position.lng(),
+        1,
+        "DefaultName",
+        "This is a default description"
+    );
+    
  /*   export { markers, markerObj};*/
 }
+
