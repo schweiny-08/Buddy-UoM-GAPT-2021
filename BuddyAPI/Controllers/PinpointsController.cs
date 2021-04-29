@@ -44,7 +44,7 @@ namespace BuddyAPI.Controllers
 
         // PUT: api/Pinpoints/5
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
-        [HttpPut("editPinpoint")]
+        [HttpPut("addPinpoint")]
         public async Task<IActionResult> PutPinpoints(int id, Pinpoints pinpoints)
         {
             if (id != pinpoints.pinpoint_Id)
@@ -75,7 +75,7 @@ namespace BuddyAPI.Controllers
 
         // POST: api/Pinpoints
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
-        [HttpPost("addPinpoint")]
+        [HttpPost("editPinpoint")]
         public async Task<ActionResult<Pinpoints>> PostPinpoints(Pinpoints pinpoints)
         {
             _context.Pinpoints.Add(pinpoints);

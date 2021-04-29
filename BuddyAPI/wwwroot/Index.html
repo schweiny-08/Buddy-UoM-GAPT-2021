@@ -32,33 +32,12 @@
             <h1 id="status">No Overlay</h1>
         </form>
     </div>
-    <div id="addPinpointSubmit">
-        <button type="submit" id="pinpointCreateButton" onclick="EditPinpoint()">Edit Details</button>
-    </div>
-
-    <div id="pinpointTypes">
-        <div id="pinpointTypeAdd">
-            <input type="text" id="pinpointTypeName" />
-            <input type="text" id="PinpointTypeIcon" />
-
-            <button type="submit" onclick="AddPinpointType()">Add Pinpoint Type</button>
-        </div>
-        <div id="pinpointTypeSearch">
-            <input type="text" class="form-control" id="pinpointTypeIdSearch" />
-
-            <button type="submit" , onclick="GetPinpointTypeById(document.getElementById('pinpointTypeIdSearch').value)">Search Pinpoint Type by Id</button>
-            <div id="searchPinpointByIdOutput"></div>
-        </div>
-    </div>
 
     <!-- calling the google maps api using a custom API key. CHECK IF SAME KEY WORKS ACROSS DIFFERENT DEVICES!! -->
-
 
     <script src="../js/ictMap.js"></script>
     <script src="../js/infoWindow.js"></script>
     <script src="../js/pinpointWindow.js"></script>
-    <script src="../js/pinpointTypeApiCalls.js"></script>
-    <script type="text/javascript" src="../js/pinpointApiCalls.js"></script>
     <!--<script src="../js/mapMarkers.js"></script>-->
     <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyChmvdq02aq8Sa68jTYFghQZz_1LFFUp8o&callback=initMap&libraries=&v=weekly"
             async></script>
