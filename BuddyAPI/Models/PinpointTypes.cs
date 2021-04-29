@@ -14,7 +14,6 @@ namespace BuddyAPI.Models
 		[Required]
 		public string pinpointTypeName{ get; set; }
 
-		//[Required]
 		public string pinpointIcon { get; set; }
 
 		//public virtual ICollection<PinpointTypes> pinpointTypes { get; set; }

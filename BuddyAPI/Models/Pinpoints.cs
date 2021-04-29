@@ -19,16 +19,14 @@ namespace BuddyAPI.Models
 		public int floor_Id { get; set; }
 
 		[Required]
-		public double latitude { get; set; }
-		
-		[Required]
-		public double longitude { get; set; }
+		public int location_Id { get; set; }
 
 		public int hazard_Id { get; set; }
 
 		[Required]
 		public string pinpointName { get; set; }
 
+		[Required]
 		public string pinpointDescription { get; set; }
 
 		//public virtual ICollection<Pinpoints> pinpoints { get; set; }
