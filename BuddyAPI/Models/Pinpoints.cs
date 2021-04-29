@@ -1,18 +1,36 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace BuddyAPI.Models
 {
 	public class Pinpoints
 	{
-		public int pinpointId { get; set; }
-		public int pinTypeId { get; set; }
-		public int floorId { get; set; }
-		public int locationId { get; set; }
-		public int hazardId { get; set; }
-		public string pinpointName { get; set; }
-		public string pinpointDesc { get; set; }
 
-		public virtual ICollection<Pinpoints> pinpoints { get; set; }
+		[Key]
+		[DatabaseGenerated(DatabaseGeneratedOption.Identity)]
+		public int pinpoint_Id { get; set; }
+
+		[Required]
+		public int pinpointType_Id { get; set; }
+
+		[Required]
+		public int floor_Id { get; set; }
+
+		[Required]
+		public double latitude { get; set; }
+		
+		[Required]
+		public double longitude { get; set; }
+
+		public int hazard_Id { get; set; }
+
+		[Required]
+		public string pinpointName { get; set; }
+
+		public string pinpointDescription { get; set; }
+
+		//public virtual ICollection<Pinpoints> pinpoints { get; set; }
 	}
 }
