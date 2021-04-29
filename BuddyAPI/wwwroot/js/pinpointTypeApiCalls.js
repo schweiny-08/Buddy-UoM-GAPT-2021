@@ -33,10 +33,21 @@ function GetPinpointTypeById(id) {
         .then(response => response.json())
         .then(data => retData = data)//document.getElementById("searchPinpointByIdOutput").innerHTML = JSON.stringify(data))
         .catch(error => console.error('Unable to get Pinpoint Type.', error))
-
     return retData;
 }
 
-function EditPinpointTypeById(id) {
-    
+function EditPinpointTypeById(id) {}
+
+function GetAllPinpointTypes() {
+    //const itemId = document.getElementById('pinpointTypeIdSearch').value;
+    for (var id = 0; id <= 4; id++) {
+        //not displaying 
+        let getUrl = `${url + "/getPinpointType?id="}${id}`;
+
+        fetch(getUrl)
+            .then(response => response.json())
+            .then(data => document.getElementById("searchPinpointByIdOutput").innerHTML = JSON.stringify(data))
+            .catch(error => console.error('Unable to get Pinpoint Type.', error))
+    }
+
 }
