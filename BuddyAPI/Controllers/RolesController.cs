@@ -22,14 +22,14 @@ namespace BuddyAPI.Controllers
         }
 
         // GET: api/Roles
-        [HttpGet]
+        [HttpGet("GetAllRoles")]
         public async Task<ActionResult<IEnumerable<Roles>>> GetRoles()
         {
             return await _context.Roles.ToListAsync();
         }
 
         // GET: api/Roles/5
-        [HttpGet("{id}")]
+        [HttpGet("GetRolebyId")]
         public async Task<ActionResult<Roles>> GetRoles(int id)
         {
             var roles = await _context.Roles.FindAsync(id);
@@ -44,7 +44,7 @@ namespace BuddyAPI.Controllers
 
         // PUT: api/Roles/5
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
-        [HttpPut("{id}")]
+        [HttpPut("UpdateRolebyId")]
         public async Task<IActionResult> PutRoles(int id, Roles roles)
         {
             if (id != roles.Role_Id)
@@ -75,7 +75,7 @@ namespace BuddyAPI.Controllers
 
         // POST: api/Roles
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
-        [HttpPost]
+        [HttpPost ("PostNewRole")]
         public async Task<ActionResult<Roles>> PostRoles(Roles roles)
         {
             _context.Roles.Add(roles);
@@ -85,7 +85,7 @@ namespace BuddyAPI.Controllers
         }
 
         // DELETE: api/Roles/5
-        [HttpDelete("{id}")]
+        [HttpDelete("DeleteRole")]
         public async Task<IActionResult> DeleteRoles(int id)
         {
             var roles = await _context.Roles.FindAsync(id);
