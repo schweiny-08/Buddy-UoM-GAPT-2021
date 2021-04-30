@@ -1,14 +1,14 @@
-﻿//import {AddPinpoint} from '../js/pinpointApiCalls.js';
-
-var port = location.port;
+﻿var port = location.port;
 var markers = [];
 var level = 0;
 var id = 0;
+const iconBase = "../images/MarkerIcons/";
+var map;
 
 //Creating the map centred over UOM with default zoom level 15
 function initMap() {
     const ict = new google.maps.LatLng(35.901810199007215, 14.485197413626922);
-    const map = new google.maps.Map(document.getElementById("map"), {
+    map = new google.maps.Map(document.getElementById("map"), {
         center: ict,
         zoom: 15,
     });
@@ -235,6 +235,8 @@ function initMap() {
             if (document.getElementById('level 0').checked) {
                 level = 0;
 
+                console.log("HERE" + markers);
+
                 map.overlayMapTypes.clear();
                 map.overlayMapTypes.push(ictLvlZero);
                 document.getElementById('status').innerHTML = "Level 0";
@@ -247,6 +249,7 @@ function initMap() {
                         markers[j].marker.setMap(null);
                     }
                 }
+                
             }
 
             if (document.getElementById('level 1').checked) {
@@ -273,19 +276,20 @@ function initMap() {
                 document.getElementById('status').innerHTML = "No Overlay";
             }
         }
-
-        // Adds marker when user clicks on map
-        map.addListener("click", (mapsMouseEvent) => {
-            addMarker(map, mapsMouseEvent)
-        });
     }
+
+    // Adds marker when user clicks on map
+    map.addListener("click", (mapsMouseEvent) => {
+        addMarker(map, mapsMouseEvent)
+    });
 }
 
 function addMarker(map, mapsMouseEvent) {
         var marker = new google.maps.Marker({
             position: mapsMouseEvent.latLng,
+            //icon: iconBase+"NavNode.png",
             map,
-            title: "Basic Marker"
+            title: "Lecture Room"
         });
 
 
@@ -320,15 +324,16 @@ function addMarker(map, mapsMouseEvent) {
 
         console.log("LAT" + JSON.stringify(marker.position.lng()));
 
-        AddPinpoint(
-            1,
-            level,
+// Adding entrance/exit
+       /* AddPinpoint(
+            15,
+            2,
             marker.position.lat(),
             marker.position.lng(),
             1,
-            "DefaultName",
-            "This is a default description"
-        );
+            "Nav Node",
+            "Navigation Node"
+        );*/
 
         /*   export { markers, markerObj};*/
 }
