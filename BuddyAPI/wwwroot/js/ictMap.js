@@ -287,7 +287,7 @@ function initMap() {
 function addMarker(map, mapsMouseEvent) {
         var marker = new google.maps.Marker({
             position: mapsMouseEvent.latLng,
-            //icon: iconBase+"Stairs.png",
+            //icon: iconBase+"NavNode.png",
             map,
             title: "Lecture Room"
         });
@@ -324,15 +324,15 @@ function addMarker(map, mapsMouseEvent) {
 
         console.log("LAT" + JSON.stringify(marker.position.lng()));
 
-/*// Adding entrance/exit
-        AddPinpoint(
+// Adding entrance/exit
+       /* AddPinpoint(
             15,
             2,
             marker.position.lat(),
             marker.position.lng(),
             1,
-            "Lecture Room",
-            "A lecture room in the ICT building."
+            "Nav Node",
+            "Navigation Node"
         );*/
 
         /*   export { markers, markerObj};*/
