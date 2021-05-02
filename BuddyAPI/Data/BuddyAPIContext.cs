@@ -17,6 +17,8 @@ namespace BuddyAPI.Data
         public DbSet<PinpointTypes> PinpointTypes { get; set; }
         public DbSet<Floor> Floor { get; set; }
         public DbSet<User> User { get; set; }
+        public DbSet<Buildings> Buildings { get; set; }
+        public DbSet<Hazard> Hazard { get; set; }
         public DbSet<Itineraries> Itineraries { get; set; }
         public DbSet<Events> Events { get; set; }
         public DbSet<PrivateEvents> PrivateEvents { get; set; }
