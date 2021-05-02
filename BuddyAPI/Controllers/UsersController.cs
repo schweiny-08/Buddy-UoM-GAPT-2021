@@ -22,14 +22,14 @@ namespace BuddyAPI.Controllers
         }
 
         // GET: api/Users
-        [HttpGet]
+        [HttpGet("getAllUsers")]
         public async Task<ActionResult<IEnumerable<User>>> GetUsers()
         {
             return await _context.User.ToListAsync();
         }
 
         // GET: api/Users/5
-        [HttpGet("{id}")]
+        [HttpGet("getUserById")]
         public async Task<ActionResult<User>> GetUser(int id)
         {
             var user = await _context.User.FindAsync(id);
@@ -44,7 +44,7 @@ namespace BuddyAPI.Controllers
 
         // PUT: api/Users/5
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
-        [HttpPut("{id}")]
+        [HttpPut("editUserById")]
         public async Task<IActionResult> PutUser(int id, User user)
         {
             if (id != user.User_Id)
@@ -75,7 +75,7 @@ namespace BuddyAPI.Controllers
 
         // POST: api/Users
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
-        [HttpPost]
+        [HttpPost("addUser")]
         public async Task<ActionResult<User>> PostUser(User user)
         {
             //user.Role = null;
@@ -89,7 +89,7 @@ namespace BuddyAPI.Controllers
         }
 
         // DELETE: api/Users/5
-        [HttpDelete("{id}")]
+        [HttpDelete("deleteUserById")]
         public async Task<IActionResult> DeleteUser(int id)
         {
             var user = await _context.User.FindAsync(id);
