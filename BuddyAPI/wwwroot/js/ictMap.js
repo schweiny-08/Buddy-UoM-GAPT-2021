@@ -4,6 +4,7 @@ var level = 0;
 var id = 0;
 const iconBase = "../images/MarkerIcons/";
 var map;
+var startNode = null, endNode = null;
 
 //Creating the map centred over UOM with default zoom level 15
 function initMap() {
@@ -308,7 +309,11 @@ function addMarker(map, mapsMouseEvent) {
 
 
         marker.addListener("dblclick", (mapsMouseEvent) => {
-            //pinpointWindow(map, mapsMouseEvent)
+            if (startNode == null)
+                startNode = marker;
+            else
+                endNode = marker;
+
         });
 
         var markerObj = {

@@ -32,5 +32,6 @@ namespace BuddyAPI.Models
 		public string pinpointDescription { get; set; }
 
 		//public virtual ICollection<Pinpoints> pinpoints { get; set; }
+		public List<NavEdge> map_edges;
 	}
 }
