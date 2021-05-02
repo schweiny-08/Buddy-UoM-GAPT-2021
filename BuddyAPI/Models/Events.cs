@@ -1,17 +1,22 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations.Schema;
+using System.ComponentModel.DataAnnotations;
+
 
 namespace BuddyAPI.Models
 {
 	public class Events
 	{
-		public int eventId { get; set; }
-		public int pinpointId { get; set; }
-		public string eventName { get; set; }
-		public string eventDesc { get; set; }
-		public DateTime startTime { get; set; }
-		public DateTime endTime { get; set; }
+		[Key]
+		[DatabaseGenerated(DatabaseGeneratedOption.Identity)]
+		public int Event_Id { get; set; }
+		public int Pinpoint_Id { get; set; }
+		public string EventName { get; set; }
+		public string EventDescription { get; set; }
+		public DateTime StartTime { get; set; }
+		public DateTime EndTime { get; set; }
 
-		public virtual ICollection<Events> events { get; set; }
+		//public virtual ICollection<Events> events { get; set; }
 	}
 }
