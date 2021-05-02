@@ -1,16 +1,22 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations.Schema;
+using System.ComponentModel.DataAnnotations;
 
 namespace BuddyAPI.Models
 {
 	public class User
 	{
-		public int userId { get; set; }
-		public string username { get; set; }
-		public int telephone { get; set; }
-		public string email { get; set; }
-		public string password { get; set; }
+		[Key]
+		[DatabaseGenerated(DatabaseGeneratedOption.Identity)]
+		public int User_Id { get; set; }
+		public string Username { get; set; }
+		public int Telephone { get; set; }
+		public string Email { get; set; }
+		public string Password { get; set; }
 
-		public virtual ICollection<User> users { get; set; }
+		public int Role_Id { get; set; }
+
+		//public virtual ICollection<User> users { get; set; }
 	}
 }
