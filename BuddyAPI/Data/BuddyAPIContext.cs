@@ -17,7 +17,8 @@ namespace BuddyAPI.Data
         public DbSet<PinpointTypes> PinpointTypes { get; set; }
         public DbSet<Floor> Floor { get; set; }
         public DbSet<User> User { get; set; }
-
+        public DbSet<BuddyAPI.Models.Buildings> Buildings { get; set; }
+        public DbSet<BuddyAPI.Models.Hazard> Hazard { get; set; }
         /*protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.Entity<Roles>().ToTable("Roles");

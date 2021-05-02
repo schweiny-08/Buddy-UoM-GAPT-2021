@@ -44,7 +44,7 @@ namespace BuddyAPI.Controllers
 
         // PUT: api/Floors/5
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
-        [HttpPut("editFloor")]
+        [HttpPut("editFloorById")]
         public async Task<IActionResult> PutFloor(int id, Floor floor)
         {
             if (id != floor.floor_Id)
@@ -85,7 +85,7 @@ namespace BuddyAPI.Controllers
         }
 
         // DELETE: api/Floors/5
-        [HttpDelete("deleteFloor")]
+        [HttpDelete("deleteFloorById")]
         public async Task<IActionResult> DeleteFloor(int id)
         {
             var floor = await _context.Floor.FindAsync(id);

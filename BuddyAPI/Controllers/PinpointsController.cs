@@ -29,7 +29,7 @@ namespace BuddyAPI.Controllers
         }
 
         // GET: api/Pinpoints/5
-        [HttpGet("getPinpoint")]
+        [HttpGet("getPinpointById")]
         public async Task<ActionResult<Pinpoints>> GetPinpoints(int id)
         {
             var pinpoints = await _context.Pinpoints.FindAsync(id);
@@ -44,7 +44,7 @@ namespace BuddyAPI.Controllers
 
         // PUT: api/Pinpoints/5
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
-        [HttpPut("editPinpoint")]
+        [HttpPut("editPinpointById")]
         public async Task<IActionResult> PutPinpoints(int id, Pinpoints pinpoints)
         {
             if (id != pinpoints.pinpoint_Id)
@@ -85,7 +85,7 @@ namespace BuddyAPI.Controllers
         }
 
         // DELETE: api/Pinpoints/5
-        [HttpDelete("deletePinpoint")]
+        [HttpDelete("deletePinpointById")]
         public async Task<IActionResult> DeletePinpoints(int id)
         {
             var pinpoints = await _context.Pinpoints.FindAsync(id);
