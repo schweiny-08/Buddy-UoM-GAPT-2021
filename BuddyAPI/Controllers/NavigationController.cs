@@ -15,10 +15,11 @@ namespace BuddyAPI.Controllers
     {
         //GET: api/Navigation
         [HttpGet]
-        public async Task<ActionResult<Pinpoints>>GetNavigation(int startNode, int endNode)
+        public async Task<ActionResult<List<int>>>GetNavigation(int startNode, int endNode)
         {
             NavigateMap nav = new NavigateMap();
-            return Ok(nav.CalculateAStar(startNode, endNode));
+            List<int> path = nav.CalculateAStar(startNode, endNode); // gave error
+            return path;
         }
 
         struct MinPriorityQueue
@@ -71,7 +72,7 @@ namespace BuddyAPI.Controllers
 
             public static explicit operator GraphNode(Task<ActionResult<Pinpoints>> v)
             {
-                throw new NotImplementedException();
+                throw new NotImplementedException(); // thrown
             }
         }
 
@@ -103,11 +104,11 @@ namespace BuddyAPI.Controllers
                 minQueue.map_edges = new List<NavEdge>();
                 minQueue.map_costs = new List<int>();
 
-                //I THINK THIS IS INCORRECT 
+                //***********I THINK THIS IS INCORRECT ****************
                 PinpointsController pc = new PinpointsController(context);
-                GraphNode endPin = (GraphNode)pc.GetPinpoints(end);
+                GraphNode endPin = (GraphNode)pc.GetPinpoints(end); // gives error 
                 GraphNode startPin = (GraphNode)pc.GetPinpoints(start);
-                //need a way to send the long and lat of start/finish into the variables
+                //**********need a way to send the long and lat of start/finish into the variables
                 map_costs[start] = 0;
                 double targetX = endPin.map_long;
                 double targetY = endPin.map_long;
