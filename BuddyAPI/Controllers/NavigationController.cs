@@ -1,4 +1,5 @@
-﻿using BuddyAPI.Models;
+﻿using BuddyAPI.Data;
+using BuddyAPI.Models;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using System;
@@ -9,11 +10,12 @@ using System.Threading.Tasks;
 namespace BuddyAPI.Controllers
 {
     [Route("api/[controller]")]
-    [ApiController]
+    //[ApiController]
     public class NavigationController : ControllerBase
     {
+        //GET: api/Navigation
         [HttpGet]
-        public IActionResult Get(Pinpoints startNode, Pinpoints endNode)
+        public async Task<ActionResult<Pinpoints>>GetNavigation(int startNode, int endNode)
         {
             NavigateMap nav = new NavigateMap();
             return Ok(nav.CalculateAStar(startNode, endNode));
@@ -53,30 +55,46 @@ namespace BuddyAPI.Controllers
             }
         }
 
+        struct GraphNode
+        {
+            //info from pinpoints is transfered into an object of Graph Node
+            public GraphNode(int id, int longitude, int latitude)
+            {
+                //map_index = index;
+                map_pinId = id;
+                map_long = longitude;
+                map_lat = latitude;
+                map_edges = new List<NavEdge>();
+            }
+            public int map_long, map_lat, map_pinId;
+            public List<NavEdge> map_edges; //adjacency list
+
+            public static explicit operator GraphNode(Task<ActionResult<Pinpoints>> v)
+            {
+                throw new NotImplementedException();
+            }
+        }
+
         struct NavigateMap
         {
-            public List<Pinpoints> nodes;
-            //start node and end needs to be passed as objects of GraphNode - info stored there
-            public List<int> CalculateAStar(Pinpoints start, Pinpoints end)
+            public List<GraphNode> nodes;
+            private BuddyAPIContext context;
+
+            public List<int> CalculateAStar(int start, int end)
             {
                 List<int> path = new List<int>();
-                for (int y = 0; y < 30; y++)
+                for (int i = 0; i < 54; i++)
                 {
-                    for (int x = 0; x < 30; x++)
-                    {
                         //setting the path to null to start a new one
                         path.Add(-1);
-                    }
                 }
 
                 List<int> map_costs = new List<int>();
-                for (int y = 0; y < 30; y++)
+                //navigation nodes with type 15 aree navigation nodes - 54 nav nodes in the database
+                for (int i=0; i < 54; i++)
                 {
-                    for (int x = 0; x < 30; x++)
-                    {
                         // add the largest possible int to the costs
                         map_costs.Add(int.MaxValue);
-                    }
                 }
 
                 //to avoid repeated visits to the same node
@@ -85,51 +103,54 @@ namespace BuddyAPI.Controllers
                 minQueue.map_edges = new List<NavEdge>();
                 minQueue.map_costs = new List<int>();
 
-                map_costs[start.pinpoint_Id] = 0;
-                double targetX = end.longitude;
-                double targetY = end.latitude;
-                double sourceX = start.longitude;
-                double sourceY = start.latitude;
+                //I THINK THIS IS INCORRECT 
+                PinpointsController pc = new PinpointsController(context);
+                GraphNode endPin = (GraphNode)pc.GetPinpoints(end);
+                GraphNode startPin = (GraphNode)pc.GetPinpoints(start);
+                //need a way to send the long and lat of start/finish into the variables
+                map_costs[start] = 0;
+                double targetX = endPin.map_long;
+                double targetY = endPin.map_long;
+                double sourceX = startPin.map_long;
+                double sourceY = startPin.map_lat;
 
                 //Add all adjacent nodes to the source, to the min priority queue
-                for (int i = 0; i < nodes[start.pinpoint_Id].map_edges.Count; i++)
+                for (int i = 0; i < nodes[start].map_edges.Count; i++)
                 {
-                    NavEdge edge = nodes[start.pinpoint_Id].map_edges[i];
-                    //Input manhattan heuristic cost -- still need to understand exactly
-                    //computed by calculating the total number of squares moved horizontally and vertically to reach the target square from the current square
-                    //https://brilliant.org/wiki/a-star-search/#heuristics
-                    int nodeX = edge.to % 30;
-                    int nodeY = edge.to / 30;
+                    NavEdge edge = nodes[start].map_edges[i];
+                    //manhattan heuristic cost calculating the total number of squares moved horizontally and vertically to reach the target square from the current
+                    int nodeX = edge.to;
+                    int nodeY = edge.to;
 
                     int heuristicCost = Convert.ToInt32(Math.Abs(nodeX - targetX) + Math.Abs(nodeY - targetY));
-                    //All costs start of at 1 - (in a Grid based program)
+                    //All costs start of at 1
                     minQueue.Add(edge, 1 + heuristicCost);
                 }
                 bool TargetNodeFound = false;
 
                 while (minQueue.map_edges.Count > 0)
                 {
-                    //Pop element from minQueue and put into traversedEdges list
+                    //Pop element from minQueue enter into traversedEdges list
                     NavEdge curEdge = minQueue.Pop();
                     traversed.Add(curEdge);
 
-                    //Check if the cost of the node the current edge leads to is greater than the cost of the previous node added with the cost of the edge
+                    //Check if node cost = current edge leads to is greater than previous node cost + cost of the edge
                     if (map_costs[curEdge.to] > map_costs[curEdge.from] + 1)
                     {
                         path[curEdge.to] = curEdge.from;
                         map_costs[curEdge.to] = map_costs[curEdge.from] + 1;
-                        if (end.pinpoint_Id == curEdge.to)
+                        if (end == curEdge.to)
                         {
                             TargetNodeFound = true;
                             break;
                         }
                         else
                         {
-                            //Add all adjacent edges to the queue using a for loop
-                            Pinpoints curNode = nodes[curEdge.to];
+                            //Add adjacent edges to the queue
+                            GraphNode curNode = nodes[curEdge.to];
                             for (int i = 0; i < curNode.map_edges.Count; i++)
                             {
-                                //If the edge is on the already traversed queue or the min-priority queue then it is not added
+                                //If edge already in traversed queue or min-priority queue then  not added
                                 if (traversed.Contains(curNode.map_edges[i]))
                                 {
                                     continue;
@@ -138,12 +159,12 @@ namespace BuddyAPI.Controllers
                                 {
                                     continue;
                                 }
-                                //else add to the queue and set its priority as the current node's cost plus the cost of this adjacent edge
-                                int nodeX = curNode.map_edges[i].to % 30;
-                                int nodeY = curNode.map_edges[i].to / 30;
+                                //add to queue and priority = current node's cost + the cost of this adjacent edge
+                                int nodeX = curNode.map_edges[i].to;
+                                int nodeY = curNode.map_edges[i].to;
 
                                 int heuristicCost = Convert.ToInt32(Math.Abs(nodeX - targetX) + Math.Abs(nodeY - targetY));
-                                minQueue.Add(curNode.map_edges[i], map_costs[curNode.pinpoint_Id] + 1 + heuristicCost);
+                                minQueue.Add(curNode.map_edges[i], map_costs[curNode.map_pinId] + 1 + heuristicCost);
                             }
                         }
                     }

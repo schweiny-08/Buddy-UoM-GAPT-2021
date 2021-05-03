@@ -1,7 +1,9 @@
-﻿using System;
+﻿using Microsoft.AspNetCore.Mvc;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using System.Threading.Tasks;
 
 namespace BuddyAPI.Models
 {
@@ -32,6 +34,11 @@ namespace BuddyAPI.Models
 		public string pinpointDescription { get; set; }
 
 		//public virtual ICollection<Pinpoints> pinpoints { get; set; }
-		public List<NavEdge> map_edges;
-	}
+		//public List<NavEdge> map_edges;
+		//added by Nina to test something out
+        public static explicit operator Pinpoints(Task<ActionResult<Pinpoints>> v)
+        {
+            throw new NotImplementedException();
+        }
+    }
 }
