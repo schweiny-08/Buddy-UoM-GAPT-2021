@@ -34,11 +34,6 @@ namespace BuddyAPI.Models
 		public string pinpointDescription { get; set; }
 
 		//public virtual ICollection<Pinpoints> pinpoints { get; set; }
-		//public List<NavEdge> map_edges;
-		//added by Nina to test something out
-        public static explicit operator Pinpoints(Task<ActionResult<Pinpoints>> v)
-        {
-            throw new NotImplementedException();
-        }
+
     }
 }
