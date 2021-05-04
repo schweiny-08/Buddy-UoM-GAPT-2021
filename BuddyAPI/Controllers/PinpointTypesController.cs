@@ -42,6 +42,19 @@ namespace BuddyAPI.Controllers
             return pinpointTypes;
         }
 
+        [HttpGet("getPinpointTypeByName")]
+        public async Task<ActionResult<PinpointTypes>> GetPinpointTypesByName(string name)
+        {
+            var pinpointTypes = _context.PinpointTypes.FirstOrDefault(p => p.pinpointTypeName == name);
+
+            if (pinpointTypes == null)
+            {
+                return NotFound();
+            }
+
+            return pinpointTypes;
+        }
+
         // PUT: api/PinpointTypes/5
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPut("editPinpointTypeById")]
@@ -78,6 +91,11 @@ namespace BuddyAPI.Controllers
         [HttpPost("addPinpointType")]
         public async Task<ActionResult<PinpointTypes>> PostPinpointTypes(PinpointTypes pinpointTypes)
         {
+            var existingPPType = _context.PinpointTypes.FirstOrDefault(p => p.pinpointTypeName == pinpointTypes.pinpointTypeName);
+
+            if (existingPPType!= null && existingPPType.pinpointTypeName.Equals(pinpointTypes.pinpointTypeName, StringComparison.OrdinalIgnoreCase))
+                return BadRequest("Pinpoint type already exists!");
+
             _context.PinpointTypes.Add(pinpointTypes);
             await _context.SaveChangesAsync();
 

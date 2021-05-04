@@ -42,6 +42,17 @@ namespace BuddyAPI.Controllers
             return buildings;
         }
 
+        [HttpGet("getBuildingByName")]
+        public async Task<ActionResult<Buildings>> GetBuildingsByName(string name) {
+            var building =  _context.Buildings.FirstOrDefault( b => b.buildingName == name);
+
+            if (building == null)
+                return NotFound();
+
+            return building;
+
+        }
+
         // PUT: api/Buildings/5
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPut("editBuildingById")]
