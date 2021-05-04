@@ -15,7 +15,9 @@ namespace BuddyAPI.Models
 		[Required]
 		public int building_Id { get; set; }
 		[Required]
+		[StringLength(50, ErrorMessage = "Floor name cannot be longer than 50 characters.")]
 		public string floorName { get; set; }
+		[StringLength(150, ErrorMessage = "Description cannot be longer than 150 characters.")]
 		public string floorDescription { get; set; }
 		public string floorImage { get; set; }
 
