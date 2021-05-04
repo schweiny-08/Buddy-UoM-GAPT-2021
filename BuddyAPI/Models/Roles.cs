@@ -1,17 +1,27 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
-using System.ComponentModel.DataAnnotations.Schema;
+using System.Runtime.Serialization;
+using System.Text.Json.Serialization;
 
 namespace BuddyAPI.Models
 {
 	public class Roles
 	{
-		[Key]
-		[DatabaseGenerated(DatabaseGeneratedOption.Identity)]
-		public int Role_Id { get; set; }
+
+        //public Roles()
+        //{
+        //    Users = new HashSet<User>();
+
+        //}
+        [Key]
+        //[DatabaseGenerated(DatabaseGeneratedOption.Identity)]
+        public int Role_Id { get; set; }
 		public string RoleType { get; set; }
 
-		//public virtual ICollection<Roles> roles { get; set; }
-	}
+        //[System.Text.Json.Serialization.JsonIgnore]
+        //[JsonIgnore]
+        //[IgnoreDataMember]
+        //public virtual ICollection<User> Users { get; set; }
+    }
 }
