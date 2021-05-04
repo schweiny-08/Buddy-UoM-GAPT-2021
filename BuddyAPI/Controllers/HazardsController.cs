@@ -80,7 +80,7 @@ namespace BuddyAPI.Controllers
         {
             var existingHazard = _context.Hazard.FirstOrDefault(h => h.hazardType == hazard.hazardType);
 
-            if (existingHazard.hazardType.Equals(hazard.hazardType, StringComparison.OrdinalIgnoreCase))
+            if (existingHazard != null && existingHazard.hazardType.Equals(hazard.hazardType, StringComparison.OrdinalIgnoreCase))
                 return BadRequest("Hazard with same type already exists!");
 
             _context.Hazard.Add(hazard);

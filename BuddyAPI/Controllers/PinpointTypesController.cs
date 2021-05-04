@@ -93,7 +93,7 @@ namespace BuddyAPI.Controllers
         {
             var existingPPType = _context.PinpointTypes.FirstOrDefault(p => p.pinpointTypeName == pinpointTypes.pinpointTypeName);
 
-            if (existingPPType.pinpointTypeName == pinpointTypes.pinpointTypeName)
+            if (existingPPType!= null && existingPPType.pinpointTypeName.Equals(pinpointTypes.pinpointTypeName, StringComparison.OrdinalIgnoreCase))
                 return BadRequest("Pinpoint type already exists!");
 
             _context.PinpointTypes.Add(pinpointTypes);
