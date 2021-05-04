@@ -7,7 +7,7 @@ using BuddyAPI.Models;
 
 namespace BuddyAPI.Data
 {
-    public class BuddyAPIContext : DbContext
+    public partial class BuddyAPIContext : DbContext
     {
 
         public BuddyAPIContext(DbContextOptions<BuddyAPIContext> options) : base(options) { }
@@ -23,9 +23,7 @@ namespace BuddyAPI.Data
         public DbSet<Events> Events { get; set; }
         public DbSet<PrivateEvents> PrivateEvents { get; set; }
 
-        /*protected override void OnModelCreating(ModelBuilder modelBuilder)
-        {
-            modelBuilder.Entity<Roles>().ToTable("Roles");
-        }*/
+       
     }
 }
+   

@@ -32,7 +32,11 @@ namespace BuddyAPI.Controllers
         [HttpGet("getRoleById")]
         public async Task<ActionResult<Roles>> GetRoles(int id)
         {
-            var roles = await _context.Roles.FindAsync(id);
+            var roles = await _context.Roles
+               //.Include(i => i.Users)
+               .FirstOrDefaultAsync(i => i.Role_Id == id);
+
+            //var roles = await _context.Roles.FindAsync(id);
 
             if (roles == null)
             {
@@ -81,7 +85,7 @@ namespace BuddyAPI.Controllers
             _context.Roles.Add(roles);
             await _context.SaveChangesAsync();
 
-            return CreatedAtAction("GetRoles", new { id = roles.Role_Id }, roles);
+            return CreatedAtAction("getRoleById", new { id = roles.Role_Id }, roles);
         }
 
         // DELETE: api/Roles/5
@@ -99,6 +103,8 @@ namespace BuddyAPI.Controllers
 
             return NoContent();
         }
+
+        
 
         private bool RolesExists(int id)
         {
