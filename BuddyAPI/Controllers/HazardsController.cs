@@ -78,6 +78,11 @@ namespace BuddyAPI.Controllers
         [HttpPost("addHazard")]
         public async Task<ActionResult<Hazard>> PostHazard(Hazard hazard)
         {
+            var existingHazard = _context.Hazard.FirstOrDefault(h => h.hazardType == hazard.hazardType);
+
+            if (existingHazard.hazardType.Equals(hazard.hazardType, StringComparison.OrdinalIgnoreCase))
+                return BadRequest("Hazard with same type already exists!");
+
             _context.Hazard.Add(hazard);
             await _context.SaveChangesAsync();
 

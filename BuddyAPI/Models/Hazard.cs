@@ -9,6 +9,7 @@ namespace BuddyAPI.Models
 		[Key]
 		public int hazard_Id { get; set; }
 		[Required]
+		[StringLength(50, ErrorMessage = "Hazard type must not be longer than 50 characters.")]
 		public string hazardType { get; set; }
 
 		//public virtual ICollection<Hazards> hazards { get; set; }
