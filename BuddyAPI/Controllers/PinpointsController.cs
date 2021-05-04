@@ -42,6 +42,19 @@ namespace BuddyAPI.Controllers
             return pinpoints;
         }
 
+        [HttpGet("getPinpointByName")]
+        public async Task<ActionResult<Pinpoints>> GetPinpointsByName(string name)
+        {
+            var pinpoints = _context.Pinpoints.FirstOrDefault(p => p.pinpointName == name);
+
+            if (pinpoints == null)
+            {
+                return NotFound();
+            }
+
+            return pinpoints;
+        }
+
         // PUT: api/Pinpoints/5
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPut("editPinpointById")]
