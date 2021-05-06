@@ -125,8 +125,14 @@ function GetAllPinpoints() {
                         map
                     })
                 };
+                markerObj.marker.addlistener("dblclick", () => function () {
+                    const coordInfoWindow = new google.maps.InfoWindow();
+                    coordInfoWindow.setContent(coordInfoWindow(ict, map.getZoom(), data.Pinpoint_Id));
+                    coordInfoWindow.setPosition(ict);
+                    coordInfoWindow.open(map);
+                });
                 markers.push(markerObj);
-                id++;
+               // id++;
             });
         }
     };
