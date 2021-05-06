@@ -1,6 +1,7 @@
 ﻿using BuddyAPI.Controllers;
 using BuddyAPI.Data;
 using BuddyAPI.Models;
+using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -16,17 +17,16 @@ namespace BuddyAPI
             _context = context;
         }
 
-        public AStar(){}
-
+        public static List<GraphNode> nodes;
         struct MinPriorityQueue
         {
             public List<NavEdge> map_edges;
-            public List<int> map_costs;
+            //public List<int> map_costs;
 
-            public NavEdge Add(NavEdge edge, int cost)
+            public NavEdge Add(NavEdge edge, int i, int cost)
             {
                 map_edges.Add(edge);
-                map_costs.Add(cost);
+                nodes[i].setMap_Cost(cost);
 
                 return edge;
             }
@@ -39,43 +39,59 @@ namespace BuddyAPI
                 for (int i = 0; i < map_edges.Count; i++)
                 {
                     //Size should be the same as the cost list.
-                    if (map_costs[i] < lowestPriority)
+                    if (nodes[i].map_cost < lowestPriority)
                     {
-                        lowestPriority = map_costs[i];
+                        lowestPriority = nodes[i].map_cost;
                         index = i;
                     }
                 }
                 NavEdge returnedEdge = map_edges[index];
                 map_edges.RemoveAt(index);
-                map_costs.RemoveAt(index);
+                nodes.RemoveAt(index);
                 return returnedEdge;
             }
         }
 
-        public List<GraphNode> nodes;
+       
 
         public GraphNode ConvertToNode(Pinpoints pin) {
-            GraphNode node = new GraphNode(pin.pinpoint_Id, pin.longitude, pin.latitude);
+            GraphNode node = new GraphNode(pin.pinpoint_Id, pin.longitude, pin.latitude, int.MaxValue);
             return node;
+        }
+
+        public Pinpoints GetPinpointsObject(int id)
+        {
+            return _context.Pinpoints.FirstOrDefault(e => e.pinpoint_Id == id);
+
         }
 
         public List<int> CalculateAStar(int start, int end)
         {
             List<int> path = new List<int>();
-            List<int> map_costs = new List<int>();
+            //List<int> map_costs = new List<int>();
             int navNodesAmount = 0;
 
-            for (int i=0;i<110;i++) { 
-                //adding all navigation nodes to the list of nodes
-                PinpointsController pinCon = new PinpointsController(_context);
-                PinpointTypesController pinTypes = new PinpointTypesController(_context);
-                Pinpoints pin = (Pinpoints)pinCon.GetPinpoints(i);
-                if (pinTypes.GetPinpointTypes(pin.pinpoint_Id).Equals(15))
+            Pinpoints pin1 = GetPinpointsObject(start);
+            nodes.Add(ConvertToNode(pin1));
+
+            for (int i=1;i<=110;i++) {
+               //adding all navigation nodes to the list of nodes
+                Pinpoints pin = GetPinpointsObject(i);
+                //int p = pin.pinpointType_Id; 
+                
+                if (pin != null)
                 {
-                    nodes.Add(ConvertToNode(pin));
-                    navNodesAmount++;
+
+                    if (pin.pinpointType_Id == 15)
+                    {
+                        nodes.Add(ConvertToNode(pin));
+                        navNodesAmount++;
+                    }
                 }
             }
+            Pinpoints pin2 = GetPinpointsObject(end);
+            nodes.Add(ConvertToNode(pin2));
+
 
             for (int i = 0; i < navNodesAmount; i++)
             {
@@ -83,30 +99,29 @@ namespace BuddyAPI
                 path.Add(-1);
 
                 //navigation nodes with type 15 are navigation nodes - 54 nav nodes in the database
-                // add the largest possible int to the costs
-                map_costs.Add(int.MaxValue);
+                //add the largest possible int to the costs
+                //map_costs.Add(int.MaxValue);
             }
+
+           // map_costs.Add(end);
 
             //to avoid repeated visits to the same node
             List<NavEdge> traversed = new List<NavEdge>();
             MinPriorityQueue minQueue = new MinPriorityQueue();
             minQueue.map_edges = new List<NavEdge>();
-            minQueue.map_costs = new List<int>();
+            //minQueue.nodes = new List<int>();
 
-            //***********I THINK THIS IS INCORRECT ****************
-            PinpointsController pc = new PinpointsController(_context);
-            Pinpoints pin1 = (Pinpoints)pc.GetPinpoints(start);
-            Pinpoints pin2 = (Pinpoints)pc.GetPinpoints(end);
             GraphNode startNode = ConvertToNode(pin1);
             GraphNode endNode = ConvertToNode(pin2); 
 
-            map_costs[start] = 0;
+            //map_costs[0] = 0;
             double sourceX = startNode.map_long;
             double sourceY = startNode.map_lat;
             double targetX = endNode.map_long;
-            double targetY = endNode.map_long;
+            double targetY = endNode.map_lat;
 
-            //Add all adjacent nodes to the source, to the min priority queue
+            //GOT TO HERE with liam
+            //Add all adjacent nodes to the source, to the min priority queue  
             for (int i = 0; i < nodes[start].map_edges.Count; i++)
             {
                 NavEdge edge = nodes[start].map_edges[i];
@@ -116,7 +131,7 @@ namespace BuddyAPI
 
                 int heuristicCost = Convert.ToInt32(Math.Abs(nodeX - targetX) + Math.Abs(nodeY - targetY));
                 //All costs start of at 1
-                minQueue.Add(edge, 1 + heuristicCost);
+                minQueue.Add(edge, i, 1 + heuristicCost);
             }
             bool TargetNodeFound = false;
 
@@ -127,10 +142,11 @@ namespace BuddyAPI
                 traversed.Add(curEdge);
 
                 //Check if node cost = current edge leads to is greater than previous node cost + cost of the edge
-                if (map_costs[curEdge.to] > map_costs[curEdge.from] + 1)
+                // if (map_costs[curEdge.to] > map_costs[curEdge.from] + 1)
+                if (nodes[curEdge.to].map_cost > nodes[curEdge.from].map_cost + 1)
                 {
                     path[curEdge.to] = curEdge.from;
-                    map_costs[curEdge.to] = map_costs[curEdge.from] + 1;
+                    nodes[curEdge.to].map_cost = nodes[curEdge.from].map_cost + 1;
                     if (end == curEdge.to)
                     {
                         TargetNodeFound = true;
@@ -156,7 +172,7 @@ namespace BuddyAPI
                             int nodeY = curNode.map_edges[i].to;
 
                             int heuristicCost = Convert.ToInt32(Math.Abs(nodeX - targetX) + Math.Abs(nodeY - targetY));
-                            minQueue.Add(curNode.map_edges[i], map_costs[curNode.map_pinId] + 1 + heuristicCost);
+                            minQueue.Add(curNode.map_edges[i], i, nodes[curNode.map_pinId].map_cost + 1 + heuristicCost);
                         }
                     }
                 }

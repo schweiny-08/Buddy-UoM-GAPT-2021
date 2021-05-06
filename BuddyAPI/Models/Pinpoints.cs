@@ -33,7 +33,13 @@ namespace BuddyAPI.Models
 
 		public string pinpointDescription { get; set; }
 
-		//public virtual ICollection<Pinpoints> pinpoints { get; set; }
+       // public static explicit operator Pinpoints(Task<ActionResult<Pinpoints>> v){
+          //  throw new NotImplementedException();
+        //}
+
+		//public Pinpoints() { }
+
+        //public virtual ICollection<Pinpoints> pinpoints { get; set; }
 
     }
 }
