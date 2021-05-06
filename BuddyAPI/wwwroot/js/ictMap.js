@@ -25,13 +25,13 @@ function initMap() {
     const coordInfoWindow = new google.maps.InfoWindow();
     coordInfoWindow.setContent(createInfoWindowContent(ict, map.getZoom()));
     coordInfoWindow.setPosition(ict);
-    //coordInfoWindow.open(map);
+    coordInfoWindow.open(map);
     //event listener that fires when zoom level changes
     map.addListener("zoom_changed", () => {
         coordInfoWindow.setContent(
             createInfoWindowContent(ict, map.getZoom())
         );
-        //coordInfoWindow.open(map);
+        coordInfoWindow.open(map);
     });
     //setting the bounds of UOM. Bounds [zoom][coord.x][coord.y]
     //bounds are generated from map tiler folder structure when tiles are created
@@ -281,7 +281,8 @@ function initMap() {
 
     // Adds marker when user clicks on map
     map.addListener("click", (mapsMouseEvent) => {
-        addMarker(map, mapsMouseEvent)
+        //addMarker(map, mapsMouseEvent)
+
     });
 }
 
@@ -308,13 +309,13 @@ function addMarker(map, mapsMouseEvent) {
         });
 
 
-        marker.addListener("dblclick", (mapsMouseEvent) => {
+        /*marker.addListener("dblclick", (mapsMouseEvent) => {
             if (startNode == null)
                 startNode = marker;
             else
                 endNode = marker;
 
-        });
+        });*/
 
         var markerObj = {
             id: id, level: level, marker: marker

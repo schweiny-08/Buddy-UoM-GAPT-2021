@@ -1,7 +1,9 @@
 ﻿//creating the window for pinpoints
-function pinpointWindow(map, mapsMouseEvent) {
+function coordInfoWindow(map, mapsMouseEvent, pinpointid) {
+
+    return pinpointid;
     //html to set window form
-    const contentString = '<div id="pinpointWindow">' +
+    /*const contentString = '<div id="pinpointWindow">' +
         '<label>' +
         'Floor: ' + level +
         '</label>' +
@@ -38,13 +40,15 @@ function pinpointWindow(map, mapsMouseEvent) {
         '<br />' +
         '<label for="pinpointDescription">Description: </label>' +
         '<textarea id="pinpointDescription"></textarea>' +
-        '</div >';
+        '</div >';*/
 
-    const pinpointWindow = new google.maps.InfoWindow({
-        content: contentString,
-    });
+    //const pinpointWindow = new google.maps.InfoWindow({
+     //   content: contentString,
+    //});
 
     //setting position of the window to where the mouse was clicked
-    pinpointWindow.setPosition(mapsMouseEvent.latLng);
-    pinpointWindow.open(map);
+   // pinpointWindow.setPosition(mapsMouseEvent.latLng);
+   // pinpointWindow.open(map);
+
+
 }

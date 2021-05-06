@@ -125,6 +125,7 @@ function GetAllPinpoints() {
                         map
                     })
                 };
+
                 markerObj.marker.addListener("click", function () {
                     const coordInfoWindow = new google.maps.InfoWindow();
                     coordInfoWindow.setContent(String(data.pinpoint_Id));
@@ -132,7 +133,7 @@ function GetAllPinpoints() {
                     coordInfoWindow.open(map);
                 });
                 markers.push(markerObj);
-                id++;
+               // id++;
             });
         }
     };

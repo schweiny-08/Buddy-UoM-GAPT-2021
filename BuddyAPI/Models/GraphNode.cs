@@ -16,8 +16,6 @@ namespace BuddyAPI.Models
             map_long = longitude;
             map_lat = latitude;
             Floor = floor;
-            //map_edges = new List<NavEdge>();
-            //map_cost = cost;
             fcost = 0;
             gcost = 0;
             hcost = 0;

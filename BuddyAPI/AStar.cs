@@ -28,7 +28,7 @@ namespace BuddyAPI
         {
             return Math.Abs(startLong - currLong) + Math.Abs(startLat - currLat);
         }
-
+        
         public static double getFCost(double gcost, double hcost)
         {
             return gcost+hcost;
@@ -110,7 +110,9 @@ namespace BuddyAPI
                     if (pin.pinpointType_Id == 15)
                     {
                         GraphNode node = ConvertToNode(pin);
+
                         //*********NOT ADDING INTO THE NOTVISITED LIST AS THEY SHOULD BE
+
                         //setting the cost values by calculating them for every navigation node
                         G = getGCost(start.map_long, start.map_lat, node.map_long, node.map_lat);
                         H = getHCost(node.map_long, node.map_lat, end.map_long, end.map_lat);
@@ -118,6 +120,7 @@ namespace BuddyAPI
                         node.setF(F);
                         node.setG(G);
                         node.setG(H);
+
 
                         notVisited.Add(node);
 
@@ -141,7 +144,6 @@ namespace BuddyAPI
                 var lowest = notVisited.Min(l => l.fcost);
                 Curr = notVisited.First(l => l.fcost == lowest);
 
-                //retrieving ny surrounding pins that have not been visited yet
                 var surroundingPins = GetSurroundingPins(Curr, Curr.map_long, Curr.map_lat, nodesVisited, notVisited);
                 foreach (var surrPin in surroundingPins)
                 {
@@ -150,11 +152,13 @@ namespace BuddyAPI
                         continue;
 
                     // if it hasn't been visited put it in the notvisited list
+
                     if (notVisited.FirstOrDefault(l => l.map_long == surrPin.map_long && l.map_lat == surrPin.map_lat) == null)
                     {
                         // compute its costs and set the parent
                         surrPin.gcost = getGCost(start.map_long, start.map_lat, surrPin.map_long, surrPin.map_lat);
                         surrPin.hcost = getHCost(surrPin.map_long, surrPin.map_lat, end.map_long, end.map_lat);
+
                         surrPin.fcost = getFCost(surrPin.gcost, surrPin.hcost);
                         surrPin.Parent = Curr;
 
@@ -206,7 +210,6 @@ namespace BuddyAPI
             for (int i= nodesVisited.Count(); i>0 ;i--) {
                 path.Add(gettingPath[i]);
             }
-            
             return path;
         }
     }
