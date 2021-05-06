@@ -6,10 +6,12 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using BuddyAPI.Models;
+using BuddyAPI.ViewModels;
 using BuddyAPI.Data;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using System.Text;
 using Microsoft.AspNetCore.Cryptography.KeyDerivation;
+using Microsoft.AspNetCore.Authentication;
 
 namespace BuddyAPI.Controllers
 {
@@ -24,13 +26,15 @@ namespace BuddyAPI.Controllers
             _context = context;
         }
 
+
+
         // GET: api/Users
         [HttpGet("getAllUsers")]
         public async Task<ActionResult<IEnumerable<User>>> GetUsers()
         {
             //var BuddyApiContextRoles = _context.User.Include(u => u.Roles);
-            return await _context.User.ToListAsync();
             //return await BuddyApiContextRoles.ToListAsync();
+            return await _context.User.ToListAsync();
         }
 
 
@@ -127,9 +131,19 @@ namespace BuddyAPI.Controllers
             if(emailExists == null)
             {
                 user.Password = HashPassword(user.Email, user.Password);
+
+                //user.Roles.Role_Id = user.Role_Id;
+
+                //RolesController rc = new RolesController(_context);
+                //var role = rc.GetRoles(user.Role_Id);
+
+                //user.Roles.RoleType = role.Result.Value.RoleType;
+                //user.Roles.Users = (ICollection<User>)user;
+
                 _context.Add(user);
                 await _context.SaveChangesAsync();
 
+                HttpContext.Session.SetObjectAsJson("UserLoggedIn", user);
                 return CreatedAtAction(nameof(GetUser), new { id = user.User_Id }, user);
             } else
             {
@@ -153,6 +167,7 @@ namespace BuddyAPI.Controllers
 
                     if (dbUser.Password == password)
                     {
+                        HttpContext.Session.SetObjectAsJson("UserLoggedIn", dbUser);
                         return CreatedAtAction(nameof(GetUser), new { id = dbUser.User_Id }, dbUser);
                     }
                     else
@@ -171,6 +186,33 @@ namespace BuddyAPI.Controllers
             {
                 throw new ArgumentException($"The email doesn't exist in the database for {email}");
             }
+        }
+
+        [HttpGet ("GetSession")]
+        public User GetSession()
+        {
+            User currentUser = HttpContext.Session.GetObjectFromJson<User>("UserLoggedIn");
+            
+            if(currentUser == null)
+            {
+                throw new ArgumentNullException($"There is no current session for User");
+            }
+
+            return currentUser;
+        }
+
+        [HttpGet ("Logout")]
+        public string Logout()
+        {
+            HttpContext.Session.Remove("UserLoggedIn");
+
+            //Removes All Sessions currently Stored.
+            HttpContext.Session.Clear();
+            HttpContext.SignOutAsync();
+
+            return "User has been successfully Logged out";
+            //return RedirectToAction(nameof(GetSession));
+
         }
 
 

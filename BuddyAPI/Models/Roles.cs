@@ -1,12 +1,16 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Runtime.Serialization;
 using System.Text.Json.Serialization;
 
+
+#nullable disable
+
 namespace BuddyAPI.Models
 {
-	public class Roles
+	public partial class Roles
 	{
 
         //public Roles()
@@ -15,7 +19,7 @@ namespace BuddyAPI.Models
 
         //}
         [Key]
-        //[DatabaseGenerated(DatabaseGeneratedOption.Identity)]
+        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int Role_Id { get; set; }
 		public string RoleType { get; set; }
 
