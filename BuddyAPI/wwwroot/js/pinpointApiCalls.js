@@ -117,7 +117,7 @@ function GetAllPinpoints() {
 
                 //console.log(data);
                 var markerObj = {
-                    id: id,
+                    id: data.pinpoint_Id,
                     level: level,
                     marker: new google.maps.Marker({
                         position: { lat: data.latitude, lng: data.longitude },
@@ -125,6 +125,12 @@ function GetAllPinpoints() {
                         map
                     })
                 };
+                markerObj.marker.addListener("click", function () {
+                    const coordInfoWindow = new google.maps.InfoWindow();
+                    coordInfoWindow.setContent(String(data.pinpoint_Id));
+                    coordInfoWindow.setPosition(markerObj.marker.position);
+                    coordInfoWindow.open(map);
+                });
                 markers.push(markerObj);
                 id++;
             });
