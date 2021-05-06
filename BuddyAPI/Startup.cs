@@ -28,8 +28,14 @@ namespace BuddyAPI
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddDistributedMemoryCache();
+            services.AddSession(options =>
+            {
+                options.IdleTimeout = TimeSpan.FromMinutes(10);
+            });
+
             services.AddDbContext<BuddyAPIContext>(options =>
-            options.UseSqlServer(Configuration.GetConnectionString("BuddyAPIContext")));
+            options.UseSqlServer(Configuration.GetConnectionString("BuddyAPIContext")).EnableSensitiveDataLogging());
 
             services.AddControllers();
             services.AddSwaggerGen(c =>
@@ -55,6 +61,8 @@ namespace BuddyAPI
             app.UseRouting();
 
             app.UseAuthorization();
+
+            app.UseSession();
 
             app.UseEndpoints(endpoints =>
             {

@@ -1,14 +1,23 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace BuddyAPI.Models
 {
 	public class PinpointTypes
 	{
-		public int pinTypeId { get; set; }
-		public int pinpointName { get; set; }
+		[Key]
+		[DatabaseGenerated(DatabaseGeneratedOption.Identity)]
+		public int pinpointType_Id { get; set; }
+
+		[Required]
+		[StringLength(50, ErrorMessage = "Pinpoint type name cannot be longer than 50 characters.")]
+		public string pinpointTypeName{ get; set; }
+
+		//[Required]
 		public string pinpointIcon { get; set; }
 
-		public virtual ICollection<PinpointTypes> pinpointTypes { get; set; }
+		//public virtual ICollection<PinpointTypes> pinpointTypes { get; set; }
 	}
 }
