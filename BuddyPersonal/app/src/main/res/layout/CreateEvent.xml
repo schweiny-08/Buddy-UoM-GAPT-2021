@@ -1,0 +1,435 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#FBB964"
+    tools:context=".MainActivity">
+
+    <EditText
+        android:id="@+id/CapacityInput"
+        android:layout_width="215dp"
+        android:layout_height="21dp"
+        android:layout_marginStart="30dp"
+        android:layout_marginLeft="30dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="30dp"
+        android:layout_marginRight="30dp"
+        android:background="#FFE0B2"
+        android:ems="10"
+        android:inputType="textPersonName"
+        android:text="Capacity"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toEndOf="@+id/Capacity"
+        app:layout_constraintTop_toBottomOf="@+id/AttendeesInput" />
+
+    <EditText
+        android:id="@+id/TitleInput"
+        android:layout_width="215dp"
+        android:layout_height="21dp"
+        android:layout_marginStart="30dp"
+        android:layout_marginLeft="30dp"
+        android:layout_marginTop="80dp"
+        android:layout_marginEnd="30dp"
+        android:layout_marginRight="30dp"
+        android:background="#FFE0B2"
+        android:ems="10"
+        android:inputType="textPersonName"
+        android:text="Title"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toEndOf="@+id/Title"
+        app:layout_constraintTop_toBottomOf="@+id/ChooseAvailableTimes" />
+
+    <TextView
+        android:id="@+id/EndTime"
+        android:layout_width="102dp"
+        android:layout_height="21dp"
+        android:layout_marginStart="36dp"
+        android:layout_marginLeft="36dp"
+        android:layout_marginBottom="8dp"
+        android:background="#FFE0B2"
+        android:text="Start Time:"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toTopOf="@+id/eventTitle12"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <EditText
+        android:id="@+id/EndDateInput"
+        android:layout_width="60dp"
+        android:layout_height="21dp"
+        android:layout_marginStart="30dp"
+        android:layout_marginLeft="30dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="17dp"
+        android:layout_marginRight="17dp"
+        android:background="#FFE0B2"
+        android:ems="10"
+        android:inputType="date"
+        app:layout_constraintEnd_toStartOf="@+id/EndTimeInput"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toEndOf="@+id/eventTitle12"
+        app:layout_constraintTop_toBottomOf="@+id/StartDateInput" />
+
+    <EditText
+        android:id="@+id/StartTimeInput"
+        android:layout_width="138dp"
+        android:layout_height="21dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="28dp"
+        android:layout_marginRight="28dp"
+        android:background="#FFE0B2"
+        android:ems="10"
+        android:inputType="time"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/TitleInput" />
+
+    <EditText
+        android:id="@+id/EndTimeInput"
+        android:layout_width="138dp"
+        android:layout_height="21dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="28dp"
+        android:layout_marginRight="28dp"
+        android:background="#FFE0B2"
+        android:ems="10"
+        android:inputType="time"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/StartTimeInput" />
+
+    <TextView
+        android:id="@+id/eventTitle12"
+        android:layout_width="102dp"
+        android:layout_height="21dp"
+        android:layout_marginStart="36dp"
+        android:layout_marginLeft="36dp"
+        android:layout_marginBottom="8dp"
+        android:background="#FFE0B2"
+        android:text="End Time:"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toTopOf="@+id/LocationType"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <TextView
+        android:id="@+id/Title"
+        android:layout_width="102dp"
+        android:layout_height="21dp"
+        android:layout_marginStart="36dp"
+        android:layout_marginLeft="36dp"
+        android:layout_marginBottom="12dp"
+        android:background="#FFE0B2"
+        android:text="Title:"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toTopOf="@+id/EndTime"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <EditText
+        android:id="@+id/StartDateInput"
+        android:layout_width="60dp"
+        android:layout_height="21dp"
+        android:layout_marginStart="30dp"
+        android:layout_marginLeft="30dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="17dp"
+        android:layout_marginRight="17dp"
+        android:background="#FFE0B2"
+        android:ems="10"
+        android:inputType="date"
+        app:layout_constraintEnd_toStartOf="@+id/StartTimeInput"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toEndOf="@+id/EndTime"
+        app:layout_constraintTop_toBottomOf="@+id/TitleInput" />
+
+    <EditText
+        android:id="@+id/LocationTypeInput"
+        android:layout_width="215dp"
+        android:layout_height="21dp"
+        android:layout_marginStart="30dp"
+        android:layout_marginLeft="30dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="30dp"
+        android:layout_marginRight="30dp"
+        android:background="#FFE0B2"
+        android:ems="10"
+        android:inputType="textPersonName"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toEndOf="@+id/LocationType"
+        app:layout_constraintTop_toBottomOf="@+id/EndTimeInput" />
+
+    <EditText
+        android:id="@+id/InviteesInput"
+        android:layout_width="215dp"
+        android:layout_height="21dp"
+        android:layout_marginStart="30dp"
+        android:layout_marginLeft="30dp"
+        android:layout_marginTop="12dp"
+        android:layout_marginEnd="30dp"
+        android:layout_marginRight="30dp"
+        android:background="#FFE0B2"
+        android:ems="10"
+        android:inputType="textPersonName"
+        android:text="Invitees"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toEndOf="@+id/Invitees"
+        app:layout_constraintTop_toBottomOf="@+id/HostInput" />
+
+    <EditText
+        android:id="@+id/LocationInput"
+        android:layout_width="215dp"
+        android:layout_height="21dp"
+        android:layout_marginStart="30dp"
+        android:layout_marginLeft="30dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="30dp"
+        android:layout_marginRight="30dp"
+        android:background="#FFE0B2"
+        android:ems="10"
+        android:inputType="textPersonName"
+        android:text="Location"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toEndOf="@+id/Host"
+        app:layout_constraintTop_toBottomOf="@+id/LocationTypeInput" />
+
+    <EditText
+        android:id="@+id/NotesInput"
+        android:layout_width="215dp"
+        android:layout_height="36dp"
+        android:layout_marginStart="30dp"
+        android:layout_marginLeft="30dp"
+        android:layout_marginTop="12dp"
+        android:layout_marginEnd="30dp"
+        android:layout_marginRight="30dp"
+        android:background="#FFE0B2"
+        android:ems="10"
+        android:inputType="textPersonName"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toEndOf="@+id/Notes"
+        app:layout_constraintTop_toBottomOf="@+id/ReminderInput" />
+
+    <EditText
+        android:id="@+id/HostInput"
+        android:layout_width="215dp"
+        android:layout_height="21dp"
+        android:layout_marginStart="30dp"
+        android:layout_marginLeft="30dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="30dp"
+        android:layout_marginRight="30dp"
+        android:background="#FFE0B2"
+        android:ems="10"
+        android:inputType="textPersonName"
+        android:text="Host/s"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toEndOf="@+id/eventTitle15"
+        app:layout_constraintTop_toBottomOf="@+id/LocationInput" />
+
+    <EditText
+        android:id="@+id/AttendeesInput"
+        android:layout_width="215dp"
+        android:layout_height="21dp"
+        android:layout_marginStart="30dp"
+        android:layout_marginLeft="30dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="30dp"
+        android:layout_marginRight="30dp"
+        android:background="#FFE0B2"
+        android:ems="10"
+        android:inputType="textPersonName"
+        android:text="Attendees"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toEndOf="@+id/Attendees"
+        app:layout_constraintTop_toBottomOf="@+id/InviteesInput" />
+
+    <EditText
+        android:id="@+id/ReminderInput"
+        android:layout_width="215dp"
+        android:layout_height="21dp"
+        android:layout_marginStart="30dp"
+        android:layout_marginLeft="30dp"
+        android:layout_marginTop="12dp"
+        android:layout_marginEnd="30dp"
+        android:layout_marginRight="30dp"
+        android:background="#FFE0B2"
+        android:ems="10"
+        android:inputType="textPersonName"
+        android:text="Reminder"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toEndOf="@+id/Reminder"
+        app:layout_constraintTop_toBottomOf="@+id/CapacityInput" />
+
+    <TextView
+        android:id="@+id/Invitees"
+        android:layout_width="102dp"
+        android:layout_height="21dp"
+        android:layout_marginStart="34dp"
+        android:layout_marginLeft="34dp"
+        android:layout_marginBottom="17dp"
+        android:background="#FFE0B2"
+        android:text="Invitees:"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toTopOf="@+id/Attendees"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <Button
+        android:id="@+id/BackButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginLeft="16dp"
+        android:layout_marginTop="36dp"
+        android:background="#E44513"
+        android:text="Calendar View"
+        android:textColor="#FFFFFF"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <Button
+        android:id="@+id/CreateEventButton"
+        android:layout_width="121dp"
+        android:layout_height="53dp"
+        android:layout_marginEnd="16dp"
+        android:layout_marginRight="16dp"
+        android:layout_marginBottom="88dp"
+        android:background="#E44513"
+        android:text="Create Event"
+        android:textColor="#FFFFFF"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
+
+    <android.support.design.widget.FloatingActionButton
+        android:id="@+id/floatingActionButton2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="198dp"
+        android:layout_marginLeft="198dp"
+        android:layout_marginTop="38dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginRight="8dp"
+        android:clickable="true"
+        android:tint="#FFFFFF"
+        app:backgroundTint="#E44513"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/BackButton"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@android:drawable/ic_delete" />
+
+    <EditText
+        android:id="@+id/ChooseAvailableTimes"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="111dp"
+        android:layout_marginLeft="111dp"
+        android:layout_marginTop="14dp"
+        android:layout_marginEnd="87dp"
+        android:layout_marginRight="87dp"
+        android:background="#FFE0B2"
+        android:ems="10"
+        android:inputType="textPersonName"
+        android:text="Event Name"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/BackButton" />
+
+    <TextView
+        android:id="@+id/Attendees"
+        android:layout_width="102dp"
+        android:layout_height="21dp"
+        android:layout_marginStart="34dp"
+        android:layout_marginLeft="34dp"
+        android:layout_marginBottom="15dp"
+        android:background="#FFE0B2"
+        android:text="Attendees:"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toTopOf="@+id/Capacity"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <TextView
+        android:id="@+id/Capacity"
+        android:layout_width="102dp"
+        android:layout_height="21dp"
+        android:layout_marginStart="34dp"
+        android:layout_marginLeft="34dp"
+        android:layout_marginBottom="11dp"
+        android:background="#FFE0B2"
+        android:text="Capacity:"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toTopOf="@+id/Reminder"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <TextView
+        android:id="@+id/Reminder"
+        android:layout_width="102dp"
+        android:layout_height="21dp"
+        android:layout_marginStart="34dp"
+        android:layout_marginLeft="34dp"
+        android:layout_marginBottom="13dp"
+        android:background="#FFE0B2"
+        android:text="Reminder:"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toTopOf="@+id/Notes"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <TextView
+        android:id="@+id/Notes"
+        android:layout_width="102dp"
+        android:layout_height="36dp"
+        android:layout_marginStart="34dp"
+        android:layout_marginLeft="34dp"
+        android:layout_marginBottom="166dp"
+        android:background="#FFE0B2"
+        android:text="Notes:"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <TextView
+        android:id="@+id/LocationType"
+        android:layout_width="102dp"
+        android:layout_height="21dp"
+        android:layout_marginStart="34dp"
+        android:layout_marginLeft="34dp"
+        android:layout_marginBottom="15dp"
+        android:background="#FFE0B2"
+        android:text="Location Type:"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toTopOf="@+id/Host"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <TextView
+        android:id="@+id/Host"
+        android:layout_width="102dp"
+        android:layout_height="21dp"
+        android:layout_marginStart="34dp"
+        android:layout_marginLeft="34dp"
+        android:layout_marginBottom="8dp"
+        android:background="#FFE0B2"
+        android:text="Loction:"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toTopOf="@+id/eventTitle15"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <TextView
+        android:id="@+id/eventTitle15"
+        android:layout_width="102dp"
+        android:layout_height="21dp"
+        android:layout_marginStart="34dp"
+        android:layout_marginLeft="34dp"
+        android:layout_marginBottom="13dp"
+        android:background="#FFE0B2"
+        android:text="Host/s:"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toTopOf="@+id/Invitees"
+        app:layout_constraintStart_toStartOf="parent" />
+
+
+</android.support.constraint.ConstraintLayout>
