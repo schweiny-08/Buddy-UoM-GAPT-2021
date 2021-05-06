@@ -9,21 +9,37 @@ namespace BuddyAPI.Models
     public class GraphNode
     {
         //info from pinpoints is transfered into an object of Graph Node
-        public GraphNode(int id, double longitude, double latitude, int cost)
+        public GraphNode(int id, double longitude, double latitude, int floor)
         {
             //map_index = index;
             map_pinId = id;
             map_long = longitude;
             map_lat = latitude;
-            map_edges = new List<NavEdge>();
-            map_cost = cost;
+            Floor = floor;
+            //map_edges = new List<NavEdge>();
+            //map_cost = cost;
+            fcost = 0;
+            gcost = 0;
+            hcost = 0;
         }
 
-        public void setMap_Cost(int cost) {
-            map_cost = cost;
+        public void setF(double cost) {
+            fcost = cost;
         }
-        public double map_long, map_lat; 
-        public int map_pinId, map_cost;
-        public List<NavEdge> map_edges; //adjacency list
+
+        public void setG(double cost)
+        {
+            gcost = cost;
+        }
+
+        public void setH(double cost)
+        {
+            hcost = cost;
+        }
+
+        public double map_long, map_lat, fcost, gcost, hcost;
+        public int map_pinId, map_cost,  Floor;
+        public GraphNode Parent;
+        //public List<NavEdge> map_edges; //adjacency list
     }
 }
