@@ -1,172 +1,31 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.drawerlayout.widget.DrawerLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/drawer_layout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/blue"
-    tools:context=".MainActivity">
+    android:fitsSystemWindows="true"
+    tools:context=".MainActivity"
+    tools:openDrawer="start">
 
-    <ImageButton
-        android:id="@+id/BackButton"
+    <com.google.android.material.navigation.NavigationView
+        android:id="@+id/nav_view"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginEnd="360dp"
-        android:layout_marginRight="360dp"
-        android:tint="@color/black"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/abc_vector_test" />
+        android:layout_height="match_parent"
+        android:layout_gravity="start"
+        app:headerLayout="@layout/header"
+        app:menu="@menu/main_menu" />
 
-    <EditText
-        android:id="@+id/SearchSetting"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="73dp"
-        android:layout_marginLeft="73dp"
-        android:layout_marginBottom="686dp"
-        android:ems="10"
-        android:inputType="textPersonName"
-        android:text="Search Setting"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" /><![CDATA[
+    <!--    <androidx.appcompat.widget.Toolbar-->
+    <!--        android:layout_width="match_parent"-->
+    <!--        android:layout_height="200sp">-->
+    <!--    </androidx.appcompat.widget.Toolbar>-->
 
-    //android:text="Button"
-        android:background="@drawable/button_bg"
-        android:text = "@string/login_string"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
 
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-    ]]>
-
-    <Button
-        android:id="@+id/AccountButton"
-        android:layout_width="240dp"
-        android:layout_height="50dp"
-        android:text="Account"
-        app:backgroundTint="@android:color/holo_red_light"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.491"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.155" />
-
-    <ImageView
-        android:id="@+id/HelpIcon"
-        android:layout_width="39dp"
-        android:layout_height="35dp"
-        android:layout_marginStart="44dp"
-        android:layout_marginLeft="44dp"
-        android:layout_marginTop="468dp"
-        android:background="@color/teal_700"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        tools:srcCompat="@android:drawable/ic_menu_help" />
-
-    <Button
-        android:id="@+id/AccessbilityButton"
-        android:layout_width="240dp"
-        android:layout_height="50dp"
-        android:text="Accessibility"
-        app:backgroundTint="@android:color/holo_orange_light"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.479"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.312" />
-
-    <Button
-        android:id="@+id/CustomisationButton"
-        android:layout_width="240dp"
-        android:layout_height="50dp"
-        android:text="Customisation"
-        app:backgroundTint="@color/olive"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.479"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.499" />
-
-    <ImageView
-        android:id="@+id/CustomisationIcon"
-        android:layout_width="39dp"
-        android:layout_height="35dp"
-        android:layout_marginStart="36dp"
-        android:layout_marginLeft="36dp"
-        android:layout_marginTop="348dp"
-        android:background="@color/teal_700"
-        app:layout_constraintStart_toStartOf="@+id/BackButton"
-        app:layout_constraintTop_toTopOf="parent"
-        tools:srcCompat="@android:drawable/ic_menu_edit" />
-
-    <Button
-        android:id="@+id/HelpButton"
-        android:layout_width="240dp"
-        android:layout_height="50dp"
-        android:text="How to use"
-        app:backgroundTint="@android:color/holo_orange_dark"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.491"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.679" />
-
-    <ImageView
-        android:id="@+id/AccessibilityIcon"
-        android:layout_width="39dp"
-        android:layout_height="35dp"
-        android:layout_marginStart="40dp"
-        android:layout_marginLeft="40dp"
-        android:layout_marginTop="220dp"
-        android:background="@color/teal_700"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        tools:srcCompat="@android:drawable/ic_menu_manage" />
-
-    <ImageView
-        android:id="@+id/AccountIcon"
-        android:layout_width="37dp"
-        android:layout_height="36dp"
-        android:layout_marginTop="112dp"
-        android:background="@drawable/ic_launcher_background"
-        app:layout_constraintTop_toTopOf="parent"
-        tools:layout_editor_absoluteX="46dp"
-        tools:srcCompat="@tools:sample/avatars" />
-
-    <Button
-        android:id="@+id/HomeButton"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="16dp"
-        android:text="home"
-        app:layout_constraintBottom_toBottomOf="parent"
-        tools:layout_editor_absoluteX="161dp" />
-
-    <ImageView
-        android:id="@+id/imageView"
-        android:layout_width="58dp"
-        android:layout_height="50dp"
-        app:srcCompat="@drawable/home"
-        tools:layout_editor_absoluteX="103dp"
-        tools:layout_editor_absoluteY="665dp" />
-
-</androidx.constraintlayout.widget.ConstraintLayout>
+</androidx.drawerlayout.widget.DrawerLayout>

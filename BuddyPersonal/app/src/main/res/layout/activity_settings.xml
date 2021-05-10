@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".Settings">
+
+    <Button
+        android:id="@+id/set_bt_account"
+        style="@style/Theme.System.button"
+        android:layout_width="370dp"
+        android:layout_height="50dp"
+        android:layout_marginTop="70dp"
+        android:text="@string/account"
+        app:backgroundTint="#0636af"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <Button
+        android:id="@+id/set_bt_accessibility"
+        style="@style/Theme.System.button"
+        android:layout_width="370dp"
+        android:layout_height="50dp"
+        android:layout_marginTop="70dp"
+        android:text="@string/accessibility"
+        app:backgroundTint="#0636af"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/set_bt_account" />
+
+    <Button
+        android:id="@+id/set_bt_customisation"
+        style="@style/Theme.System.button"
+        android:layout_width="370dp"
+        android:layout_height="50dp"
+        android:layout_marginTop="70dp"
+        android:text="@string/customisation"
+        app:backgroundTint="#0636af"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/set_bt_accessibility" />
+
+    <Button
+        android:id="@+id/set_bt_how"
+        style="@style/Theme.System.button"
+        android:layout_width="370dp"
+        android:layout_height="50dp"
+        android:layout_marginTop="70dp"
+        android:text="@string/how_to_use"
+        app:backgroundTint="#0636af"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/set_bt_customisation" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
