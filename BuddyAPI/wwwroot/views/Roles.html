@@ -1,0 +1,67 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title>Roles</title>
+    <script src="../js/modeljs/constants.js">
+      
+        
+    </script>
+</head>
+<body>
+    <h1>Role Page</h1>
+    <button id="btnGetallroles" onclick="getAllRoles()">Get all Roles</button> <br /><br />
+
+    <h3>Add</h3>
+    <form action="javascript:void(0);" method="POST" onsubmit="PostNewRole()">
+        <input type="text" id="add-name" placeholder="New Role">
+        <input type="submit" value="Add">
+    </form>
+
+    <div id="editForm" style="display: none;">
+        <h3>Edit</h3>
+        <form action="javascript:void(0);" onsubmit="updateItem()">
+            <input type="hidden" id="edit-id">
+            <input type="text" id="edit-name">
+            <input type="submit" value="Save">
+            <a onclick="closeInput()" aria-label="Close">&#10006;</a>
+        </form>
+    </div>
+
+    <div id="getRoleId">
+        <h3>Get Role by Id</h3>
+        <form action="javascript:void(0);" onsubmit="getRolebyId()">
+            <input type="number" id="get-id" />
+            <input type="submit" value="Get" />
+        </form>
+    </div>
+    <table id="gotRole" style="display: none">
+        <thead>
+            <tr>
+                <th>Role ID</th>
+                <th>Role Type</th>
+            </tr>
+        </thead>
+        <tbody id="todoRole"></tbody>
+    </table>
+    <!--<form action="javascript:void(0);" onsubmit="updateItem()">
+        <input type="hidden" id="edit-id">
+        <input type="text" id="edit-name">
+        <input type="submit" value="Save">
+        <a onclick="closeInput()" aria-label="Close">&#10006;</a>
+    </form>-->
+
+    <p id="counter"></p>
+    <table>
+        <thead>
+            <tr>
+                <th>role_Id</th>
+                <th>roleType</th>
+                <th>Edit</th>
+                <th>Delete</th>
+            </tr>
+        </thead>
+        <tbody id="todos"></tbody>
+    </table>
+</body>
+</html>

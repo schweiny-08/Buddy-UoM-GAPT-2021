@@ -22,17 +22,21 @@ namespace BuddyAPI.Controllers
         }
 
         // GET: api/Roles
-        [HttpGet]
+        [HttpGet ("getAllRoles")]
         public async Task<ActionResult<IEnumerable<Roles>>> GetRoles()
         {
             return await _context.Roles.ToListAsync();
         }
 
         // GET: api/Roles/5
-        [HttpGet("{id}")]
+        [HttpGet("getRoleById")]
         public async Task<ActionResult<Roles>> GetRoles(int id)
         {
-            var roles = await _context.Roles.FindAsync(id);
+            var roles = await _context.Roles
+               //.Include(i => i.Users)
+               .FirstOrDefaultAsync(i => i.Role_Id == id);
+
+            //var roles = await _context.Roles.FindAsync(id);
 
             if (roles == null)
             {
@@ -44,7 +48,7 @@ namespace BuddyAPI.Controllers
 
         // PUT: api/Roles/5
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
-        [HttpPut("{id}")]
+        [HttpPut("editRoleById")]
         public async Task<IActionResult> PutRoles(int id, Roles roles)
         {
             if (id != roles.Role_Id)
@@ -75,17 +79,17 @@ namespace BuddyAPI.Controllers
 
         // POST: api/Roles
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
-        [HttpPost]
+        [HttpPost("addRole")]
         public async Task<ActionResult<Roles>> PostRoles(Roles roles)
         {
             _context.Roles.Add(roles);
             await _context.SaveChangesAsync();
 
-            return CreatedAtAction("GetRoles", new { id = roles.Role_Id }, roles);
+            return CreatedAtAction("getRoleById", new { id = roles.Role_Id }, roles);
         }
 
         // DELETE: api/Roles/5
-        [HttpDelete("{id}")]
+        [HttpDelete("deleteRoleById")]
         public async Task<IActionResult> DeleteRoles(int id)
         {
             var roles = await _context.Roles.FindAsync(id);
@@ -99,6 +103,8 @@ namespace BuddyAPI.Controllers
 
             return NoContent();
         }
+
+        
 
         private bool RolesExists(int id)
         {
