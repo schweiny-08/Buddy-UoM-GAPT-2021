@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <!--Menu Items-->
+
+    <group android:checkableBehavior="single">
+        <item
+            android:id="@+id/nav_profile"
+            android:title="@string/profile" />
+        <item
+            android:id="@+id/nav_settings"
+            android:title="@string/action_settings" />
+    </group>
+
+    <group>
+        <item android:title="@string/map">
+            <menu>
+                <item
+                    android:id="@+id/nav_map"
+                    android:title="@string/map_view" />
+                <item
+                    android:id="@+id/nav_pu_events"
+                    android:title="@string/venue_event" />
+            </menu>
+        </item>
+    </group>
+    <group>
+        <item android:title="@string/itinerary">
+            <menu>
+                <item
+                    android:id="@+id/nav_itinerary"
+                    android:title="@string/itinerary_view" />
+                <item
+                    android:id="@+id/nav_cr_events"
+                    android:title="@string/create_event" />
+            </menu>
+        </item>
+    </group>
+    <group>
+        <item android:title="Buddy">
+            <menu>
+                <item
+                    android:id="@+id/nav_buddy"
+                    android:title="Buddy"/>
+            </menu>
+        </item>
+    </group>
+    <item
+        android:id="@+id/nav_logout"
+        android:title="@string/log_out" />
+</menu>

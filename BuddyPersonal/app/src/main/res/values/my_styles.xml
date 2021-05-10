@@ -1,0 +1,210 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+
+    <!--System-->
+
+    <style name="Theme.System.toolbar" parent="Theme.AppCompat.Light">
+        <item name="android:textColor">#FFFFFF</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:textSize">20sp</item>
+        <item name="android:background">#01579b</item>
+    </style>
+    <style name="Theme.System.background" parent="Theme.AppCompat.Light">
+        <item name="android:background">#b1d0f1</item>
+    </style>
+    <style name="Theme.System.contrast" parent="Theme.AppCompat.Light">
+        <item name="android:background">#1a237e</item>
+    </style>
+    <style name="Theme.System.title" parent="Theme.AppCompat.Light">
+        <item name="android:textColor">#000000</item>
+        <item name="android:textSize">20sp</item>
+        <item name="android:gravity">center_horizontal</item>
+        <item name="android:background">#b1d0f1</item>
+    </style>
+    <style name="Theme.System.textbackground" parent="Theme.AppCompat.Light">
+        <item name="android:textColor">#000000</item>
+        <item name="android:textSize">12sp</item>
+        <item name="android:background">#e1f5fe</item>
+        <item name="android:gravity">center|right</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:paddingLeft">5dp</item>
+        <item name="android:paddingRight">5dp</item>
+    </style>
+    <style name="Theme.System.et" parent="Theme.AppCompat.Light">
+        <item name="android:textColor">#000000</item>
+        <item name="android:textSize">16sp</item>
+        <item name="android:textColorHint">#0636af</item>
+        <item name="android:background">#e1f5fe</item>
+        <item name="android:paddingLeft">10dp</item>
+        <item name="android:gravity">center|left</item>
+    </style>
+    <style name="Theme.System.button" parent="Theme.AppCompat.Light">
+        <item name="android:background">#0636af</item>
+        <item name="android:textColor">#FFFFFF</item>
+        <item name="android:textSize">18sp</item>
+        <item name="android:textStyle">bold</item>
+    </style>
+    <style name="Theme.System.button.thin" parent="Theme.AppCompat.Light">
+        <item name="android:background">#0636af</item>
+        <item name="android:textColor">#FFFFFF</item>
+        <item name="android:textSize">12sp</item>
+        <item name="android:textStyle">bold</item>
+    </style>
+    <style name="Theme.System.button.small" parent="Theme.AppCompat.Light">
+        <item name="android:background">#0636af</item>
+        <item name="android:textColor">#FFFFFF</item>
+        <item name="android:textSize">16sp</item>
+        <item name="android:textStyle">bold</item>
+    </style>
+    <style name="Theme.System.button.long" parent="Theme.AppCompat.Light">
+        <item name="android:background">#0636af</item>
+        <item name="android:textColor">#FFFFFF</item>
+        <item name="android:textSize">18sp</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:gravity">center|left</item>
+    </style>
+    <style name="Theme.System.button.large" parent="Theme.AppCompat.Light">
+        <item name="android:background">#0636af</item>
+        <item name="android:textColor">#FFFFFF</item>
+        <item name="android:textSize">18sp</item>
+        <item name="android:textStyle">bold</item>
+    </style>
+
+
+    <!--Map-->
+
+    <style name="Theme.Map.toolbar" parent="Theme.AppCompat.Light">
+        <item name="android:textColor">#FFFFFF</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:textSize">20sp</item>
+        <item name="android:background">#4a148c</item>
+    </style>
+    <style name="Theme.Map.background" parent="Theme.AppCompat.Light">
+        <item name="android:background">#7e57c2</item>
+    </style>
+    <style name="Theme.Map.contrast" parent="Theme.AppCompat.Light">
+        <item name="android:background">#311b92</item>
+    </style>
+    <style name="Theme.Map.titles" parent="Theme.AppCompat.Light">
+        <item name="android:textColor">#000000</item>
+        <item name="android:textSize">16sp</item>
+        <item name="android:gravity">center_horizontal</item>
+        <item name="android:background">#7e57c2</item>
+    </style>
+    <style name="Theme.Map.textbackground" parent="Theme.AppCompat.Light">
+        <item name="android:textColor">#000000</item>
+        <item name="android:textSize">14sp</item>
+        <item name="android:background">#ede7f6</item>
+        <item name="android:gravity">center_vertical|right</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:paddingLeft">5dp</item>
+        <item name="android:paddingRight">5dp</item>
+    </style>
+    <style name="Theme.Map.et" parent="Theme.AppCompat.Light">
+        <item name="android:textColor">#000000</item>
+        <item name="android:textSize">14sp</item>
+        <item name="android:textStyle">italic</item>
+        <item name="android:textColorHint">#5321c1</item>
+        <item name="android:background">#ede7f6</item>
+        <item name="android:paddingLeft">10dp</item>
+    </style>
+    <style name="Theme.Map.button" parent="Theme.AppCompat.Light">
+        <item name="android:background">#5321c1</item>
+        <item name="android:textColor">#FFFFFF</item>
+        <item name="android:textSize">18sp</item>
+        <item name="android:textStyle">bold</item>
+    </style>
+
+
+    <!--Itinerary-->
+
+    <style name="Theme.Itinerary.toolbar" parent="Theme.AppCompat.Light">
+        <item name="android:textColor">#FFFFFF</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:textSize">20sp</item>
+        <item name="android:background">#e65100</item>
+    </style>
+    <style name="Theme.Itinerary.background" parent="Theme.AppCompat.Light">
+        <item name="android:background">#fbb964</item>
+    </style>
+    <style name="Theme.Itinerary.contrast" parent="Theme.AppCompat.Light">
+        <item name="android:background">#ef6c00</item>
+    </style>
+    <style name="Theme.Itinerary.titles" parent="Theme.AppCompat.Light">
+        <item name="android:textColor">#000000</item>
+        <item name="android:textSize">16sp</item>
+        <item name="android:gravity">center_horizontal</item>
+        <item name="android:background">#fbb964</item>
+    </style>
+    <style name="Theme.Itinerary.textbackground" parent="Theme.AppCompat.Light">
+        <item name="android:textColor">#000000</item>
+        <item name="android:textSize">14sp</item>
+        <item name="android:background">#ffe0b2</item>
+        <item name="android:gravity">center_vertical|right</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:paddingLeft">5dp</item>
+        <item name="android:paddingRight">5dp</item>
+    </style>
+    <style name="Theme.Itinerary.et" parent="Theme.AppCompat.Light">
+        <item name="android:textColor">#000000</item>
+        <item name="android:textSize">14sp</item>
+        <item name="android:textStyle">italic</item>
+        <item name="android:textColorHint">#e44513</item>
+        <item name="android:background">#ffe0b2</item>
+        <item name="android:paddingLeft">10dp</item>
+    </style>
+    <style name="Theme.Itinerary.button" parent="Theme.AppCompat.Light">
+        <item name="android:background">#e44513</item>
+        <item name="android:textColor">#FFFFFF</item>
+        <item name="android:textSize">18sp</item>
+        <item name="android:textStyle">bold</item>
+    </style>
+
+
+    <!--Buddy-->
+
+    <style name="Theme.Buddy.toolbar" parent="Theme.AppCompat.Light">
+        <item name="android:textColor">#FFFFFF</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:textSize">20sp</item>
+        <item name="android:background">#0b6623</item>
+    </style>
+    <style name="Theme.Buddy.background" parent="Theme.AppCompat.Light">
+        <item name="android:background">#30a960</item>
+    </style>
+    <style name="Theme.Buddy.contrast" parent="Theme.AppCompat.Light">
+        <item name="android:background">#043927</item>
+    </style>
+    <style name="Theme.Buddy.titles" parent="Theme.AppCompat.Light">
+        <item name="android:textColor">#000000</item>
+        <item name="android:textSize">16sp</item>
+        <item name="android:gravity">center_horizontal</item>
+        <item name="android:background">#30a960</item>
+    </style>
+    <style name="Theme.Buddy.textbackground" parent="Theme.AppCompat.Light">
+        <item name="android:textColor">#000000</item>
+        <item name="android:textSize">14sp</item>
+        <item name="android:gravity">center_vertical|right</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:paddingLeft">5dp</item>
+        <item name="android:paddingRight">5dp</item>
+        <item name="android:background">#e4ffd7</item>
+    </style>
+    <style name="Theme.Buddy.et" parent="Theme.AppCompat.Light">
+        <item name="android:textColor">#000000</item>
+        <item name="android:textSize">14sp</item>
+        <item name="android:gravity">top|center</item>
+        <item name="android:textStyle">italic</item>
+        <item name="android:textColorHint">#007848</item>
+        <item name="android:background">#e4ffd7</item>
+        <item name="android:paddingLeft">10dp</item>
+    </style>
+    <style name="Theme.Buddy.button" parent="Theme.AppCompat.Light">
+        <item name="android:background">#007848</item>
+        <item name="android:textColor">#FFFFFF</item>
+        <item name="android:textSize">18sp</item>
+        <item name="android:textStyle">bold</item>
+    </style>
+
+</resources>
