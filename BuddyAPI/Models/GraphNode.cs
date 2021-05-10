@@ -21,6 +21,10 @@ namespace BuddyAPI.Models
             hcost = 0;
         }
 
+        public void setPinId(int id) {
+            map_pinId = id;
+        }
+
         public void setF(double cost) {
             fcost = cost;
         }
@@ -38,6 +42,5 @@ namespace BuddyAPI.Models
         public double map_long, map_lat, fcost, gcost, hcost;
         public int map_pinId, Floor;
         public GraphNode Parent;
-        //public List<NavEdge> map_edges; //adjacency list
     }
 }

@@ -32,7 +32,6 @@ namespace BuddyAPI.Controllers
         [HttpGet("getPinpoint")]
         public async Task<ActionResult<Pinpoints>> GetPinpoints(int id)
         {
-            //System aggregate exception
             var pinpoints = await _context.Pinpoints.FindAsync(id);
 
             if (pinpoints == null)
@@ -107,17 +106,12 @@ namespace BuddyAPI.Controllers
         }
 
         // GET: api/Pinpoints/5
-        /*[HttpGet("RetrieveNavigation")]
+        [HttpGet("RetrieveNavigation")]
         public async Task<ActionResult<IEnumerable<int>>> RetreiveNavigation(int start, int end)
         {
-            AStar astar = new AStar(_context);
-            return astar.CalculateAStar(start, end); 
-        }*/
-
-        // GET: api/Pinpoints/5
-        [HttpGet("RetrieveNavigation")]
-        public List<int> RetreiveNavigation(int start, int end)
-        {
+            //var BuddyApiContextRoles = _context.User.Include(u => u.Roles);
+            //return await _context.Pinpoints.ToListAsync();
+            //return await BuddyApiContextRoles.ToListAsync();
             AStar astar = new AStar(_context);
             return astar.CalculateAStar(start, end);
         }
