@@ -191,13 +191,9 @@ namespace BuddyAPI.Controllers
         [HttpGet ("GetSession")]
         public User GetSession()
         {
+            HttpContext.Session.SessionExists("UserLoggedIn");
+           
             User currentUser = HttpContext.Session.GetObjectFromJson<User>("UserLoggedIn");
-            
-            if(currentUser == null)
-            {
-                throw new ArgumentNullException($"There is no current session for User");
-            }
-
             return currentUser;
         }
 
