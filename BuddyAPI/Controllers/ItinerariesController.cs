@@ -42,6 +42,45 @@ namespace BuddyAPI.Controllers
             return itineraries;
         }
 
+        [HttpGet("getAllItineraryEventsByUser")]
+        public async Task<ActionResult<IEnumerable<Itineraries>>> GetItinerariesByUserId(int userId)
+        {
+            var itineraries = await _context.Itineraries.Where(i => i.User_Id == userId).ToListAsync();
+
+            if (itineraries == null)
+            {
+                return NotFound();
+            }
+
+            return itineraries;
+        } 
+        
+        [HttpGet("getItineraryEventByUser")]
+        public async Task<ActionResult<IEnumerable<Itineraries>>> GetItineraryEventByUserId(int eventId ,int userId)
+        {
+            var itineraries = await _context.Itineraries.Where(i => i.Event_Id == eventId && i.User_Id == userId).ToListAsync();
+
+            if (itineraries == null)
+            {
+                return NotFound();
+            }
+
+            return itineraries;
+        }
+        
+        [HttpGet("getItineraryPrivateEventByUser")]
+        public async Task<ActionResult<IEnumerable<Itineraries>>> GetItineraryPrivEventByUserId(int privEventId ,int userId)
+        {
+            var itineraries = await _context.Itineraries.Where(i => i.PrivateEvent_Id == privEventId && i.User_Id == userId).ToListAsync();
+
+            if (itineraries == null)
+            {
+                return NotFound();
+            }
+
+            return itineraries;
+        }
+
         // PUT: api/Itineraries/5
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPut("editItineraryById")]
@@ -78,10 +117,15 @@ namespace BuddyAPI.Controllers
         [HttpPost("addItinerary")]
         public async Task<ActionResult<Itineraries>> PostItineraries(Itineraries itineraries)
         {
-            _context.Itineraries.Add(itineraries);
-            await _context.SaveChangesAsync();
+            if (this.GetItineraryEventByUserId(itineraries.Event_Id, itineraries.User_Id) != null)
+            {
+                _context.Itineraries.Add(itineraries);
+                await _context.SaveChangesAsync();
 
-            return CreatedAtAction("GetItineraries", new { id = itineraries.Itinerary_Id }, itineraries);
+                return CreatedAtAction("GetItineraries", new { id = itineraries.Itinerary_Id }, itineraries);
+            }
+            else
+                return BadRequest("This event is already in your itinerary!");
         }
 
         // DELETE: api/Itineraries/5
@@ -99,6 +143,21 @@ namespace BuddyAPI.Controllers
 
             return NoContent();
         }
+
+        /*[HttpDelete("deleteItineraryById")]
+        public async Task<IActionResult> DeleteItinerariesByEventUser(int id)
+        {
+            var itineraries = await _context.Itineraries.;
+            if (itineraries == null)
+            {
+                return NotFound();
+            }
+
+            _context.Itineraries.Remove(itineraries);
+            await _context.SaveChangesAsync();
+
+            return NoContent();
+        }*/
 
         private bool ItinerariesExists(int id)
         {
