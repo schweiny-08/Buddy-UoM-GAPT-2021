@@ -23,27 +23,34 @@ import java.util.Locale;
 
 public class Buddy extends AppCompatActivity {
 
-    EditText userInput;
-    RecyclerView recyclerView;
-    MessageAdapter messageAdapter;
-    List<ResponseMessage> responseMessageList;
+    static EditText userInput;
+    static RecyclerView recyclerView;
+    static MessageAdapter messageAdapter;
+    static List<ResponseMessage> responseMessageList;
     //chat screen objects
 
     TextToSpeech textToSpeech;
     //text to speech objects
 
     ImageButton voiceButton;
+    ImageButton enterButton;
     private static final int REQUEST_CODE_SPEECH_INPUT = 1000;
     //speech to text objects
+
+    static buddy_bot buddy = new buddy_bot();
+    //buddy chat object
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_buddy);
+        setContentView(R.layout.activity_main);
 
         userInput = findViewById(R.id.userInput);
+        enterButton = findViewById(R.id.EnterBtn);
+
         recyclerView = findViewById(R.id.conversation);
+
         responseMessageList = new ArrayList<>();  // chat history
         messageAdapter = new MessageAdapter(responseMessageList, this);
         recyclerView.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.VERTICAL,false));
@@ -52,33 +59,62 @@ public class Buddy extends AppCompatActivity {
 
         voiceButton = findViewById(R.id.voiceBtn);
 
-        userInput.setOnEditorActionListener(new TextView.OnEditorActionListener() { // chat editor button
+        buddy_bot.greeting();
+
+        /**userInput.setOnEditorActionListener(new TextView.OnEditorActionListener() { // chat editor button
+         @Override
+         public boolean onEditorAction(TextView textView, int i, KeyEvent keyEvent) { //text editor action
+
+         //Editable temp = userInput.getText();
+
+
+         if (!userInput.getText().equals("")) {
+         if (i == EditorInfo.IME_ACTION_SEND) { //enter from onscreen keyboard
+
+         sendText(userInput.getText().toString());
+         //ResponseMessage my_message = new ResponseMessage(userInput.getText().toString(), true);
+         //responseMessageList.add(my_message); //add my message
+
+         //ResponseMessage bot_message = new ResponseMessage(userInput.getText().toString(), false);
+         //responseMessageList.add(bot_message); //add bot message
+
+         messageAdapter.notifyDataSetChanged(); //update display
+
+         if (!isLastVisible()) // is latest message visible? if not scroll down.
+         recyclerView.smoothScrollToPosition(messageAdapter.getItemCount() - 1);
+
+         userInput.setText("");
+         }
+         }
+         return false;
+         }
+
+
+         }); //chat screen functions**/
+
+        enterButton.setOnClickListener(new View.OnClickListener(){
             @Override
-            public boolean onEditorAction(TextView textView, int i, KeyEvent keyEvent) { //text editor action
+            public void onClick(View v) {
+                sendText(userInput.getText().toString());
+            }
+        } );//enter button
 
-                //Editable temp = userInput.getText();
+        userInput.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
 
-                if (!userInput.getText().equals("")) {
-                    if (i == EditorInfo.IME_ACTION_SEND) { //enter from onscreen keyboard
-                        ResponseMessage my_message = new ResponseMessage(userInput.getText().toString(), true);
-                        responseMessageList.add(my_message); //add my message
-
-                        ResponseMessage bot_message = new ResponseMessage(userInput.getText().toString(), false);
-                        responseMessageList.add(bot_message); //add bot message
-
-                        messageAdapter.notifyDataSetChanged(); //update display
-
-                        if (!isLastVisible()) // is latest message visible? if not scroll down.
-                            recyclerView.smoothScrollToPosition(messageAdapter.getItemCount() - 1);
-
-                        userInput.setText("");
-                    }
-                }
-                return false;
             }
 
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
 
-        }); //chat screen functions
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+
+            }
+        });
 
 
         textToSpeech = new TextToSpeech(getApplicationContext(), new TextToSpeech.OnInitListener()  {
@@ -100,6 +136,7 @@ public class Buddy extends AppCompatActivity {
             }
         } ); //speech to text button
     }
+
 
     private void speak() {
         //intent to show speech to text dialog
@@ -124,17 +161,20 @@ public class Buddy extends AppCompatActivity {
         int speech = textToSpeech.speak(s, TextToSpeech.QUEUE_FLUSH, null);
     }
 
-    public void sendText(String temp) { //text editor action, send text to chat screen ie. ENTER function
+    public void sendText(String temp) { //text editor action, send text to chat screen ie. ENTER function, send User text.
 
-        if (!temp.toString().equals("")) {
+        if (!temp.toString().equals("")) { //check passed string contents, if not empty or null
 
             userInput.setText(temp.toString());
 
-            ResponseMessage responseMessage = new ResponseMessage(userInput.getText().toString(), true);
+            ResponseMessage responseMessage = new ResponseMessage(userInput.getText().toString(), true); //true for user, false for bot bubble
             responseMessageList.add(responseMessage);
 
-            ResponseMessage responseMessage2 = new ResponseMessage(userInput.getText().toString(), false);
+            String bot_response = buddy.answer(temp); //get reply from bot
+            ResponseMessage responseMessage2 = new ResponseMessage(bot_response.toString(), false);
             responseMessageList.add(responseMessage2);
+
+            ConvertToSpeech(bot_response); //speak reply from bot
 
             messageAdapter.notifyDataSetChanged();
             if (!isLastVisible())
@@ -142,6 +182,21 @@ public class Buddy extends AppCompatActivity {
             userInput.setText("");
         }
 
+    }
+
+    public static void displayBotText(String temp) { //send Bot Text.
+        if (!temp.toString().equals("")) {
+
+            ResponseMessage responseMessage = new ResponseMessage(temp.toString(), false);
+            responseMessageList.add(responseMessage);
+
+            //ConvertToSpeech(temp); //speak reply from bot
+
+            messageAdapter.notifyDataSetChanged();
+            if (!isLastVisible())
+                recyclerView.smoothScrollToPosition(messageAdapter.getItemCount() - 1);
+
+        }
     }
 
     @Override
@@ -154,21 +209,24 @@ public class Buddy extends AppCompatActivity {
                     // get text array from voice intent
                     ArrayList<String> result = data.getStringArrayListExtra(RecognizerIntent.EXTRA_RESULTS);
                     //set to text view
-                    //userInput.setText(result.get(0));
-                    sendText(result.get(0));
-
-                    ConvertToSpeech(result.get(0));
+                    userInput.setText(result.get(0));
+                    enterButton.performClick();
                 }
                 break;
             }
         }
-    } //speech to text method
+    } //speech to text method...
 
-    boolean isLastVisible() {
+    static boolean isLastVisible() {
         LinearLayoutManager layoutManager = ((LinearLayoutManager) recyclerView.getLayoutManager());
         int pos = layoutManager.findLastCompletelyVisibleItemPosition();
         int numItems = recyclerView.getAdapter().getItemCount();
         return (pos >= numItems);
     } //chat screen method
+
+    /**public static void getBotReply(String query) {
+     displayBotText(buddy.answer(query));
+     }**/
+
 
 }
