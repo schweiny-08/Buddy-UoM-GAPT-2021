@@ -64,17 +64,17 @@ public class buddy_bot {
         //arraylist
     }
 
-    public getweather() {
+    public void getweather() {
         MainActivity.displayBotText("what city");
         //search for city using input
 
     }
 
-    public gettime() {
+    public void gettime() {
 
     }
 
-    public showevents() {
+    public void showevents() {
         //go to events page
         // or read from events list. for loop index 1,2,3 ... end
     }
