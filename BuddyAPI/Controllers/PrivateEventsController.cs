@@ -23,7 +23,7 @@ namespace BuddyAPI.Controllers
         }
 
         // GET: api/PrivateEvents
-        [HttpGet ("getAllPrivateEvents")]
+        [HttpGet("getAllPrivateEvents")]
         public async Task<ActionResult<IEnumerable<PrivateEvents>>> GetPrivateEvents()
         {
 
@@ -82,7 +82,7 @@ namespace BuddyAPI.Controllers
         // POST: api/Events
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPost("addPrivateEvent")]
-        public async Task<ActionResult<PrivateEvents>> PostEvents([Bind("Pinpoint_Id,PrivateEventName,PrivateEventDescription,StartTime,EndTime")] PrivateEvents privateEvents)
+        public async Task<ActionResult<PrivateEvents>> PostPrivateEvent([Bind("Pinpoint_Id,PrivateEventName,PrivateEventDescription,StartTime,EndTime")] PrivateEvents privateEvents)
         {
             HttpContext.Session.SessionExists("UserLoggedIn");
 
@@ -103,29 +103,29 @@ namespace BuddyAPI.Controllers
                 throw new ArgumentException("Error End Time cannot be before Start Time");
             }
 
-            //Retreive a list of events which match the pinpoint event
-            IEnumerable<PrivateEvents> pinpointEvent = GetEventByPinpoint(privateEvents.Pinpoint_Id);
-
-            foreach (PrivateEvents item in pinpointEvent)
-            {
-                //Checker to not allow cross events at the same pinpoints whilst allowing to be placed in between
-                if (item.EndTime > privateEvents.StartTime && item.StartTime < privateEvents.EndTime)
-                {
-                    throw new ArgumentException("Cannot create event, starttime and endtime fall under and already pre-existing event!");
-                }
-            }
-
             _context.PrivateEvents.Add(privateEvents);
             await _context.SaveChangesAsync();
 
-            return CreatedAtAction("GetPrivateEvents", new { id = privateEvents.PrivateEvent_Id }, privateEvents);
+            privateEvents = _context.PrivateEvents.OrderBy(pe => pe.PrivateEvent_Id).Last();
+            Itineraries itineraries = new Itineraries();
+            itineraries.PrivateEvent_Id = privateEvents.PrivateEvent_Id;
+            User user = HttpContext.Session.GetObjectFromJson<User>("UserLoggedIn");
+            itineraries.User_Id = user.User_Id;
+
+            ItinerariesController itinerariesController = new ItinerariesController(_context);
+            await itinerariesController.PostItineraries(itineraries);
+            return Ok("Private Event has been created and added to your itinerary");
         }
 
-        [HttpGet("GetPrivateEventByPinpoint")]
         private IEnumerable<PrivateEvents> GetEventByPinpoint(int pinpointId)
         {
             return _context.PrivateEvents.Where(e => e.Pinpoint_Id == pinpointId);
 
+        }
+
+        private IEnumerable<Itineraries> GetEventFromItineraries(int userid)
+        {
+            return _context.Itineraries.Where(u => u.User_Id == userid);
         }
 
         // DELETE: api/PrivateEvents/5
