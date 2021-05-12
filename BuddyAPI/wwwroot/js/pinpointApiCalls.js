@@ -128,7 +128,7 @@ function GetAllPinpoints() {
 
                 markerObj.marker.addListener("click", function () {
                     const coordInfoWindow = new google.maps.InfoWindow();
-                    coordInfoWindow.setContent(String(data.pinpoint_Id));
+                    coordInfoWindow.setContent(String(data.pinpoint_Id) + "<br>" + data.latitude + "<br>" + data.longitude);
                     coordInfoWindow.setPosition(markerObj.marker.position);
                     coordInfoWindow.open(map);
                 });

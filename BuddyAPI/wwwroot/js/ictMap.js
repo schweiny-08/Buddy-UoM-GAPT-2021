@@ -12,6 +12,7 @@ function initMap() {
     map = new google.maps.Map(document.getElementById("map"), {
         center: ict,
         zoom: 15,
+        gestureHandling: "greedy",
     });
 
     //Creating an array of objects
@@ -25,13 +26,13 @@ function initMap() {
     const coordInfoWindow = new google.maps.InfoWindow();
     coordInfoWindow.setContent(createInfoWindowContent(ict, map.getZoom()));
     coordInfoWindow.setPosition(ict);
-    coordInfoWindow.open(map);
+    //coordInfoWindow.open(map);
     //event listener that fires when zoom level changes
     map.addListener("zoom_changed", () => {
         coordInfoWindow.setContent(
             createInfoWindowContent(ict, map.getZoom())
         );
-        coordInfoWindow.open(map);
+        //coordInfoWindow.open(map);
     });
     //setting the bounds of UOM. Bounds [zoom][coord.x][coord.y]
     //bounds are generated from map tiler folder structure when tiles are created

@@ -17,9 +17,13 @@ namespace BuddyAPI.Data
         public DbSet<BuddyAPI.Models.PinpointTypes> PinpointTypes { get; set; }
         public DbSet<BuddyAPI.Models.Floor> Floor { get; set; }
 
-        /*protected override void OnModelCreating(ModelBuilder modelBuilder)
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            modelBuilder.Entity<Roles>().ToTable("Roles");
-        }*/
+            //modelBuilder.Entity<Roles>().ToTable("Roles");
+            modelBuilder.Entity<Paths>().HasKey(a => new { a.pinpoint_Id, a.pinpoint_Id_2});
+
+        }
+
+        public DbSet<BuddyAPI.Models.Paths> Paths { get; set; }
     }
 }

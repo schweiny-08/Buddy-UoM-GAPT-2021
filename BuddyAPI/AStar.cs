@@ -10,29 +10,30 @@ using System.Threading.Tasks;
 namespace BuddyAPI
 {
     public class AStar
-    {   
+    {
         private BuddyAPIContext _context;
         public AStar(BuddyAPIContext context)
         {
             _context = context;
         }
 
-        public static double getHCost(double currLong, double currLat, double endLong, double endLat)
+        public static double getHCost(double endLat, double endLong, double currLat, double currLong)
         {
-            return Math.Sqrt(Math.Pow((Math.Abs(endLong - currLong)), 2) + Math.Pow((Math.Abs(endLat - currLat)), 2));
+            return Math.Sqrt(Math.Pow(Math.Abs(endLat - currLat), 2) + Math.Pow(Math.Abs(endLong - currLong), 2));
         }
 
-        public static double getGCost(double startLong, double startLat, double currLong, double currLat)
+        public static double getGCost(double startLat, double startLong, double currLat, double currLong)
         {
-            return Math.Sqrt(Math.Pow((Math.Abs(startLong - currLong)),2) + Math.Pow((Math.Abs(startLat - currLat)),2));
+            return Math.Sqrt(Math.Pow(Math.Abs(startLat - currLat), 2) + Math.Pow(Math.Abs(startLong - currLong), 2));
         }
-        
+
         public static double getFCost(double gcost, double hcost)
         {
-            return gcost+hcost;
+            return gcost + hcost;
         }
 
-        public GraphNode ConvertToNode(Pinpoints pin) {
+        public GraphNode ConvertToNode(Pinpoints pin)
+        {
             GraphNode node = new GraphNode(pin.pinpoint_Id, pin.longitude, pin.latitude, pin.floor_Id);
             return node;
         }
@@ -43,7 +44,17 @@ namespace BuddyAPI
 
         }
 
-        public List<GraphNode> GetSurroundingPins(GraphNode curr ,double longi, double lat, List<GraphNode> visited, List<GraphNode> notVisited)
+        public GraphNode GetMatchingNode(List<GraphNode> notVisited, int id)
+        {
+            return notVisited.Find(i => i.map_pinId == id);
+        }
+
+        public GraphNode GetNodeByFcost(List<GraphNode> notVisited, double fcost)
+        {
+            return notVisited.Find(i => i.fcost == fcost);
+        }
+
+        public List<GraphNode> GetSurroundingPins(GraphNode curr, double longi, double lat, List<GraphNode> visited, List<GraphNode> notVisited)
         {
             List<GraphNode> nearbyNodes = new List<GraphNode>();
             List<GraphNode> final = new List<GraphNode>();
@@ -51,14 +62,14 @@ namespace BuddyAPI
             Pinpoints newPin;
             GraphNode newG;
             double G;
-            double H ;
-            double F ;
+            double H;
+            double F;
 
             if (curr.map_pinId + 1 != null || curr.map_pinId + 1 != 0)
             {
                 newId = curr.map_pinId + 1;
                 newPin = GetPinpointsObject(newId);
-                if (newPin == null) {}
+                if (newPin == null) { }
                 else
                 {
                     newG = ConvertToNode(newPin);
@@ -70,34 +81,17 @@ namespace BuddyAPI
                     newG.setG(G);
                     newG.setG(H);
                     nearbyNodes.Add(newG);
+                    G = H = F = 0;
                 }
-                
+
             }
-           
+
 
             if (curr.map_pinId + 2 != null || curr.map_pinId + 2 != 0)
             {
                 newId = curr.map_pinId + 2;
                 newPin = GetPinpointsObject(newId);
-                if (newPin == null) {}
-                else {
-                    newG = ConvertToNode(newPin);
-                    //GraphNode newG = new GraphNode(newId+1, newId.map_long = longi, curr.map_lat = lat, curr.Floor);
-                    G = getGCost(curr.map_long, curr.map_lat, newG.map_long, newG.map_lat);
-                    H = getHCost(newG.map_long, newG.map_lat, curr.map_long, curr.map_lat);
-                    F = getFCost(G, H);
-                    newG.setF(F);
-                    newG.setG(G);
-                    newG.setG(H);
-                    nearbyNodes.Add(newG);
-                }  
-            }
-           
-
-            if (curr.map_pinId - 1 != null || curr.map_pinId - 1 != 0) {
-                newId = curr.map_pinId - 1;
-                newPin = GetPinpointsObject(newId);
-                if (newPin == null) {} 
+                if (newPin == null) { }
                 else
                 {
                     newG = ConvertToNode(newPin);
@@ -109,17 +103,18 @@ namespace BuddyAPI
                     newG.setG(G);
                     newG.setG(H);
                     nearbyNodes.Add(newG);
+                    G = H = F = 0;
                 }
-               
             }
-            
 
-            if (curr.map_pinId - 2 != null || curr.map_pinId - 2 != 0)
+
+            if (curr.map_pinId - 1 != null || curr.map_pinId - 1 != 0)
             {
-                newId = curr.map_pinId - 2;
+                newId = curr.map_pinId - 1;
                 newPin = GetPinpointsObject(newId);
-                if (newPin == null) {}
-                else {
+                if (newPin == null) { }
+                else
+                {
                     newG = ConvertToNode(newPin);
                     //GraphNode newG = new GraphNode(newId+1, newId.map_long = longi, curr.map_lat = lat, curr.Floor);
                     G = getGCost(curr.map_long, curr.map_lat, newG.map_long, newG.map_lat);
@@ -129,15 +124,38 @@ namespace BuddyAPI
                     newG.setG(G);
                     newG.setG(H);
                     nearbyNodes.Add(newG);
-                }  
+                    G = H = F = 0;
+                }
+
             }
-            
+
+
+            if (curr.map_pinId - 2 != null || curr.map_pinId - 2 != 0)
+            {
+                newId = curr.map_pinId - 2;
+                newPin = GetPinpointsObject(newId);
+                if (newPin == null) { }
+                else
+                {
+                    newG = ConvertToNode(newPin);
+                    //GraphNode newG = new GraphNode(newId+1, newId.map_long = longi, curr.map_lat = lat, curr.Floor);
+                    G = getGCost(curr.map_long, curr.map_lat, newG.map_long, newG.map_lat);
+                    H = getHCost(newG.map_long, newG.map_lat, curr.map_long, curr.map_lat);
+                    F = getFCost(G, H);
+                    newG.setF(F);
+                    newG.setG(G);
+                    newG.setG(H);
+                    nearbyNodes.Add(newG);
+                    G = H = F = 0;
+                }
+            }
+
 
             //***MIGHT NEED TO ADD A GET FLOOR IN THE FUTURE 
             //finding whether the surrounding nodes are within the pinpoints
             foreach (GraphNode node in nearbyNodes)
             {
-               final.Add(node);
+                final.Add(node);
             }
 
             return final;
@@ -145,29 +163,32 @@ namespace BuddyAPI
 
         public List<int> CalculateAStar(int startId, int endId)
         {
-            List<int> path = new List<int>();
+            List<int> finalPath = new List<int>();
             GraphNode Curr = null;
             Pinpoints pin1 = GetPinpointsObject(startId);
-            GraphNode startPin =  ConvertToNode(pin1);
+            GraphNode startPin = ConvertToNode(pin1);
             Pinpoints pin2 = GetPinpointsObject(endId);
             GraphNode endPin = ConvertToNode(pin2);
 
-            var start = new GraphNode (startId, pin1.longitude, pin1.latitude, pin1.floor_Id );
-            var end = new GraphNode (endId, pin2.longitude, pin2.latitude, pin2.floor_Id );
+            var path = new List<GraphNode>();
+            var start = new GraphNode(startId, pin1.longitude, pin1.latitude, pin1.floor_Id);
+            var end = new GraphNode(endId, pin2.longitude, pin2.latitude, pin2.floor_Id);
             var notVisited = new List<GraphNode>();
             var Visited = new List<GraphNode>();//could be the possible path
 
             //setting the cost values by calculating them for the start node
 
             double G = 0;
-            double H = getHCost(start.map_long, start.map_lat, end.map_long, end.map_lat);
+            //double H = getHCost(start.map_long, start.map_lat, end.map_long, end.map_lat);
+            double H = getHCost(end.map_lat, end.map_long, start.map_lat, start.map_long);
             double F = getFCost(G, H);
             start.setF(F);
             start.setG(G);
             start.setH(H);
-            path.Add(start.map_pinId);
+            path.Add(start);
             GraphNode prev = start;
             start.Parent = null;
+            //G = H = F = 0;
             for (int i = 36; i <= 204; i++)
             {
                 //adding all navigation nodes to the list of nodes
@@ -175,13 +196,13 @@ namespace BuddyAPI
 
                 if (pin != null)
                 {
-                    if (pin.floor_Id ==3 && pin.pinpointType_Id==15)
+                    if (pin.floor_Id == 3 && pin.pinpointType_Id == 15)
                     {
                         GraphNode node = ConvertToNode(pin);
 
                         //setting the cost values by calculating them for every navigation node
-                        G = getGCost(start.map_long, start.map_lat, node.map_long, node.map_lat);
-                        H = getHCost(node.map_long, node.map_lat, end.map_long, end.map_lat);
+                        G = getGCost(start.map_lat, start.map_long, node.map_lat, node.map_long);
+                        H = getHCost(end.map_lat, end.map_long, node.map_lat, node.map_long);
                         F = getFCost(G, H);
                         node.setF(F);
                         node.setG(G);
@@ -191,59 +212,60 @@ namespace BuddyAPI
 
                         notVisited.Add(node);
                         prev = node;
-
+                        //G = H = F = 0;
                     }
                 }
             }
             //setting the cost values by calculating them for the end node
             notVisited.Add(end);
-            G = getGCost(start.map_long, start.map_lat, end.map_long, end.map_lat);
+            G = getGCost(start.map_lat, start.map_long, end.map_lat, end.map_long);
             H = 0;
             F = getFCost(G, H);
             end.setF(F);
             end.setG(G);
             end.setH(H);
             end.Parent = prev;
+            //G = H = F = 0;
 
-            
 
             //Pathfinding starts and ends within this loop
             while (notVisited.Count > 0)
             {
-                GraphNode picked=null;
-                int counter = 0;
+                //GraphNode picked = null;
+                //bool firstNode = true;
                 // retrieving node with the lowest FCost
                 // var lowest = notVisited.Min(l => l.fcost);
                 //Curr = notVisited.First(l => l.fcost == lowest);
 
-                foreach (GraphNode g in notVisited) {
-                    if(g.Parent != null && counter >0)
-                    {
-                        if (picked==null)
-                            picked = g; 
+                // foreach (GraphNode g in notVisited) {
+                //if(g.Parent != null && !firstNode)
+                //{
+                //    if (picked==null)
+                //        picked = g; 
 
-                        if (g.fcost < g.Parent.fcost && g.fcost<picked.fcost)
-                        {
-                            picked = g;
-                        }
+                //    if (g.fcost < g.Parent.fcost && g.fcost<picked.fcost)
+                //    {
+                //        picked = g;
+                //    }
 
-                        if (g.fcost > g.Parent.fcost && g.Parent.fcost<picked.fcost)
-                        {
-                            picked = g.Parent;
-                        }
-                    }
-                    counter++;
-                    //if (g.Parent.fcost < g.fcost)
-                       // picked = g.Parent.fcost;
+                //    if (g.fcost > g.Parent.fcost && g.Parent.fcost<picked.fcost)
+                //    {
+                //        picked = g.Parent;
+                //    }
+                //}
+                //firstNode = false; ;
+                //if (g.Parent.fcost < g.fcost)
+                // picked = g.Parent.fcost;
 
-                }
+                //}
+                double minFCost = notVisited.Min(g => g.fcost);
+                path.Add(GetNodeByFcost(notVisited, minFCost));
 
-                path.Add(picked.map_pinId);
                 // adding current pin to visited list
-                Visited.Add(picked);
+                //Visited.Add(picked);
 
                 // remove current pin from not visited list
-                notVisited.Remove(picked);
+                notVisited.Remove(GetMatchingNode(notVisited, GetNodeByFcost(notVisited, minFCost).map_pinId));
 
                 //****not working within this loop
                 //List<GraphNode> surroundingPins = GetSurroundingPins(Curr, Curr.map_long, Curr.map_lat, Visited, notVisited);
@@ -280,20 +302,30 @@ namespace BuddyAPI
 
 
                 // if end point added to the visited list, path completed
-                if (Visited.FirstOrDefault(l => l.map_long == end.map_long && l.map_lat == end.map_lat) != null) {
+                if (Visited.FirstOrDefault(l => l.map_long == end.map_long && l.map_lat == end.map_lat) != null)
+                {
                     //Visited.Add(end);
                     //foreach (GraphNode g in Visited) {
-                      //  int id = g.map_pinId;
-                        //path.Add(id);
+                    //  int id = g.map_pinId;
+                    //path.Add(id);
                     //}
                     break;
                 }
             }
 
+            List<GraphNode> orderedPath = path.OrderBy(g => g.gcost).ToList();
+            foreach (var o in orderedPath)
+            {
+                finalPath.Add(o.map_pinId);
+            }
+            var index = finalPath.IndexOf(end.map_pinId);
+            finalPath.RemoveRange(index, finalPath.Count - index);
+            return finalPath;
+
             //int stops = Visited.Count();
             //List<int> gettingPath = new List<int>();
-           // gettingPath.Add(end.map_pinId);
-            
+            // gettingPath.Add(end.map_pinId);
+
             /*for (int i=nodesVisited.Count(); i>0;i--) {
                 //*************this is the gist of what needs to be done - get the parent node of every element in the nodes visited list - LINE 201 THROWING NULL EXCEPTION
                 do//out of range ----FIX IT 
@@ -305,7 +337,6 @@ namespace BuddyAPI
             /*for (int i= nodesVisited.Count(); i>0 ;i--) {
                 path.Add(gettingPath[i]);
             }*/
-            return path;
         }
     }
 }
