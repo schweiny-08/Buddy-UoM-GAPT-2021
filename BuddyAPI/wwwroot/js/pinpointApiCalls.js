@@ -97,7 +97,8 @@ function GetAllPinpoints() {
             var pinpnt = JSON.parse(this.responseText);
             //console.log(pinpnt);
             pinpnt.forEach(function (data, index) {
-                
+
+                //console.log(data)
 
                 if (data.floor_Id == 2)
                     level = -1
@@ -112,6 +113,8 @@ function GetAllPinpoints() {
                     iconType = "Stairs.png";
                 else if (data.pinpointType_Id == 15)
                     iconType = "NavNode.png";
+
+                //console.log(data.pinpoint_Id);
 
                 var id = 0;
 

@@ -24,5 +24,14 @@ namespace BuddyAPI.ViewModels
             var value = session.GetString(key);
             return value == null ? default(T) : JsonConvert.DeserializeObject<T>(value);
         }
+
+       public static void SessionExists(this ISession session, string key)
+        {
+            var exists = session.Get(key);
+            if(exists == null)
+            {
+                throw new ArgumentNullException("No Session of " + key + " Exists");
+            }
+        }
     }
 }
