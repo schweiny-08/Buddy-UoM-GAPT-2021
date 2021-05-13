@@ -1,8 +1,6 @@
 package com.example.buddypersonal;
 
-import android.content.Intent;
 import android.os.Bundle;
-import android.view.View;
 import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -20,17 +18,17 @@ public class Itinerary extends AppCompatActivity {
     private SimpleDateFormat simpleDateFormat;
     private String date;
     RecyclerView mRecyclerView;
-    MyAdapter myAdapter;
+    ItineraryAdapter myAdapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_itinerary);
 
-        mRecyclerView = findViewById(R.id.recyclerView);
+        mRecyclerView = findViewById(R.id.recyclerViewItin);
         mRecyclerView.setLayoutManager(new LinearLayoutManager(this));
 
-        myAdapter = new MyAdapter(this, getMyList());
+        myAdapter = new ItineraryAdapter(this, getMyList());
         mRecyclerView.setAdapter(myAdapter);
 
         dateTimeDisplay = (TextView)findViewById(R.id.itn_tv_curr_date);

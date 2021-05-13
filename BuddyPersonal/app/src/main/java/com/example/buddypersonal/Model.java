@@ -4,7 +4,7 @@ import java.sql.Time;
 
 public class Model {
 
-    private String title, type, startTime, startDate, endTime, endDate, notes;
+    private String title, type, startTime, startDate, endTime, endDate, notes, description, loc;
 
     public Model() {
     }
@@ -66,5 +66,21 @@ public class Model {
 
     public void setNotes(String notes) {
         this.notes = notes;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
+    public String getLoc() {
+        return loc;
+    }
+
+    public void setLoc(String loc) {
+        this.loc = loc;
     }
 }

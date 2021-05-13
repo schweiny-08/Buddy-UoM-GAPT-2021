@@ -6,9 +6,11 @@ import android.app.DatePickerDialog;
 import android.app.TimePickerDialog;
 import android.content.Intent;
 import android.os.Bundle;
+import android.text.TextUtils;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.Button;
+import android.widget.CheckBox;
 import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.TextView;
@@ -16,57 +18,45 @@ import android.widget.TimePicker;
 import android.widget.Toast;
 
 import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.Calendar;
+import java.util.Date;
 
-public class Register extends AppCompatActivity implements AdapterView.OnItemSelectedListener, DatePickerDialog.OnDateSetListener, TimePickerDialog.OnTimeSetListener{
-//    Button register;
-//    EditText username, password, confirm;
-//    DatabaseHelper dbHelper;
+public class Register extends AppCompatActivity implements AdapterView.OnItemSelectedListener, DatePickerDialog.OnDateSetListener{
 
-    TextView startTime, endTime, startDate, endDate;
+    TextView dob;
+    EditText name, surname, email, username, password, confPassword;
+    CheckBox toc;
+    Date DOB, CURR;
+    SimpleDateFormat sdf;
+    Pickers picker = new Pickers();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_register);
 
-//        //TIME
-//        startTime = (TextView) findViewById(R.id.reg_et_dob);
-//        startTime.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                DialogFragment timePicker = new TimePickerFragment();
-//                timePicker.show(getSupportFragmentManager(), "time picker");
-//            }
-//        });
-//
-//        endTime = (TextView) findViewById(R.id.evd_tv_end_time_det);
-//        endTime.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                DialogFragment timePicker = new TimePickerFragment();
-//                timePicker.show(getSupportFragmentManager(), "time e picker");
-//            }
-//        });
+        name = (EditText)findViewById(R.id.reg_et_name);
+        surname = (EditText)findViewById(R.id.reg_et_surname);
+        dob = (TextView)findViewById(R.id.reg_et_dob);
+        email = (EditText)findViewById(R.id.reg_et_email);
+        username = (EditText)findViewById(R.id.reg_et_username);
+        password = (EditText)findViewById(R.id.reg_et_password);
+        confPassword = (EditText)findViewById(R.id.reg_et_conf_password);
+        toc = (CheckBox)findViewById(R.id.reg_cb_tac);
 
         //DATE
-        startDate = (TextView) findViewById(R.id.reg_et_dob);
-        startDate.setOnClickListener(new View.OnClickListener() {
+        dob = (TextView) findViewById(R.id.reg_et_dob);
+        dob.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                picker.setDate(dob);
                 DialogFragment datePicker = new DatePickerFragment();
                 datePicker.show(getSupportFragmentManager(), "date picker");
             }
         });
 
-//        endDate = (TextView) findViewById(R.id.evd_tv_end_date_det);
-//        endDate.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                DialogFragment datePicker = new DatePickerFragment();
-//                datePicker.show(getSupportFragmentManager(), "date e picker");
-//            }
-//        });
+
 
 //        dbHelper = new DatabaseHelper(this);
 //        username = (EditText) findViewById(R.id.reg_et_username);
@@ -125,30 +115,16 @@ public class Register extends AppCompatActivity implements AdapterView.OnItemSel
 //    }
 
     @Override
-    public void onTimeSet(TimePicker view, int hourOfDay, int minute){
-        java.util.Calendar c = java.util.Calendar.getInstance();
-        c.set(java.util.Calendar.HOUR_OF_DAY, hourOfDay);
-        c.set(java.util.Calendar.MINUTE, minute);
-
-        String currentTime = DateFormat.getTimeInstance(DateFormat.SHORT).format(c.getTime());
-//        if(getTag().equalsIgnoreCase("time picker")) {
-        startTime.setText(currentTime);
-//        }
-//        else{
-//            endTime.setText(currentTime);
-//        }
-    }
-
-    @Override
     public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
 
-        java.util.Calendar c = java.util.Calendar.getInstance();
+        Calendar c = java.util.Calendar.getInstance();
         c.set(java.util.Calendar.YEAR, year);
         c.set(java.util.Calendar.MONTH, month);
         c.set(Calendar.DAY_OF_MONTH, dayOfMonth);
 
         String currentDate = DateFormat.getDateInstance(DateFormat.SHORT).format(c.getTime());
-        startDate.setText(currentDate);
+        picker.getDate().setText(currentDate);
+//                .setsDate(currentDate);
     }
 
     @Override
@@ -160,15 +136,38 @@ public class Register extends AppCompatActivity implements AdapterView.OnItemSel
 
     }
 
+    boolean isEmailValid(CharSequence email) {
+        return android.util.Patterns.EMAIL_ADDRESS.matcher(email).matches();
+    }
+
     public void register(View view){
-        Intent intent = new Intent(this, Login.class);
-        EditText name = (EditText)findViewById(R.id.reg_et_name);
-        EditText surname = (EditText)findViewById(R.id.reg_et_surname);
-        EditText dob = (EditText)findViewById(R.id.reg_et_dob);
-        EditText email = (EditText)findViewById(R.id.reg_et_email);
-        EditText username = (EditText)findViewById(R.id.reg_et_username);
-        EditText password = (EditText)findViewById(R.id.reg_et_password);
-        EditText confPassword = (EditText)findViewById(R.id.reg_et_conf_password);
-        startActivity(intent);
+        if ((TextUtils.isEmpty(name.getText().toString()))||(TextUtils.isEmpty(surname.getText().toString()))||(TextUtils.isEmpty(dob.getText().toString()))||(TextUtils.isEmpty(email.getText().toString()))||(TextUtils.isEmpty(username.getText().toString()))||(TextUtils.isEmpty(password.getText().toString()))||(TextUtils.isEmpty(confPassword.getText().toString()))) {
+            Toast.makeText(Register.this, "Please make sure you have filled  the necessary credentials.", Toast.LENGTH_SHORT).show();
+        }
+//        else if(){
+//            //dob should not be in the future
+//        }
+        else if (!isEmailValid(email.getText().toString())){
+            Toast.makeText(Register.this, "The email you provided is invalid.", Toast.LENGTH_SHORT).show();
+        }
+//        else if(){
+//            //unique username
+//        }
+        else if(password.getText().toString().length()<8){
+            Toast.makeText(Register.this, "The passwords is too short.", Toast.LENGTH_SHORT).show();
+        }
+        else if(!password.getText().toString().equals(confPassword.getText().toString())){
+            Toast.makeText(Register.this, "The passwords do no match.", Toast.LENGTH_SHORT).show();
+        }
+//        else if(){
+//        when checkbox is left unmarked
+//            Toast.makeText(Register.this, "Please accept the Terms and Conditions", Toast.LENGTH_SHORT).show();
+//        }
+        else{
+            Toast.makeText(Register.this, "Your account has been registered successfully.", Toast.LENGTH_SHORT).show();
+            Intent intent = new Intent(this, Login.class);
+            startActivity(intent);
+        }
+
     }
 }

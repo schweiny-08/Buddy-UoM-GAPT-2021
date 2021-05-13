@@ -1,4 +1,4 @@
-package com.example.buddy2;
+package com.example.buddypersonal;
 
 
 public class ResponseMessage {

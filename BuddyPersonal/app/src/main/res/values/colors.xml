@@ -4,5 +4,31 @@
     <color name="colorPrimaryCenter">#214D9E</color>
     <color name="colorPrimary">#449af5</color>
     <color name="colorAccent">#ffff</color>
+
+
+
+    <color name="sys_toolbar">#01579b</color>
+    <color name="sys_background">#b1d0f1</color>
+    <color name="sys_contrast">#1a237e</color>
+    <color name="sys_text">#e1f5fe</color>
+    <color name="sys_button">#0636af</color>
+
+    <color name="map_toolbar">#4a148c</color>
+    <color name="map_background">#7e57c2</color>
+    <color name="map_contrast">#311b92</color>
+    <color name="map_text">#ede7f6</color>
+    <color name="map_button">#5321c1</color>
+
+    <color name="itn_toolbar">#e65100</color>
+    <color name="itn_background">#fbb964</color>
+    <color name="itn_contrast">#ef6c00</color>
+    <color name="itn_text">#ffe0b2</color>
+    <color name="itn_button">#e44513</color>
+
+    <color name="bud_toolbar">#0b6623</color>
+    <color name="bud_background">#30a960</color>
+    <color name="bud_contrast">#043927</color>
+    <color name="bud_text">#e4ffd7</color>
+    <color name="bud_button">#007848</color>
 </resources>
 

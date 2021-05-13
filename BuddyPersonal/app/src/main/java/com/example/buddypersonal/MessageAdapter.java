@@ -1,4 +1,4 @@
-package com.example.buddy2;
+package com.example.buddypersonal;
 
 import android.content.Context;
 import android.view.LayoutInflater;

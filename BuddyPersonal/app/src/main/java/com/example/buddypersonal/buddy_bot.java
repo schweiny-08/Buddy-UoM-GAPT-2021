@@ -1,4 +1,4 @@
-package com.example.buddy2;
+package com.example.buddypersonal;
 
 import android.text.Editable;
 
@@ -44,9 +44,9 @@ public class buddy_bot {
     public String trainMe(String question) {
 
 
-        //MainActivity.displayBotText("Sorry, how should I reply?");
+        //Buddy.displayBotText("Sorry, how should I reply?");
 
-        //String temp = MainActivity.userInput.getText().toString();
+        //String temp = Buddy.userInput.getText().toString();
 
 
 
@@ -56,7 +56,7 @@ public class buddy_bot {
     }
 
     public static void greeting() {
-        MainActivity.displayBotText("hey buddy");
+        Buddy.displayBotText("hey buddy");
         //good morning buddy
         //good after buddy
         //whats up buddy
@@ -65,7 +65,7 @@ public class buddy_bot {
     }
 
     public void getweather() {
-        MainActivity.displayBotText("what city");
+        Buddy.displayBotText("what city");
         //search for city using input
 
     }

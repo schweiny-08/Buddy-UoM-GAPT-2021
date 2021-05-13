@@ -74,14 +74,14 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 intent = new Intent(MainActivity.this, Home.class);
                 startActivity(intent);
                 break;
-//            case R.id.nav_map:
-//                intent = new Intent(MainActivity.this, Map.class);
-//                startActivity(intent);
-//                break;
-//            case R.id.nav_pu_events:
-//                intent = new Intent(MainActivity.this, PublicEvents.class);
-//                startActivity(intent);
-//                break;
+            case R.id.nav_map:
+                intent = new Intent(MainActivity.this, MapView.class);
+                startActivity(intent);
+                break;
+            case R.id.nav_pu_events:
+                intent = new Intent(MainActivity.this, VenueEvents.class);
+                startActivity(intent);
+                break;
             case R.id.nav_itinerary:
                 intent = new Intent(MainActivity.this, Itinerary.class);
                 startActivity(intent);
@@ -90,16 +90,17 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 intent = new Intent(MainActivity.this, CreateEvent.class);
                 startActivity(intent);
                 break;
-//            case R.id.nav_buddy:
-//                intent = new Intent(MainActivity.this, Buddy.class);
-//                startActivity(intent);
-//                break;
+            case R.id.nav_buddy:
+                intent = new Intent(MainActivity.this, Buddy.class);
+                startActivity(intent);
+                break;
             case R.id.nav_logout:
                 Toast.makeText(this, "You have been logged out!", Toast.LENGTH_SHORT).show();
                 break;
             default:
                 break;
         }
+        drawerLayout.closeDrawer(GravityCompat.START);
         return true;
     }
 

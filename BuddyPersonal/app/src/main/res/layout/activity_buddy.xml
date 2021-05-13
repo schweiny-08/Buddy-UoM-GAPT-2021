@@ -16,17 +16,16 @@
 
     <EditText
         android:id="@+id/userInput"
-        android:layout_width="280dp"
+        android:layout_width="323dp"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
-        android:layout_marginStart="65dp"
-        android:layout_marginLeft="65dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginLeft="8dp"
         android:layout_marginTop="8dp"
         android:layout_marginEnd="8dp"
         android:layout_marginRight="8dp"
-        android:layout_marginBottom="6dp"
+        android:layout_marginBottom="8dp"
         android:background="@drawable/bg_edit_text"
-        android:fontFamily="@font/montserrat"
         android:hint="Ask Buddy"
         android:imeActionId="4"
         android:imeOptions="actionSend"
@@ -40,22 +39,11 @@
         android:id="@+id/voiceBtn"
         android:layout_width="60dp"
         android:layout_height="60dp"
-        android:layout_alignBottom="@id/EnterBtn"
-        android:layout_marginStart="-350dp"
-        android:layout_marginLeft="-350dp"
-        android:layout_marginBottom="0dp"
+        android:layout_alignBottom="@id/userInput"
+        android:layout_marginStart="0dp"
+        android:layout_marginLeft="0dp"
+        android:layout_marginBottom="-2dp"
         android:layout_toRightOf="@+id/userInput"
         android:src="@drawable/ic_mic" />
-
-    <ImageButton
-        android:id="@+id/EnterBtn"
-        android:layout_width="60dp"
-        android:layout_height="60dp"
-        android:layout_alignBottom="@id/userInput"
-        android:layout_marginStart="-5dp"
-        android:layout_marginLeft="0dp"
-        android:layout_marginBottom="-3dp"
-        android:layout_toRightOf="@+id/userInput"
-        android:src="@android:drawable/ic_media_play" />
 
 </RelativeLayout>

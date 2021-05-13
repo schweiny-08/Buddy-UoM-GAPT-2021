@@ -4,6 +4,8 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.speech.RecognizerIntent;
 import android.speech.tts.TextToSpeech;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.view.KeyEvent;
 import android.view.View;
 import android.view.inputmethod.EditorInfo;
@@ -44,10 +46,10 @@ public class Buddy extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+        setContentView(R.layout.activity_buddy);
 
         userInput = findViewById(R.id.userInput);
-        enterButton = findViewById(R.id.EnterBtn);
+//        enterButton = findViewById(R.id.EnterBtn);
 
         recyclerView = findViewById(R.id.conversation);
 

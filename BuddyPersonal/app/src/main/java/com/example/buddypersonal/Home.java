@@ -14,18 +14,18 @@ public class Home extends AppCompatActivity {
         setContentView(R.layout.activity_home);
     }
 
-//    public void map(View view){
-//        Intent intent = new Intent(this, Map.class);
-//        startActivity(intent);
-//    }
+    public void map(View view){
+        Intent intent = new Intent(this, MapView.class);
+        startActivity(intent);
+    }
 
     public void itinerary(View view){
         Intent intent = new Intent(this, Itinerary.class);
         startActivity(intent);
     }
 
-//    public void buddy(View view){
-//        Intent intent = new Intent(this, Buddy.class);
-//        startActivity(intent);
-//    }
+    public void buddy(View view){
+        Intent intent = new Intent(this, Buddy.class);
+        startActivity(intent);
+    }
 }

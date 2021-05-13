@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    app:cardCornerRadius="3dp"
+    app:cardElevation="3dp"
+    app:cardUseCompatPadding="true">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="5dp"
+        android:onClick="eventDetails">
+        <TextView
+            style="@style/Theme.Itinerary.textbackground"
+            android:id="@+id/itn_start"
+            android:textSize="18sp"
+            android:layout_width="62dp"
+            android:layout_height="wrap_content"
+            android:text="23:00"
+            android:gravity="center"
+            android:layout_alignParentTop="true"
+            android:layout_alignParentLeft="true"/>
+
+        <TextView
+            style="@style/Theme.Itinerary.textbackground"
+            android:id="@+id/itn_end"
+            android:textSize="18sp"
+            android:layout_width="62dp"
+            android:layout_height="wrap_content"
+            android:text="23:59"
+            android:gravity="center"
+            android:layout_below="@id/itn_start"
+            android:layout_alignParentLeft="true"/>
+
+        <TextView
+            style="@style/Theme.Itinerary.textbackground"
+            android:id="@+id/itn_title"
+            android:textSize="18sp"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:text="Developing Developments"
+            android:gravity="center"
+            android:layout_toRightOf="@id/itn_start"
+            android:layout_alignBottom="@id/itn_end"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentTop="true"/>
+
+    </RelativeLayout>
+
+</androidx.cardview.widget.CardView>
