@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using BuddyAPI.Data;
 using BuddyAPI.Models;
+using BuddyAPI.ViewModels;
 
 namespace BuddyAPI.Controllers
 {
@@ -117,5 +118,30 @@ namespace BuddyAPI.Controllers
         {
             return _context.Pinpoints.Any(e => e.pinpoint_Id == id);
         }
+
+        [HttpPost("SetSessionLocation")]
+        public void SetLocation(string key , Pinpoints pinpoint)
+        {
+            HttpContext.Session.SetObjectAsJson(key, pinpoint);
+        }
+        
+        [HttpGet("GetSessionLocation")]
+        public Pinpoints GetLocation(string key)
+        {
+            Pinpoints  pinpoint =  HttpContext.Session.GetObjectFromJson<Pinpoints>(key);
+            return pinpoint;
+        }
+        
+      /*  [HttpPost("SetEndPoint")]
+        public void SetEndPoint(Pinpoints pinpoint)
+        {
+            HttpContext.Session.SetObjectAsJson("EndPoint", pinpoint);
+        }
+        
+        [HttpGet("GetEndPoint")]
+        public Pinpoints GetEndPoint()
+        {
+            return HttpContext.Session.GetObjectFromJson<Pinpoints>("EndPoint");
+        }*/
     }
 }
