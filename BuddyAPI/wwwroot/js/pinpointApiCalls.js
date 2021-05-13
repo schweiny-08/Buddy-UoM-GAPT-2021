@@ -135,3 +135,56 @@ function GetAllPinpoints() {
     };
 }
 
+function setCurrentLoc(pinpoint) {
+    var xhttp = new XMLHttpRequest();
+
+    xhttp.open("POST", url + "/SetSessionLocation?key=CurrentLocation", true);
+    xhttp.setRequestHeader("Content-type", "application/json");
+    xhttp.send(JSON.stringify(pinpoint));
+       
+    xhttp.onreadystatechange = function () {
+
+        if (this.readyState == 4 && this.status == 200) {
+            var response = JSON.parse(this.responseText);
+            alert(response);
+        } else {
+            alert("Something went wrong in setcurloc" + this.status);
+        }
+    }
+  
+}
+
+function getCurrentLoc() {
+    var xhttp = new XMLHttpRequest();
+    xhttp.open("GET", url + "/GetSessionLocation?key=CurrentLocation", true);
+    xhttp.send();
+
+    xhttp.onreadystatechange = function () {
+        if (this.readyState == 4, this.status == 200) {
+            pinpoint = JSON.parse(this.responseText);
+            console.log("in get curr loc");
+            console.log(pinpoint);
+        }
+       
+    }
+
+}
+
+function updateUserCurrentPinpoint(ppId) {
+    var pinpoint;
+    var id = ppId;
+    var xhttp = new XMLHttpRequest();
+    xhttp.open("GET", url + "/getPinpointById?id="+ id , true);
+    xhttp.send();
+
+    xhttp.onreadystatechange = function () {
+        if (this.readyState == 4, this.status == 200) {
+            pinpoint = JSON.parse(this.responseText);
+            console.log(pinpoint);
+            setCurrentLoc(pinpoint);
+
+            getCurrentLoc();
+            //run drawNavigation(pinpoint);
+        }
+    }
+}

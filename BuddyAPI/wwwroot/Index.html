@@ -18,6 +18,10 @@
             text-align: center;
         }
     </style>
+
+    <!--QR CODE LIBS-->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="https://rawgit.com/schmich/instascan-builds/master/instascan.min.js"></script>
     
 </head>
 <body onload="GetAllPinpoints()">
@@ -59,6 +63,14 @@
         </div>
     </div>
 
+    <div class="navigation">
+        <video id="preview"></video>
+       <!-- <form>
+            <input id="endPoint" type="number" name="endpoint" />
+        </form>-->
+    </div>
+
+
     <!-- calling the google maps api using a custom API key. CHECK IF SAME KEY WORKS ACROSS DIFFERENT DEVICES!! -->
 
 
@@ -67,6 +79,7 @@
     <script src="../js/pinpointWindow.js"></script>
     <script src="../js/pinpointTypeApiCalls.js"></script>
     <script type="text/javascript" src="../js/pinpointApiCalls.js"></script>
+    <script type="text/javascript" src="../js/qrReader.js"></script>
     <!--<script src="../js/mapMarkers.js"></script>-->
     <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyChmvdq02aq8Sa68jTYFghQZz_1LFFUp8o&callback=initMap&libraries=&v=weekly"
             async></script>
