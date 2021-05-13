@@ -29,6 +29,16 @@ namespace BuddyAPI.Controllers
             return await _context.Events.ToListAsync();
         }
 
+        [HttpGet("getEventsByTimeFrame")]
+        public async Task<ActionResult<IEnumerable<Events>>> GetEvents(DateTime start, DateTime end) {
+            var events = await _context.Events.Where(e => e.StartTime >= start && e.StartTime <= end || e.EndTime >= start && e.EndTime <= end).ToListAsync();
+
+            if (events == null)
+                return NotFound();
+
+            return events;
+        }
+
         // GET: api/Events/5
         [HttpGet("getEventById")]
         public async Task<ActionResult<Events>> GetEvents(int id)
