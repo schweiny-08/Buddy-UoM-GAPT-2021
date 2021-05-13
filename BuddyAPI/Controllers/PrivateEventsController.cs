@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using BuddyAPI.Data;
 using BuddyAPI.Models;
+using BuddyAPI.ViewModels;
 
 namespace BuddyAPI.Controllers
 {
@@ -22,9 +23,10 @@ namespace BuddyAPI.Controllers
         }
 
         // GET: api/PrivateEvents
-        [HttpGet ("getAllPrivateEvents")]
+        [HttpGet("getAllPrivateEvents")]
         public async Task<ActionResult<IEnumerable<PrivateEvents>>> GetPrivateEvents()
         {
+
             return await _context.PrivateEvents.ToListAsync();
         }
 
@@ -32,6 +34,7 @@ namespace BuddyAPI.Controllers
         [HttpGet("getPrivateEventById")]
         public async Task<ActionResult<PrivateEvents>> GetPrivateEvents(int id)
         {
+
             var privateEvents = await _context.PrivateEvents.FindAsync(id);
 
             if (privateEvents == null)
@@ -47,6 +50,7 @@ namespace BuddyAPI.Controllers
         [HttpPut("editPrivateEventById")]
         public async Task<IActionResult> PutPrivateEvents(int id, PrivateEvents privateEvents)
         {
+            HttpContext.Session.SessionExists("UserLoggedIn");
             if (id != privateEvents.PrivateEvent_Id)
             {
                 return BadRequest();
@@ -73,21 +77,62 @@ namespace BuddyAPI.Controllers
             return NoContent();
         }
 
-        // POST: api/PrivateEvents
+
+
+        // POST: api/Events
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPost("addPrivateEvent")]
-        public async Task<ActionResult<PrivateEvents>> PostPrivateEvents(PrivateEvents privateEvents)
+        public async Task<ActionResult<PrivateEvents>> PostPrivateEvent([Bind("Pinpoint_Id,PrivateEventName,PrivateEventDescription,StartTime,EndTime")] PrivateEvents privateEvents)
         {
+            HttpContext.Session.SessionExists("UserLoggedIn");
+
+            //Validations
+            //Check if Pinpoint is not null
+            if (privateEvents.Pinpoint_Id == 0)
+            {
+                throw new ArgumentException("Error, no pinpoint was selected");
+            }
+            //Check if EventName are not null
+            if (privateEvents.PrivateEventName.Equals("string") || privateEvents.PrivateEventName.Equals(""))
+            {
+                throw new ArgumentException("Please input an Event Name");
+            }
+            //Check Start Time is not before EndTime
+            if (privateEvents.StartTime >= privateEvents.EndTime)
+            {
+                throw new ArgumentException("Error End Time cannot be before Start Time");
+            }
+
             _context.PrivateEvents.Add(privateEvents);
             await _context.SaveChangesAsync();
 
-            return CreatedAtAction("GetPrivateEvents", new { id = privateEvents.PrivateEvent_Id }, privateEvents);
+            privateEvents = _context.PrivateEvents.OrderBy(pe => pe.PrivateEvent_Id).Last();
+            Itineraries itineraries = new Itineraries();
+            itineraries.PrivateEvent_Id = privateEvents.PrivateEvent_Id;
+            User user = HttpContext.Session.GetObjectFromJson<User>("UserLoggedIn");
+            itineraries.User_Id = user.User_Id;
+
+            ItinerariesController itinerariesController = new ItinerariesController(_context);
+            await itinerariesController.PostItineraries(itineraries);
+            return Ok("Private Event has been created and added to your itinerary");
+        }
+
+        private IEnumerable<PrivateEvents> GetEventByPinpoint(int pinpointId)
+        {
+            return _context.PrivateEvents.Where(e => e.Pinpoint_Id == pinpointId);
+
+        }
+
+        private IEnumerable<Itineraries> GetEventFromItineraries(int userid)
+        {
+            return _context.Itineraries.Where(u => u.User_Id == userid);
         }
 
         // DELETE: api/PrivateEvents/5
         [HttpDelete("deletePrivateEventById")]
         public async Task<IActionResult> DeletePrivateEvents(int id)
         {
+            HttpContext.Session.SessionExists("UserLoggedIn");
             var privateEvents = await _context.PrivateEvents.FindAsync(id);
             if (privateEvents == null)
             {

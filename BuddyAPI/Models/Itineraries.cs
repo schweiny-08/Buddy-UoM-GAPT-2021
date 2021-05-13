@@ -14,7 +14,8 @@ namespace BuddyAPI.Models
 		public int User_Id { get; set; }
 		public int Event_Id { get; set; }
 		public int PrivateEvent_Id { get; set; }
+        //public Itineraries itineraries { get; internal set; }
 
-		//public virtual ICollection<Itineraries> itineraries { get; set; }
-	}
+        //public virtual ICollection<Itineraries> itineraries { get; set; }
+    }
 }
