@@ -106,14 +106,14 @@ namespace BuddyAPI.Controllers
         }
 
         // GET: api/Pinpoints/5
-        [HttpGet("RetrieveNavigation")]
-        public async Task<ActionResult<IEnumerable<int>>> RetreiveNavigation(int start, int end)
+        [HttpGet("GetNavigation")]
+        public async Task<ActionResult<IEnumerable<int>>> GetNavigation(int start, int end)
         {
             //var BuddyApiContextRoles = _context.User.Include(u => u.Roles);
             //return await _context.Pinpoints.ToListAsync();
             //return await BuddyApiContextRoles.ToListAsync();
             AStar astar = new AStar(_context);
-            return astar.CalculateAStar(start, end);
+            return astar.CalculatePath(start, end);
         }
     }
 }

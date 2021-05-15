@@ -11,7 +11,7 @@ function initMap() {
     const ict = new google.maps.LatLng(35.901810199007215, 14.485197413626922);
     map = new google.maps.Map(document.getElementById("map"), {
         center: ict,
-        zoom: 15,
+        zoom: 19,
         gestureHandling: "greedy",
     });
 
@@ -237,7 +237,7 @@ function initMap() {
             if (document.getElementById('level 0').checked) {
                 level = 0;
 
-                console.log("HERE" + markers);
+                //console.log("HERE" + markers);
 
                 map.overlayMapTypes.clear();
                 map.overlayMapTypes.push(ictLvlZero);
@@ -332,16 +332,16 @@ function addMarker(map, mapsMouseEvent) {
         console.log("LAT" + JSON.stringify(marker.position.lng()));
 
 // Adding entrance/exit
-       /* AddPinpoint(
-            15,
-            2,
-            marker.position.lat(),
-            marker.position.lng(),
-            1,
-            "Nav Node",
-            "Navigation Node"
-        );*/
+        //AddPinpoint(
+        //    4, //pp type
+        //    3, //floor id
+        //    marker.position.lat(),
+        //    marker.position.lng(),
+        //    1, //hazard id
+        //    "Stair Bott", //title
+        //    "Staircase Bottom" //description
+        //);
 
-        /*   export { markers, markerObj};*/
+           //export { markers, markerObj};
 }
 
