@@ -107,13 +107,30 @@ namespace BuddyAPI.Controllers
 
         // GET: api/Pinpoints/5
         [HttpGet("GetNavigation")]
-        public async Task<ActionResult<IEnumerable<int>>> GetNavigation(int start, int end)
+        public async Task<ActionResult<IEnumerable<Pinpoints>>> GetNavigation(int start, int end)
         {
             //var BuddyApiContextRoles = _context.User.Include(u => u.Roles);
             //return await _context.Pinpoints.ToListAsync();
             //return await BuddyApiContextRoles.ToListAsync();
             AStar astar = new AStar(_context);
             return astar.CalculatePath(start, end);
+        }
+
+        [HttpGet("GetNavigationId")]
+        public async Task<ActionResult<IEnumerable<int>>> GetNavigationId(int start, int end)
+        {
+            //var BuddyApiContextRoles = _context.User.Include(u => u.Roles);
+            //return await _context.Pinpoints.ToListAsync();
+            //return await BuddyApiContextRoles.ToListAsync();
+            AStar astar = new AStar(_context);
+            List<Pinpoints> path = astar.CalculatePath(start, end);
+            List<int> pathIds = new();
+
+            foreach(var p in path)
+            {
+                pathIds.Add(p.pinpoint_Id);
+            }
+            return pathIds;
         }
     }
 }

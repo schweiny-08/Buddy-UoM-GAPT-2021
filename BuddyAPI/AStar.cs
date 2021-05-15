@@ -10,7 +10,7 @@ namespace BuddyAPI
     public class AStar
     {
         static BuddyAPIContext _context;
-        List<GraphNode> path = new List<GraphNode>();
+        List<Pinpoints> path = new();
         //GraphNode originalStart, originalEnd = null;
         int userStart, userEnd, userStartFloorLvl, userEndFloorLvl = 0;
         Pinpoints userStartPin, userEndPin;
@@ -37,7 +37,7 @@ namespace BuddyAPI
             return gcost + hcost;
         }
 
-        public GraphNode ConvertToNode(Pinpoints pin)
+        public static GraphNode ConvertToNode(Pinpoints pin)
         {
             GraphNode node = new GraphNode(pin.pinpoint_Id, pin.longitude, pin.latitude, pin.floor_Id);
             return node;
@@ -46,85 +46,83 @@ namespace BuddyAPI
         public Pinpoints GetPinpointsObject(int id)
         {
             return _context.Pinpoints.FirstOrDefault(e => e.pinpoint_Id == id);
-
         }
 
-        public List<int> GetConnectingNodeId(int id)
+        public List<Pinpoints> GetConnectingPins(Pinpoints startPin)
         {
-            List<int> paths = new List<int>();
+            List<Pinpoints> paths = new List<Pinpoints>();
+            List<int> pathIds = new List<int>();
             foreach (var p in _context.Paths)
             {
-                if (p.pinpoint_Id == id)
+                if (p.pinpoint_Id == startPin.pinpoint_Id)
                 {
-                    paths.Add(p.pinpoint_Id_2);
+                    pathIds.Add(p.pinpoint_Id_2);
                 }
-                else if (p.pinpoint_Id_2 == id)
+                else if (p.pinpoint_Id_2 == startPin.pinpoint_Id)
                 {
-                    paths.Add(p.pinpoint_Id);
+                    pathIds.Add(p.pinpoint_Id);
                 }
+            }
+            foreach(var p in pathIds)
+            {
+                paths.Add(GetPinpointsObject(p));
             }
             return paths;
         }
 
-        public List<int> GetConnectingStaircaseId(int id)
+        public List<Pinpoints> GetConnectingStaircasePin(int id)
         {
-            List<int> connNodes = GetConnectingNodeId(id);
-            List<int> connStaircaseId = new List<int>();
-            Pinpoints connStairCasePin = new Pinpoints();
-            foreach (var c in connNodes)
+            List<Pinpoints> connPins = GetConnectingPins(GetPinpointsObject(id));
+            List<Pinpoints> connStaircasePins = new List<Pinpoints>();
+            foreach (var c in connPins)
             {
-                connStairCasePin = GetPinpointsObject(c);
                 //connStairCasePin2 = GetPinpointsObject(p.pinpoint_Id_2);
-                if (connStairCasePin.pinpointType_Id == 4 || connStairCasePin.pinpointType_Id == 14)
+                if (c.pinpointType_Id == 4 || c.pinpointType_Id == 14)
                 {
-                    connStaircaseId.Add(c);
+                    connStaircasePins.Add(c);
                 }
             }
-            return connStaircaseId;
+            return connStaircasePins;
         }
 
-        public int GetConnectingStaircaseTop(GraphNode start)
+        public Pinpoints GetConnectingStaircaseTop(Pinpoints start)
         {
             //get pin type 14
-            List<int> connNodes = GetConnectingNodeId(start.map_pinId);
-            Pinpoints connPins;
+            List<Pinpoints> connPins = GetConnectingPins(start);
             GraphNode connNode;
-            int topId = 0;
+            Pinpoints topPin = new();
             int floorLvl;
-            foreach(var c in connNodes)
+            foreach(var c in connPins)
             {
-                connPins = GetPinpointsObject(c);
-                connNode = ConvertToNode(connPins);
-                floorLvl = GetFloorLevel(connPins.floor_Id);
+                connNode = ConvertToNode(c);
+                floorLvl = GetFloorLevel(connNode.floorId);
                 connNode.setFloorLevel(floorLvl);
-                if (connNode.floorLevel > start.floorLevel)
+                if (connNode.floorLevel > GetFloorLevel(start.floor_Id))
                 {
-                    topId = c;
+                    topPin = c;
                 }
             }
-            return topId;
+            return topPin;
         }
 
-        public int GetConnectingStaircaseBottom(GraphNode start)
+        public Pinpoints GetConnectingStaircaseBottom(Pinpoints start)
         {
             //get pin type 4
-            List<int> connNodes = GetConnectingNodeId(start.map_pinId);
-            Pinpoints connPins;
+            List<Pinpoints> connPins = GetConnectingPins(start);
             GraphNode connNode;
-            int topId = 0;
+            Pinpoints topPin = new();
             int floorLvl;
-            foreach (var c in connNodes)
+            foreach (var c in connPins)
             {
-                connPins = GetPinpointsObject(c);
-                connNode = ConvertToNode(connPins);
-                floorLvl = GetFloorLevel(connPins.floor_Id);
+                connNode = ConvertToNode(c);
+                floorLvl = GetFloorLevel(connNode.floorId);
                 connNode.setFloorLevel(floorLvl);
-                if (connNode.floorLevel < start.floorLevel)
+                if (connNode.floorLevel < GetFloorLevel(start.floor_Id))
                 {
-                    topId = c;
+                    topPin = c;
                 }
             }
-            return topId;
+            return topPin;
         }
 
         public GraphNode GetMatchingNode(List<GraphNode> notVisited, int id)
@@ -174,13 +172,51 @@ namespace BuddyAPI
             return _context.Floor.FirstOrDefault(e => e.floor_Id == floorId).floorLevel;
         }
 
-        public List<int> CalculatePath(int startId, int endId)
+        public List<Pinpoints> CalculatePath(int startId, int endId)
         {
-            //getting all connected nodes of the current node
-            List<int> connections = GetConnectingNodeId(startId);
-            List<int> finalPath = new List<int>();
+            //creating nodes for current start and end IDs
+            Pinpoints startPin = GetPinpointsObject(startId);
+            Pinpoints endPin = GetPinpointsObject(endId);
+            
+            GraphNode startNode = ConvertToNode(startPin);
+            GraphNode endNode = ConvertToNode(endPin);
+
+            startNode.setFloorLevel(GetFloorLevel(startPin.floor_Id));
+            endNode.setFloorLevel(GetFloorLevel(endPin.floor_Id));
+
             List<GraphNode> staircasesTop = GetStaircasesTop();
             List<GraphNode> staircasesBottom = GetStaircasesBottom();
+
+            GraphNode stairs = new();
+            Pinpoints nextPin = new();
+
+            //getting all connected nodes of the current node
+            List<Pinpoints> connections = GetConnectingPins(startPin);
+            List<GraphNode> finalPath = new();
+
+
+            //creating visited and not visited lists for future path calculation
+            List<GraphNode> notVisited = new();
+            List<GraphNode> Visited = new();
+
+            Pinpoints connStaircasePin = new();
+            GraphNode connStaircaseNode = new();
+            GraphNode nextStart = new();
+            //int nextStairCase;
+
+            //creating variables for floor levels
+            int startFloorLevel = 0;
+            int endFloorLevel = 0;
+            int nextNodeId;
+
+            //declaring the costs
+            double H, G = 0;
+            //declaring var for minimum G cost
+            double minGCost, minHCost = 0;
+
+            //adds the current start node to the path List
+            path.Add(startPin);
+
 
             //checks if first iteration and if true stores the original user start and end points
             if (check == false)
@@ -198,168 +234,132 @@ namespace BuddyAPI
                 userEndFloorLvl = GetFloorLevel(userEndPin.floor_Id);
                 userEndNode.setFloorLevel(userEndFloorLvl);
                 check = true;
-                //Pinpoints start = GetPinpointsObject(userStart);
-                //originalStart = ConvertToNode(start);
-                //Pinpoints end = GetPinpointsObject(userEnd);
-                //originalEnd = ConvertToNode(end);
             }
-
-            //creating nodes for current start and end IDs
-            Pinpoints pin1 = GetPinpointsObject(startId);
-            GraphNode startPin = ConvertToNode(pin1);
-            Pinpoints pin2 = GetPinpointsObject(endId);
-            GraphNode endPin = ConvertToNode(pin2);
-
-            //adds the current start node to the path List
-            path.Add(startPin);
-
-            //creating visited and not visited lists for future path calculation
-            var notVisited = new List<GraphNode>();
-            var Visited = new List<GraphNode>();
-
-            var startFloorLevel = 0;
-            var endFloorLevel = 0;
-
-            //creating nodes from user original start and end IDs
-            Pinpoints startPinFinal = GetPinpointsObject(userStart);
-            GraphNode startNode = ConvertToNode(startPinFinal);
-            Pinpoints endPinFinal = GetPinpointsObject(userEnd);
-            GraphNode endNode = ConvertToNode(endPinFinal);
             
-            //declaring the costs
-            double H = 0;   //distance from current to end node
-            double G = 0;
-
             //check if start pin floor level is same as end pin floor level
-            if (startPin.floorId != endPin.floorId)
+            if (startPin.floor_Id != endPin.floor_Id)
             {
-                startFloorLevel = GetFloorLevel(startPin.floorId);
-                startPin.setFloorLevel(startFloorLevel);
-                endFloorLevel = GetFloorLevel(endPin.floorId);
-                endPin.setFloorLevel(endFloorLevel);
+                startFloorLevel = GetFloorLevel(startPin.floor_Id);
+                startNode.setFloorLevel(startFloorLevel);
+
+                endFloorLevel = GetFloorLevel(endPin.floor_Id);
+                endNode.setFloorLevel(endFloorLevel);
+
                 //path goes up
-                if(startPin.floorLevel < endPin.floorLevel)
+                if(startNode.floorLevel < endNode.floorLevel)
                 {
                     //finding closest staircase bottom to start
-                    staircasesBottom = staircasesBottom.FindAll(g => g.floorId == startPin.floorId);
+                    staircasesBottom = staircasesBottom.FindAll(g => g.floorId == startNode.floorId);
                     foreach (var s in staircasesBottom)
                     {
-                        G = getGCost(startPin.map_lat, startPin.map_long, s.map_lat, s.map_long);
+                        G = getGCost(startNode.map_lat, startNode.map_long, s.map_lat, s.map_long);
                         s.setG(G);
                     }
-                    double minGCost = staircasesBottom.Min(g => g.gcost);
-                    GraphNode stairs = GetNodeByGcost(staircasesBottom, minGCost);
-                    endPin = stairs;
+                    minGCost = staircasesBottom.Min(g => g.gcost);
+                    stairs = GetNodeByGcost(staircasesBottom, minGCost);
+                    endNode = stairs;
                 }
                 //path goes down
                 else
                 {
                     //finding closest staircase top to start
-                    staircasesTop = staircasesTop.FindAll(g => g.floorId == startPin.floorId);
+                    staircasesTop = staircasesTop.FindAll(g => g.floorId == startPin.floor_Id);
                     foreach(var s in staircasesTop)
                     {
-                        G = getGCost(startPin.map_lat, startPin.map_long, s.map_lat, s.map_long);
+                        G = getGCost(startNode.map_lat, startNode.map_long, s.map_lat, s.map_long);
                         s.setG(G);
                     }
                     //staircasesTop.Min(g => g.gcost);
-                    double minGCost = staircasesTop.Min(g => g.gcost);
-                    GraphNode stairs = GetNodeByGcost(staircasesTop, minGCost);
-                    endPin = stairs;
+                    minGCost = staircasesTop.Min(g => g.gcost);
+                    stairs = GetNodeByGcost(staircasesTop, minGCost);
+                    endNode = stairs;
                 }
             }
 
             //check if the current node is the end node (path is complete)
-            if (startPin.map_pinId != endPin.map_pinId)
+            if (startNode.map_pinId != endNode.map_pinId)
             {
                 //converting connections to an int list
-                List<int> conn = connections.ToList();
-                Pinpoints nextPin;
+                //conn = connections.ToList();
                 
                 //iterate through connections
-                foreach (var c in conn)
+                foreach (var c in connections)
                 {
                     //converting each connection to a node
-                    Pinpoints pin = GetPinpointsObject(c);
-                    GraphNode node = ConvertToNode(pin);
+                    GraphNode node = ConvertToNode(c);
 
                     //if connected node in current iteration is not in path (not visited)
-                    if (!path.Contains(path.FirstOrDefault(e => e.map_pinId == node.map_pinId)))
+                    if (!path.Contains(path.FirstOrDefault(e => e.pinpoint_Id == node.map_pinId)))
                     {
                         //if current node is a navigation node or the end node
-                        if (pin.pinpointType_Id == 15 || node.map_pinId == endNode.map_pinId || pin.pinpointType_Id == 4 || pin.pinpointType_Id == 14)
+                        if (c.pinpointType_Id == 15 || node.map_pinId == endNode.map_pinId || c.pinpointType_Id == 4 || c.pinpointType_Id == 14)
                         {
-                            //calculating distance of connected node to end node
-                            H = getHCost(endPin.map_lat, endPin.map_long, node.map_lat, node.map_long);
-                            node.setH(H);
-                            //adding the connected node to the not visited list for future comparison
-                            notVisited.Add(node);
+                            if (!(userStartPin.floor_Id == userEndPin.floor_Id && (c.pinpointType_Id == 4 || c.pinpointType_Id == 14)))
+                            {
+                                //calculating distance of connected node to end node
+                                H = getHCost(endNode.map_lat, endNode.map_long, node.map_lat, node.map_long);
+                                node.setH(H);
+                                //adding the connected node to the not visited list for future comparison
+                                notVisited.Add(node);
+                            }
                         }
                     }
                 }
 
                 //storing the lowest H Cost from the not visited list
-                double minHCost = notVisited.Min(h => h.hcost);
+                minHCost = notVisited.Min(h => h.hcost);
+
                 //retrieving the ID of the node with lowest H Cost
-                int nextNodeId = GetNodeByHcost(notVisited, minHCost).map_pinId;
+                nextNodeId = GetNodeByHcost(notVisited, minHCost).map_pinId;
+
                 //getting node with corresponding ID and saving as the next node
                 nextPin = GetPinpointsObject(nextNodeId);
 
-                
-
                 //if current node is a navigation node or the end node
-                if (nextPin.pinpointType_Id == 15 || nextPin.pinpoint_Id == endNode.map_pinId || nextPin.pinpoint_Id == endPin.map_pinId)
+                if (nextPin.pinpointType_Id == 15 || nextPin.pinpoint_Id == endNode.map_pinId || nextPin.pinpoint_Id == userEndNode.map_pinId)
                 {
                     //recursive call with the best option from connections passed as new start node ID
-                    return CalculatePath(nextNodeId, endPin.map_pinId);
+                    return CalculatePath(nextNodeId, endNode.map_pinId);
                 }
             }
             //path calculation finished
             else
-            {
-                //creating node from end ID
-                Pinpoints pin = GetPinpointsObject(endId);
-                GraphNode node = ConvertToNode(pin);
-                Pinpoints connStaircasePin;
-                GraphNode connStaircaseNode, nextStart;
-                int nextStairCase;
+            {                
+                
                 List<int> connStaircase = new List<int>();
-                if (startPin.map_pinId != userEnd)
+                if (startNode.map_pinId != userEnd)
                 {
-                    if (pin1.pinpointType_Id == 4 || pin1.pinpointType_Id == 14)
+                    if (startPin.pinpointType_Id == 4 || startPin.pinpointType_Id == 14)
                     {
-                        if(startPin.floorLevel < userEndNode.floorLevel)
+                        if(startNode.floorLevel < userEndNode.floorLevel)
                         {
-                            nextStairCase = GetConnectingStaircaseTop(startPin);
-                            connStaircasePin = GetPinpointsObject(nextStairCase);
+                            connStaircasePin = GetConnectingStaircaseTop(startPin);
                             connStaircaseNode = ConvertToNode(connStaircasePin);
                             nextStart = connStaircaseNode;
-                            endPin = endNode;
-                            return CalculatePath(nextStart.map_pinId, endPin.map_pinId);
+                            return CalculatePath(nextStart.map_pinId, userEndNode.map_pinId);
                         }
                         else
                         {
-                            nextStairCase = GetConnectingStaircaseBottom(startPin);
-                            connStaircasePin = GetPinpointsObject(nextStairCase);
+                            connStaircasePin = GetConnectingStaircaseBottom(startPin);
                             connStaircaseNode = ConvertToNode(connStaircasePin);
                             nextStart = connStaircaseNode;
-                            endPin = endNode;
-                            return CalculatePath(nextStart.map_pinId, endPin.map_pinId);
+                            return CalculatePath(nextStart.map_pinId, userEndNode.map_pinId);
                         }
                     }
                 }
                 else
                 {
-                    //iterating through path list
-                    foreach (var o in path)
-                    {
-                        //populating final path list with IDs of nodes in path
-                        finalPath.Add(o.map_pinId);
-                    }
-                    return finalPath;
+                    ////iterating through path list
+                    //foreach (var o in path)
+                    //{
+                    //    //populating final path list with IDs of nodes in path
+                    //    finalPath.Add(o.map_pinId);
+                    //}
+                    return path;
                 }
             }
             //returning the calculated path
-            return finalPath;
+            return path;
         }
     }
 }
