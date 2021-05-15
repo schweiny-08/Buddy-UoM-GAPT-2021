@@ -3,18 +3,15 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.DialogFragment;
 
 import android.app.DatePickerDialog;
-import android.app.TimePickerDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.View;
 import android.widget.AdapterView;
-import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.TextView;
-import android.widget.TimePicker;
 import android.widget.Toast;
 
 import java.text.DateFormat;
@@ -29,7 +26,7 @@ public class Register extends AppCompatActivity implements AdapterView.OnItemSel
     CheckBox toc;
     Date DOB, CURR;
     SimpleDateFormat sdf;
-    Pickers picker = new Pickers();
+    Picker picker = new Picker();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -50,7 +47,7 @@ public class Register extends AppCompatActivity implements AdapterView.OnItemSel
         dob.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                picker.setDate(dob);
+                picker.setPicker(dob);
                 DialogFragment datePicker = new DatePickerFragment();
                 datePicker.show(getSupportFragmentManager(), "date picker");
             }
@@ -123,8 +120,7 @@ public class Register extends AppCompatActivity implements AdapterView.OnItemSel
         c.set(Calendar.DAY_OF_MONTH, dayOfMonth);
 
         String currentDate = DateFormat.getDateInstance(DateFormat.SHORT).format(c.getTime());
-        picker.getDate().setText(currentDate);
-//                .setsDate(currentDate);
+        picker.getPicker().setText(currentDate);
     }
 
     @Override

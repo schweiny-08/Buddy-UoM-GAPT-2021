@@ -1,11 +1,16 @@
 <resources>
 
-     Base application theme.
-    <style name="Buddy2" parent="Theme.AppCompat.Light.NoActionBar">
-        <!-- Customize your theme here. -->
-        <item name="colorPrimary">#696969</item>
-        <item name="colorPrimaryDark">#420420</item>
-        <item name="colorAccent">#249200</item>
+<!--     Base application theme.-->
+<!--    <style name="Buddy2" parent="Theme.AppCompat.Light.NoActionBar">-->
+<!--        &lt;!&ndash; Customize your theme here. &ndash;&gt;-->
+<!--        <item name="colorPrimary">#696969</item>-->
+<!--        <item name="colorPrimaryDark">#420420</item>-->
+<!--        <item name="colorAccent">#249200</item>-->
+
+
+<!--    </style>-->
+    <style name="Theme.AppCompat.Light" parent="Theme.AppCompat.Light.DarkActionBar">
+
     </style>
 
 </resources>

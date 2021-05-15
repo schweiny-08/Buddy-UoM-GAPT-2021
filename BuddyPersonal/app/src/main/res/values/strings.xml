@@ -71,4 +71,8 @@
     <string name="english">English</string>
     <string name="maltese">Maltese</string>
     <string name="spanish">Spanish</string>
+    <string name="save">Save</string>
+    <string name="change_password">Change Password</string>
+    <string name="new_password">New Password</string>
+    <string name="new_conf_password">Confirm New Password</string>
 </resources>

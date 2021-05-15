@@ -1,15 +1,12 @@
 package com.example.buddypersonal;
 
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.fragment.app.DialogFragment;
 
 import android.app.DatePickerDialog;
 import android.app.TimePickerDialog;
-import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
-import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.DatePicker;
@@ -24,7 +21,7 @@ public class CreateEvent extends AppCompatActivity implements AdapterView.OnItem
 
     EditText title, location, notes;
     TextView startTime, startDate, endTime, endDate;
-    Pickers picker = new Pickers();
+    Picker picker = new Picker();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -44,7 +41,7 @@ public class CreateEvent extends AppCompatActivity implements AdapterView.OnItem
         startTime.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                picker.setDate(startTime);
+                picker.setPicker(startTime);
                 DialogFragment timePicker = new TimePickerFragment();
                 timePicker.show(getSupportFragmentManager(), "time picker");
             }
@@ -53,7 +50,7 @@ public class CreateEvent extends AppCompatActivity implements AdapterView.OnItem
         endTime.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                picker.setDate(endTime);
+                picker.setPicker(endTime);
                 DialogFragment timePicker = new TimePickerFragment();
                 timePicker.show(getSupportFragmentManager(), "time end picker");
             }
@@ -62,7 +59,7 @@ public class CreateEvent extends AppCompatActivity implements AdapterView.OnItem
         startDate.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                picker.setDate(startDate);
+                picker.setPicker(startDate);
                 DialogFragment datePicker = new DatePickerFragment();
                 datePicker.show(getSupportFragmentManager(), "date picker");
             }
@@ -71,7 +68,7 @@ public class CreateEvent extends AppCompatActivity implements AdapterView.OnItem
         endDate.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                picker.setDate(endDate);
+                picker.setPicker(endDate);
                 DialogFragment datePicker = new DatePickerFragment();
                 datePicker.show(getSupportFragmentManager(), "date end picker");
             }
@@ -95,7 +92,7 @@ public class CreateEvent extends AppCompatActivity implements AdapterView.OnItem
         c.set(java.util.Calendar.MINUTE, minute);
 
         String currentTime = DateFormat.getTimeInstance(DateFormat.SHORT).format(c.getTime());
-        picker.getDate().setText(currentTime);
+        picker.getPicker().setText(currentTime);
     }
 
     @Override
@@ -107,7 +104,7 @@ public class CreateEvent extends AppCompatActivity implements AdapterView.OnItem
         c.set(Calendar.DAY_OF_MONTH, dayOfMonth);
 
         String currentDate = DateFormat.getDateInstance(DateFormat.SHORT).format(c.getTime());
-        picker.getDate().setText(currentDate);
+        picker.getPicker().setText(currentDate);
     }
 
     @Override

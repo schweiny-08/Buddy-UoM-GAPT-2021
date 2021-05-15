@@ -71,4 +71,8 @@
     <string name="english">Ingliż</string>
     <string name="maltese">Malti</string>
     <string name="spanish">Spanjol</string>
+    <string name="save">Salva</string>
+    <string name="change_password">Biddel il-Passakelma</string>
+    <string name="new_password">Passakelma Ġdida</string>
+    <string name="new_conf_password">Ikkonferma Passakelma Ġdida</string>
 </resources>
