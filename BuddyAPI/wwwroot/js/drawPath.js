@@ -17,14 +17,10 @@ function calculatePath() {
     var start = document.getElementById('startId').value;
     var end = document.getElementById('endId').value;
     let request = new XMLHttpRequest();
-<<<<<<< Updated upstream
-    request.open('GET', 'https://localhost:' + port + '/api/pinpoints/GetNavigation?start=' + start + '&end=' + end);
-=======
 
     document.getElementById('pastePath').innerHTML = 'Calculating path';
 
     request.open('GET', 'https://localhost:' + port + '/api/pinpoints/GetNavigationId?start=' + start + '&end=' + end);
->>>>>>> Stashed changes
     request.send();
     request.onload = () => {
         path = JSON.parse(request.response);
