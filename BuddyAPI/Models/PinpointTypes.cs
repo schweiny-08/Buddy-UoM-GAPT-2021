@@ -12,6 +12,7 @@ namespace BuddyAPI.Models
 		public int pinpointType_Id { get; set; }
 
 		[Required]
+		[StringLength(50, ErrorMessage = "Pinpoint type name cannot be longer than 50 characters.")]
 		public string pinpointTypeName{ get; set; }
 
 		//[Required]

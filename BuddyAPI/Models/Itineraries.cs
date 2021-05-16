@@ -1,15 +1,21 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations.Schema;
+using System.ComponentModel.DataAnnotations;
+
 
 namespace BuddyAPI.Models
 {
 	public class Itineraries
 	{
-		public int itineraryId { get; set; }
-		public int userId { get; set; }
-		public int eventId { get; set; }
-		public int privEventId { get; set; }
+		[Key]
+		[DatabaseGenerated(DatabaseGeneratedOption.Identity)]
+		public int Itinerary_Id { get; set; }
+		public int User_Id { get; set; }
+		public int Event_Id { get; set; }
+		public int PrivateEvent_Id { get; set; }
+        //public Itineraries itineraries { get; internal set; }
 
-		public virtual ICollection<Itineraries> itineraries { get; set; }
-	}
+        //public virtual ICollection<Itineraries> itineraries { get; set; }
+    }
 }

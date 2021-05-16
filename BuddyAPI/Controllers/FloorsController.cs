@@ -42,9 +42,19 @@ namespace BuddyAPI.Controllers
             return floor;
         }
 
+        [HttpGet("getFloorByLevel")]
+        public async Task<ActionResult<Floor>> GetFloorByLevel(int level) {
+            var floor = _context.Floor.FirstOrDefault(f => f.floorLevel == level);
+
+            if (floor == null)
+                return NotFound();
+
+            return floor;
+        }
+
         // PUT: api/Floors/5
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
-        [HttpPut("editFloor")]
+        [HttpPut("editFloorById")]
         public async Task<IActionResult> PutFloor(int id, Floor floor)
         {
             if (id != floor.floor_Id)
@@ -78,6 +88,12 @@ namespace BuddyAPI.Controllers
         [HttpPost("addFloor")]
         public async Task<ActionResult<Floor>> PostFloor(Floor floor)
         {
+            var existingFloor = _context.Floor.FirstOrDefault(f => f.floorLevel == floor.floorLevel);
+
+            if (existingFloor != null && existingFloor.building_Id == floor.building_Id)
+                // Floor in building already has same level
+                return BadRequest("Floor with same level in building already exists!");
+
             _context.Floor.Add(floor);
             await _context.SaveChangesAsync();
 
@@ -85,7 +101,7 @@ namespace BuddyAPI.Controllers
         }
 
         // DELETE: api/Floors/5
-        [HttpDelete("deleteFloor")]
+        [HttpDelete("deleteFloorById")]
         public async Task<IActionResult> DeleteFloor(int id)
         {
             var floor = await _context.Floor.FindAsync(id);

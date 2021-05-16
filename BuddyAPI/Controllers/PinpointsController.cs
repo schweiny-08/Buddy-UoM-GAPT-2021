@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using BuddyAPI.Data;
 using BuddyAPI.Models;
+using BuddyAPI.ViewModels;
 
 namespace BuddyAPI.Controllers
 {
@@ -29,7 +30,7 @@ namespace BuddyAPI.Controllers
         }
 
         // GET: api/Pinpoints/5
-        [HttpGet("getPinpoint")]
+        [HttpGet("getPinpointById")]
         public async Task<ActionResult<Pinpoints>> GetPinpoints(int id)
         {
             var pinpoints = await _context.Pinpoints.FindAsync(id);
@@ -42,9 +43,22 @@ namespace BuddyAPI.Controllers
             return pinpoints;
         }
 
+        [HttpGet("getPinpointByName")]
+        public async Task<ActionResult<Pinpoints>> GetPinpointsByName(string name)
+        {
+            var pinpoints = _context.Pinpoints.FirstOrDefault(p => p.pinpointName == name);
+
+            if (pinpoints == null)
+            {
+                return NotFound();
+            }
+
+            return pinpoints;
+        }
+
         // PUT: api/Pinpoints/5
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
-        [HttpPut("editPinpoint")]
+        [HttpPut("editPinpointById")]
         public async Task<IActionResult> PutPinpoints(int id, Pinpoints pinpoints)
         {
             if (id != pinpoints.pinpoint_Id)
@@ -85,7 +99,7 @@ namespace BuddyAPI.Controllers
         }
 
         // DELETE: api/Pinpoints/5
-        [HttpDelete("deletePinpoint")]
+        [HttpDelete("deletePinpointById")]
         public async Task<IActionResult> DeletePinpoints(int id)
         {
             var pinpoints = await _context.Pinpoints.FindAsync(id);
@@ -105,7 +119,19 @@ namespace BuddyAPI.Controllers
             return _context.Pinpoints.Any(e => e.pinpoint_Id == id);
         }
 
-        // GET: api/Pinpoints/5
+        [HttpPost("SetSessionLocation")]
+        public void SetLocation(string key , Pinpoints pinpoint)
+        {
+            HttpContext.Session.SetObjectAsJson(key, pinpoint);
+        }
+        
+        [HttpGet("GetSessionLocation")]
+        public Pinpoints GetLocation(string key)
+        {
+            Pinpoints  pinpoint =  HttpContext.Session.GetObjectFromJson<Pinpoints>(key);
+            return pinpoint;
+        }
+        
         [HttpGet("GetNavigation")]
         public async Task<ActionResult<IEnumerable<Pinpoints>>> GetNavigation(int start, int end)
         {

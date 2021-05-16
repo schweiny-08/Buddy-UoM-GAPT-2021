@@ -252,7 +252,6 @@ function initMap() {
                 if (drawPathLvl0 != null) {
                     drawPathLvl0.setMap(map);
                 }
-                //console.log("HERE" + markers);
 
                 map.overlayMapTypes.clear();
                 map.overlayMapTypes.push(ictLvlZero);

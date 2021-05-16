@@ -29,7 +29,7 @@ namespace BuddyAPI.Controllers
         }
 
         // GET: api/PinpointTypes/5
-        [HttpGet("getPinpointType")]
+        [HttpGet("getPinpointTypeById")]
         public async Task<ActionResult<PinpointTypes>> GetPinpointTypes(int id)
         {
             var pinpointTypes = await _context.PinpointTypes.FindAsync(id);
@@ -42,9 +42,22 @@ namespace BuddyAPI.Controllers
             return pinpointTypes;
         }
 
+        [HttpGet("getPinpointTypeByName")]
+        public async Task<ActionResult<PinpointTypes>> GetPinpointTypesByName(string name)
+        {
+            var pinpointTypes = _context.PinpointTypes.FirstOrDefault(p => p.pinpointTypeName == name);
+
+            if (pinpointTypes == null)
+            {
+                return NotFound();
+            }
+
+            return pinpointTypes;
+        }
+
         // PUT: api/PinpointTypes/5
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
-        [HttpPut("editPinpointType")]
+        [HttpPut("editPinpointTypeById")]
         public async Task<IActionResult> PutPinpointTypes(int id, PinpointTypes pinpointTypes)
         {
             if (id != pinpointTypes.pinpointType_Id)
@@ -78,6 +91,11 @@ namespace BuddyAPI.Controllers
         [HttpPost("addPinpointType")]
         public async Task<ActionResult<PinpointTypes>> PostPinpointTypes(PinpointTypes pinpointTypes)
         {
+            var existingPPType = _context.PinpointTypes.FirstOrDefault(p => p.pinpointTypeName == pinpointTypes.pinpointTypeName);
+
+            if (existingPPType!= null && existingPPType.pinpointTypeName.Equals(pinpointTypes.pinpointTypeName, StringComparison.OrdinalIgnoreCase))
+                return BadRequest("Pinpoint type already exists!");
+
             _context.PinpointTypes.Add(pinpointTypes);
             await _context.SaveChangesAsync();
 
@@ -85,7 +103,7 @@ namespace BuddyAPI.Controllers
         }
 
         // DELETE: api/PinpointTypes/5
-        [HttpDelete("deletePinpointType")]
+        [HttpDelete("deletePinpointTypeById")]
         public async Task<IActionResult> DeletePinpointTypes(int id)
         {
             var pinpointTypes = await _context.PinpointTypes.FindAsync(id);

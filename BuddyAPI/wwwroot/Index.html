@@ -18,6 +18,10 @@
             text-align: center;
         }
     </style>
+
+    <!--QR CODE LIBS-->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="https://rawgit.com/schmich/instascan-builds/master/instascan.min.js"></script>
     
 </head>
 <body onload="GetAllPinpoints()">
@@ -63,6 +67,51 @@
             </div>
         </div>
             -->
+            <button type="submit" , onclick="GetPinpointTypeById(document.getElementById('pinpointTypeIdSearch').value)">Search Pinpoint Type by Id</button>
+            <div id="searchPinpointByIdOutput"></div>
+        </div>
+        <div id="pinpointTypeDisplayAll">
+            <button type="Button" , onclick="displayItems()">
+                Getting All Pinpoint Types
+            </button>
+            <div id="pinpointTypeDisplayAll"></div>
+        </div>
+    </div>
+
+    <br />
+    <br />
+    <br />
+    <br />
+
+        <video id="preview" width="500" height="450" hidden></video>
+    <!--<form onsubmit="RetreiveNavigation();" class="form-control">-->
+    <form id="GetNavigation" class="form-control">
+        <input id="TurnOnCamera" type="button" value="Present QR Code" onclick="turnOnCamera();" />
+        <input id="startPointName" type="text" name="startpoint" />
+        <input id="endPointName" type="text" name="endpoint" />
+
+        <input id="startPoint" type="hidden" />
+        <input id="endPoint" type="hidden" />
+        <input type="button" value="Get Navigation" onclick="RetreiveNavigation();" />
+    </form>
+
+    <br />
+    <br />
+
+
+    <form id="UpdateNavigation" hidden>
+        <p>Input new QR Code to Update the Navigation</p>
+        <input id="TurnOnCameraAgain" type="button" value="Present QR Code" onclick="turnOnCamera();" />
+        <!--<video id="preview" width="500" height="450" hidden></video>-->
+        <input type="button" value="Update Navigation" onclick="RetreiveNavigation();" />
+        <br />
+        <input type="button" value="Reset Navigation" onclick="ResetNavigation();" />
+
+    </form>
+
+    <br />
+    <br />
+
     <!-- calling the google maps api using a custom API key. CHECK IF SAME KEY WORKS ACROSS DIFFERENT DEVICES!! -->
 
     <div id="path">
@@ -77,6 +126,7 @@
     <script src="../js/pinpointTypeApiCalls.js"></script>
     <script type="text/javascript" src="../js/pinpointApiCalls.js"></script>
     <script type="text/javascript" src="js/drawPath.js"></script>
+    <script type="text/javascript" src="../js/qrReader.js"></script>
     <!--<script src="../js/mapMarkers.js"></script>-->
     <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyChmvdq02aq8Sa68jTYFghQZz_1LFFUp8o&callback=initMap&libraries=&v=weekly"
             async></script>

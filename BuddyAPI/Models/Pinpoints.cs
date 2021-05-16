@@ -29,17 +29,10 @@ namespace BuddyAPI.Models
 		public int hazard_Id { get; set; }
 
 		[Required]
+		[StringLength(50, ErrorMessage = "Pinpoint name must be shorter than 50 characters.")]
 		public string pinpointName { get; set; }
-
+		[StringLength(150, ErrorMessage = "Pinpoint description must be shorter than 150 characters.")]
 		public string pinpointDescription { get; set; }
-
-       // public static explicit operator Pinpoints(Task<ActionResult<Pinpoints>> v){
-          //  throw new NotImplementedException();
-        //}
-
-		//public Pinpoints() { }
-
-        //public virtual ICollection<Pinpoints> pinpoints { get; set; }
-
     }
 }
+
