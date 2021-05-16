@@ -235,7 +235,7 @@ function initMap() {
             if (document.getElementById('level 0').checked) {
                 level = 0;
 
-                console.log("HERE" + markers);
+                //console.log("HERE" + markers);
 
                 map.overlayMapTypes.clear();
                 map.overlayMapTypes.push(ictLvlZero);
