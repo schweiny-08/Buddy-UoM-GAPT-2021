@@ -45,8 +45,8 @@ function turnOnCamera() {
 }
 
 async function RetreiveNavigation() {
-    let startpoint = document.getElementById("startPoint").value;
-    let endpoint = document.getElementById("endPoint").value;
+    let startpoint = document.getElementById("startId").value;
+    let endpoint = document.getElementById("endId").value;
     //let endpoint = getSessionAsPinpoint("EndLocation");
 
     if (startpoint == "" && endpoint == "") {
@@ -61,8 +61,9 @@ async function RetreiveNavigation() {
         endpoint = parseInt(endpoint);
         document.getElementById("GetNavigation").hidden = true;
     //Sent request got Get Navigation
-        alert("Retreiving Navigation Start Location Id: " + startpoint + " End Location Id: " + endpoint);
+        //alert("Retreiving Navigation Start Location Id: " + startpoint + " End Location Id: " + endpoint);
         //Continue to save Edit Navigation
+        calculatePath(startpoint, endpoint);
         document.getElementById("UpdateNavigation").hidden = false;
 
     }
@@ -71,8 +72,8 @@ async function RetreiveNavigation() {
 function ResetNavigation() {
     document.getElementById("startPointName").value = "";
     document.getElementById("endPointName").value = "";
-    document.getElementById("startPoint").value = "";
-    document.getElementById("endPoint").value = "";
+    document.getElementById("startId").value = "";
+    document.getElementById("endId").value = "";
 
 
     document.getElementById("GetNavigation").hidden = false;
@@ -93,7 +94,7 @@ function retreivePinpointObject(key, pinpointQR_Url) {
                 var pinpoint = await JSON.parse(this.responseText);
                 //console.log(pinpoint);
                 document.getElementById("startPointName").value = pinpoint.pinpointName;
-                document.getElementById("startPoint").value = pinpoint.pinpoint_Id;
+                document.getElementById("startId").value = pinpoint.pinpoint_Id;
                 savePinpointAsSession(key, pinpoint);
                 //getSessionAsPinpoint(key);
             }
