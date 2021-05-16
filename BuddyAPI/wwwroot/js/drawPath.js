@@ -1,7 +1,7 @@
 ﻿var drawPathLvl0, drawPathLvlMin1, len, lat, lng;
 
 
-function calculatePath() {
+function calculatePath(start, end) {
     var countLvl0 = 0;
     var countLvlMin1 = 0;
     var path = [];
@@ -14,8 +14,8 @@ function calculatePath() {
     var coordinatesLvlMin1 = [];
     var markerLvl0Ids = [];
     var markerLvlMin1Ids = [];
-    var start = document.getElementById('startId').value;
-    var end = document.getElementById('endId').value;
+    //var start = document.getElementById('startId').value;
+    //var end = document.getElementById('endId').value;
     let request = new XMLHttpRequest();
 
     document.getElementById('pastePath').innerHTML = 'Calculating path';

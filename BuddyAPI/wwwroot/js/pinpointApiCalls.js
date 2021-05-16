@@ -148,17 +148,18 @@ function GetAllPinpoints() {
                 //markerObj.marker.addListener("rightclick", function () {
                 //    document.getElementById('endId').value = data.pinpoint_Id;
                 //});
+
                 markerObj.marker.addListener("click", function () {
 
                     document.getElementById("startPointName").value = markerObj.name;
-                    document.getElementById("startPoint").value = markerObj.id;
+                    document.getElementById("startId").value = markerObj.id;
                     console.log(markerObj.id);
                 });
 
                 markerObj.marker.addListener("rightclick", function () {
 
                     document.getElementById("endPointName").value = markerObj.name;
-                    document.getElementById("endPoint").value = markerObj.id;
+                    document.getElementById("endId").value = markerObj.id;
                     savePinpointAsSession("EndLocation", data);
 
 

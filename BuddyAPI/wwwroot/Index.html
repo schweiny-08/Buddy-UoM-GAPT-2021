@@ -69,14 +69,12 @@
             -->
             <button type="submit" , onclick="GetPinpointTypeById(document.getElementById('pinpointTypeIdSearch').value)">Search Pinpoint Type by Id</button>
             <div id="searchPinpointByIdOutput"></div>
-        </div>
         <div id="pinpointTypeDisplayAll">
             <button type="Button" , onclick="displayItems()">
                 Getting All Pinpoint Types
             </button>
             <div id="pinpointTypeDisplayAll"></div>
         </div>
-    </div>
 
     <br />
     <br />
@@ -90,8 +88,8 @@
         <input id="startPointName" type="text" name="startpoint" />
         <input id="endPointName" type="text" name="endpoint" />
 
-        <input id="startPoint" type="hidden" />
-        <input id="endPoint" type="hidden" />
+        <input id="startId" type="hidden" />
+        <input id="endId" type="hidden" />
         <input type="button" value="Get Navigation" onclick="RetreiveNavigation();" />
     </form>
 
@@ -114,11 +112,11 @@
 
     <!-- calling the google maps api using a custom API key. CHECK IF SAME KEY WORKS ACROSS DIFFERENT DEVICES!! -->
 
-    <div id="path">
+    <!--<div id="path">
         <input type="text" id="startId" />
         <input type="text" id="endId" />
         <button type="submit" onclick="calculatePath()">Calculate Path</button>
-    </div>
+    </div>-->
     <div id="pastePath"></div>
     <script src="../js/ictMap.js"></script>
     <script src="../js/infoWindow.js"></script>
