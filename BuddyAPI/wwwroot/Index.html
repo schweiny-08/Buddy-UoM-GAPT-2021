@@ -58,18 +58,46 @@
             <div id="searchPinpointByIdOutput"></div>
         </div>
         <div id="pinpointTypeDisplayAll">
-            <button type= "Button" , onclick="displayItems()">Getting All Pinpoint Types</button>
+            <button type="Button" , onclick="displayItems()">
+                Getting All Pinpoint Types
+            </button>
             <div id="pinpointTypeDisplayAll"></div>
         </div>
     </div>
 
-    <div class="navigation">
-        <video id="preview"></video>
-       <!-- <form>
-            <input id="endPoint" type="number" name="endpoint" />
-        </form>-->
-    </div>
+    <br />
+    <br />
+    <br />
+    <br />
 
+        <video id="preview" width="500" height="450" hidden></video>
+    <!--<form onsubmit="RetreiveNavigation();" class="form-control">-->
+    <form id="GetNavigation" class="form-control">
+        <input id="TurnOnCamera" type="button" value="Present QR Code" onclick="turnOnCamera();" />
+        <input id="startPointName" type="text" name="startpoint" />
+        <input id="endPointName" type="text" name="endpoint" />
+
+        <input id="startPoint" type="hidden" />
+        <input id="endPoint" type="hidden" />
+        <input type="button" value="Get Navigation" onclick="RetreiveNavigation();" />
+    </form>
+
+    <br />
+    <br />
+
+
+    <form id="UpdateNavigation" hidden>
+        <p>Input new QR Code to Update the Navigation</p>
+        <input id="TurnOnCameraAgain" type="button" value="Present QR Code" onclick="turnOnCamera();" />
+        <!--<video id="preview" width="500" height="450" hidden></video>-->
+        <input type="button" value="Update Navigation" onclick="RetreiveNavigation();" />
+        <br />
+        <input type="button" value="Reset Navigation" onclick="ResetNavigation();" />
+
+    </form>
+
+    <br />
+    <br />
 
     <!-- calling the google maps api using a custom API key. CHECK IF SAME KEY WORKS ACROSS DIFFERENT DEVICES!! -->
 

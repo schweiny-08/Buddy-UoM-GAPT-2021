@@ -86,15 +86,18 @@ function EditPinpoint() {
 
 function GetAllPinpoints() {
     var level;
-    var iconType
+    var iconType;
+    var pinpnt;
 
     var xhttp = new XMLHttpRequest();
     xhttp.open("GET", url + "/getAllPinpoints", true);
+    xhttp.responseType = "text";
     xhttp.send();
 
     xhttp.onreadystatechange = function () {
         if (this.readyState == 4, this.status == 200) {
-            var pinpnt = JSON.parse(this.responseText);
+            if (this.responseText != "") {
+            pinpnt = JSON.parse(this.responseText);
             //console.log(pinpnt);
             pinpnt.forEach(function (data, index) {
 
@@ -116,11 +119,12 @@ function GetAllPinpoints() {
 
                 //console.log(data.pinpoint_Id);
 
-                var id = 0;
+                //var id = ;
 
                 //console.log(data);
                 var markerObj = {
-                    id: id,
+                    id: data.pinpoint_Id,
+                    name: data.pinpointName,
                     level: level,
                     marker: new google.maps.Marker({
                         position: { lat: data.latitude, lng: data.longitude },
@@ -128,63 +132,28 @@ function GetAllPinpoints() {
                         map
                     })
                 };
+
+                markerObj.marker.addListener("click", function () {
+
+                    document.getElementById("startPointName").value = markerObj.name;
+                    document.getElementById("startPoint").value = markerObj.id;
+                    console.log(markerObj.id);
+                });
+
+                markerObj.marker.addListener("rightclick", function () {
+
+                    document.getElementById("endPointName").value = markerObj.name;
+                    document.getElementById("endPoint").value = markerObj.id;
+                    savePinpointAsSession("EndLocation", data);
+
+
+                });
+
                 markers.push(markerObj);
                 id++;
             });
         }
+    }
     };
 }
 
-function setCurrentLoc(pinpoint) {
-    var xhttp = new XMLHttpRequest();
-
-    xhttp.open("POST", url + "/SetSessionLocation?key=CurrentLocation", true);
-    xhttp.setRequestHeader("Content-type", "application/json");
-    xhttp.send(JSON.stringify(pinpoint));
-       
-    xhttp.onreadystatechange = function () {
-
-        if (this.readyState == 4 && this.status == 200) {
-            var response = JSON.parse(this.responseText);
-            alert(response);
-        } else {
-            alert("Something went wrong in setcurloc" + this.status);
-        }
-    }
-  
-}
-
-function getCurrentLoc() {
-    var xhttp = new XMLHttpRequest();
-    xhttp.open("GET", url + "/GetSessionLocation?key=CurrentLocation", true);
-    xhttp.send();
-
-    xhttp.onreadystatechange = function () {
-        if (this.readyState == 4, this.status == 200) {
-            pinpoint = JSON.parse(this.responseText);
-            console.log("in get curr loc");
-            console.log(pinpoint);
-        }
-       
-    }
-
-}
-
-function updateUserCurrentPinpoint(ppId) {
-    var pinpoint;
-    var id = ppId;
-    var xhttp = new XMLHttpRequest();
-    xhttp.open("GET", url + "/getPinpointById?id="+ id , true);
-    xhttp.send();
-
-    xhttp.onreadystatechange = function () {
-        if (this.readyState == 4, this.status == 200) {
-            pinpoint = JSON.parse(this.responseText);
-            console.log(pinpoint);
-            setCurrentLoc(pinpoint);
-
-            getCurrentLoc();
-            //run drawNavigation(pinpoint);
-        }
-    }
-}
