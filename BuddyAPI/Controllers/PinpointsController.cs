@@ -132,16 +132,26 @@ namespace BuddyAPI.Controllers
             return pinpoint;
         }
         
-      /*  [HttpPost("SetEndPoint")]
-        public void SetEndPoint(Pinpoints pinpoint)
+        [HttpGet("GetNavigation")]
+        public async Task<ActionResult<IEnumerable<Pinpoints>>> GetNavigation(int start, int end)
         {
-            HttpContext.Session.SetObjectAsJson("EndPoint", pinpoint);
+            Navigation nav = new Navigation(_context);
+            return nav.CalculatePath(start, end);
         }
-        
-        [HttpGet("GetEndPoint")]
-        public Pinpoints GetEndPoint()
+
+
+        [HttpGet("GetNavigationId")]
+        public async Task<ActionResult<IEnumerable<int>>> GetNavigationId(int start, int end)
         {
-            return HttpContext.Session.GetObjectFromJson<Pinpoints>("EndPoint");
-        }*/
+            Navigation nav = new Navigation(_context);
+            List<Pinpoints> path = nav.CalculatePath(start, end);
+            List<int> pathIds = new();
+
+            foreach(var p in path)
+            {
+                pathIds.Add(p.pinpoint_Id);
+            }
+            return pathIds;
+        }
     }
 }

@@ -133,6 +133,21 @@ function GetAllPinpoints() {
                     })
                 };
 
+                markerObj.marker.addListener("dblclick", function () {
+                    const coordInfoWindow = new google.maps.InfoWindow();
+                    coordInfoWindow.setContent(String(data.pinpoint_Id));
+                    coordInfoWindow.setPosition(markerObj.marker.position);
+                    coordInfoWindow.open(map);
+                    
+                });
+
+                //markerObj.marker.addListener("click", function () {
+                //    document.getElementById('startId').value = data.pinpoint_Id;
+                //});
+
+                //markerObj.marker.addListener("rightclick", function () {
+                //    document.getElementById('endId').value = data.pinpoint_Id;
+                //});
                 markerObj.marker.addListener("click", function () {
 
                     document.getElementById("startPointName").value = markerObj.name;
@@ -150,7 +165,7 @@ function GetAllPinpoints() {
                 });
 
                 markers.push(markerObj);
-                id++;
+               // id++;
             });
         }
     }

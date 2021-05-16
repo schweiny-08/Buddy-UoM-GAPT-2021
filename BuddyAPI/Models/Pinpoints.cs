@@ -1,7 +1,9 @@
-﻿using System;
+﻿using Microsoft.AspNetCore.Mvc;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using System.Threading.Tasks;
 
 namespace BuddyAPI.Models
 {
@@ -20,7 +22,7 @@ namespace BuddyAPI.Models
 
 		[Required]
 		public double latitude { get; set; }
-
+		
 		[Required]
 		public double longitude { get; set; }
 
@@ -31,7 +33,6 @@ namespace BuddyAPI.Models
 		public string pinpointName { get; set; }
 		[StringLength(150, ErrorMessage = "Pinpoint description must be shorter than 150 characters.")]
 		public string pinpointDescription { get; set; }
-
-		//public virtual ICollection<Pinpoints> pinpoints { get; set; }
-	}
+    }
 }
+

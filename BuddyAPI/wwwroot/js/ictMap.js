@@ -4,13 +4,15 @@ var level = 0;
 var id = 0;
 const iconBase = "../images/MarkerIcons/";
 var map;
+var startNode = null, endNode = null;
 
 //Creating the map centred over UOM with default zoom level 15
 function initMap() {
     const ict = new google.maps.LatLng(35.901810199007215, 14.485197413626922);
     map = new google.maps.Map(document.getElementById("map"), {
         center: ict,
-        zoom: 15,
+        zoom: 19,
+        gestureHandling: "greedy",
     });
 
     //Creating an array of objects
@@ -218,6 +220,14 @@ function initMap() {
             if (document.getElementById('level -1').checked) {
                 level = -1;
 
+                if (drawPathLvl0 != null) {
+                    drawPathLvl0.setMap(null);
+                }
+
+                if (drawPathLvlMin1 != null) {
+                    drawPathLvlMin1.setMap(map);
+                }
+
                 map.overlayMapTypes.clear();
                 map.overlayMapTypes.push(ictLvlMinOne);
                 document.getElementById('status').innerHTML = "Level -1";
@@ -235,7 +245,13 @@ function initMap() {
             if (document.getElementById('level 0').checked) {
                 level = 0;
 
-                //console.log("HERE" + markers);
+                if (drawPathLvlMin1 != null) {
+                    drawPathLvlMin1.setMap(null);
+                }
+
+                if (drawPathLvl0 != null) {
+                    drawPathLvl0.setMap(map);
+                }
 
                 map.overlayMapTypes.clear();
                 map.overlayMapTypes.push(ictLvlZero);
@@ -280,7 +296,8 @@ function initMap() {
 
     // Adds marker when user clicks on map
     map.addListener("click", (mapsMouseEvent) => {
-        addMarker(map, mapsMouseEvent)
+        //addMarker(map, mapsMouseEvent)
+
     });
 }
 
@@ -307,9 +324,13 @@ function addMarker(map, mapsMouseEvent) {
         });
 
 
-        marker.addListener("dblclick", (mapsMouseEvent) => {
-            //pinpointWindow(map, mapsMouseEvent)
-        });
+        /*marker.addListener("dblclick", (mapsMouseEvent) => {
+            if (startNode == null)
+                startNode = marker;
+            else
+                endNode = marker;
+
+        });*/
 
         var markerObj = {
             id: id, level: level, marker: marker
@@ -325,16 +346,16 @@ function addMarker(map, mapsMouseEvent) {
         console.log("LAT" + JSON.stringify(marker.position.lng()));
 
 // Adding entrance/exit
-       /* AddPinpoint(
-            15,
-            2,
-            marker.position.lat(),
-            marker.position.lng(),
-            1,
-            "Nav Node",
-            "Navigation Node"
-        );*/
+        //AddPinpoint(
+        //    4, //pp type
+        //    3, //floor id
+        //    marker.position.lat(),
+        //    marker.position.lng(),
+        //    1, //hazard id
+        //    "Stair Bott", //title
+        //    "Staircase Bottom" //description
+        //);
 
-        /*   export { markers, markerObj};*/
+           //export { markers, markerObj};
 }
 
