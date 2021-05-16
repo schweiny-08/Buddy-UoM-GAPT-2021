@@ -220,6 +220,14 @@ function initMap() {
             if (document.getElementById('level -1').checked) {
                 level = -1;
 
+                if (drawPathLvl0 != null) {
+                    drawPathLvl0.setMap(null);
+                }
+
+                if (drawPathLvlMin1 != null) {
+                    drawPathLvlMin1.setMap(map);
+                }
+
                 map.overlayMapTypes.clear();
                 map.overlayMapTypes.push(ictLvlMinOne);
                 document.getElementById('status').innerHTML = "Level -1";
@@ -237,6 +245,13 @@ function initMap() {
             if (document.getElementById('level 0').checked) {
                 level = 0;
 
+                if (drawPathLvlMin1 != null) {
+                    drawPathLvlMin1.setMap(null);
+                }
+
+                if (drawPathLvl0 != null) {
+                    drawPathLvl0.setMap(map);
+                }
                 //console.log("HERE" + markers);
 
                 map.overlayMapTypes.clear();

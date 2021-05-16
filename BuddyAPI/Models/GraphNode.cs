@@ -30,10 +30,6 @@ namespace BuddyAPI.Models
             floorLevel = 0;
         }
 
-        public GraphNode()
-        {
-        }
-
         public void setFloorLevel(int floorLevel)
         {
             this.floorLevel = floorLevel;
