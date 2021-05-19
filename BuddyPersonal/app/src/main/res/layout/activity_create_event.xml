@@ -13,23 +13,11 @@
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:gravity="center_horizontal"
-        android:text="@string/create_event"
+        android:text="@string/event"
         android:textSize="20dp"
         app:layout_constraintBottom_toTopOf="@+id/guideline33"
         app:layout_constraintEnd_toStartOf="@+id/guideline19"
-        app:layout_constraintStart_toStartOf="@+id/guideline18"
-        app:layout_constraintTop_toTopOf="@+id/guideline5" />
-
-    <Button
-        style="@style/Theme.Itinerary.button"
-        android:id="@+id/button2"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        android:onClick="exit"
-        android:text="X"
-        app:layout_constraintBottom_toTopOf="@+id/guideline33"
-        app:layout_constraintEnd_toStartOf="@+id/guideline4"
-        app:layout_constraintStart_toStartOf="@+id/guideline19"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="@+id/guideline5" />
 
     <TextView
@@ -188,12 +176,24 @@
         app:layout_constraintTop_toTopOf="@+id/guideline9" />
 
     <Button
-        android:id="@+id/CreateEventButton"
+        android:id="@+id/crt_evt_bt_cancel"
+        style="@style/Theme.Itinerary.button"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:onClick="exit"
+        android:text="@string/cancel"
+        app:layout_constraintBottom_toTopOf="@+id/guideline17"
+        app:layout_constraintEnd_toStartOf="@+id/guideline2"
+        app:layout_constraintStart_toStartOf="@+id/guideline1"
+        app:layout_constraintTop_toTopOf="@+id/guideline16" />
+
+    <Button
+        android:id="@+id/crt_evt_bt_save"
         style="@style/Theme.Itinerary.button.small"
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:onClick="createEvent"
-        android:text="@string/create_event"
+        android:text="@string/save"
         app:layout_constraintBottom_toTopOf="@+id/guideline17"
         app:layout_constraintEnd_toStartOf="@+id/guideline4"
         app:layout_constraintStart_toStartOf="@+id/guideline13"

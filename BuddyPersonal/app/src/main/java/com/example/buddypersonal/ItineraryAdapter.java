@@ -1,6 +1,7 @@
 package com.example.buddypersonal;
 
 import android.content.Context;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -33,20 +34,20 @@ public class ItineraryAdapter extends RecyclerView.Adapter<ItineraryHolder> {
         holder.mStart.setText(models.get(position).getStartTime());
         holder.mEnd.setText(models.get(position).getEndTime());
         holder.mTitle.setText(models.get(position).getTitle());
+        holder.mLoc.setText(models.get(position).getLoc());
+        holder.mNotes.setText(models.get(position).getNotes());
 
 //        holder.setItemClickListener(new ItemClickListener() {
 //            @Override
 //            public void inItemClickListener(View v, int position) {
-//                String gTitle = models.get(position).getTitle();
-//                String gType = models.get(position).getType();
-//                String gStartTime = models.get(position).getStartTime();
-//                String gEndTime = models.get(position).getEndTime();
-
-//                Intent intent = new Intent(c, EventDetails.class);
-//                intent.putExtra("iTitle", gTitle);
-//                intent.putExtra("iType", gType);
-//                intent.putExtra("iStartTime", gStartTime);
-//                intent.putExtra("iEndTime", gEndTime);
+//                Intent intent = new Intent(c, ViewEvent.class);
+//                intent.putExtra("iTitle", models.get(position).getTitle());
+//                intent.putExtra("iStartTime", models.get(position).getStartTime());
+//                intent.putExtra("iStartDate", models.get(position).getStartDate());
+//                intent.putExtra("iEndTime", models.get(position).getEndTime());
+//                intent.putExtra("iEndDate", models.get(position).getEndDate());
+//                intent.putExtra("iLocation", models.get(position).getLoc());
+//                intent.putExtra("iNotes", models.get(position).getNotes());
 //                c.startActivity(intent);
 //            }
 //        });

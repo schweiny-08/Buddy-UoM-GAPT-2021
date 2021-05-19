@@ -72,7 +72,12 @@
     <string name="maltese">Maltés</string>
     <string name="spanish">Español</string>
     <string name="save">Ahorrar</string>
-    <string name="new_password">"Nueva Contraseña "</string>
+    <string name="col_new_password">Nueva Contraseña:</string>
     <string name="change_password">" Cambiar la Contraseña"</string>
-    <string name="new_conf_password">"Confirmar Nueva Contraseña "</string>
+    <string name="col_new_conf_password">Confirmar Nueva Contraseña:</string>
+    <string name="edit">Editar</string>
+    <string name="col_curr_password">" Contraseña Actual:"</string>
+    <string name="event">Evento</string>
+    <string name="cancel">Cancelar</string>
+    <string name="delete">Eliminar</string>
 </resources>

@@ -86,6 +86,10 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 intent = new Intent(MainActivity.this, Itinerary.class);
                 startActivity(intent);
                 break;
+            case R.id.nav_calendar:
+                intent = new Intent(MainActivity.this, Calendar.class);
+                startActivity(intent);
+                break;
             case R.id.nav_cr_events:
                 intent = new Intent(MainActivity.this, CreateEvent.class);
                 startActivity(intent);

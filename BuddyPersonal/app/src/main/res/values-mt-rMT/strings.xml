@@ -73,6 +73,11 @@
     <string name="spanish">Spanjol</string>
     <string name="save">Salva</string>
     <string name="change_password">Biddel il-Passakelma</string>
-    <string name="new_password">Passakelma Ġdida</string>
-    <string name="new_conf_password">Ikkonferma Passakelma Ġdida</string>
+    <string name="col_new_password">Passakelma Ġdida:</string>
+    <string name="col_new_conf_password">Ikkonferma Passakelma Ġdida:</string>
+    <string name="edit">Biddel</string>
+    <string name="col_curr_password">Passakelma Kurrenti:</string>
+    <string name="event">Avveniment</string>
+    <string name="cancel">Ikkanċella</string>
+    <string name="delete">Ħassar</string>
 </resources>

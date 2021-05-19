@@ -1,6 +1,4 @@
 package com.example.buddypersonal;
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.fragment.app.DialogFragment;
 
 import android.app.DatePickerDialog;
 import android.content.Intent;
@@ -8,39 +6,51 @@ import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.View;
 import android.widget.AdapterView;
+import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.DialogFragment;
+
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
 
+import retrofit.Callback;
+import retrofit.RetrofitError;
+import retrofit.client.Response;
+
 public class Register extends AppCompatActivity implements AdapterView.OnItemSelectedListener, DatePickerDialog.OnDateSetListener{
 
     TextView dob;
     EditText name, surname, email, username, password, confPassword;
+    Button register;
     CheckBox toc;
-    Date DOB, CURR;
+    Date DOB;
     SimpleDateFormat sdf;
     Picker picker = new Picker();
+    RestService restService;
+    private int _User_Id = 0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_register);
 
-        name = (EditText)findViewById(R.id.reg_et_name);
-        surname = (EditText)findViewById(R.id.reg_et_surname);
-        dob = (TextView)findViewById(R.id.reg_et_dob);
-        email = (EditText)findViewById(R.id.reg_et_email);
-        username = (EditText)findViewById(R.id.reg_et_username);
-        password = (EditText)findViewById(R.id.reg_et_password);
-        confPassword = (EditText)findViewById(R.id.reg_et_conf_password);
-        toc = (CheckBox)findViewById(R.id.reg_cb_tac);
+        name = (EditText) findViewById(R.id.reg_et_name);
+        surname = (EditText) findViewById(R.id.reg_et_surname);
+        dob = (TextView) findViewById(R.id.reg_et_dob);
+        email = (EditText) findViewById(R.id.reg_et_email);
+        username = (EditText) findViewById(R.id.reg_et_username);
+        password = (EditText) findViewById(R.id.reg_et_password);
+        confPassword = (EditText) findViewById(R.id.reg_et_conf_password);
+        toc = (CheckBox) findViewById(R.id.reg_cb_tac);
+        register = (Button) findViewById(R.id.reg_bt_register);
 
         //DATE
         dob = (TextView) findViewById(R.id.reg_et_dob);
@@ -53,13 +63,30 @@ public class Register extends AppCompatActivity implements AdapterView.OnItemSel
             }
         });
 
+        _User_Id = 0;
+        Intent intent = getIntent();
+        _User_Id = intent.getIntExtra("user_Id", 0);
+        if (_User_Id > 0) {
+            restService.getService().getUserById(_User_Id, new Callback<User>() {
+                @Override
+                public void success(User user, Response response) {
+                    name.setText(user.name);
+                    surname.setText(user.surname);
+                    dob.setText(user.dob);
+                    email.setText(user.email);
+                    username.setText(user.username);
+                    password.setText(user.password);
 
+                }
 
-//        dbHelper = new DatabaseHelper(this);
-//        username = (EditText) findViewById(R.id.reg_et_username);
-//        password = (EditText) findViewById(R.id.reg_et_password);
-//        confirm = (EditText) findViewById(R.id.reg_et_conf_password);
-//        register = findViewById(R.id.reg_bt_register);
+                @Override
+                public void failure(RetrofitError error) {
+                    Toast.makeText(Register.this, "Error message", Toast.LENGTH_SHORT).show();
+                }
+            });
+        }
+    }
+
 
 //        register.setOnClickListener(new View.OnClickListener() {
 //            @Override
@@ -91,25 +118,6 @@ public class Register extends AppCompatActivity implements AdapterView.OnItemSel
 //                }
 //            }
 //        });
-    }
-
-    
-//    public void regConfirm(View view){
-//        Intent intent = new Intent(this, Register.class);
-//        //EditText PersonName = (EditText) findViewById(R.id.PersonName);
-//        //EditText PersonSurname = (EditText) findViewById(R.id.PersonSurname);
-//        //EditText PersonDOB = (EditText) findViewById(R.id.PersonDOB);
-//        //EditText PersonEmail = (EditText) findViewById(R.id.PersonEmail);
-//
-//        register = findViewById(R.id.reg_bt_register);
-//        register.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                Toast.makeText(Register.this, "Successfully Registered", Toast.LENGTH_SHORT).show();
-//            }
-//        });
-//        startActivity(intent);
-//    }
 
     @Override
     public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
@@ -140,14 +148,14 @@ public class Register extends AppCompatActivity implements AdapterView.OnItemSel
         if ((TextUtils.isEmpty(name.getText().toString()))||(TextUtils.isEmpty(surname.getText().toString()))||(TextUtils.isEmpty(dob.getText().toString()))||(TextUtils.isEmpty(email.getText().toString()))||(TextUtils.isEmpty(username.getText().toString()))||(TextUtils.isEmpty(password.getText().toString()))||(TextUtils.isEmpty(confPassword.getText().toString()))) {
             Toast.makeText(Register.this, "Please make sure you have filled  the necessary credentials.", Toast.LENGTH_SHORT).show();
         }
-//        else if(){
-//            //dob should not be in the future
-//        }
+        else if(new Date().after(DOB)){
+            Toast.makeText(Register.this, "Please enter a valid Date of Birth.", Toast.LENGTH_SHORT).show();
+        }
         else if (!isEmailValid(email.getText().toString())){
             Toast.makeText(Register.this, "The email you provided is invalid.", Toast.LENGTH_SHORT).show();
         }
 //        else if(){
-//            //unique username
+//            //unique email + username
 //        }
         else if(password.getText().toString().length()<8){
             Toast.makeText(Register.this, "The passwords is too short.", Toast.LENGTH_SHORT).show();
@@ -155,15 +163,35 @@ public class Register extends AppCompatActivity implements AdapterView.OnItemSel
         else if(!password.getText().toString().equals(confPassword.getText().toString())){
             Toast.makeText(Register.this, "The passwords do no match.", Toast.LENGTH_SHORT).show();
         }
-//        else if(){
-//        when checkbox is left unmarked
-//            Toast.makeText(Register.this, "Please accept the Terms and Conditions", Toast.LENGTH_SHORT).show();
-//        }
-        else{
-            Toast.makeText(Register.this, "Your account has been registered successfully.", Toast.LENGTH_SHORT).show();
-            Intent intent = new Intent(this, Login.class);
-            startActivity(intent);
+        else if(toc.isChecked()){
+            Toast.makeText(Register.this, "Please accept the Terms and Conditions", Toast.LENGTH_SHORT).show();
         }
+        else{
+            //add the user to the database
+            User user = new User();
+            Integer status = 0;
+            user.name = name.getText().toString();
+            user.surname = surname.getText().toString();
+            user.dob = dob.getText().toString();
+            user.email = email.getText().toString();
+            user.username = username.getText().toString();
+            user.password = password.getText().toString();
+            user.Id = _User_Id;
 
+            if(_User_Id == 0){
+                restService.getService().addUser(user, new Callback<User>(){
+                    @Override
+                    public void success(User user, Response response) {
+                        Toast.makeText(Register.this, "Your account has been registered successfully.", Toast.LENGTH_SHORT).show();
+                        Intent intent = new Intent(Register.this, Login.class);
+                        startActivity(intent);
+                    }
+                    @Override
+                    public void failure(RetrofitError error) {
+                        Toast.makeText(Register.this, error.getMessage().toString(), Toast.LENGTH_SHORT).show();
+                    }
+                });
+            }
+        }
     }
 }

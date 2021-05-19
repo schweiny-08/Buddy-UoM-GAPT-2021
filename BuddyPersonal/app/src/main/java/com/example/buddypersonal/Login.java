@@ -22,9 +22,19 @@ public class Login extends AppCompatActivity {
         password = (EditText) findViewById(R.id.log_et_password);
     }
 
+    boolean isEmailValid(CharSequence email) {
+        return android.util.Patterns.EMAIL_ADDRESS.matcher(email).matches();
+    }
+
     public void login(View view) {
         if ((TextUtils.isEmpty(email.getText().toString()))||(TextUtils.isEmpty(password.getText().toString()))) {
             Toast.makeText(Login.this, "Please make sure you have entered the necessary credentials.", Toast.LENGTH_SHORT).show();
+        }
+        else if (!isEmailValid(email.getText().toString())){
+            Toast.makeText(Login.this, "The email you provided is invalid.", Toast.LENGTH_SHORT).show();
+        }
+        else if(password.getText().toString().length()<8){
+            Toast.makeText(Login.this, "The passwords is too short.", Toast.LENGTH_SHORT).show();
         }
 //        else if() {
 //            //when email and password do not match a registered set.

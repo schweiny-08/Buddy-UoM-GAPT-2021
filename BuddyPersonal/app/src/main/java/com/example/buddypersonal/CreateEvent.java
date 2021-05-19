@@ -7,21 +7,25 @@ import android.app.DatePickerDialog;
 import android.app.TimePickerDialog;
 import android.content.Intent;
 import android.os.Bundle;
+import android.text.TextUtils;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.TimePicker;
+import android.widget.Toast;
 
 import java.text.DateFormat;
 import java.util.Calendar;
+import java.util.Date;
 
 public class CreateEvent extends AppCompatActivity implements AdapterView.OnItemSelectedListener, DatePickerDialog.OnDateSetListener, TimePickerDialog.OnTimeSetListener {
 
     EditText title, location, notes;
     TextView startTime, startDate, endTime, endDate;
     Picker picker = new Picker();
+    Calendar cST, cSD, cET, cED;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -76,8 +80,22 @@ public class CreateEvent extends AppCompatActivity implements AdapterView.OnItem
     }
 
     public void createEvent(View view) {
-        Intent intent = new Intent(this, Itinerary.class);
-        startActivity(intent);
+        if ((TextUtils.isEmpty(title.getText().toString()))||(TextUtils.isEmpty(startTime.getText().toString()))||(TextUtils.isEmpty(startDate.getText().toString()))||(TextUtils.isEmpty(endTime.getText().toString()))||(TextUtils.isEmpty(endDate.getText().toString()))) {
+            Toast.makeText(CreateEvent.this, "Please make sure you have filled  the necessary credentials.", Toast.LENGTH_SHORT).show();
+        }
+        else if(cST.after(cET)){
+            if((cSD.after(cED))||(cSD.equals(cED))) {
+                Toast.makeText(CreateEvent.this, "Please enter a valid time frame for the event.", Toast.LENGTH_SHORT).show();
+            }
+        }
+        else if(cSD.after(cED)){
+            Toast.makeText(CreateEvent.this, "Please enter a valid time frame for the event.", Toast.LENGTH_SHORT).show();
+        }
+        else {
+            Toast.makeText(CreateEvent.this, "Event has been successfully created.", Toast.LENGTH_SHORT).show();
+            Intent intent = new Intent(this, Itinerary.class);
+            startActivity(intent);
+        }
     }
 
     public void exit(View view) {
@@ -87,24 +105,36 @@ public class CreateEvent extends AppCompatActivity implements AdapterView.OnItem
 
     @Override
     public void onTimeSet(TimePicker view, int hourOfDay, int minute) {
-        java.util.Calendar c = java.util.Calendar.getInstance();
-        c.set(java.util.Calendar.HOUR_OF_DAY, hourOfDay);
-        c.set(java.util.Calendar.MINUTE, minute);
+        Calendar c = java.util.Calendar.getInstance();
+        c.set(Calendar.HOUR_OF_DAY, hourOfDay);
+        c.set(Calendar.MINUTE, minute);
 
         String currentTime = DateFormat.getTimeInstance(DateFormat.SHORT).format(c.getTime());
         picker.getPicker().setText(currentTime);
+        if(picker.getPicker()==startTime){
+            cST = c;
+        }
+        else{
+            cET = c;
+        }
     }
 
     @Override
     public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
 
         java.util.Calendar c = java.util.Calendar.getInstance();
-        c.set(java.util.Calendar.YEAR, year);
-        c.set(java.util.Calendar.MONTH, month);
+        c.set(Calendar.YEAR, year);
+        c.set(Calendar.MONTH, month);
         c.set(Calendar.DAY_OF_MONTH, dayOfMonth);
 
         String currentDate = DateFormat.getDateInstance(DateFormat.SHORT).format(c.getTime());
         picker.getPicker().setText(currentDate);
+        if(picker.getPicker()==startDate){
+            cSD = c;
+        }
+        else{
+            cED = c;
+        }
     }
 
     @Override

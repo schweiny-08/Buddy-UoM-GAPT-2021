@@ -73,6 +73,11 @@
     <string name="spanish">Spanish</string>
     <string name="save">Save</string>
     <string name="change_password">Change Password</string>
-    <string name="new_password">New Password</string>
-    <string name="new_conf_password">Confirm New Password</string>
+    <string name="col_new_password">New Password:</string>
+    <string name="col_new_conf_password">Confirm New Password:</string>
+    <string name="edit">Edit</string>
+    <string name="col_curr_password">Current Password:</string>
+    <string name="event">Event</string>
+    <string name="cancel">Cancel</string>
+    <string name="delete">Delete</string>
 </resources>

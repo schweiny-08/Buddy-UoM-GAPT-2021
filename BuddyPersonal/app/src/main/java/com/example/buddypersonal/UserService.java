@@ -10,7 +10,7 @@ import retrofit.http.POST;
 import retrofit.http.PUT;
 import retrofit.http.Path;
 
-public interface BuddyService {
+public interface UserService {
 
     @GET("Users/getAllUsers")
     public void getAllUsers(Callback<List<User>> callback);
