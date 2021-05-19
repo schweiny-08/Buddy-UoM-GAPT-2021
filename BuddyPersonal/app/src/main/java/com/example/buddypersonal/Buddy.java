@@ -1,7 +1,11 @@
 package com.example.buddypersonal;
 
+import androidx.annotation.Nullable;
+import androidx.appcompat.app.AppCompatActivity;
+
 import android.content.Intent;
 import android.os.Bundle;
+
 import android.speech.RecognizerIntent;
 import android.speech.tts.TextToSpeech;
 import android.text.Editable;
@@ -14,12 +18,19 @@ import android.widget.ImageButton;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import androidx.annotation.Nullable;
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+import androidx.recyclerview.widget.LinearLayoutManager;
 
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
+import java.io.StreamCorruptedException;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Locale;
 
@@ -45,11 +56,12 @@ public class Buddy extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_buddy);
+        setContentView(R.layout.activity_main);
 
         userInput = findViewById(R.id.userInput);
-//        enterButton = findViewById(R.id.EnterBtn);
+        enterButton = findViewById(R.id.EnterBtn);
 
         recyclerView = findViewById(R.id.conversation);
 
@@ -61,62 +73,12 @@ public class Buddy extends AppCompatActivity {
 
         voiceButton = findViewById(R.id.voiceBtn);
 
-        buddy_bot.greeting();
-
-        /**userInput.setOnEditorActionListener(new TextView.OnEditorActionListener() { // chat editor button
-         @Override
-         public boolean onEditorAction(TextView textView, int i, KeyEvent keyEvent) { //text editor action
-
-         //Editable temp = userInput.getText();
-
-
-         if (!userInput.getText().equals("")) {
-         if (i == EditorInfo.IME_ACTION_SEND) { //enter from onscreen keyboard
-
-         sendText(userInput.getText().toString());
-         //ResponseMessage my_message = new ResponseMessage(userInput.getText().toString(), true);
-         //responseMessageList.add(my_message); //add my message
-
-         //ResponseMessage bot_message = new ResponseMessage(userInput.getText().toString(), false);
-         //responseMessageList.add(bot_message); //add bot message
-
-         messageAdapter.notifyDataSetChanged(); //update display
-
-         if (!isLastVisible()) // is latest message visible? if not scroll down.
-         recyclerView.smoothScrollToPosition(messageAdapter.getItemCount() - 1);
-
-         userInput.setText("");
-         }
-         }
-         return false;
-         }
-
-
-         }); //chat screen functions**/
-
         enterButton.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View v) {
                 sendText(userInput.getText().toString());
             }
         } );//enter button
-
-        userInput.addTextChangedListener(new TextWatcher() {
-            @Override
-            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
-
-            }
-
-            @Override
-            public void onTextChanged(CharSequence s, int start, int before, int count) {
-
-            }
-
-            @Override
-            public void afterTextChanged(Editable s) {
-
-            }
-        });
 
 
         textToSpeech = new TextToSpeech(getApplicationContext(), new TextToSpeech.OnInitListener()  {
@@ -137,8 +99,68 @@ public class Buddy extends AppCompatActivity {
                 speak();
             }
         } ); //speech to text button
+
+        String temp = buddy_bot.greeting();
+        displayBotText(temp);
+        //ConvertToSpeech(temp);
+
+        loadKB();
     }
 
+    /*public static String getLastChatMsg() {
+        ResponseMessage temp = responseMessageList.get(responseMessageList.size() - 1);
+        return temp.text;
+    }*/
+
+    public static String getLastUserMsg() {
+
+        int i = responseMessageList.size() - 1;
+        ResponseMessage temp = responseMessageList.get(i);
+
+        while(!temp.isMe && i>0){
+            i--;
+            temp = responseMessageList.get(i);
+        }
+        return temp.text;
+    }
+
+    /*public static String get2ndLastUserMsg() {
+
+        int i = responseMessageList.size() - 1;
+        ResponseMessage temp = responseMessageList.get(i);
+
+        while(!temp.isMe && i>0){
+            i--;
+            temp = responseMessageList.get(i);
+        }
+
+        if(i>0) {
+            i--;
+            temp = responseMessageList.get(i);
+
+            while(!temp.isMe && i>0){
+                i--;
+                temp = responseMessageList.get(i);
+            }
+
+            return temp.text;
+        }else {
+            return "Not found";
+        }
+
+    }*/
+
+    public static String getLastBotMsg() {
+
+        int i = responseMessageList.size() - 1;
+        ResponseMessage temp = responseMessageList.get(i);
+
+        while(temp.isMe && i>0){
+            i--;
+            temp = responseMessageList.get(i);
+        }
+        return temp.text;
+    }
 
     private void speak() {
         //intent to show speech to text dialog
@@ -159,7 +181,6 @@ public class Buddy extends AppCompatActivity {
     } //speech to text method, get speech from user
 
     public void ConvertToSpeech(String s) {  // speaks given strings
-        //int speech = textToSpeech.speak(s, TextToSpeech.QUEUE_FLUSH, null);
         int speech = textToSpeech.speak(s, TextToSpeech.QUEUE_FLUSH, null);
     }
 
@@ -182,8 +203,9 @@ public class Buddy extends AppCompatActivity {
             if (!isLastVisible())
                 recyclerView.smoothScrollToPosition(messageAdapter.getItemCount() - 1);
             userInput.setText("");
-        }
 
+            saveKB();
+        }
     }
 
     public static void displayBotText(String temp) { //send Bot Text.
@@ -192,12 +214,9 @@ public class Buddy extends AppCompatActivity {
             ResponseMessage responseMessage = new ResponseMessage(temp.toString(), false);
             responseMessageList.add(responseMessage);
 
-            //ConvertToSpeech(temp); //speak reply from bot
-
             messageAdapter.notifyDataSetChanged();
             if (!isLastVisible())
                 recyclerView.smoothScrollToPosition(messageAdapter.getItemCount() - 1);
-
         }
     }
 
@@ -224,11 +243,110 @@ public class Buddy extends AppCompatActivity {
         int pos = layoutManager.findLastCompletelyVisibleItemPosition();
         int numItems = recyclerView.getAdapter().getItemCount();
         return (pos >= numItems);
-    } //chat screen method
+    } //chat screen method, check if last message is visible
 
-    /**public static void getBotReply(String query) {
-     displayBotText(buddy.answer(query));
-     }**/
+    private String subFolder = "/userdata";
+    private String file = "buddy_kb.txt";
 
+    public String saveKB() {
+        File cacheDir = null;
+        File appDirectory = null;
+
+        if (android.os.Environment.getExternalStorageState().
+                equals(android.os.Environment.MEDIA_MOUNTED)) {
+            cacheDir = getApplicationContext().getExternalCacheDir();
+            appDirectory = new File(cacheDir + subFolder);
+
+        } else {
+            cacheDir = getApplicationContext().getCacheDir();
+            String BaseFolder = cacheDir.getAbsolutePath();
+            appDirectory = new File(BaseFolder + subFolder);
+
+        }
+
+        if (appDirectory != null && !appDirectory.exists()) {
+            appDirectory.mkdirs();
+        }
+
+        File fileName = new File(appDirectory, file);
+
+        FileOutputStream fos = null;
+        ObjectOutputStream out = null;
+        try {
+            fos = new FileOutputStream(fileName);
+            out = new ObjectOutputStream(fos);
+            out.writeObject(buddy_bot.knowledge);
+        } catch (IOException ex) {
+            ex.printStackTrace();
+        }  catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            try {
+                if (fos != null)
+                    fos.flush();
+                fos.close();
+                if (out != null)
+                    out.flush();
+                out.close();
+            } catch (Exception e) {
+
+            }
+        }
+
+        return "I saved my knowledge base.";
+    }
+
+    public String loadKB() {
+        File cacheDir = null;
+        File appDirectory = null;
+        if (android.os.Environment.getExternalStorageState().
+                equals(android.os.Environment.MEDIA_MOUNTED)) {
+            cacheDir = getApplicationContext().getExternalCacheDir();
+            appDirectory = new File(cacheDir + subFolder);
+        } else {
+            cacheDir = getApplicationContext().getCacheDir();
+            String BaseFolder = cacheDir.getAbsolutePath();
+            appDirectory = new File(BaseFolder + subFolder);
+        }
+
+        if (appDirectory != null && !appDirectory.exists())
+            return "Knowledge base does not exist."; // File does not exist
+
+        File fileName = new File(appDirectory, file);
+
+        FileInputStream fis = null;
+        ObjectInputStream in = null;
+        try {
+            fis = new FileInputStream(fileName);
+            in = new ObjectInputStream(fis);
+            HashMap<String, String> myHashMap = (HashMap<String, String>) in.readObject();
+            buddy_bot.knowledge = myHashMap;
+            //System.out.println("count of hash map::"+knowledge.size() + " " + knowledge);
+
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        } catch (StreamCorruptedException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        } catch (ClassNotFoundException e) {
+            e.printStackTrace();
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+
+            try {
+                if (fis != null) {
+                    fis.close();
+                }
+                if (in != null) {
+                    in.close();
+                }
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+        return "I loaded my knowledge base.";
+    }
 
 }
