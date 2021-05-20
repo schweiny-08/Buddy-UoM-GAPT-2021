@@ -301,7 +301,7 @@ namespace BuddyAPI
                     if (!path.Contains(path.FirstOrDefault(e => e.pinpoint_Id == node.map_pinId)))
                     {
                         //if current node is a navigation node or the end node
-                        if (c.pinpointType_Id == 15 || node.map_pinId == endNode.map_pinId || c.pinpointType_Id == 4 || c.pinpointType_Id == 14)
+                        if (c.pinpointType_Id == 15 || node.map_pinId == endNode.map_pinId || c.pinpointType_Id == 4 || c.pinpointType_Id == 14 || c.pinpointType_Id == 2)
                         {
                             if (!(userStartPin.floor_Id == userEndPin.floor_Id && (c.pinpointType_Id == 4 || c.pinpointType_Id == 14)))
                             {
@@ -333,7 +333,7 @@ namespace BuddyAPI
                 }
 
                 //if current node is a navigation node or the end node
-                if (nextPin.pinpointType_Id == 15 || nextPin.pinpoint_Id == endNode.map_pinId || nextPin.pinpoint_Id == userEndNode.map_pinId)
+                if (nextPin.pinpointType_Id == 15 || nextPin.pinpoint_Id == endNode.map_pinId || nextPin.pinpoint_Id == userEndNode.map_pinId || nextPin.pinpointType_Id == 2)
                 {
                     //recursive call with the best option from connections passed as new start node ID
                     return CalculatePath(nextNodeId, endNode.map_pinId);
