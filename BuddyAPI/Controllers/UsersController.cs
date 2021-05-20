@@ -87,26 +87,6 @@ namespace BuddyAPI.Controllers
             return NoContent();
         }
 
-        // POST: api/Users
-        // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
-        [HttpPost("addUser")]
-        public async Task<ActionResult<User>> PostUser(User user)
-        {
-
-            _context.User.Add(user);
-            await _context.SaveChangesAsync();
-
-            //var users = await _context.User
-            //    .Include(i => i.Roles)
-            //    .FirstOrDefaultAsync(i => i.Role_Id == user.Role_Id);
-
-            //return JsonResult(users);
-
-            return CreatedAtAction(nameof(GetUser), new { id = user.User_Id }, user);
-            //return CreatedAtAction(nameof(GetUser), new { id = users.User_Id }, users);
-
-        }
-
         // DELETE: api/Users/5
         [HttpDelete("deleteUserById")]
         public async Task<IActionResult> DeleteUser(int id)
@@ -131,14 +111,6 @@ namespace BuddyAPI.Controllers
             if(emailExists == null)
             {
                 user.Password = HashPassword(user.Email, user.Password);
-
-                //user.Roles.Role_Id = user.Role_Id;
-
-                //RolesController rc = new RolesController(_context);
-                //var role = rc.GetRoles(user.Role_Id);
-
-                //user.Roles.RoleType = role.Result.Value.RoleType;
-                //user.Roles.Users = (ICollection<User>)user;
 
                 _context.Add(user);
                 await _context.SaveChangesAsync();
@@ -207,7 +179,6 @@ namespace BuddyAPI.Controllers
             HttpContext.SignOutAsync();
 
             return "User has been successfully Logged out";
-            //return RedirectToAction(nameof(GetSession));
 
         }
 
