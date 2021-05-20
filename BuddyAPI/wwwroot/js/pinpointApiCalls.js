@@ -115,7 +115,7 @@ function GetAllPinpoints() {
                 else if (data.pinpointType_Id == 4 || data.pinpointType_Id == 14)
                     iconType = "Stairs.png";
                 else if (data.pinpointType_Id == 15)
-                    iconType = "NavNode.png";
+                    iconType = "";
 
                 //console.log(data.pinpoint_Id);
 
