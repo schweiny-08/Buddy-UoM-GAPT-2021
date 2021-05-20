@@ -42,7 +42,7 @@ public class ChangePassword extends AppCompatActivity {
         else{
             //update in the database
             Toast.makeText(ChangePassword.this, "Password changed successfully.", Toast.LENGTH_SHORT).show();
-            Intent intent = new Intent(ChangePassword.this, Account.class);
+            Intent intent = new Intent(ChangePassword.this, EditAccount.class);
             startActivity(intent);
         }
     }

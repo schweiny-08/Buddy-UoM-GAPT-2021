@@ -42,18 +42,21 @@ public class Login extends AppCompatActivity {
 //        }
         else{
             Toast.makeText(Login.this, "Login Successful", Toast.LENGTH_SHORT).show();
-            Intent intent = new Intent(this, MainActivity.class);
+            Intent intent = new Intent(this, Home.class);
+//            finish();
             startActivity(intent);
         }
     }
 
     public void register(View view) {
         Intent intent = new Intent(this, Register.class);
+        finish();
         startActivity(intent);
     }
 
     public void forgotPassword(View view) {
         Intent intent = new Intent(this, ForgotPassword.class);
+        finish();
         startActivity(intent);
     }
 

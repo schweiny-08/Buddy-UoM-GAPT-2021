@@ -40,12 +40,13 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
         drawerLayout = findViewById(R.id.drawer_layout);
         navigationView = findViewById(R.id.nav_view);
-        toolbar = findViewById(R.id.nav_toolbar);
+//        toolbar = getSupportActionBar();
+//                findViewById(R.id.nav_toolbar);
 
-        setSupportActionBar(toolbar);
+//        setSupportActionBar(toolbar);
 
         navigationView.bringToFront();
-        ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(this, drawerLayout, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
+        ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(this, drawerLayout, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
         drawerLayout.addDrawerListener(toggle);
         toggle.syncState();
 
@@ -64,41 +65,51 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
     @Override
     public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
-        Intent intent;
         switch(menuItem.getItemId()){
             case R.id.nav_settings:
-                intent = new Intent(MainActivity.this, Settings.class);
-                startActivity(intent);
+                Intent iSettings = new Intent(MainActivity.this, Settings.class);
+//                finish();
+                startActivity(iSettings);
                 break;
-            case R.id.nav_profile:
-                intent = new Intent(MainActivity.this, Home.class);
-                startActivity(intent);
+            case R.id.nav_home:
+                Intent iProfile = new Intent(MainActivity.this, Home.class);
+//                finish();
+                startActivity(iProfile);
                 break;
             case R.id.nav_map:
-                intent = new Intent(MainActivity.this, MapView.class);
-                startActivity(intent);
+                Intent iMap = new Intent(MainActivity.this, MapView.class);
+//                finish();
+                startActivity(iMap);
                 break;
             case R.id.nav_pu_events:
-                intent = new Intent(MainActivity.this, VenueEvents.class);
-                startActivity(intent);
+                Intent iPuEvents = new Intent(MainActivity.this, VenueEvents.class);
+//                finish();
+                startActivity(iPuEvents);
                 break;
             case R.id.nav_itinerary:
-                intent = new Intent(MainActivity.this, Itinerary.class);
-                startActivity(intent);
+                Intent iItinerary = new Intent(MainActivity.this, Itinerary.class);
+//                finish();
+                startActivity(iItinerary);
                 break;
             case R.id.nav_calendar:
-                intent = new Intent(MainActivity.this, Calendar.class);
-                startActivity(intent);
+                Intent iCalendar = new Intent(MainActivity.this, Calendar.class);
+//                finish();
+                startActivity(iCalendar);
                 break;
             case R.id.nav_cr_events:
-                intent = new Intent(MainActivity.this, CreateEvent.class);
-                startActivity(intent);
+                Intent iCrEvents = new Intent(MainActivity.this, CreateEvent.class);
+//                finish();
+                startActivity(iCrEvents);
                 break;
             case R.id.nav_buddy:
-                intent = new Intent(MainActivity.this, Buddy.class);
-                startActivity(intent);
+                Intent iBuddy = new Intent(MainActivity.this, Buddy.class);
+//                finish();
+                startActivity(iBuddy);
                 break;
             case R.id.nav_logout:
+                Intent iLogin = new Intent(MainActivity.this, Login.class);
+//                finish();
+                startActivity(iLogin);
                 Toast.makeText(this, "You have been logged out!", Toast.LENGTH_SHORT).show();
                 break;
             default:

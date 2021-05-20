@@ -34,8 +34,8 @@ public class ItineraryAdapter extends RecyclerView.Adapter<ItineraryHolder> {
         holder.mStart.setText(models.get(position).getStartTime());
         holder.mEnd.setText(models.get(position).getEndTime());
         holder.mTitle.setText(models.get(position).getTitle());
-        holder.mLoc.setText(models.get(position).getLoc());
-        holder.mNotes.setText(models.get(position).getNotes());
+//        holder.mLoc.setText(models.get(position).getLoc());
+//        holder.mNotes.setText(models.get(position).getNotes());
 
 //        holder.setItemClickListener(new ItemClickListener() {
 //            @Override

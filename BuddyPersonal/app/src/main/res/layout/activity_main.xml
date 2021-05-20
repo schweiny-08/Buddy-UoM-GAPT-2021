@@ -5,8 +5,8 @@
     android:id="@+id/drawer_layout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:fitsSystemWindows="true"
     tools:context=".MainActivity"
+    android:fitsSystemWindows="true"
     tools:openDrawer="start">
 
     <com.google.android.material.navigation.NavigationView
@@ -14,13 +14,7 @@
         android:layout_width="wrap_content"
         android:layout_height="match_parent"
         android:layout_gravity="start"
-        app:headerLayout="@layout/header"
         app:menu="@menu/main_menu" />
-
-    <!--    <androidx.appcompat.widget.Toolbar-->
-    <!--        android:layout_width="match_parent"-->
-    <!--        android:layout_height="200sp">-->
-    <!--    </androidx.appcompat.widget.Toolbar>-->
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"

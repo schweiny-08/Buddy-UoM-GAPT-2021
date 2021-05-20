@@ -49,7 +49,7 @@ public class NavigationDrawer extends AppCompatActivity implements NavigationVie
                 intent = new Intent(this, Settings.class);
                 startActivity(intent);
                 break;
-            case R.id.nav_profile:
+            case R.id.nav_home:
                 intent = new Intent(this, Home.class);
                 startActivity(intent);
                 break;

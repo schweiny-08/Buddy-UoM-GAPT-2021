@@ -21,11 +21,17 @@ import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
 
-import retrofit.Callback;
-import retrofit.RetrofitError;
-import retrofit.client.Response;
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
+import retrofit2.Retrofit;
+import retrofit2.converter.gson.GsonConverterFactory;
 
-public class Register extends AppCompatActivity implements AdapterView.OnItemSelectedListener, DatePickerDialog.OnDateSetListener{
+//import retrofit.Callback;
+//import retrofit.RetrofitError;
+//import retrofit.client.Response;
+
+public class Register extends AppCompatActivity implements AdapterView.OnItemSelectedListener, DatePickerDialog.OnDateSetListener {
 
     TextView dob;
     EditText name, surname, email, username, password, confPassword;
@@ -34,13 +40,25 @@ public class Register extends AppCompatActivity implements AdapterView.OnItemSel
     Date DOB;
     SimpleDateFormat sdf;
     Picker picker = new Picker();
-    RestService restService;
+//    RestService restService;
     private int _User_Id = 0;
+
+    private JsonPlaceHolderApi jsonPlaceHolderApi;
+
+    String sName, sSurname, sDob, sEmail, sUsername, sPassword;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_register);
+
+        Retrofit retrofit = new Retrofit.Builder()
+                .baseUrl("https://192.168.1.90:44346/")
+                .addConverterFactory(GsonConverterFactory.create())
+                .build();
+        jsonPlaceHolderApi = retrofit.create(JsonPlaceHolderApi.class);
+
+//        Call<User>
 
         name = (EditText) findViewById(R.id.reg_et_name);
         surname = (EditText) findViewById(R.id.reg_et_surname);
@@ -51,6 +69,13 @@ public class Register extends AppCompatActivity implements AdapterView.OnItemSel
         confPassword = (EditText) findViewById(R.id.reg_et_conf_password);
         toc = (CheckBox) findViewById(R.id.reg_cb_tac);
         register = (Button) findViewById(R.id.reg_bt_register);
+
+        sName = name.getText().toString();
+        sSurname = surname.getText().toString();
+        sDob = dob.getText().toString();
+        sEmail = email.getText().toString();
+        sUsername = username.getText().toString();
+        sPassword = password.getText().toString();
 
         //DATE
         dob = (TextView) findViewById(R.id.reg_et_dob);
@@ -63,28 +88,28 @@ public class Register extends AppCompatActivity implements AdapterView.OnItemSel
             }
         });
 
-        _User_Id = 0;
-        Intent intent = getIntent();
-        _User_Id = intent.getIntExtra("user_Id", 0);
-        if (_User_Id > 0) {
-            restService.getService().getUserById(_User_Id, new Callback<User>() {
-                @Override
-                public void success(User user, Response response) {
-                    name.setText(user.name);
-                    surname.setText(user.surname);
-                    dob.setText(user.dob);
-                    email.setText(user.email);
-                    username.setText(user.username);
-                    password.setText(user.password);
-
-                }
-
-                @Override
-                public void failure(RetrofitError error) {
-                    Toast.makeText(Register.this, "Error message", Toast.LENGTH_SHORT).show();
-                }
-            });
-        }
+//        _User_Id = 0;
+//        Intent intent = getIntent();
+//        _User_Id = intent.getIntExtra("user_Id", 0);
+//        if (_User_Id > 0) {
+//            restService.getService().getUserById(_User_Id, new Callback<User>() {
+//                @Override
+//                public void success(User user, Response response) {
+//                    name.setText(user.name);
+//                    surname.setText(user.surname);
+//                    dob.setText(user.dob);
+//                    email.setText(user.email);
+//                    username.setText(user.username);
+//                    password.setText(user.password);
+//
+//                }
+//
+//                @Override
+//                public void failure(RetrofitError error) {
+//                    Toast.makeText(Register.this, "Error message", Toast.LENGTH_SHORT).show();
+//                }
+//            });
+//        }
     }
 
 
@@ -144,54 +169,81 @@ public class Register extends AppCompatActivity implements AdapterView.OnItemSel
         return android.util.Patterns.EMAIL_ADDRESS.matcher(email).matches();
     }
 
-    public void register(View view){
-        if ((TextUtils.isEmpty(name.getText().toString()))||(TextUtils.isEmpty(surname.getText().toString()))||(TextUtils.isEmpty(dob.getText().toString()))||(TextUtils.isEmpty(email.getText().toString()))||(TextUtils.isEmpty(username.getText().toString()))||(TextUtils.isEmpty(password.getText().toString()))||(TextUtils.isEmpty(confPassword.getText().toString()))) {
-            Toast.makeText(Register.this, "Please make sure you have filled  the necessary credentials.", Toast.LENGTH_SHORT).show();
-        }
-        else if(new Date().after(DOB)){
-            Toast.makeText(Register.this, "Please enter a valid Date of Birth.", Toast.LENGTH_SHORT).show();
-        }
-        else if (!isEmailValid(email.getText().toString())){
-            Toast.makeText(Register.this, "The email you provided is invalid.", Toast.LENGTH_SHORT).show();
-        }
-//        else if(){
-//            //unique email + username
+    public void register(View view) {
+        registerUser();
+//        if ((TextUtils.isEmpty(name.getText().toString())) || (TextUtils.isEmpty(surname.getText().toString())) || (TextUtils.isEmpty(dob.getText().toString())) || (TextUtils.isEmpty(email.getText().toString())) || (TextUtils.isEmpty(username.getText().toString())) || (TextUtils.isEmpty(password.getText().toString())) || (TextUtils.isEmpty(confPassword.getText().toString()))) {
+//            Toast.makeText(Register.this, "Please make sure you have filled  the necessary credentials.", Toast.LENGTH_SHORT).show();
 //        }
-        else if(password.getText().toString().length()<8){
-            Toast.makeText(Register.this, "The passwords is too short.", Toast.LENGTH_SHORT).show();
-        }
-        else if(!password.getText().toString().equals(confPassword.getText().toString())){
-            Toast.makeText(Register.this, "The passwords do no match.", Toast.LENGTH_SHORT).show();
-        }
-        else if(toc.isChecked()){
-            Toast.makeText(Register.this, "Please accept the Terms and Conditions", Toast.LENGTH_SHORT).show();
-        }
-        else{
-            //add the user to the database
-            User user = new User();
-            Integer status = 0;
-            user.name = name.getText().toString();
-            user.surname = surname.getText().toString();
-            user.dob = dob.getText().toString();
-            user.email = email.getText().toString();
-            user.username = username.getText().toString();
-            user.password = password.getText().toString();
-            user.Id = _User_Id;
+////        else if(new Date().after(DOB)){
+////            Toast.makeText(Register.this, "Please enter a valid Date of Birth.", Toast.LENGTH_SHORT).show();
+////        }
+//        else if (!isEmailValid(email.getText().toString())) {
+//            Toast.makeText(Register.this, "The email you provided is invalid.", Toast.LENGTH_SHORT).show();
+//        }
+////        else if(){
+////            //unique email + username
+////        }
+//        else if (password.getText().toString().length() < 8) {
+//            Toast.makeText(Register.this, "The passwords is too short.", Toast.LENGTH_SHORT).show();
+//        } else if (!password.getText().toString().equals(confPassword.getText().toString())) {
+//            Toast.makeText(Register.this, "The passwords do no match.", Toast.LENGTH_SHORT).show();
+//        }
+////        else if(toc.isChecked()){
+////            Toast.makeText(Register.this, "Please accept the Terms and Conditions", Toast.LENGTH_SHORT).show();
+////        }
+//        else {
+//            //add the user to the database
+//
+//
+////            User user = new User();
+////            Integer status = 0;
+////            user.name = name.getText().toString();
+////            user.surname = surname.getText().toString();
+////            user.dob = dob.getText().toString();
+////            user.email = email.getText().toString();
+////            user.username = username.getText().toString();
+////            user.password = password.getText().toString();
+////            user.Id = _User_Id;
+////
+////            if(_User_Id == 0){
+////                restService.getService().addUser(user, new Callback<User>(){
+////                    @Override
+////                    public void success(User user, Response response) {
+////                        Toast.makeText(Register.this, "Your account has been registered successfully.", Toast.LENGTH_SHORT).show();
+////                        Intent intent = new Intent(Register.this, Login.class);
+////                        startActivity(intent);
+////                    }
+////                    @Override
+////                    public void failure(RetrofitError error) {
+////                        Toast.makeText(Register.this, error.getMessage().toString(), Toast.LENGTH_SHORT).show();
+////                    }
+////                });
+////            } else{
+////                Toast.makeText(Register.this, "god knows", Toast.LENGTH_SHORT).show();
+////            }
+//        }
+    }
 
-            if(_User_Id == 0){
-                restService.getService().addUser(user, new Callback<User>(){
-                    @Override
-                    public void success(User user, Response response) {
-                        Toast.makeText(Register.this, "Your account has been registered successfully.", Toast.LENGTH_SHORT).show();
-                        Intent intent = new Intent(Register.this, Login.class);
-                        startActivity(intent);
-                    }
-                    @Override
-                    public void failure(RetrofitError error) {
-                        Toast.makeText(Register.this, error.getMessage().toString(), Toast.LENGTH_SHORT).show();
-                    }
-                });
+    private void registerUser() {
+
+//        User user = new User(sName, sSurname, sDob, sEmail, sUsername, sPassword);
+        User user = new User(0, "ft", 12345678, "ft@test.com", "maybe123", 3 );
+
+        Call<User> call = jsonPlaceHolderApi.registerUser(user);
+        call.enqueue(new Callback<User>() {
+            @Override
+            public void onResponse(Call<User> call, Response<User> response) {
+
+                if (!response.isSuccessful()) {
+                    Toast.makeText(Register.this, "Code: " + response.code(), Toast.LENGTH_SHORT).show();
+                }
+//                User userResponse = response.body();
             }
-        }
+
+            @Override
+            public void onFailure(Call<User> call, Throwable t) {
+                Toast.makeText(Register.this, t.getMessage(), Toast.LENGTH_SHORT).show();
+            }
+        });
     }
 }

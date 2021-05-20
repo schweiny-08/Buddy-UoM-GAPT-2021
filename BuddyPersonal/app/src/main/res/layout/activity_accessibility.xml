@@ -1,178 +1,193 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.drawerlayout.widget.DrawerLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/acc_drawer"
+    style="@style/Theme.System.background"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:fitsSystemWindows="true"
     tools:context=".Accessibility"
-    style="@style/Theme.System.background">
+    tools:openDrawer="start">
 
-    <TextView
-        style="@style/Theme.System.title"
-        android:gravity="left"
-        android:id="@+id/textView11"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Color Correction"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/radioGroup2" />
-
-    <TextView
-        android:id="@+id/textView10"
-        style="@style/Theme.System.title"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:gravity="left"
-        android:text="Languages"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/iwebfuwebf" />
-
-
-    <Button
-        android:id="@+id/button2"
-        style="@style/Theme.System.button"
+    <com.google.android.material.navigation.NavigationView
+        android:id="@+id/acc_nav"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginEnd="16dp"
-        android:layout_marginRight="16dp"
-        android:layout_marginBottom="16dp"
-        android:text="Save"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent" />
+        android:layout_height="match_parent"
+        android:layout_gravity="start"
+        app:menu="@menu/main_menu" />
 
-    <TextView
-        android:id="@+id/textView9"
-        style="@style/Theme.System.title"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:gravity="left"
-        android:text="Text-to-Speech"
-        app:layout_constraintEnd_toStartOf="@+id/iwebfuwebf"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/radioGroup" />
-
-    <TextView
-        android:id="@+id/acc_et_title"
-        style="@style/Theme.System.title"
-        android:layout_width="282dp"
-        android:layout_height="35dp"
-        android:text="@string/accessibility"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
-
-    <TextView
-        style="@style/Theme.System.title"
-        android:gravity="left"
-        android:id="@+id/textView8"
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Font Size"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/acc_et_title" />
+        android:layout_height="match_parent">
 
-    <RadioGroup
-        android:id="@+id/radioGroup"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView8">
-
-        <RadioButton
-            android:id="@+id/rdb_small"
+        <TextView
+            android:id="@+id/textView11"
+            style="@style/Theme.System.title"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Small" />
+            android:gravity="left"
+            android:text="Color Correction"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/radioGroup2" />
 
-        <RadioButton
-            android:id="@+id/rdb_normal"
+        <TextView
+            android:id="@+id/textView10"
+            style="@style/Theme.System.title"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Normal" />
+            android:gravity="left"
+            android:text="Languages"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/iwebfuwebf" />
 
-        <RadioButton
-            android:id="@+id/rdb_large"
+
+        <Button
+            android:id="@+id/button2"
+            style="@style/Theme.System.button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="16dp"
+            android:layout_marginRight="16dp"
+            android:layout_marginBottom="16dp"
+            android:onClick="save"
+            android:text="@string/save"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent" />
+
+        <TextView
+            android:id="@+id/textView9"
+            style="@style/Theme.System.title"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:gravity="left"
+            android:text="Text-to-Speech"
+            app:layout_constraintEnd_toStartOf="@+id/iwebfuwebf"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/radioGroup" />
+
+        <TextView
+            android:id="@+id/acc_et_title"
+            style="@style/Theme.System.title"
+            android:layout_width="282dp"
+            android:layout_height="35dp"
+            android:text="@string/accessibility"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+
+        <TextView
+            android:id="@+id/textView8"
+            style="@style/Theme.System.title"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Large" />
-    </RadioGroup>
+            android:gravity="left"
+            android:text="Font Size"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/acc_et_title" />
 
-<!--    <ToggleButton-->
-<!--        style="@style/Theme.System.button"-->
-<!--        android:id="@+id/toggleButton2"-->
-<!--        android:layout_width="148dp"-->
-<!--        android:layout_height="49dp"-->
-<!--        android:text="ToggleButton"-->
-<!--        android:textOff="Disabled"-->
-<!--        android:textOn="Enabled"-->
-<!--        app:layout_constraintEnd_toEndOf="parent"-->
-<!--        app:layout_constraintStart_toStartOf="parent"-->
-<!--        app:layout_constraintTop_toBottomOf="@+id/textView9" />-->
-
-    <RadioGroup
-        android:id="@+id/radioGroup2"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView10">
-
-        <RadioButton
-            android:id="@+id/rdb_english"
+        <RadioGroup
+            android:id="@+id/radioGroup"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="@string/english" />
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/textView8">
 
-        <RadioButton
-            android:id="@+id/rdb_maltese"
+            <RadioButton
+                android:id="@+id/rdb_small"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Small" />
+
+            <RadioButton
+                android:id="@+id/rdb_normal"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Normal" />
+
+            <RadioButton
+                android:id="@+id/rdb_large"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Large" />
+        </RadioGroup>
+
+        <!--    <ToggleButton-->
+        <!--        style="@style/Theme.System.button"-->
+        <!--        android:id="@+id/toggleButton2"-->
+        <!--        android:layout_width="148dp"-->
+        <!--        android:layout_height="49dp"-->
+        <!--        android:text="ToggleButton"-->
+        <!--        android:textOff="Disabled"-->
+        <!--        android:textOn="Enabled"-->
+        <!--        app:layout_constraintEnd_toEndOf="parent"-->
+        <!--        app:layout_constraintStart_toStartOf="parent"-->
+        <!--        app:layout_constraintTop_toBottomOf="@+id/textView9" />-->
+
+        <RadioGroup
+            android:id="@+id/radioGroup2"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="@string/maltese" />
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/textView10">
 
-        <RadioButton
-            android:id="@+id/rbd_spanish"
+            <RadioButton
+                android:id="@+id/rdb_english"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/english" />
+
+            <RadioButton
+                android:id="@+id/rdb_maltese"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/maltese" />
+
+            <RadioButton
+                android:id="@+id/rbd_spanish"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/spanish" />
+        </RadioGroup>
+
+        <RadioGroup
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="@string/spanish" />
-    </RadioGroup>
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/textView11">
 
-    <RadioGroup
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView11">
+            <RadioButton
+                android:id="@+id/rdb_deuter"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Deuteranomaly (Red-green)" />
 
-        <RadioButton
-            android:id="@+id/rdb_deuter"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Deuteranomaly (Red-green)" />
+            <RadioButton
+                android:id="@+id/rdb_prot"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Protanomaly (Red-green)" />
 
-        <RadioButton
-            android:id="@+id/rdb_prot"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Protanomaly (Red-green)" />
+            <RadioButton
+                android:id="@+id/rdb_trit"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Tritanomaly (Blue-yellow)" />
+        </RadioGroup>
 
-        <RadioButton
-            android:id="@+id/rdb_trit"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Tritanomaly (Blue-yellow)" />
-    </RadioGroup>
+        <Switch
+            android:id="@+id/iwebfuwebf"
+            android:layout_width="wrap_content"
+            android:layout_height="49dp"
+            android:textOff="Disabled"
+            android:textOn="Enabled"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/radioGroup" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
-    <Switch
-        android:id="@+id/iwebfuwebf"
-        android:layout_width="wrap_content"
-        android:layout_height="49dp"
-        android:textOff="Disabled"
-        android:textOn="Enabled"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/radioGroup" />
-
-
-</androidx.constraintlayout.widget.ConstraintLayout>
+</androidx.drawerlayout.widget.DrawerLayout>

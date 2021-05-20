@@ -1,6 +1,8 @@
 package com.example.buddypersonal;
 
+import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.appcompat.app.ActionBarDrawerToggle;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
@@ -11,6 +13,7 @@ import android.speech.tts.TextToSpeech;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.view.KeyEvent;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.inputmethod.EditorInfo;
 import android.widget.EditText;
@@ -18,8 +21,12 @@ import android.widget.ImageButton;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.core.view.GravityCompat;
+import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.recyclerview.widget.LinearLayoutManager;
+
+import com.google.android.material.navigation.NavigationView;
 
 import java.io.File;
 import java.io.FileInputStream;
@@ -34,7 +41,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Locale;
 
-public class Buddy extends AppCompatActivity {
+public class Buddy extends AppCompatActivity  implements NavigationView.OnNavigationItemSelectedListener{
 
     static EditText userInput;
     static RecyclerView recyclerView;
@@ -53,12 +60,14 @@ public class Buddy extends AppCompatActivity {
     static buddy_bot buddy = new buddy_bot();
     //buddy chat object
 
+    DrawerLayout drawerLayout;
+    NavigationView navigationView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
 
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+        setContentView(R.layout.activity_buddy);
 
         userInput = findViewById(R.id.userInput);
         enterButton = findViewById(R.id.EnterBtn);
@@ -105,6 +114,17 @@ public class Buddy extends AppCompatActivity {
         //ConvertToSpeech(temp);
 
         loadKB();
+
+
+        drawerLayout = findViewById(R.id.bud_drawer);
+        navigationView = findViewById(R.id.bud_nav);
+
+        navigationView.bringToFront();
+        ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(this, drawerLayout, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
+        drawerLayout.addDrawerListener(toggle);
+        toggle.syncState();
+
+        navigationView.setNavigationItemSelectedListener(this);
     }
 
     /*public static String getLastChatMsg() {
@@ -349,4 +369,69 @@ public class Buddy extends AppCompatActivity {
         return "I loaded my knowledge base.";
     }
 
+    @Override
+    public void onBackPressed() {
+        if(drawerLayout.isDrawerOpen(GravityCompat.START)){
+            drawerLayout.closeDrawer(GravityCompat.START);
+        }
+        else {
+            super.onBackPressed();
+        }
+    }
+
+    @Override
+    public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
+        switch(menuItem.getItemId()){
+            case R.id.nav_settings:
+                Intent iSettings = new Intent(Buddy.this, Settings.class);
+//                finish();
+                startActivity(iSettings);
+                break;
+            case R.id.nav_home:
+                Intent iProfile = new Intent(Buddy.this, Home.class);
+//                finish();
+                startActivity(iProfile);
+                break;
+            case R.id.nav_map:
+                Intent iMap = new Intent(Buddy.this, MapView.class);
+//                finish();
+                startActivity(iMap);
+                break;
+            case R.id.nav_pu_events:
+                Intent iPuEvents = new Intent(Buddy.this, VenueEvents.class);
+//                finish();
+                startActivity(iPuEvents);
+                break;
+            case R.id.nav_itinerary:
+                Intent iItinerary = new Intent(Buddy.this, Itinerary.class);
+//                finish();
+                startActivity(iItinerary);
+                break;
+            case R.id.nav_calendar:
+                Intent iCalendar = new Intent(Buddy.this, Calendar.class);
+//                finish();
+                startActivity(iCalendar);
+                break;
+            case R.id.nav_cr_events:
+                Intent iCrEvents = new Intent(Buddy.this, CreateEvent.class);
+//                finish();
+                startActivity(iCrEvents);
+                break;
+            case R.id.nav_buddy:
+                Intent iBuddy = new Intent(Buddy.this, Buddy.class);
+//                finish();
+                startActivity(iBuddy);
+                break;
+            case R.id.nav_logout:
+                Intent iLogin = new Intent(Buddy.this, Login.class);
+//                finish();
+                startActivity(iLogin);
+                Toast.makeText(this, "You have been logged out!", Toast.LENGTH_SHORT).show();
+                break;
+            default:
+                break;
+        }
+        drawerLayout.closeDrawer(GravityCompat.START);
+        return true;
+    }
 }

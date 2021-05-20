@@ -18,8 +18,8 @@ public class ItineraryHolder extends RecyclerView.ViewHolder /*implements View.O
         this.mStart = itemView.findViewById(R.id.itn_start);
         this.mEnd = itemView.findViewById(R.id.itn_end);
         this.mTitle = itemView.findViewById(R.id.itn_title);
-        this.mLoc = itemView.findViewById(R.id.itn_location);
-        this.mNotes = itemView.findViewById(R.id.itn_notes);
+//        this.mLoc = itemView.findViewById(R.id.itn_location);
+//        this.mNotes = itemView.findViewById(R.id.itn_notes);
 
 //        itemView.setOnClickListener(this);
     }

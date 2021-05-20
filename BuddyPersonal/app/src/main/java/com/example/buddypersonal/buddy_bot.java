@@ -139,6 +139,7 @@ public class buddy_bot {
 
     public String showIter() {
         //Intent intent = new Intent (this, Main2Activity.class);
+        //finish();
         //startActivity(intent);
         return "test";
     }
