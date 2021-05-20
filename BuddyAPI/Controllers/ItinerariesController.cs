@@ -21,26 +21,7 @@ namespace BuddyAPI.Controllers
             _context = context;
         }
 
-        // GET: api/Itineraries
-        [HttpGet("getAllItineraries")]
-        public async Task<ActionResult<IEnumerable<Itineraries>>> GetItineraries()
-        {
-            return await _context.Itineraries.ToListAsync();
-        }
-
-        // GET: api/Itineraries/5
-        [HttpGet("getItineraryById")]
-        public async Task<ActionResult<Itineraries>> GetItineraries(int id)
-        {
-            var itineraries = await _context.Itineraries.FindAsync(id);
-
-            if (itineraries == null)
-            {
-                return NotFound();
-            }
-
-            return itineraries;
-        }
+       
 
         [HttpGet("getAllItineraryEventsByUser")]
         public async Task<ActionResult<IEnumerable<Itineraries>>> GetItinerariesByUserId(int userId)
@@ -80,6 +61,7 @@ namespace BuddyAPI.Controllers
 
             return itineraries;
         }
+        
 
         // PUT: api/Itineraries/5
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
@@ -151,6 +133,7 @@ namespace BuddyAPI.Controllers
 
         }
 
+       
         // DELETE: api/Itineraries/5
         [HttpDelete("deleteItineraryById")]
         public async Task<IActionResult> DeleteItineraries(int id)

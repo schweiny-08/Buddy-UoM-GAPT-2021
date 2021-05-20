@@ -23,7 +23,14 @@ namespace BuddyAPI.Data
         public DbSet<Events> Events { get; set; }
         public DbSet<PrivateEvents> PrivateEvents { get; set; }
 
-       
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
+            //modelBuilder.Entity<Roles>().ToTable("Roles");
+            modelBuilder.Entity<Paths>().HasKey(a => new { a.pinpoint_Id, a.pinpoint_Id_2});
+
+        }
+
+        public DbSet<BuddyAPI.Models.Paths> Paths { get; set; }
     }
 }
    
