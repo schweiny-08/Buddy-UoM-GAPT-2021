@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     style="@style/Theme.System.background"
     android:layout_width="match_parent"
+    android:background="@drawable/bg_gradient2"
     android:layout_height="match_parent"
     tools:context=".Login">
 
