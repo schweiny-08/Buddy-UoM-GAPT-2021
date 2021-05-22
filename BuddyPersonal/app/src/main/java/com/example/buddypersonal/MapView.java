@@ -1,9 +1,12 @@
 package com.example.buddypersonal;
 
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.view.MenuItem;
+import android.view.View;
 import android.webkit.WebView;
+import android.widget.Button;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -18,19 +21,25 @@ public class MapView extends AppCompatActivity implements NavigationView.OnNavig
 
     DrawerLayout drawerLayout;
     NavigationView navigationView;
+    int floor = 0;
+
+    Button up;
+    Button down;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_map);
-        String url = "file:///android_asset/openlayers.html";
+        String url = "file:///android_asset/Level0/openlayers.html";
+        //level 0 first
         WebView view = (WebView) this.findViewById(R.id.webview);
         view.getSettings().setJavaScriptEnabled(true);
         view.loadUrl(url);
 
-
         drawerLayout = findViewById(R.id.map_drawer);
         navigationView = findViewById(R.id.map_nav);
+        up = findViewById(R.id.upBtn);
+        down = findViewById(R.id.downBtn);
 
         navigationView.bringToFront();
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(this, drawerLayout, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
@@ -38,6 +47,54 @@ public class MapView extends AppCompatActivity implements NavigationView.OnNavig
         toggle.syncState();
 
         navigationView.setNavigationItemSelectedListener(this);
+
+        down.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View v) {
+                switch(floor) {
+                    case -2:
+                        //do nothing
+                        break;
+                    case 0:
+                        view.loadUrl("file:///android_asset/Level-1/openlayers.html");
+                        floor = -1;
+                        break;
+                    case 1:
+                        view.loadUrl("file:///android_asset/Level0/openlayers.html");
+                        floor = 0;
+                        break;
+                    case -1:
+                        view.loadUrl("file:///android_asset/Level-2/openlayers.html");
+                        floor = -2;
+                        break;
+
+                }
+            }
+        } );
+
+        up.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View v) {
+                switch(floor) {
+                    case -2:
+                        view.loadUrl("file:///android_asset/Level-1/openlayers.html");
+                        floor = -1;
+                        break;
+                    case 0:
+                        view.loadUrl("file:///android_asset/Level1/openlayers.html");
+                        floor = 1;
+                        break;
+                    case 1:
+                        //do nothing
+                        break;
+                    case -1:
+                        view.loadUrl("file:///android_asset/Level0/openlayers.html");
+                        floor = 0;
+                        break;
+
+                }
+            }
+        } );
     }
 
     @Override
