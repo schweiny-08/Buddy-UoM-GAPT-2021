@@ -1,30 +1,23 @@
 package com.example.buddypersonal;
 
+import android.content.Intent;
+import android.os.Bundle;
+import android.speech.RecognizerIntent;
+import android.speech.tts.TextToSpeech;
+import android.view.MenuItem;
+import android.view.View;
+import android.widget.EditText;
+import android.widget.ImageButton;
+import android.widget.Toast;
+
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.ActionBarDrawerToggle;
 import androidx.appcompat.app.AppCompatActivity;
-
-import android.content.Intent;
-import android.os.Bundle;
-
-import android.speech.RecognizerIntent;
-import android.speech.tts.TextToSpeech;
-import android.text.Editable;
-import android.text.TextWatcher;
-import android.view.KeyEvent;
-import android.view.MenuItem;
-import android.view.View;
-import android.view.inputmethod.EditorInfo;
-import android.widget.EditText;
-import android.widget.ImageButton;
-import android.widget.TextView;
-import android.widget.Toast;
-
 import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
-import androidx.recyclerview.widget.RecyclerView;
 import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import com.google.android.material.navigation.NavigationView;
 
@@ -36,10 +29,12 @@ import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.io.StreamCorruptedException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Locale;
+import java.util.Set;
 
 public class Buddy extends AppCompatActivity  implements NavigationView.OnNavigationItemSelectedListener{
 
@@ -57,7 +52,9 @@ public class Buddy extends AppCompatActivity  implements NavigationView.OnNaviga
     private static final int REQUEST_CODE_SPEECH_INPUT = 1000;
     //speech to text objects
 
-    static buddy_bot buddy = new buddy_bot();
+    HashMap<String, String> knowledge = new HashMap<String, String>();
+    String customAnswer = "";
+    String customQuery = "";
     //buddy chat object
 
     DrawerLayout drawerLayout;
@@ -109,12 +106,12 @@ public class Buddy extends AppCompatActivity  implements NavigationView.OnNaviga
             }
         } ); //speech to text button
 
-        String temp = buddy_bot.greeting();
+        String temp = greeting();
         displayBotText(temp);
-        //ConvertToSpeech(temp);
+        ConvertToSpeech(temp);
 
+        buildKB();
         loadKB();
-
 
         drawerLayout = findViewById(R.id.bud_drawer);
         navigationView = findViewById(R.id.bud_nav);
@@ -132,7 +129,7 @@ public class Buddy extends AppCompatActivity  implements NavigationView.OnNaviga
         return temp.text;
     }*/
 
-    public static String getLastUserMsg() {
+    public String getLastUserMsg() {
 
         int i = responseMessageList.size() - 1;
         ResponseMessage temp = responseMessageList.get(i);
@@ -170,7 +167,34 @@ public class Buddy extends AppCompatActivity  implements NavigationView.OnNaviga
 
     }*/
 
-    public static String getLastBotMsg() {
+    public void buildKB() {
+        knowledge.put("Hi", "Hello... Pleased to meet you!");
+        knowledge.put("Hello", "Oh hello there, how can I help?");
+        knowledge.put("How are you?", "Great! And you?");
+        knowledge.put("Buddy train me", "Okay, enter user query.");
+        knowledge.put("Good morning", "Good morning, buddy.");
+        knowledge.put("Good afternoon", "Good afternoon, buddy.");
+        knowledge.put("Good evening", "Good evening, buddy.");
+        knowledge.put("Good night", "Good night buddy, sleep tight.");
+        knowledge.put("Bye", "Good bye.");
+        knowledge.put("See you", "Have a good one, buddy.");
+        knowledge.put("What's up", "Oh not much, just planning and organizing activities for the day. How about you?");
+        knowledge.put("Marco", "Polo.");
+        knowledge.put("", "meh");
+        knowledge.put("cool", "I agree.");
+        knowledge.put("Thanks", "You're welcome.");
+        knowledge.put("Thank you", "You are welcome!");
+        knowledge.put("Hey buddy", "Hey, what's up?");
+        knowledge.put("Hey", "Hey!");
+        knowledge.put("Buddy", "Buddy.");
+        knowledge.put("Are you a robot?", "Yes I am.");
+        knowledge.put("Robot", "Human.");
+        knowledge.put("what is love","Baby don't hurt me.");
+        knowledge.put("i love you", "We're just good *buddies* :)");
+        //knowledge.put("What are you able to do?", "I can do.....");
+    }
+
+    public String getLastBotMsg() {
 
         int i = responseMessageList.size() - 1;
         ResponseMessage temp = responseMessageList.get(i);
@@ -213,7 +237,7 @@ public class Buddy extends AppCompatActivity  implements NavigationView.OnNaviga
             ResponseMessage responseMessage = new ResponseMessage(userInput.getText().toString(), true); //true for user, false for bot bubble
             responseMessageList.add(responseMessage);
 
-            String bot_response = buddy.answer(temp); //get reply from bot
+            String bot_response = answer(temp); //get reply from bot
             ResponseMessage responseMessage2 = new ResponseMessage(bot_response.toString(), false);
             responseMessageList.add(responseMessage2);
 
@@ -228,7 +252,7 @@ public class Buddy extends AppCompatActivity  implements NavigationView.OnNaviga
         }
     }
 
-    public static void displayBotText(String temp) { //send Bot Text.
+    public void displayBotText(String temp) { //send Bot Text.
         if (!temp.toString().equals("")) {
 
             ResponseMessage responseMessage = new ResponseMessage(temp.toString(), false);
@@ -295,7 +319,7 @@ public class Buddy extends AppCompatActivity  implements NavigationView.OnNaviga
         try {
             fos = new FileOutputStream(fileName);
             out = new ObjectOutputStream(fos);
-            out.writeObject(buddy_bot.knowledge);
+            out.writeObject(knowledge);
         } catch (IOException ex) {
             ex.printStackTrace();
         }  catch (Exception e) {
@@ -340,7 +364,7 @@ public class Buddy extends AppCompatActivity  implements NavigationView.OnNaviga
             fis = new FileInputStream(fileName);
             in = new ObjectInputStream(fis);
             HashMap<String, String> myHashMap = (HashMap<String, String>) in.readObject();
-            buddy_bot.knowledge = myHashMap;
+            knowledge = myHashMap;
             //System.out.println("count of hash map::"+knowledge.size() + " " + knowledge);
 
         } catch (FileNotFoundException e) {
@@ -377,6 +401,27 @@ public class Buddy extends AppCompatActivity  implements NavigationView.OnNaviga
         else {
             super.onBackPressed();
         }
+    }
+
+    public String showIter() {
+        Intent iter = new Intent (this, Itinerary.class);
+        finish();
+        startActivity(iter);
+        return "I wonder what's planned for today";
+    }
+
+    public String showSettings() {
+        Intent setts = new Intent (this, Settings.class);
+        finish();
+        startActivity(setts);
+        return "Of course!";
+    }
+
+    public String showMap() {
+        Intent map = new Intent (this, MapView.class);
+        finish();
+        startActivity(map);
+        return "Sure thing!";
     }
 
     @Override
@@ -433,5 +478,127 @@ public class Buddy extends AppCompatActivity  implements NavigationView.OnNaviga
         }
         drawerLayout.closeDrawer(GravityCompat.START);
         return true;
+    }
+
+    public String getTime() {
+        java.util.Calendar calendar = java.util.Calendar.getInstance();
+        SimpleDateFormat mdformat = new SimpleDateFormat("HH:mm");
+        String strTime = "The time is : " + mdformat.format(calendar.getTime());
+        return strTime;
+
+    }
+
+    public String getDate() {
+        java.util.Calendar calendar = java.util.Calendar.getInstance();
+        SimpleDateFormat mdformat = new SimpleDateFormat("dd-MMM-yyyy");
+        String strDate = "Today is: " + mdformat.format(calendar.getTime());
+        return strDate;
+    }
+
+    public String forgotPass() {
+        Intent pass = new Intent (this, ForgotPassword.class);
+        finish();
+        startActivity(pass);
+        return "No worries. We can fix that.";
+    }
+
+    public String showProfile() {
+        Intent prof = new Intent (this, ViewAccount.class);
+        finish();
+        startActivity(prof);
+        return "Sure thing!";
+    }
+
+    public String createEv() {
+        Intent ev = new Intent (this, CreateEvent.class);
+        finish();
+        startActivity(ev);
+        return "What's new?";
+    }
+
+    public String goHome() {
+        Intent home = new Intent (this, Home.class);
+        finish();
+        startActivity(home);
+        return "Next stop: Home";
+    }
+
+    public String greeting() {
+        String temp = "Hey Buddy!";
+
+        //good morning buddy
+        //good after buddy
+        //whats up buddy
+        //how can i help buddy
+
+        return temp;
+    }
+
+    public String answer(String question) {
+        Set<String> keys = knowledge.keySet();
+        String temp = "";
+        boolean found = false;
+
+        String Lquestion = question.toLowerCase();
+
+        if(Lquestion.equals("show me the map"))
+            return showMap();
+
+        if(Lquestion.equals("show me the itinerary"))
+            return showIter();
+
+        if(Lquestion.equals("show me the settings"))
+            return showSettings();
+
+        if(Lquestion.equals("what time is it"))
+            return getTime();
+
+        if(Lquestion.equals("show me my profile"))
+            return showProfile();
+
+        if(Lquestion.equals("i forgot my password"))
+            return forgotPass();
+
+        if(Lquestion.equals("take me home"))
+            return goHome();
+
+        if(Lquestion.equals("i want to create a new event"))
+            return createEv();
+
+        //commands/functions
+
+        if (getLastBotMsg().equals("How should I reply?")) {
+            knowledge.put(getLastUserMsg(), question);
+            return "Thanks for teaching me!";
+        } //train bot for unknown answers to questions
+
+        if (getLastBotMsg().equals("Okay, enter how my reply should be")) {
+            customAnswer = question;
+            knowledge.put(customQuery, customAnswer);
+
+            return "Thanks for teaching me!";
+        }//custom bot training functionality
+
+        if (getLastBotMsg().equals("Okay, enter user query")) {
+            customQuery = question;
+            return "Okay, enter how my reply should be";
+
+        } else {
+            for (String key : keys) {
+                String lowerKey = key.toLowerCase();
+                String lowerQuestion = question.toLowerCase();
+
+                if (lowerKey.contains(lowerQuestion)) {
+                    temp = knowledge.get(key);
+                    found = true;
+                }
+            }
+
+            if (!found) {
+                temp = "I don't know about that";
+            }
+        }//custom bot training functionality
+
+        return temp;
     }
 }
