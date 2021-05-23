@@ -5,56 +5,58 @@ import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.ArrayList;
 
-public class ItineraryAdapter extends RecyclerView.Adapter<ItineraryHolder> {
+public class ItineraryAdapter extends RecyclerView.Adapter<ItineraryAdapter.ViewHolder> {
 
-    Context c;
-    ArrayList<Model> models;
+    private ArrayList<EventModel> mEventModel = new ArrayList<>();
+    private EventClickListener mEventClickListener;
 
-    public ItineraryAdapter(Context c, ArrayList<Model> models) {
-        this.c = c;
-        this.models = models;
+    public ItineraryAdapter(ArrayList<EventModel> eventModel, EventClickListener eventClickListener) {
+        this.mEventModel = eventModel;
+        this.mEventClickListener = eventClickListener;
     }
 
-    @NonNull
-    @Override
-    public ItineraryHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View view  = LayoutInflater.from(parent.getContext()).inflate(R.layout.private_events, null);
-        return new ItineraryHolder(view);
+    public ViewHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int i) {
+        View view = LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.private_events, viewGroup, false);
+        return new ViewHolder(view, mEventClickListener);
     }
 
-
-    @Override
-    public void onBindViewHolder(@NonNull ItineraryHolder holder, int position) {
-        holder.mStart.setText(models.get(position).getStartTime());
-        holder.mEnd.setText(models.get(position).getEndTime());
-        holder.mTitle.setText(models.get(position).getTitle());
-//        holder.mLoc.setText(models.get(position).getLoc());
-//        holder.mNotes.setText(models.get(position).getNotes());
-
-//        holder.setItemClickListener(new ItemClickListener() {
-//            @Override
-//            public void inItemClickListener(View v, int position) {
-//                Intent intent = new Intent(c, ViewEvent.class);
-//                intent.putExtra("iTitle", models.get(position).getTitle());
-//                intent.putExtra("iStartTime", models.get(position).getStartTime());
-//                intent.putExtra("iStartDate", models.get(position).getStartDate());
-//                intent.putExtra("iEndTime", models.get(position).getEndTime());
-//                intent.putExtra("iEndDate", models.get(position).getEndDate());
-//                intent.putExtra("iLocation", models.get(position).getLoc());
-//                intent.putExtra("iNotes", models.get(position).getNotes());
-//                c.startActivity(intent);
-//            }
-//        });
+    public void onBindViewHolder(@NonNull ViewHolder viewHolder, int i) {
+        viewHolder.startTime.setText(mEventModel.get(i).getStartTime());
+        viewHolder.endTime.setText(mEventModel.get(i).getEndTime());
+        viewHolder.title.setText(mEventModel.get(i).getTitle());
     }
-
-    @Override
     public int getItemCount() {
-        return models.size();
+        return mEventModel.size();
+    }
+    public static class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
+
+        TextView startTime, endTime, title;
+        EventClickListener mEventClickListener;
+
+        public ViewHolder(@NonNull View itemView, EventClickListener eventClickListener) {
+            super(itemView);
+            startTime = itemView.findViewById(R.id.itn_start);
+            endTime = itemView.findViewById(R.id.itn_end);
+            title = itemView.findViewById(R.id.itn_title);
+            mEventClickListener = eventClickListener;
+
+            itemView.setOnClickListener(this);
+        }
+
+        @Override
+        public void onClick(View v) {
+            mEventClickListener.onEventClick(getAdapterPosition());
+        }
+    }
+
+    public interface EventClickListener {
+        void onEventClick(int position);
     }
 }

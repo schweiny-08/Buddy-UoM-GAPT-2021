@@ -1,26 +1,32 @@
 package com.example.buddypersonal;
 
-public class Model {
+public class EventModel {
 
-    private String id, title, type, startTime, startDate, endTime, endDate, notes, description, loc;
+    private int eventId, userId;
+    private String title, startTime, startDate, endTime, endDate, notes, loc;
+
+    public int getEventId() {
+        return eventId;
+    }
+
+    public void setEventId(int eventId) {
+        this.eventId = eventId;
+    }
+
+    public int getUserId() {
+        return userId;
+    }
+
+    public void setUserId(int userId) {
+        this.userId = userId;
+    }
 
     public String getTitle() {
-
         return title;
     }
 
     public void setTitle(String title) {
-
         this.title = title;
-    }
-
-    public String getType() {
-        return type;
-    }
-
-    public void setType(String type) {
-
-        this.type = type;
     }
 
     public String getStartTime() {
@@ -63,27 +69,11 @@ public class Model {
         this.notes = notes;
     }
 
-    public String getDescription() {
-        return description;
-    }
-
-    public void setDescription(String description) {
-        this.description = description;
-    }
-
     public String getLoc() {
         return loc;
     }
 
     public void setLoc(String loc) {
         this.loc = loc;
-    }
-
-    public String getId() {
-        return id;
-    }
-
-    public void setId(String id) {
-        this.id = id;
     }
 }
