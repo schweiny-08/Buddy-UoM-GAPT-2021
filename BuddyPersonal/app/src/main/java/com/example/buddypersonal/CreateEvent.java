@@ -23,6 +23,11 @@ import android.widget.Toast;
 
 import com.google.android.material.navigation.NavigationView;
 
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.io.ObjectOutputStream;
 import java.text.DateFormat;
 import java.util.Calendar;
 import java.util.Date;
@@ -113,6 +118,8 @@ public class CreateEvent extends AppCompatActivity implements AdapterView.OnItem
         }
         else {
             Toast.makeText(CreateEvent.this, "Event has been successfully created.", Toast.LENGTH_SHORT).show();
+            //create event + add to arraylist
+            //save event list
             Intent intent = new Intent(this, Itinerary.class);
             startActivity(intent);
         }
@@ -230,5 +237,57 @@ public class CreateEvent extends AppCompatActivity implements AdapterView.OnItem
         }
         drawerLayout.closeDrawer(GravityCompat.START);
         return true;
+    }
+
+    private String subFolder = "/userdata";
+    //user_file, event_file
+
+    public void saveFile(String file, String JsonObj) {
+        File cacheDir = null;
+        File appDirectory = null;
+
+        if (android.os.Environment.getExternalStorageState().
+                equals(android.os.Environment.MEDIA_MOUNTED)) {
+            cacheDir = getApplicationContext().getExternalCacheDir();
+            appDirectory = new File(cacheDir + subFolder);
+
+        } else {
+            cacheDir = getApplicationContext().getCacheDir();
+            String BaseFolder = cacheDir.getAbsolutePath();
+            appDirectory = new File(BaseFolder + subFolder);
+
+        }
+
+        if (appDirectory != null && !appDirectory.exists()) {
+            appDirectory.mkdirs();
+        }
+
+        File fileName = new File(appDirectory, file);
+
+        FileOutputStream fos = null;
+        ObjectOutputStream out = null;
+        try {
+
+            FileWriter filenew = new FileWriter(appDirectory + "/" + file);
+            filenew.write(JsonObj);
+            filenew.flush();
+            filenew.close();
+
+        } catch (IOException ex) {
+            ex.printStackTrace();
+        }  catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            try {
+                if (fos != null)
+                    fos.flush();
+                fos.close();
+                if (out != null)
+                    out.flush();
+                out.close();
+            } catch (Exception e) {
+
+            }
+        }
     }
 }

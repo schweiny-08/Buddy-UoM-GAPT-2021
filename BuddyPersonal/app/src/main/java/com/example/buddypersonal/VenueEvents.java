@@ -23,7 +23,6 @@ public class VenueEvents extends AppCompatActivity implements NavigationView.OnN
     VenueEventsAdapter puEventAdapter;
     public ArrayList<PublicEventModel> prModel = new ArrayList<>();
 
-
     DrawerLayout drawerLayout;
     NavigationView navigationView;
 

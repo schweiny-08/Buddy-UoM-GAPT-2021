@@ -5,6 +5,32 @@ public class PublicEventModel {
     private int puEventId, architectId, siteId;
     private String title, startTime, startDate, endTime, endDate, location, description;
 
+    public PublicEventModel() {
+        this.puEventId = -1;
+        this.architectId = -1;
+        this.siteId = -1;
+        this.title = "title";
+        this.startTime = "startTime";
+        this.startDate = "startDate";
+        this.endTime = "endTime";
+        this.endDate = "endDate";
+        this.location = "loc";
+        this.description = "description";
+    }
+
+    public PublicEventModel(int puid, int aid, int sid, String titl, String startTajm, String startDejt, String endTajm, String endDejt, String loca, String desc) {
+        this.puEventId = puid;
+        this.architectId = aid;
+        this.siteId = sid;
+        this.title = titl;
+        this.startTime = startTajm;
+        this.startDate = startDejt;
+        this.endTime = endTajm;
+        this.endDate = endDejt;
+        this.location = loca;
+        this.description = desc;
+    }
+
     public int getPuEventId() {
         return puEventId;
     }

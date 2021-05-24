@@ -5,6 +5,30 @@ public class EventModel {
     private int eventId, userId;
     private String title, startTime, startDate, endTime, endDate, notes, loc;
 
+    public EventModel() {
+        this.eventId = -1;
+        this.userId = -1;
+        this.title = "title";
+        this.startTime = "startTajm";
+        this.startDate = "startDejt";
+        this.endTime = "endTajm";
+        this.endDate = "endDejt";
+        this.notes = "noti";
+        this.loc = "loca";
+    }
+
+    public EventModel(int evid, int uid, String titl, String startTajm, String startDejt, String endTajm, String endDejt, String noti, String loca) {
+        this.eventId = evid;
+        this.userId = uid;
+        this.title = titl;
+        this.startTime = startTajm;
+        this.startDate = startDejt;
+        this.endTime = endTajm;
+        this.endDate = endDejt;
+        this.notes = noti;
+        this.loc = loca;
+    }
+
     public int getEventId() {
         return eventId;
     }

@@ -20,11 +20,13 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.google.android.material.navigation.NavigationView;
+import com.google.gson.Gson;
 
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
+import java.io.FileWriter;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
@@ -36,7 +38,7 @@ import java.util.List;
 import java.util.Locale;
 import java.util.Set;
 
-public class Buddy extends AppCompatActivity  implements NavigationView.OnNavigationItemSelectedListener{
+public class Buddy extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener{
 
     static EditText userInput;
     static RecyclerView recyclerView;
@@ -124,11 +126,6 @@ public class Buddy extends AppCompatActivity  implements NavigationView.OnNaviga
         navigationView.setNavigationItemSelectedListener(this);
     }
 
-    /*public static String getLastChatMsg() {
-        ResponseMessage temp = responseMessageList.get(responseMessageList.size() - 1);
-        return temp.text;
-    }*/
-
     public String getLastUserMsg() {
 
         int i = responseMessageList.size() - 1;
@@ -140,32 +137,6 @@ public class Buddy extends AppCompatActivity  implements NavigationView.OnNaviga
         }
         return temp.text;
     }
-
-    /*public static String get2ndLastUserMsg() {
-
-        int i = responseMessageList.size() - 1;
-        ResponseMessage temp = responseMessageList.get(i);
-
-        while(!temp.isMe && i>0){
-            i--;
-            temp = responseMessageList.get(i);
-        }
-
-        if(i>0) {
-            i--;
-            temp = responseMessageList.get(i);
-
-            while(!temp.isMe && i>0){
-                i--;
-                temp = responseMessageList.get(i);
-            }
-
-            return temp.text;
-        }else {
-            return "Not found";
-        }
-
-    }*/
 
     public void buildKB() {
         knowledge.put("Hi", "Hello... Pleased to meet you!");
@@ -290,11 +261,13 @@ public class Buddy extends AppCompatActivity  implements NavigationView.OnNaviga
     } //chat screen method, check if last message is visible
 
     private String subFolder = "/userdata";
-    private String file = "buddy_kb.txt";
+    private String file = "buddy_kb";
 
     public String saveKB() {
         File cacheDir = null;
         File appDirectory = null;
+
+        String Json = new Gson().toJson(knowledge);
 
         if (android.os.Environment.getExternalStorageState().
                 equals(android.os.Environment.MEDIA_MOUNTED)) {
@@ -317,9 +290,10 @@ public class Buddy extends AppCompatActivity  implements NavigationView.OnNaviga
         FileOutputStream fos = null;
         ObjectOutputStream out = null;
         try {
-            fos = new FileOutputStream(fileName);
-            out = new ObjectOutputStream(fos);
-            out.writeObject(knowledge);
+            FileWriter filenew = new FileWriter(appDirectory + "/" + file);
+            filenew.write(Json);
+            filenew.flush();
+            filenew.close();
         } catch (IOException ex) {
             ex.printStackTrace();
         }  catch (Exception e) {

@@ -1,12 +1,16 @@
 package com.example.buddypersonal;
 
+import java.util.ArrayList;
+
 public class User {
 
-    private Integer uId;
-    private String uName, uSurname, uDob, uEmail, uUsername, uPassword;
+    //private Integer uId;
+    //private String uName, uSurname, uDob, uEmail, uUsername, uPassword;
 
     private Integer user_Id, telephone, role_Id;
     private String username, email, password;
+
+    //public ArrayList<EventModel> privateEvents = new ArrayList<EventModel>();
 
     public Integer getId() {
         return user_Id;
@@ -40,6 +44,16 @@ public class User {
         this.email = email;
         this.password = password;
     }
+
+    public User() {
+        this.user_Id = -1;
+        this.telephone = 0;
+        this.role_Id = 0;
+        this.username = "default_user";
+        this.email = "default_email@buddy.com";
+        this.password = "default_password";
+    }
+
 //    public User(Integer uID, String uName, String uSurname, String uDob, String uEmail, String uUsername, String uPassword) {
 //        this.uId = uId;
 //        this.uName = uName;

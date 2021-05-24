@@ -1,6 +1,7 @@
 package com.example.buddypersonal;
 
 import android.app.DatePickerDialog;
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.TextUtils;
@@ -16,6 +17,11 @@ import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.DialogFragment;
 
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.io.ObjectOutputStream;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
@@ -43,7 +49,11 @@ public class Register extends AppCompatActivity implements AdapterView.OnItemSel
 //    RestService restService;
     private int _User_Id = 0;
 
+    //public Context context;
+
     private JsonPlaceHolderApi jsonPlaceHolderApi;
+
+    static LocalStorage localstorage = new LocalStorage();
 
     String sName, sSurname, sDob, sEmail, sUsername, sPassword;
 
@@ -57,6 +67,8 @@ public class Register extends AppCompatActivity implements AdapterView.OnItemSel
                 .addConverterFactory(GsonConverterFactory.create())
                 .build();
         jsonPlaceHolderApi = retrofit.create(JsonPlaceHolderApi.class);
+
+        //context = getApplication().getBaseContext();
 
 //        Call<User>
 
@@ -226,8 +238,10 @@ public class Register extends AppCompatActivity implements AdapterView.OnItemSel
 
     private void registerUser() {
 
-//        User user = new User(sName, sSurname, sDob, sEmail, sUsername, sPassword);
+//      User user = new User(sName, sSurname, sDob, sEmail, sUsername, sPassword);
         User user = new User(0, "ft", 12345678, "ft@test.com", "maybe123", 3 );
+        localstorage.usersList.add(user);
+        saveFile("user_file.json", localstorage.getUserJson());
 
         Call<User> call = jsonPlaceHolderApi.registerUser(user);
         call.enqueue(new Callback<User>() {
@@ -243,7 +257,61 @@ public class Register extends AppCompatActivity implements AdapterView.OnItemSel
             @Override
             public void onFailure(Call<User> call, Throwable t) {
                 Toast.makeText(Register.this, t.getMessage(), Toast.LENGTH_SHORT).show();
+                Intent intent = new Intent(Register.this, Login.class);
+                startActivity(intent);
             }
         });
+    }
+
+    private String subFolder = "/userdata";
+    //user_file, event_file
+
+    public void saveFile(String file, String JsonObj) {
+        File cacheDir = null;
+        File appDirectory = null;
+
+        if (android.os.Environment.getExternalStorageState().
+                equals(android.os.Environment.MEDIA_MOUNTED)) {
+            cacheDir = getApplicationContext().getExternalCacheDir();
+            appDirectory = new File(cacheDir + subFolder);
+
+        } else {
+            cacheDir = getApplicationContext().getCacheDir();
+            String BaseFolder = cacheDir.getAbsolutePath();
+            appDirectory = new File(BaseFolder + subFolder);
+
+        }
+
+        if (appDirectory != null && !appDirectory.exists()) {
+            appDirectory.mkdirs();
+        }
+
+        File fileName = new File(appDirectory, file);
+
+        FileOutputStream fos = null;
+        ObjectOutputStream out = null;
+        try {
+
+            FileWriter filenew = new FileWriter(appDirectory + "/" + file);
+            filenew.write(JsonObj);
+            filenew.flush();
+            filenew.close();
+
+        } catch (IOException ex) {
+            ex.printStackTrace();
+        }  catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            try {
+                if (fos != null)
+                    fos.flush();
+                fos.close();
+                if (out != null)
+                    out.flush();
+                out.close();
+            } catch (Exception e) {
+
+            }
+        }
     }
 }
