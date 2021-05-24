@@ -16,7 +16,6 @@
         android:networkSecurityConfig="@xml/network_security_policy"
         android:theme="@style/Theme.AppCompat.Light">
         <activity android:name=".ViewEvent"></activity>
-        <activity android:name=".CalendarList" />
         <activity
             android:name=".MapView"
             android:parentActivityName=".Home"
@@ -82,14 +81,6 @@
         </activity>
         <activity
             android:name=".ForgotPassword"
-            android:parentActivityName=".Login"
-            android:screenOrientation="portrait">
-            <meta-data
-                android:name="android.support.PARENT_ACTIVITY"
-                android:value=".Login" />
-        </activity>
-        <activity
-            android:name=".MainActivity"
             android:parentActivityName=".Login"
             android:screenOrientation="portrait">
             <meta-data

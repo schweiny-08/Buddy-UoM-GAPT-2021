@@ -4,40 +4,50 @@ import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.ArrayList;
 
-public class VenueEventsAdapter extends RecyclerView.Adapter<VenueEventsHolder> {
-    Context c;
-    ArrayList<Model> models;
+public class VenueEventsAdapter extends RecyclerView.Adapter<VenueEventsAdapter.ViewHolder> {
 
-    public VenueEventsAdapter(Context c, ArrayList<Model> models) {
-        this.c = c;
-        this.models = models;
+    private ArrayList<PublicEventModel> mPuEModel = new ArrayList<>();
+
+    public VenueEventsAdapter(ArrayList<PublicEventModel> eventModel) {
+        this.mPuEModel = eventModel;
     }
 
-    @NonNull
-    @Override
-    public VenueEventsHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.public_events, null);
-        return new VenueEventsHolder(view);
+    public ViewHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int i) {
+        View view = LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.public_events, viewGroup, false);
+        return new ViewHolder(view);
     }
 
-
-    @Override
-    public void onBindViewHolder(@NonNull VenueEventsHolder holder, int position) {
-        holder.mStart.setText(models.get(position).getStartTime());
-        holder.mEnd.setText(models.get(position).getEndTime());
-        holder.mTitle.setText(models.get(position).getTitle());
-        holder.mLoc.setText(models.get(position).getLoc());
-        holder.mDesc.setText(models.get(position).getDescription());
+    public void onBindViewHolder(@NonNull ViewHolder viewHolder, int i) {
+        viewHolder.startTime.setText(mPuEModel.get(i).getStartTime());
+        viewHolder.endTime.setText(mPuEModel.get(i).getEndTime());
+        viewHolder.title.setText(mPuEModel.get(i).getTitle());
+        viewHolder.location.setText(mPuEModel.get(i).getLocation());
+        viewHolder.description.setText(mPuEModel.get(i).getDescription());
     }
 
     @Override
     public int getItemCount() {
-        return models.size();
+        return mPuEModel.size();
+    }
+
+    public static class ViewHolder extends RecyclerView.ViewHolder {
+
+        TextView startTime, endTime, title, location, description;
+
+        public ViewHolder(@NonNull View itemView) {
+            super(itemView);
+            startTime = itemView.findViewById(R.id.ven_start);
+            endTime = itemView.findViewById(R.id.ven_end);
+            title = itemView.findViewById(R.id.ven_title);
+            location = itemView.findViewById(R.id.ven_loc);
+            description = itemView.findViewById(R.id.ven_desc);
+        }
     }
 }

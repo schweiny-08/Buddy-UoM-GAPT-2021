@@ -31,5 +31,4 @@ public class EditAccount extends AppCompatActivity{
         Intent intent = new Intent(EditAccount.this, ViewAccount.class);
         startActivity(intent);
     }
-
 }
