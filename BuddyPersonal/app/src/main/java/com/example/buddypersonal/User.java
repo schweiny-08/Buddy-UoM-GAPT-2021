@@ -4,13 +4,13 @@ import java.util.ArrayList;
 
 public class User {
 
-    //private Integer uId;
-    //private String uName, uSurname, uDob, uEmail, uUsername, uPassword;
+
+    private String uName, uSurname, uDob;
 
     private Integer user_Id, telephone, role_Id;
     private String username, email, password;
 
-    //public ArrayList<EventModel> privateEvents = new ArrayList<EventModel>();
+    public ArrayList<EventModel> privateEvents = new ArrayList<EventModel>();
 
     public Integer getId() {
         return user_Id;
@@ -36,13 +36,20 @@ public class User {
         return password;
     }
 
-    public User(Integer user_Id, String username, Integer telephone, String email, String password, Integer role_Id) {
+    public void setPassword(String temp) {
+        this.password = temp;
+    }
+
+    public User(Integer user_Id, String username, Integer telephone, String email, String password, Integer role_Id, String name, String surname, String doby) {
         this.user_Id = user_Id;
         this.telephone = telephone;
         this.role_Id = role_Id;
         this.username = username;
         this.email = email;
         this.password = password;
+        this.uDob = doby;
+        this.uName = name;
+        this.uSurname = surname;
     }
 
     public User() {
@@ -52,43 +59,24 @@ public class User {
         this.username = "default_user";
         this.email = "default_email@buddy.com";
         this.password = "default_password";
+        this.uName = "def";
+        this.uSurname = "def";
+        this.uDob = "01/01/70"; //the beginning of recorded history
     }
 
-//    public User(Integer uID, String uName, String uSurname, String uDob, String uEmail, String uUsername, String uPassword) {
-//        this.uId = uId;
-//        this.uName = uName;
-//        this.uSurname = uSurname;
-//        this.uDob = uDob;
-//        this.uEmail = uEmail;
-//        this.uUsername = uUsername;
-//        this.uPassword = uPassword;
-//    }
+    public String getUName() {
+       return this.uName;
+    }
 
-//    public int getuId() {
-//        return uId;
-//    }
-//
-//    public String getUName() {
-//        return uName;
-//    }
-//
-//    public String getUSurname() {
-//        return uSurname;
-//    }
-//
-//    public String getUDob() {
-//        return uDob;
-//    }
-//
-//    public String getUEmail() {
-//        return uEmail;
-//    }
-//
-//    public String getUUsername() {
-//        return uUsername;
-//    }
-//
-//    public String getUPassword() {
-//        return uPassword;
-//    }
+    public String getUSurname() {
+        return uSurname;
+   }
+
+    public String getUDob() {
+        return uDob;
+    }
+
+    public void addEvent(EventModel event) {
+        privateEvents.add(event);
+    }
 }

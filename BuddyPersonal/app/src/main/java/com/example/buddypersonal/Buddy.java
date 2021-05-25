@@ -1,6 +1,7 @@
 package com.example.buddypersonal;
 
 import android.content.Intent;
+import android.os.Build;
 import android.os.Bundle;
 import android.speech.RecognizerIntent;
 import android.speech.tts.TextToSpeech;
@@ -12,6 +13,7 @@ import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.ActionBarDrawerToggle;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.view.GravityCompat;
@@ -30,9 +32,13 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
+import java.io.Reader;
 import java.io.StreamCorruptedException;
+import java.nio.file.Files;
+import java.nio.file.Paths;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Locale;
@@ -62,6 +68,7 @@ public class Buddy extends AppCompatActivity implements NavigationView.OnNavigat
     DrawerLayout drawerLayout;
     NavigationView navigationView;
 
+    @RequiresApi(api = Build.VERSION_CODES.O)
     @Override
     protected void onCreate(Bundle savedInstanceState) {
 
@@ -113,7 +120,11 @@ public class Buddy extends AppCompatActivity implements NavigationView.OnNavigat
         ConvertToSpeech(temp);
 
         buildKB();
-        loadKB();
+        try {
+            loadKB();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
 
         drawerLayout = findViewById(R.id.bud_drawer);
         navigationView = findViewById(R.id.bud_nav);
@@ -228,6 +239,7 @@ public class Buddy extends AppCompatActivity implements NavigationView.OnNavigat
 
             ResponseMessage responseMessage = new ResponseMessage(temp.toString(), false);
             responseMessageList.add(responseMessage);
+            //ConvertToSpeech(temp);
 
             messageAdapter.notifyDataSetChanged();
             if (!isLastVisible())
@@ -261,7 +273,7 @@ public class Buddy extends AppCompatActivity implements NavigationView.OnNavigat
     } //chat screen method, check if last message is visible
 
     private String subFolder = "/userdata";
-    private String file = "buddy_kb";
+    private String file = "buddy_kb.json";
 
     public String saveKB() {
         File cacheDir = null;
@@ -314,7 +326,8 @@ public class Buddy extends AppCompatActivity implements NavigationView.OnNavigat
         return "I saved my knowledge base.";
     }
 
-    public String loadKB() {
+    @RequiresApi(api = Build.VERSION_CODES.O)
+    public String loadKB() throws IOException {
         File cacheDir = null;
         File appDirectory = null;
         if (android.os.Environment.getExternalStorageState().
@@ -330,7 +343,7 @@ public class Buddy extends AppCompatActivity implements NavigationView.OnNavigat
         if (appDirectory != null && !appDirectory.exists())
             return "Knowledge base does not exist."; // File does not exist
 
-        File fileName = new File(appDirectory, file);
+        /*File fileName = new File(appDirectory, file);
 
         FileInputStream fis = null;
         ObjectInputStream in = null;
@@ -339,7 +352,6 @@ public class Buddy extends AppCompatActivity implements NavigationView.OnNavigat
             in = new ObjectInputStream(fis);
             HashMap<String, String> myHashMap = (HashMap<String, String>) in.readObject();
             knowledge = myHashMap;
-            //System.out.println("count of hash map::"+knowledge.size() + " " + knowledge);
 
         } catch (FileNotFoundException e) {
             e.printStackTrace();
@@ -363,7 +375,20 @@ public class Buddy extends AppCompatActivity implements NavigationView.OnNavigat
             } catch (IOException e) {
                 e.printStackTrace();
             }
-        }
+        }*/
+
+        Gson gson = new Gson();
+
+        // create a reader
+        Reader reader = Files.newBufferedReader(Paths.get(subFolder+"/buddy_kb.json"));
+
+        // convert JSON file to map
+        HashMap<String, String> map = gson.fromJson(reader, HashMap.class);
+        knowledge = map;
+
+        // close reader
+        reader.close();
+
         return "I loaded my knowledge base.";
     }
 
@@ -508,6 +533,32 @@ public class Buddy extends AppCompatActivity implements NavigationView.OnNavigat
         return temp;
     }
 
+    public static String get2ndLastUserMsg() {
+
+        int i = responseMessageList.size() - 1;
+        ResponseMessage temp = responseMessageList.get(i);
+
+        while(!temp.isMe && i>0){
+            i--;
+            temp = responseMessageList.get(i);
+        }
+
+        if(i>0) {
+            i--;
+            temp = responseMessageList.get(i);
+
+            while(!temp.isMe && i>0){
+                i--;
+                temp = responseMessageList.get(i);
+            }
+
+            return temp.text;
+        }else {
+            return "Not found";
+        }
+
+    }
+
     public String answer(String question) {
         Set<String> keys = knowledge.keySet();
         String temp = "";
@@ -541,21 +592,21 @@ public class Buddy extends AppCompatActivity implements NavigationView.OnNavigat
 
         //commands/functions
 
-        if (getLastBotMsg().equals("How should I reply?")) {
-            knowledge.put(getLastUserMsg(), question);
+        if (getLastBotMsg().equals("I don't know about that. How should I reply?")) {
+            knowledge.put(get2ndLastUserMsg(), question);
             return "Thanks for teaching me!";
         } //train bot for unknown answers to questions
 
-        if (getLastBotMsg().equals("Okay, enter how my reply should be")) {
+        if (getLastBotMsg().equals("Okay, enter how my reply should be.")) {
             customAnswer = question;
             knowledge.put(customQuery, customAnswer);
 
             return "Thanks for teaching me!";
         }//custom bot training functionality
 
-        if (getLastBotMsg().equals("Okay, enter user query")) {
+        if (getLastBotMsg().equals("Okay, enter user query.")) {
             customQuery = question;
-            return "Okay, enter how my reply should be";
+            return "Okay, enter how my reply should be.";
 
         } else {
             for (String key : keys) {
@@ -569,7 +620,7 @@ public class Buddy extends AppCompatActivity implements NavigationView.OnNavigat
             }
 
             if (!found) {
-                temp = "I don't know about that";
+                temp = "I don't know about that. How should I reply?";
             }
         }//custom bot training functionality
 

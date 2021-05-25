@@ -46,14 +46,16 @@ public class Register extends AppCompatActivity implements AdapterView.OnItemSel
     Date DOB;
     SimpleDateFormat sdf;
     Picker picker = new Picker();
-//    RestService restService;
-    private int _User_Id = 0;
+    //RestService restService;
+    //private int _User_Id = 0;
+
+    Button contact;
 
     //public Context context;
 
     private JsonPlaceHolderApi jsonPlaceHolderApi;
 
-    static LocalStorage localstorage = new LocalStorage();
+    //static LocalStorage localstorage = new LocalStorage();
 
     String sName, sSurname, sDob, sEmail, sUsername, sPassword;
 
@@ -98,6 +100,22 @@ public class Register extends AppCompatActivity implements AdapterView.OnItemSel
                 DialogFragment datePicker = new DatePickerFragment();
                 datePicker.show(getSupportFragmentManager(), "date picker");
             }
+        });
+
+        contact = (Button) findViewById(R.id.reg_bt_contact);
+        contact.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Intent intent=new Intent(Intent.ACTION_SEND);
+                    String[] recipients={"buddy_customer@gmail.com"};
+                    intent.putExtra(Intent.EXTRA_EMAIL, recipients);
+                    //intent.putExtra(Intent.EXTRA_SUBJECT,"Subject text here...");
+                    //intent.putExtra(Intent.EXTRA_TEXT,"Body of the content here...");
+                    //intent.putExtra(Intent.EXTRA_CC,"mailcc@gmail.com");
+                    intent.setType("text/html");
+                    intent.setPackage("com.google.android.gm");
+                    startActivity(Intent.createChooser(intent, "Send mail"));
+        }
         });
 
 //        _User_Id = 0;
@@ -238,29 +256,47 @@ public class Register extends AppCompatActivity implements AdapterView.OnItemSel
 
     private void registerUser() {
 
-//      User user = new User(sName, sSurname, sDob, sEmail, sUsername, sPassword);
-        User user = new User(0, "ft", 12345678, "ft@test.com", "maybe123", 3 );
-        localstorage.usersList.add(user);
-        saveFile("user_file.json", localstorage.getUserJson());
+        sName = name.getText().toString();
+        sSurname = surname.getText().toString();
+        sDob = dob.getText().toString();
+        sEmail = email.getText().toString();
+        sUsername = username.getText().toString();
+        sPassword = password.getText().toString();
 
-        Call<User> call = jsonPlaceHolderApi.registerUser(user);
-        call.enqueue(new Callback<User>() {
-            @Override
-            public void onResponse(Call<User> call, Response<User> response) {
+        if(!checkUserValid(sUsername)){
+            Toast.makeText(Register.this, "This username has already been registered!", Toast.LENGTH_SHORT).show();
+        }else if(!checkEmailValid(sEmail)) { //email already registered
+            Toast.makeText(Register.this, "This email has already been registered!", Toast.LENGTH_SHORT).show();
+        } else if(!sPassword.equals(confPassword.getText().toString())) { //pass do not match
+            Toast.makeText(Register.this, "Passwords do not match!", Toast.LENGTH_SHORT).show();
+        } else {
 
-                if (!response.isSuccessful()) {
-                    Toast.makeText(Register.this, "Code: " + response.code(), Toast.LENGTH_SHORT).show();
-                }
+            User user = new User(LocalStorage.usersList.size()+1, sUsername, 12345678, sEmail, sPassword, 0, sName, sSurname, sDob);
+
+            LocalStorage.usersList.add(user);
+            saveFile("user_file.json", LocalStorage.getUserJson());
+
+            Call<User> call = jsonPlaceHolderApi.registerUser(user);
+            call.enqueue(new Callback<User>() {
+                @Override
+                public void onResponse(Call<User> call, Response<User> response) {
+
+                    if (!response.isSuccessful()) {
+                        Toast.makeText(Register.this, "Code: " + response.code(), Toast.LENGTH_SHORT).show();
+                    }
 //                User userResponse = response.body();
-            }
+                }
 
-            @Override
-            public void onFailure(Call<User> call, Throwable t) {
-                Toast.makeText(Register.this, t.getMessage(), Toast.LENGTH_SHORT).show();
-                Intent intent = new Intent(Register.this, Login.class);
-                startActivity(intent);
-            }
-        });
+                @Override
+                public void onFailure(Call<User> call, Throwable t) {
+                    Toast.makeText(Register.this, t.getMessage(), Toast.LENGTH_SHORT).show();
+
+                }
+            });
+
+            Intent intent = new Intent(Register.this, Login.class);
+            startActivity(intent);
+        }
     }
 
     private String subFolder = "/userdata";
@@ -314,4 +350,31 @@ public class Register extends AppCompatActivity implements AdapterView.OnItemSel
             }
         }
     }
+
+    public static boolean checkEmailValid(String email) {
+        //this was not our part to do. back end function
+        int i = 0;
+        while(i>-1 && i<LocalStorage.usersList.size()) {
+            if(LocalStorage.usersList.get(i).getEmail().equals(email)) {
+                return false;
+                //match is found. Is valid? no.
+            }
+            i++;
+        }
+        return true; /// no match found. is valid? yes
+    }
+
+    public static boolean checkUserValid(String user) {
+        //this was not our part to do. back end function
+        int i = 0;
+        while(i>-1 && i<LocalStorage.usersList.size()) {
+            if(LocalStorage.usersList.get(i).getUsername().equals(user)) {
+                return false;
+                //match is found. Is valid? no.
+            }
+            i++;
+        }
+        return true; /// no match found. is valid? yes
+    }
+
 }

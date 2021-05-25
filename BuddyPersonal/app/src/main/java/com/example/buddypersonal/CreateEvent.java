@@ -118,8 +118,22 @@ public class CreateEvent extends AppCompatActivity implements AdapterView.OnItem
         }
         else {
             Toast.makeText(CreateEvent.this, "Event has been successfully created.", Toast.LENGTH_SHORT).show();
-            //create event + add to arraylist
-            //save event list
+
+            int evid = LocalStorage.usersList.get(LocalStorage.loggedInUser).privateEvents.size()+1;
+            int uid = LocalStorage.loggedInUser;
+            String titl = title.getText().toString();
+            String st = startTime.getText().toString();
+            String sd = startDate.getText().toString();
+            String et = endTime.getText().toString();
+            String ed = endDate.getText().toString();
+            String noti = notes.getText().toString();
+            String loca = location.getText().toString();
+
+
+            EventModel eventNew = new EventModel(evid, uid, titl, st, sd, et, ed, noti, loca); //according to parameters, to do
+            LocalStorage.usersList.get(LocalStorage.loggedInUser).addEvent(eventNew);
+            saveFile("user_file.json", LocalStorage.getUserJson()); //since is private event and private events are stored in user obj, so save the user list
+
             Intent intent = new Intent(this, Itinerary.class);
             startActivity(intent);
         }

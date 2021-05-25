@@ -6,10 +6,13 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
 
+import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.android.material.navigation.NavigationView;
@@ -19,6 +22,9 @@ public class ViewAccount extends AppCompatActivity implements NavigationView.OnN
     DrawerLayout drawerLayout;
     NavigationView navigationView;
 
+    EditText name, surname, email, username;
+
+    @SuppressLint("WrongViewCast")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -33,6 +39,16 @@ public class ViewAccount extends AppCompatActivity implements NavigationView.OnN
         toggle.syncState();
 
         navigationView.setNavigationItemSelectedListener(this);
+
+        name = (EditText) findViewById(R.id.act_tv_name);
+        surname = (EditText) findViewById(R.id.act_tv_surname);
+        email = (EditText) findViewById(R.id.act_tv_email);
+        username = (EditText) findViewById(R.id.act_tv_username);
+
+        name.setText(LocalStorage.usersList.get(LocalStorage.loggedInUser).getUName());
+        surname.setText(LocalStorage.usersList.get(LocalStorage.loggedInUser).getUSurname());
+        email.setText(LocalStorage.usersList.get(LocalStorage.loggedInUser).getEmail());
+        username.setText(LocalStorage.usersList.get(LocalStorage.loggedInUser).getUsername());
     }
 
     public void edit(View view){

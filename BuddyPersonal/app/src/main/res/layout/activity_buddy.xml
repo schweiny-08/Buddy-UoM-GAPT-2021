@@ -40,8 +40,8 @@
 
         <EditText
             android:id="@+id/userInput"
-            android:layout_width="0dp"
-            android:layout_height="0dp"
+            android:layout_width="245dp"
+            android:layout_height="73dp"
             android:layout_alignParentBottom="true"
             android:background="@drawable/bg_edit_text"
             android:hint="Ask Buddy"
