@@ -80,4 +80,11 @@
     <string name="event">Event</string>
     <string name="cancel">Cancel</string>
     <string name="delete">Delete</string>
+    <string name= "colour_correction">Colour Correction</string>
+    <string name= "languages">Languages</string>
+    <string name= "font_size">Font Size</string>
+    <string name= "text_to_speech">Text-to-Speech</string>
+    <string name= "small">Small</string>
+    <string name= "normal">Normal</string>
+    <string name= "large">Large</string>
 </resources>

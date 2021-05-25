@@ -7,8 +7,8 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:fitsSystemWindows="true"
-    tools:context=".Accessibility"
-    tools:openDrawer="start">
+    tools:context=".Accessibility">
+<!--    tools:openDrawer="start">-->
 
     <com.google.android.material.navigation.NavigationView
         android:id="@+id/acc_nav"
@@ -27,7 +27,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:gravity="left"
-            android:text="Color Correction"
+            android:text="@string/colour_correction"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/radioGroup2" />
@@ -38,7 +38,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:gravity="left"
-            android:text="Languages"
+            android:text="@string/languages"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/iwebfuwebf" />
 
@@ -62,7 +62,7 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:gravity="left"
-            android:text="Text-to-Speech"
+            android:text="@string/text_to_speech"
             app:layout_constraintEnd_toStartOf="@+id/iwebfuwebf"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/radioGroup" />
@@ -84,7 +84,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:gravity="left"
-            android:text="Font Size"
+            android:text="@string/font_size"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/acc_et_title" />
 
@@ -100,19 +100,19 @@
                 android:id="@+id/rdb_small"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Small" />
+                android:text="@string/small" />
 
             <RadioButton
                 android:id="@+id/rdb_normal"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Normal" />
+                android:text="@string/normal" />
 
             <RadioButton
                 android:id="@+id/rdb_large"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Large" />
+                android:text="@string/large" />
         </RadioGroup>
 
         <!--    <ToggleButton-->

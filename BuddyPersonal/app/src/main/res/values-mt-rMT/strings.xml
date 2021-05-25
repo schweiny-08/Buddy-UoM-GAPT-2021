@@ -80,4 +80,11 @@
     <string name="event">Avveniment</string>
     <string name="cancel">Ikkanċella</string>
     <string name="delete">Ħassar</string>
+    <string name="colour_correction">Irranga il-Kulur</string>
+    <string name="languages">Lingwi</string>
+    <string name="font_size">Kobor tal-Kliem</string>
+    <string name="text_to_speech">Kliem-ghal-Diskors</string>
+    <string name="small">Żgħir</string>
+    <string name="normal">Normali</string>
+    <string name="large">Kbir</string>
 </resources>
