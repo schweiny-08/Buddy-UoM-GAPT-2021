@@ -10,6 +10,7 @@ import androidx.fragment.app.DialogFragment;
 import android.app.DatePickerDialog;
 import android.app.TimePickerDialog;
 import android.content.Intent;
+import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.MenuItem;
@@ -102,6 +103,7 @@ public class CreateEvent extends AppCompatActivity implements AdapterView.OnItem
         toggle.syncState();
 
         navigationView.setNavigationItemSelectedListener(this);
+        getSupportActionBar().setBackgroundDrawable(new ColorDrawable(getResources().getColor(R.color.itn_toolbar)));
     }
 
     public void createEvent(View view) {

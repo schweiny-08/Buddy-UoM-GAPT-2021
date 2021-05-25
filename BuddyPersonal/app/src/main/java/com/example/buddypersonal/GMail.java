@@ -24,6 +24,7 @@ public class GMail {
 
     String fromEmail;
     String fromPassword;
+
     List<String> toEmailList;
     String emailSubject;
     String emailBody;

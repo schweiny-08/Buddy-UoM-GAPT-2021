@@ -1,6 +1,7 @@
 package com.example.buddypersonal;
 
 import android.content.Intent;
+import android.graphics.drawable.ColorDrawable;
 import android.net.Uri;
 import android.os.Bundle;
 import android.view.MenuItem;
@@ -47,6 +48,8 @@ public class MapView extends AppCompatActivity implements NavigationView.OnNavig
         toggle.syncState();
 
         navigationView.setNavigationItemSelectedListener(this);
+
+        getSupportActionBar().setBackgroundDrawable(new ColorDrawable(getResources().getColor(R.color.map_toolbar)));
 
         down.setOnClickListener(new View.OnClickListener(){
             @Override

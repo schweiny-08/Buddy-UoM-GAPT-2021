@@ -3,6 +3,7 @@ package com.example.buddypersonal;
 import android.app.DatePickerDialog;
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.View;
@@ -90,6 +91,8 @@ public class Register extends AppCompatActivity implements AdapterView.OnItemSel
         sEmail = email.getText().toString();
         sUsername = username.getText().toString();
         sPassword = password.getText().toString();
+
+        getSupportActionBar().setBackgroundDrawable(new ColorDrawable(getResources().getColor(R.color.sys_toolbar)));
 
         //DATE
         dob = (TextView) findViewById(R.id.reg_et_dob);

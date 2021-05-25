@@ -8,6 +8,7 @@ import androidx.drawerlayout.widget.DrawerLayout;
 
 import android.annotation.SuppressLint;
 import android.content.Intent;
+import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.View;
@@ -39,6 +40,8 @@ public class ViewAccount extends AppCompatActivity implements NavigationView.OnN
         toggle.syncState();
 
         navigationView.setNavigationItemSelectedListener(this);
+
+        getSupportActionBar().setBackgroundDrawable(new ColorDrawable(getResources().getColor(R.color.sys_toolbar)));
 
         name = (EditText) findViewById(R.id.act_tv_name);
         surname = (EditText) findViewById(R.id.act_tv_surname);

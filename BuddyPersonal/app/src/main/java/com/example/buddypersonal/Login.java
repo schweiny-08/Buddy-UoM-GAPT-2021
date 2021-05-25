@@ -3,6 +3,7 @@ package com.example.buddypersonal;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
+import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.View;
@@ -54,6 +55,8 @@ public class Login extends AppCompatActivity {
                 startActivity(Intent.createChooser(intent, "Send mail"));
             }
         });
+
+        getSupportActionBar().setBackgroundDrawable(new ColorDrawable(getResources().getColor(R.color.sys_toolbar)));
     }
 
     boolean isEmailValid(CharSequence email) {

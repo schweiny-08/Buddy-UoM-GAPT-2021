@@ -3,6 +3,7 @@ package com.example.buddypersonal;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
+import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.TextView;
@@ -32,6 +33,8 @@ public class ViewEvent extends AppCompatActivity {
         endDate.setText(intent.getStringExtra("iEndDate"));
         location.setText(intent.getStringExtra("iLocation"));
         notes.setText(intent.getStringExtra("iNotes"));
+
+        getSupportActionBar().setBackgroundDrawable(new ColorDrawable(getResources().getColor(R.color.itn_toolbar)));
     }
 
     public void cancel(View view){

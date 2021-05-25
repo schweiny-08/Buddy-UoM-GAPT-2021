@@ -3,6 +3,7 @@ package com.example.buddypersonal;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
+import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -26,6 +27,7 @@ public class ForgotPassword extends AppCompatActivity {
         } catch (Exception e) {
             Log.e("SendMail", e.getMessage(), e);
         }
+        getSupportActionBar().setBackgroundDrawable(new ColorDrawable(getResources().getColor(R.color.sys_toolbar)));
     }
 
     public void resetPassword(View view){

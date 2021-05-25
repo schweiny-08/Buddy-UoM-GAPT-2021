@@ -3,6 +3,7 @@ package com.example.buddypersonal;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
+import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.View;
@@ -24,6 +25,8 @@ public class ChangePassword extends AppCompatActivity {
         newPass = (EditText)findViewById(R.id.cng_psw_et_new_pass);
         confNewPass = (EditText)findViewById(R.id.cng_psw_et_conf_new_pass);
         changePassword = (Button)findViewById(R.id.cng_psw_bt_cng_psw);
+
+        getSupportActionBar().setBackgroundDrawable(new ColorDrawable(getResources().getColor(R.color.sys_toolbar)));
     }
 
     public void changePassword(View view){

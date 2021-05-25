@@ -1,6 +1,7 @@
 package com.example.buddypersonal;
 
 import android.content.Intent;
+import android.graphics.drawable.ColorDrawable;
 import android.os.Build;
 import android.os.Bundle;
 import android.speech.RecognizerIntent;
@@ -135,6 +136,7 @@ public class Buddy extends AppCompatActivity implements NavigationView.OnNavigat
         toggle.syncState();
 
         navigationView.setNavigationItemSelectedListener(this);
+        getSupportActionBar().setBackgroundDrawable(new ColorDrawable(getResources().getColor(R.color.bud_toolbar)));
     }
 
     public String getLastUserMsg() {
