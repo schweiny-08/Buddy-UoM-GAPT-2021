@@ -4,7 +4,6 @@
     xmlns:tools="http://schemas.android.com/tools"
     style="@style/Theme.System.background"
     android:layout_width="match_parent"
-    android:background="@drawable/bg_gradient2"
     android:layout_height="match_parent"
     tools:context=".Login">
 
@@ -90,25 +89,10 @@
         android:layout_height="0dp"
         android:onClick="forgotPassword"
         android:text="@string/forgot_password"
-        app:backgroundTint="#0636af"
         app:layout_constraintBottom_toTopOf="@+id/guideline24"
         app:layout_constraintEnd_toStartOf="@+id/guideline12"
         app:layout_constraintStart_toStartOf="@+id/guideline3"
         app:layout_constraintTop_toTopOf="@+id/guideline23" />
-
-    <Button
-        android:id="@+id/log_btn_log_in"
-        style="@style/Theme.System.button"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        android:backgroundTint="#0636af"
-        android:onClick="login"
-        android:text="@string/login"
-        app:backgroundTint="#0636af"
-        app:layout_constraintBottom_toTopOf="@+id/guideline26"
-        app:layout_constraintEnd_toStartOf="@+id/guideline12"
-        app:layout_constraintStart_toStartOf="@+id/guideline1"
-        app:layout_constraintTop_toTopOf="@+id/guideline25" />
 
     <Button
         android:id="@+id/log_btn_register"
@@ -117,10 +101,21 @@
         android:layout_height="0dp"
         android:onClick="register"
         android:text="@string/register"
-        app:backgroundTint="#0636af"
+        app:layout_constraintBottom_toTopOf="@+id/guideline26"
+        app:layout_constraintEnd_toStartOf="@+id/guideline2"
+        app:layout_constraintStart_toStartOf="@+id/guideline1"
+        app:layout_constraintTop_toTopOf="@+id/guideline25" />
+
+    <Button
+        android:id="@+id/log_btn_log_in"
+        style="@style/Theme.System.button"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:onClick="login"
+        android:text="@string/login"
         app:layout_constraintBottom_toTopOf="@+id/guideline26"
         app:layout_constraintEnd_toStartOf="@+id/guideline4"
-        app:layout_constraintStart_toStartOf="@+id/guideline13"
+        app:layout_constraintStart_toStartOf="@+id/guideline3"
         app:layout_constraintTop_toTopOf="@+id/guideline25" />
 
     <Button
@@ -129,7 +124,6 @@
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:text="@string/contact_us"
-        app:backgroundTint="#0636af"
         app:layout_constraintBottom_toTopOf="@+id/guideline17"
         app:layout_constraintEnd_toStartOf="@+id/guideline14"
         app:layout_constraintStart_toStartOf="@+id/guideline18"

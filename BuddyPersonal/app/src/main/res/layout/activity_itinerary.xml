@@ -7,7 +7,6 @@
     android:layout_height="match_parent"
     android:fitsSystemWindows="true"
     tools:context=".Itinerary"
-    tools:openDrawer="start"
     android:id="@+id/itn_drawer">
 
 
@@ -25,12 +24,12 @@
 
         <TextView
             android:id="@+id/itn_tv_curr_date"
-            style="@style/Theme.Itinerary.textbackground"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            style="@style/Theme.Itinerary.titles"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
             android:gravity="center_vertical|left"
             android:text=""
-            android:textSize="25sp"
+            app:layout_constraintBottom_toTopOf="@+id/guideline1"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
@@ -42,16 +41,12 @@
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/itn_tv_curr_date">
+            app:layout_constraintTop_toBottomOf="@+id/guideline1">
 
             <androidx.core.widget.NestedScrollView
                 style="@style/Theme.Itinerary.background"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/itn_tv_curr_date">
+                android:layout_height="match_parent">
 
                 <androidx.recyclerview.widget.RecyclerView
                     android:id="@+id/recyclerViewItin"
@@ -62,5 +57,13 @@
                 </androidx.recyclerview.widget.RecyclerView>
             </androidx.core.widget.NestedScrollView>
         </LinearLayout>
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/guideline1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            app:layout_constraintGuide_percent="0.05" />
+
     </androidx.constraintlayout.widget.ConstraintLayout>
 </androidx.drawerlayout.widget.DrawerLayout>

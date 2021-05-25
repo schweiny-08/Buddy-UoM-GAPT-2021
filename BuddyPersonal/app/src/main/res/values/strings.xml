@@ -80,4 +80,10 @@
     <string name="event">Event</string>
     <string name="cancel">Cancel</string>
     <string name="delete">Delete</string>
+    <string name="col_sec_key">Security Key:</string>
+    <string name="sec_key"><i>Security Key</i></string>
+    <string name="scan_qr_code">Scan QR Code</string>
+    <string name="get_navigation">Get Navigation</string>
+    <string name="up">Up</string>
+    <string name="down">Down</string>
 </resources>

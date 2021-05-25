@@ -7,7 +7,7 @@
     tools:context=".MapView"
     android:id="@+id/map_drawer"
     android:fitsSystemWindows="true"
-    tools:openDrawer="start">
+    style="@style/Theme.Map.background">
 
     <com.google.android.material.navigation.NavigationView
         android:id="@+id/map_nav"
@@ -22,66 +22,132 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-        <Button
-            android:id="@+id/qrBtn"
-            android:layout_width="135dp"
-            android:layout_height="48dp"
-            android:layout_marginEnd="273dp"
-            android:layout_marginRight="273dp"
-            android:layout_marginBottom="2dp"
-            android:text="Scan QR Code"
-            android:textSize="10sp"
-            android:clickable="false"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent" />
-
-        <Button
-            android:id="@+id/navBtn"
-            android:layout_width="135dp"
-            android:layout_height="48dp"
-            android:layout_marginEnd="140dp"
-            android:layout_marginRight="140dp"
-            android:layout_marginBottom="2dp"
-            android:text="Get Navigation"
-            android:clickable="false"
-            android:textSize="10sp"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent" />
-
-        <Button
-            android:id="@+id/upBtn"
-            android:layout_width="65dp"
-            android:layout_height="48dp"
-            android:layout_marginEnd="73dp"
-            android:layout_marginRight="73dp"
-            android:layout_marginBottom="2dp"
-            android:text="Up"
-            android:textSize="10sp"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent" />
-
         <WebView
             android:id="@+id/webview"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_marginBottom="50dp"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
             android:clickable="true"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            tools:layout_editor_absoluteX="67dp" />
+            app:layout_constraintBottom_toTopOf="@+id/guideline9"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
         <Button
-            android:id="@+id/downBtn"
-            android:layout_width="65dp"
-            android:layout_height="48dp"
-            android:layout_marginEnd="8dp"
-            android:layout_marginRight="8dp"
+            style="@style/Theme.Map.button.thin"
+            android:id="@+id/map_bt_scan_qr"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:clickable="false"
+            android:text="@string/scan_qr_code"
+            app:layout_constraintBottom_toTopOf="@+id/guideline10"
+            app:layout_constraintEnd_toStartOf="@+id/guideline1"
+            app:layout_constraintStart_toStartOf="@+id/guideline8"
+            app:layout_constraintTop_toTopOf="@+id/guideline9" />
+
+        <Button
+            style="@style/Theme.Map.button.thin"
+            android:id="@+id/map_bt_navigation"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:clickable="false"
+            android:text="@string/get_navigation"
+            app:layout_constraintBottom_toTopOf="@+id/guideline10"
+            app:layout_constraintEnd_toStartOf="@+id/guideline3"
+            app:layout_constraintStart_toStartOf="@+id/guideline2"
+            app:layout_constraintTop_toTopOf="@+id/guideline9" />
+
+        <Button
+            style="@style/Theme.Map.button.thin"
+            android:id="@+id/map_bt_up"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:text="@string/up"
+            app:layout_constraintBottom_toTopOf="@+id/guideline10"
+            app:layout_constraintEnd_toStartOf="@+id/guideline5"
+            app:layout_constraintStart_toStartOf="@+id/guideline4"
+            app:layout_constraintTop_toTopOf="@+id/guideline9" />
+
+        <Button
+            style="@style/Theme.Map.button.thin"
+            android:id="@+id/map_bt_down"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
             android:clickable="true"
-            android:layout_marginBottom="2dp"
-            android:text="Down"
-            android:textSize="10sp"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent" />
+            android:text="@string/down"
+            app:layout_constraintBottom_toTopOf="@+id/guideline10"
+            app:layout_constraintEnd_toStartOf="@+id/guideline7"
+            app:layout_constraintStart_toStartOf="@+id/guideline6"
+            app:layout_constraintTop_toTopOf="@+id/guideline9" />
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/guideline1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintGuide_percent="0.30" />
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/guideline2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintGuide_percent="0.33" />
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/guideline3"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintGuide_percent="0.67" />
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/guideline4"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintGuide_percent="0.7" />
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/guideline5"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintGuide_percent="0.82" />
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/guideline6"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintGuide_percent="0.85" />
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/guideline7"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintGuide_percent="0.97" />
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/guideline8"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintGuide_percent="0.03" />
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/guideline9"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            app:layout_constraintGuide_percent="0.92" />
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/guideline10"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            app:layout_constraintGuide_percent="0.98" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

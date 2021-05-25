@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     app:cardCornerRadius="3dp"
     app:cardElevation="3dp"
     app:cardUseCompatPadding="true">
@@ -10,42 +10,42 @@
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:padding="5dp"
-        android:onClick="eventDetails">
+        android:padding="5dp">
+
         <TextView
-            style="@style/Theme.Itinerary.textbackground"
             android:id="@+id/itn_start"
-            android:textSize="18sp"
+            style="@style/Theme.Itinerary.textbackground"
             android:layout_width="62dp"
             android:layout_height="wrap_content"
-            android:text="23:00"
-            android:gravity="center"
+            android:layout_alignParentLeft="true"
             android:layout_alignParentTop="true"
-            android:layout_alignParentLeft="true"/>
+            android:gravity="center"
+            android:text="23:00"
+            android:textSize="18sp" />
 
         <TextView
-            style="@style/Theme.Itinerary.textbackground"
             android:id="@+id/itn_end"
-            android:textSize="18sp"
+            style="@style/Theme.Itinerary.textbackground"
             android:layout_width="62dp"
             android:layout_height="wrap_content"
-            android:text="23:59"
-            android:gravity="center"
             android:layout_below="@id/itn_start"
-            android:layout_alignParentLeft="true"/>
+            android:layout_alignParentLeft="true"
+            android:gravity="center"
+            android:text="23:59"
+            android:textSize="18sp" />
 
         <TextView
-            style="@style/Theme.Itinerary.textbackground"
             android:id="@+id/itn_title"
-            android:textSize="18sp"
+            style="@style/Theme.Itinerary.textbackground"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:text="Developing Developments"
-            android:gravity="center"
-            android:layout_toRightOf="@id/itn_start"
             android:layout_alignBottom="@id/itn_end"
+            android:layout_alignParentTop="true"
             android:layout_alignParentRight="true"
-            android:layout_alignParentTop="true"/>
+            android:layout_toRightOf="@id/itn_start"
+            android:gravity="center|left"
+            android:text="Developing Developments"
+            android:textSize="18sp" />
 
     </RelativeLayout>
 

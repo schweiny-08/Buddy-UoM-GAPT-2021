@@ -80,4 +80,10 @@
     <string name="event">Avveniment</string>
     <string name="cancel">Ikkanċella</string>
     <string name="delete">Ħassar</string>
+    <string name="col_sec_key">Ċavetta tas-Sigurtà:</string>
+    <string name="sec_key"><i>Ċavetta tas-Sigurtà</i></string>
+    <string name="scan_qr_code">Skanja Kodiċi QR</string>
+    <string name="get_navigation">Ikseb Navigazzjoni</string>
+    <string name="up">Fuq</string>
+    <string name="down">Isfel</string>
 </resources>

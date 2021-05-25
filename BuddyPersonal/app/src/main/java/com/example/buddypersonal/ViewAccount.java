@@ -59,6 +59,11 @@ public class ViewAccount extends AppCompatActivity implements NavigationView.OnN
         startActivity(intent);
     }
 
+    public void delete(View view){
+        Intent intent = new Intent(ViewAccount.this, Login.class);
+        startActivity(intent);
+    }
+
     @Override
     public void onBackPressed() {
         if(drawerLayout.isDrawerOpen(GravityCompat.START)){

@@ -10,22 +10,23 @@
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:onClick="eventDetails"
-        android:padding="3dp"
-        style="@style/Theme.Map.toolbar">
+        android:padding="5dp"
+        style="@style/Theme.Map.contrast">
 
         <TextView
             android:id="@+id/ven_title"
             style="@style/Theme.Map.textbackground"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_alignBottom="@id/ven_start"
             android:layout_alignParentLeft="true"
             android:layout_alignParentTop="true"
             android:layout_toLeftOf="@id/ven_start"
+            android:background="@drawable/card_borders"
             android:gravity="left"
             android:text="Developing Developments"
             android:textSize="18sp"
-            android:background="@drawable/card_borders"/>
+            android:textStyle="normal" />
 
         <TextView
             android:id="@+id/ven_start"
@@ -34,10 +35,10 @@
             android:layout_height="wrap_content"
             android:layout_alignParentTop="true"
             android:layout_toLeftOf="@id/ven_end"
+            android:background="@drawable/card_borders_start"
             android:gravity="center"
             android:text="23:00"
-            android:textSize="18sp"
-            android:background="@drawable/card_borders_start"/>
+            android:textSize="18sp" />
 
         <TextView
             android:id="@+id/ven_end"
@@ -46,10 +47,10 @@
             android:layout_height="wrap_content"
             android:layout_alignParentTop="true"
             android:layout_alignParentRight="true"
+            android:background="@drawable/card_borders_end"
             android:gravity="center"
             android:text="23:59"
-            android:textSize="18sp"
-            android:background="@drawable/card_borders_end"/>
+            android:textSize="18sp" />
 
         <TextView
             android:id="@+id/ven_loc"
@@ -59,10 +60,11 @@
             android:layout_below="@id/ven_title"
             android:layout_alignParentLeft="true"
             android:layout_alignParentRight="true"
+            android:background="@drawable/card_borders"
             android:gravity="left"
             android:text="Hall H"
             android:textSize="14sp"
-            android:background="@drawable/card_borders"/>
+            android:textStyle="italic" />
 
         <TextView
             android:id="@+id/ven_desc"
@@ -72,10 +74,11 @@
             android:layout_below="@id/ven_loc"
             android:layout_alignParentLeft="true"
             android:layout_alignParentRight="true"
+            android:background="@drawable/card_borders"
             android:gravity="left"
             android:text="Description"
             android:textSize="14sp"
-            android:background="@drawable/card_borders"/>
+            android:textStyle="normal" />
 
     </RelativeLayout>
 

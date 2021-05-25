@@ -52,17 +52,16 @@ public class Calendar extends AppCompatActivity implements NavigationView.OnNavi
 
     @Override
     public void onBackPressed() {
-        if(drawerLayout.isDrawerOpen(GravityCompat.START)){
+        if (drawerLayout.isDrawerOpen(GravityCompat.START)) {
             drawerLayout.closeDrawer(GravityCompat.START);
-        }
-        else {
+        } else {
             super.onBackPressed();
         }
     }
 
     @Override
     public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
-        switch(menuItem.getItemId()){
+        switch (menuItem.getItemId()) {
             case R.id.nav_settings:
                 Intent iSettings = new Intent(Calendar.this, Settings.class);
 //                finish();

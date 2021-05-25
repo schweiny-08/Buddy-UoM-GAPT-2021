@@ -46,7 +46,7 @@ public class ViewEvent extends AppCompatActivity {
         //delete event from itinerary
     }
     
-//    public void edit(View view){
+    public void edit(View view){
 //        Intent intent = new Intent(ViewEvent.this, CreateEvent.class);
 //        intent.putExtra("vEventId", prModel.get(position).getEventId());
 //        intent.putExtra("vUserId", prModel.get(position).getUserId());
@@ -59,5 +59,5 @@ public class ViewEvent extends AppCompatActivity {
 //        intent.putExtra("vNotes", prModel.get(position).getNotes());
 //        startActivity(intent);
 //        startActivity(intent);
-//    }
+    }
 }

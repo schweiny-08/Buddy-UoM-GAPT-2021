@@ -2,7 +2,6 @@ package com.example.buddypersonal;
 
 import android.content.Intent;
 import android.graphics.drawable.ColorDrawable;
-import android.net.Uri;
 import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.View;
@@ -39,8 +38,8 @@ public class MapView extends AppCompatActivity implements NavigationView.OnNavig
 
         drawerLayout = findViewById(R.id.map_drawer);
         navigationView = findViewById(R.id.map_nav);
-        up = findViewById(R.id.upBtn);
-        down = findViewById(R.id.downBtn);
+        up = findViewById(R.id.map_bt_up);
+        down = findViewById(R.id.map_bt_down);
 
         navigationView.bringToFront();
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(this, drawerLayout, R.string.navigation_drawer_open, R.string.navigation_drawer_close);

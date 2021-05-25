@@ -12,5 +12,5 @@
         android:background="@drawable/bot_bubble"
         android:padding="16dp"
         android:textColor="@color/colorPrimaryDark"
-        android:textSize="20sp" />
+        android:textSize="16sp" />
 </RelativeLayout>
