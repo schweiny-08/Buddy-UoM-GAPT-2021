@@ -22,11 +22,12 @@
 
         <Button
             android:id="@+id/hom_bt_map"
-            style="@style/Theme.Map.button"
+            style="@style/Theme.Map.button.large"
             android:layout_width="0dp"
             android:layout_height="0dp"
             android:text="@string/map"
             android:onClick="map"
+            android:background="@drawable/map_button_background"
             app:layout_constraintBottom_toTopOf="@+id/guideline5"
             app:layout_constraintEnd_toStartOf="@+id/guideline2"
             app:layout_constraintStart_toStartOf="@+id/guideline1"
@@ -34,11 +35,12 @@
 
         <Button
             android:id="@+id/hom_bt_itinerary"
-            style="@style/Theme.Itinerary.button"
+            style="@style/Theme.Itinerary.button.large"
             android:layout_width="0dp"
             android:layout_height="0dp"
             android:onClick="itinerary"
             android:text="@string/itinerary"
+            android:background="@drawable/itinerary_button_background"
             app:layout_constraintBottom_toTopOf="@+id/guideline7"
             app:layout_constraintEnd_toStartOf="@+id/guideline2"
             app:layout_constraintStart_toStartOf="@+id/guideline1"
@@ -46,11 +48,12 @@
 
         <Button
             android:id="@+id/hom_bt_buddy"
-            style="@style/Theme.Buddy.button"
+            style="@style/Theme.Buddy.button.large"
             android:layout_width="0dp"
             android:layout_height="0dp"
-            android:text="@string/app_name"
+            android:text="@string/buddy"
             android:onClick="buddy"
+            android:background="@drawable/buddy_button_background"
             app:layout_constraintBottom_toTopOf="@+id/guideline4"
             app:layout_constraintEnd_toStartOf="@+id/guideline2"
             app:layout_constraintStart_toStartOf="@+id/guideline1"

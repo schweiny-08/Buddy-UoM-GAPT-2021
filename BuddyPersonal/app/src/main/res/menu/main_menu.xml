@@ -9,7 +9,8 @@
             android:title="@string/title_activity_home" />
         <item
             android:id="@+id/nav_settings"
-            android:title="@string/action_settings" />
+            android:title="@string/action_settings"
+            android:icon="@drawable/settings_nav_icon"/>
     </group>
 
     <group>
@@ -17,7 +18,8 @@
             <menu>
                 <item
                     android:id="@+id/nav_map"
-                    android:title="@string/map_view" />
+                    android:title="@string/map_view"
+                    android:icon="@drawable/map_nav_icon"/>
                 <item
                     android:id="@+id/nav_pu_events"
                     android:title="@string/venue_event" />

@@ -86,4 +86,5 @@
     <string name="get_navigation">Get Navigation</string>
     <string name="up">Up</string>
     <string name="down">Down</string>
+    <string name="buddy" translatable="false">Buddy</string>
 </resources>

@@ -75,8 +75,10 @@
     <style name="Theme.System.button.large" parent="Theme.AppCompat.Light">
         <item name="android:background">#0636af</item>
         <item name="android:textColor">#FFFFFF</item>
-        <item name="android:textSize">18sp</item>
+        <item name="android:textSize">24sp</item>
         <item name="android:textStyle">bold</item>
+        <item name="android:gravity">left|center</item>
+        <item name="android:paddingLeft">50dp</item>
     </style>
 
     <!--Map-->
@@ -146,8 +148,10 @@
     <style name="Theme.Map.button.large" parent="Theme.AppCompat.Light">
         <item name="android:background">#5321c1</item>
         <item name="android:textColor">#FFFFFF</item>
-        <item name="android:textSize">18sp</item>
+        <item name="android:textSize">24sp</item>
         <item name="android:textStyle">bold</item>
+        <item name="android:gravity">center</item>
+        <item name="android:paddingRight">160dp</item>
     </style>
 
 
@@ -218,8 +222,10 @@
     <style name="Theme.Itinerary.button.large" parent="Theme.AppCompat.Light">
         <item name="android:background">#e44513</item>
         <item name="android:textColor">#FFFFFF</item>
-        <item name="android:textSize">18sp</item>
+        <item name="android:textSize">24sp</item>
         <item name="android:textStyle">bold</item>
+        <item name="android:gravity">center</item>
+        <item name="android:paddingRight">160dp</item>
     </style>
 
 
@@ -290,8 +296,10 @@
     <style name="Theme.Buddy.button.large" parent="Theme.AppCompat.Light">
         <item name="android:background">#007848</item>
         <item name="android:textColor">#FFFFFF</item>
-        <item name="android:textSize">18sp</item>
+        <item name="android:textSize">24sp</item>
         <item name="android:textStyle">bold</item>
+        <item name="android:gravity">center</item>
+        <item name="android:paddingRight">150dp</item>
     </style>
 
 </resources>
