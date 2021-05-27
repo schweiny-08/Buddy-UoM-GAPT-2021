@@ -6,6 +6,9 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
+import androidx.navigation.NavController;
+import androidx.navigation.ui.AppBarConfiguration;
+import androidx.navigation.ui.NavigationUI;
 
 import android.content.Intent;
 import android.graphics.drawable.ColorDrawable;
@@ -20,6 +23,9 @@ public class Home extends AppCompatActivity implements NavigationView.OnNavigati
 
     DrawerLayout drawerLayout;
     NavigationView navigationView;
+    Toolbar toolbar;
+    AppBarConfiguration appBarConfiguration;
+    NavController navController;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -28,9 +34,14 @@ public class Home extends AppCompatActivity implements NavigationView.OnNavigati
 
         drawerLayout = findViewById(R.id.hom_drawer);
         navigationView = findViewById(R.id.hom_nav);
+//        toolbar = findViewById(R.id.nav_toolbar);
+
+//        setSupportActionBar(toolbar);
+//        appBarConfiguration = new AppBarConfiguration.Builder(navController.getGraph()).build();
+//        NavigationUI.setupWithNavController(toolbar, navController, appBarConfiguration);
 
         navigationView.bringToFront();
-        ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(this, drawerLayout, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
+        ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(this, drawerLayout, /*toolbar,*/ R.string.navigation_drawer_open, R.string.navigation_drawer_close);
         drawerLayout.addDrawerListener(toggle);
         toggle.syncState();
 

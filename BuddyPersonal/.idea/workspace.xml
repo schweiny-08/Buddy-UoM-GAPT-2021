@@ -28,16 +28,20 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="6fca2fa9-a229-4b94-aa37-b6467783e06a" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/app/src/main/res/drawable/buddy_button_background.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/src/main/res/drawable/itinerary_button_background.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/src/main/res/drawable/map_button_background.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/src/main/res/drawable/map_nav_icon.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/src/main/res/drawable/settings_nav_icon.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/src/main/res/drawable/buddy_nav_icon.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/src/main/res/drawable/calendar_nav_icon.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/src/main/res/drawable/crt_evt_nav_icon.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/src/main/res/drawable/home_nav_icon.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/src/main/res/drawable/itinerary_nav_icon.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/src/main/res/drawable/logout_nav_icon.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/src/main/res/drawable/ven_evt_nav_icon.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/activity_home.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/layout/activity_home.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/build.gradle" beforeDir="false" afterPath="$PROJECT_DIR$/app/build.gradle" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/AndroidManifest.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/AndroidManifest.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/buddypersonal/Home.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/buddypersonal/Home.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/buddypersonal/Login.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/buddypersonal/Login.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/header.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/layout/header.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/src/main/res/menu/main_menu.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/menu/main_menu.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/res/values/my_styles.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/values/my_styles.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/res/values/strings.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/values/strings.xml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -53,9 +57,9 @@
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
       <list>
-        <option value="layoutResourceFile" />
         <option value="Interface" />
         <option value="Class" />
+        <option value="layoutResourceFile" />
         <option value="resourceFile" />
       </list>
     </option>
@@ -84,13 +88,16 @@
     <property name="multi-representation-previewC:/Users/Owner/AppData/Local/Android/Sdk/sources/android-30/android/widget/TextView.java_selected" value="Custom views" />
   </component>
   <component name="RecentsManager">
-    <key name="android.template.-221168115">
+    <key name="android.template.-436368591">
       <recent name="com.example.buddypersonal" />
     </key>
     <key name="CopyFile.RECENT_KEYS">
       <recent name="C:\Users\Cedri\OneDrive\Documents\GitHub\Buddy-UoM-GAPT-2021\BuddyPersonal\app\src\main\res\drawable" />
     </key>
-    <key name="android.template.-436368591">
+    <key name="android.template.-1813113235">
+      <recent name="com.example.buddypersonal" />
+    </key>
+    <key name="android.template.-221168115">
       <recent name="com.example.buddypersonal" />
     </key>
   </component>
@@ -189,28 +196,32 @@
     <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
   </component>
   <component name="WindowStateProjectService">
-    <state x="1133" y="150" key="#com.intellij.ide.util.MemberChooser" timestamp="1621958690535">
-      <screen x="0" y="0" width="1920" height="1040" />
+    <state x="906" y="119" key="#com.intellij.ide.util.MemberChooser" timestamp="1622115930721">
+      <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state x="906" y="119" key="#com.intellij.ide.util.MemberChooser/0.0.1536.824@0.0.1536.824" timestamp="1621531197639" />
+    <state x="906" y="119" key="#com.intellij.ide.util.MemberChooser/0.0.1536.824@0.0.1536.824" timestamp="1622115930721" />
     <state x="1133" y="150" key="#com.intellij.ide.util.MemberChooser/0.0.1920.1040@0.0.1920.1040" timestamp="1621958690535" />
     <state x="1223" y="400" width="433" height="268" key="#com.intellij.refactoring.move.moveClassesOrPackages.MoveClassesOrPackagesDialog.classes" timestamp="1621690615626">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state x="1223" y="400" width="433" height="268" key="#com.intellij.refactoring.move.moveClassesOrPackages.MoveClassesOrPackagesDialog.classes/0.0.1920.1040@0.0.1920.1040" timestamp="1621690615626" />
-    <state x="624" y="201" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog" timestamp="1621963967888">
-      <screen x="0" y="0" width="1920" height="1040" />
+    <state x="499" y="159" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog" timestamp="1622116361317">
+      <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state x="499" y="159" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog/0.0.1536.824@0.0.1536.824" timestamp="1621262986374" />
+    <state x="499" y="159" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog/0.0.1536.824@0.0.1536.824" timestamp="1622116361317" />
     <state x="624" y="201" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog/0.0.1920.1040@0.0.1920.1040" timestamp="1621963967888" />
     <state x="862" y="100" width="581" height="630" maximized="true" key="AVDManager" timestamp="1621539422895">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
     <state x="862" y="100" width="581" height="630" maximized="true" key="AVDManager/0.0.1536.824@0.0.1536.824" timestamp="1621539422895" />
-    <state x="637" y="181" key="AndroidCreateResourceFileDialog" timestamp="1622029005635">
+    <state x="698" y="170" key="AndroidCreateResourceDirectoryDialog" timestamp="1622111968414">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state x="637" y="181" key="AndroidCreateResourceFileDialog/0.0.1536.824@0.0.1536.824" timestamp="1622029005635" />
+    <state x="698" y="170" key="AndroidCreateResourceDirectoryDialog/0.0.1536.824@0.0.1536.824" timestamp="1622111968414" />
+    <state x="637" y="181" key="AndroidCreateResourceFileDialog" timestamp="1622115817739">
+      <screen x="0" y="0" width="1536" height="824" />
+    </state>
+    <state x="637" y="181" key="AndroidCreateResourceFileDialog/0.0.1536.824@0.0.1536.824" timestamp="1622115817739" />
     <state x="89" y="0" width="1346" height="789" key="Downloadable.Font.Dialog.Size" timestamp="1621097850873">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
@@ -219,25 +230,25 @@
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state x="1220" y="278" key="FileChooserDialogImpl/0.0.1920.1040@0.0.1920.1040" timestamp="1621947856550" />
-    <state width="1876" height="281" key="GridCell.Tab.0.bottom" timestamp="1621964465033">
-      <screen x="0" y="0" width="1920" height="1040" />
+    <state width="1491" height="327" key="GridCell.Tab.0.bottom" timestamp="1622122386915">
+      <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state width="1491" height="210" key="GridCell.Tab.0.bottom/0.0.1536.824@0.0.1536.824" timestamp="1621538001204" />
+    <state width="1491" height="327" key="GridCell.Tab.0.bottom/0.0.1536.824@0.0.1536.824" timestamp="1622122386915" />
     <state width="1876" height="281" key="GridCell.Tab.0.bottom/0.0.1920.1040@0.0.1920.1040" timestamp="1621964465033" />
-    <state width="1876" height="281" key="GridCell.Tab.0.center" timestamp="1621964465032">
-      <screen x="0" y="0" width="1920" height="1040" />
+    <state width="1491" height="327" key="GridCell.Tab.0.center" timestamp="1622122386912">
+      <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state width="1491" height="210" key="GridCell.Tab.0.center/0.0.1536.824@0.0.1536.824" timestamp="1621538001203" />
+    <state width="1491" height="327" key="GridCell.Tab.0.center/0.0.1536.824@0.0.1536.824" timestamp="1622122386912" />
     <state width="1876" height="281" key="GridCell.Tab.0.center/0.0.1920.1040@0.0.1920.1040" timestamp="1621964465032" />
-    <state width="1876" height="281" key="GridCell.Tab.0.left" timestamp="1621964465032">
-      <screen x="0" y="0" width="1920" height="1040" />
+    <state width="1491" height="327" key="GridCell.Tab.0.left" timestamp="1622122386911">
+      <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state width="1491" height="210" key="GridCell.Tab.0.left/0.0.1536.824@0.0.1536.824" timestamp="1621538001202" />
+    <state width="1491" height="327" key="GridCell.Tab.0.left/0.0.1536.824@0.0.1536.824" timestamp="1622122386911" />
     <state width="1876" height="281" key="GridCell.Tab.0.left/0.0.1920.1040@0.0.1920.1040" timestamp="1621964465032" />
-    <state width="1876" height="281" key="GridCell.Tab.0.right" timestamp="1621964465032">
-      <screen x="0" y="0" width="1920" height="1040" />
+    <state width="1491" height="327" key="GridCell.Tab.0.right" timestamp="1622122386913">
+      <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state width="1491" height="210" key="GridCell.Tab.0.right/0.0.1536.824@0.0.1536.824" timestamp="1621538001203" />
+    <state width="1491" height="327" key="GridCell.Tab.0.right/0.0.1536.824@0.0.1536.824" timestamp="1622122386913" />
     <state width="1876" height="281" key="GridCell.Tab.0.right/0.0.1920.1040@0.0.1920.1040" timestamp="1621964465032" />
     <state width="1491" height="312" key="GridCell.Tab.1.bottom" timestamp="1621499799082">
       <screen x="0" y="0" width="1536" height="824" />

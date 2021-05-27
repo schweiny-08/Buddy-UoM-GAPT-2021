@@ -6,7 +6,8 @@
     <group android:checkableBehavior="single">
         <item
             android:id="@+id/nav_home"
-            android:title="@string/title_activity_home" />
+            android:title="@string/title_activity_home"
+            android:icon="@drawable/home_nav_icon"/>
         <item
             android:id="@+id/nav_settings"
             android:title="@string/action_settings"
@@ -22,7 +23,8 @@
                     android:icon="@drawable/map_nav_icon"/>
                 <item
                     android:id="@+id/nav_pu_events"
-                    android:title="@string/venue_event" />
+                    android:title="@string/venue_event"
+                    android:icon="@drawable/ven_evt_nav_icon"/>
             </menu>
         </item>
     </group>
@@ -31,13 +33,16 @@
             <menu>
                 <item
                     android:id="@+id/nav_itinerary"
-                    android:title="@string/itinerary_view" />
+                    android:title="@string/itinerary_view"
+                    android:icon="@drawable/itinerary_nav_icon"/>
                 <item
                     android:id="@+id/nav_calendar"
-                    android:title="@string/calendar" />
+                    android:title="@string/calendar"
+                    android:icon="@drawable/calendar_nav_icon"/>
                 <item
                     android:id="@+id/nav_cr_events"
-                    android:title="@string/create_event" />
+                    android:title="@string/create_event"
+                    android:icon="@drawable/crt_evt_nav_icon"/>
             </menu>
         </item>
     </group>
@@ -46,11 +51,13 @@
             <menu>
                 <item
                     android:id="@+id/nav_buddy"
-                    android:title="Buddy"/>
+                    android:title="Buddy"
+                    android:icon="@drawable/buddy_nav_icon"/>
             </menu>
         </item>
     </group>
     <item
         android:id="@+id/nav_logout"
-        android:title="@string/log_out" />
+        android:title="@string/log_out"
+        android:icon="@drawable/logout_nav_icon"/>
 </menu>
