@@ -2,10 +2,12 @@ package com.example.buddypersonal;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Context;
 import android.content.Intent;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -13,11 +15,19 @@ import android.widget.Toast;
 
 import com.google.gson.Gson;
 
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
 import java.io.ObjectInputStream;
+import java.io.OutputStreamWriter;
 import java.io.StreamCorruptedException;
 import java.util.ArrayList;
 import java.util.Collection;
@@ -33,9 +43,6 @@ public class Login extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
-
-        loadFile("user_file");
-        //loadFile("event_file");
 
         email = (EditText) findViewById(R.id.log_et_email);
         password = (EditText) findViewById(R.id.log_et_password);
@@ -64,6 +71,14 @@ public class Login extends AppCompatActivity {
     }
 
     public void login(View view) {
+
+        try {
+            build_db();
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+
+        //Toast.makeText(Login.this, LocalStorage.usersList.toString(), Toast.LENGTH_LONG).show();
 
         int temp = checkForMatch(email.getText().toString(), password.getText().toString()); //check for email and password match, returns user id. returns -1 if not found.
 
@@ -102,65 +117,84 @@ public class Login extends AppCompatActivity {
         startActivity(intent);
     }
 
+    private String readFromFile(Context context) {
+
+        String ret = "";
+
+        try {
+            InputStream inputStream = context.openFileInput("config.txt");
+
+            if ( inputStream != null ) {
+                InputStreamReader inputStreamReader = new InputStreamReader(inputStream);
+                BufferedReader bufferedReader = new BufferedReader(inputStreamReader);
+                String receiveString = "";
+                StringBuilder stringBuilder = new StringBuilder();
+
+                while ( (receiveString = bufferedReader.readLine()) != null ) {
+                    stringBuilder.append("\n").append(receiveString);
+                }
+
+                inputStream.close();
+                ret = stringBuilder.toString();
+            }
+        }
+        catch (FileNotFoundException e) {
+            Log.e("login activity", "File not found: " + e.toString());
+        } catch (IOException e) {
+            Log.e("login activity", "Can not read file: " + e.toString());
+        }
+
+        return ret;
+    }
+
+    public void build_db() throws JSONException {
+        String temp = readFromFile(getApplicationContext());
+        ArrayList<User> tempusersList = new ArrayList<User>();
+
+        JSONArray jsonArray = new JSONArray(temp);
+        JSONObject jsnobject = new JSONObject(temp);
+
+        jsonArray = jsnobject.getJSONArray("locations");
+        for (int i = 0; i < jsonArray.length(); i++) {
+            JSONObject explrObject = jsonArray.getJSONObject(i);
+            String email = jsonArray.getJSONObject(i).getString("email");
+            String pass = jsonArray.getJSONObject(i).getString("password");
+            //array.getJSONObject(i).getString("privateEvents");
+            int role = jsonArray.getJSONObject(i).getInt("role_Id");
+            int tel = jsonArray.getJSONObject(i).getInt("telephone");
+            String dob = jsonArray.getJSONObject(i).getString("uDob");
+            String uname = jsonArray.getJSONObject(i).getString("uName");
+            String surn = jsonArray.getJSONObject(i).getString("uSurname");
+            int uid = jsonArray.getJSONObject(i).getInt("user_Id");
+            String user = jsonArray.getJSONObject(i).getString("username");
+        }
+
+//        JSONObject array = obj.getJSONObject();
+//        for(int i = 0 ; i < array.length() ; i++){
+//            //get parameters from json
+//            String email = array.getJSONObject(i).getString("email");
+//            String pass = array.getJSONObject(i).getString("password");
+//            //array.getJSONObject(i).getString("privateEvents");
+//            int role = array.getJSONObject(i).getInt("role_Id");
+//            int tel = array.getJSONObject(i).getInt("telephone");
+//            String dob = array.getJSONObject(i).getString("uDob");
+//            String uname = array.getJSONObject(i).getString("uName");
+//            String surn = array.getJSONObject(i).getString("uSurname");
+//            int uid = array.getJSONObject(i).getInt("user_Id");
+//            String user = array.getJSONObject(i).getString("username");
+//
+//            User usernew = new User(uid, user, tel, email, pass, role, uname, surn, dob);
+//            tempusersList.add(usernew);
+//        }
+
+        LocalStorage.usersList = tempusersList;
+
+    }
+
     private String subFolder = "/userdata";
     //user_file, event_file
 
-    public String loadFile(String file) {
-        File cacheDir = null;
-        File appDirectory = null;
-        if (android.os.Environment.getExternalStorageState().
-                equals(android.os.Environment.MEDIA_MOUNTED)) {
-            cacheDir = getApplicationContext().getExternalCacheDir();
-            appDirectory = new File(cacheDir + subFolder);
-        } else {
-            cacheDir = getApplicationContext().getCacheDir();
-            String BaseFolder = cacheDir.getAbsolutePath();
-            appDirectory = new File(BaseFolder + subFolder);
-        }
 
-        if (appDirectory != null && !appDirectory.exists())
-            return "Knowledge base does not exist."; // File does not exist
-
-        File fileName = new File(appDirectory, file);
-
-        FileInputStream fis = null;
-        ObjectInputStream in = null;
-        try {
-            fis = new FileInputStream(fileName);
-            in = new ObjectInputStream(fis);
-            Gson g = new Gson();
-
-            //HashMap<String, String> myHashMap = (HashMap<String, String>) in.readObject();
-            //knowledge = myHashMap;
-
-            String temp = (String)in.readObject();
-            ArrayList<User> usersTemp = new ArrayList((Collection) new Gson().fromJson(temp, User.class));
-
-        } catch (FileNotFoundException e) {
-            e.printStackTrace();
-        } catch (StreamCorruptedException e) {
-            e.printStackTrace();
-        } catch (IOException e) {
-            e.printStackTrace();
-        } catch (ClassNotFoundException e) {
-            e.printStackTrace();
-        } catch (Exception e) {
-            e.printStackTrace();
-        } finally {
-
-            try {
-                if (fis != null) {
-                    fis.close();
-                }
-                if (in != null) {
-                    in.close();
-                }
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-        }
-        return "I loaded my knowledge base.";
-    }
 
     public int checkForMatch (String email, String pass) {
         //this was not our part to do. back end function
@@ -170,17 +204,12 @@ public class Login extends AppCompatActivity {
                 if(LocalStorage.usersList.get(i).getPassword().equals(pass)) {
                     return i;
                 }
-
             }
             i++;
         }
         return -1;
     }
 
-//    public void contactUs(View view){
-//        Intent intent = new Intent(this, ContactUs.class);
-//        startActivity(intent);
-//    }
 //    public void help(View view){
 //        Intent intent = new Intent(this, Help.class);
 //        startActivity(intent);

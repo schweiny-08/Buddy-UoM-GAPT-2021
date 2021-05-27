@@ -6,6 +6,7 @@ import android.content.Intent;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.Button;
@@ -23,6 +24,7 @@ import java.io.FileOutputStream;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.ObjectOutputStream;
+import java.io.OutputStreamWriter;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
@@ -277,7 +279,8 @@ public class Register extends AppCompatActivity implements AdapterView.OnItemSel
             User user = new User(LocalStorage.usersList.size()+1, sUsername, 12345678, sEmail, sPassword, 0, sName, sSurname, sDob);
 
             LocalStorage.usersList.add(user);
-            saveFile("user_file.json", LocalStorage.getUserJson());
+            //saveFile("user_file.json", LocalStorage.getUserJson());
+            writeToFile(LocalStorage.getUserJson(), getApplicationContext());
 
             Call<User> call = jsonPlaceHolderApi.registerUser(user);
             call.enqueue(new Callback<User>() {
@@ -299,6 +302,17 @@ public class Register extends AppCompatActivity implements AdapterView.OnItemSel
 
             Intent intent = new Intent(Register.this, Login.class);
             startActivity(intent);
+        }
+    }
+
+    private void writeToFile(String data, Context context) {
+        try {
+            OutputStreamWriter outputStreamWriter = new OutputStreamWriter(context.openFileOutput("config.txt", Context.MODE_PRIVATE));
+            outputStreamWriter.write(data);
+            outputStreamWriter.close();
+        }
+        catch (IOException e) {
+            Log.e("Exception", "File write failed: " + e.toString());
         }
     }
 

@@ -3,12 +3,14 @@ package com.example.buddypersonal;
 import android.content.Context;
 
 import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
 
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
+import java.lang.reflect.Type;
 import java.util.ArrayList;
 
 public class LocalStorage {
@@ -54,12 +56,14 @@ public class LocalStorage {
     //name of json save files
 
     public static String getUserJson() {
-        String userJson = new Gson().toJson(usersList);
+        Type type = new TypeToken<ArrayList<User>>(){}.getType();
+        String userJson = new Gson().toJson(usersList,type);
         return userJson;
     }
 
     public static String getEventsJson() {
-        String eventJson = new Gson().toJson(eventList);
+        Type type = new TypeToken<ArrayList<PublicEventModel>>(){}.getType();
+        String eventJson = new Gson().toJson(eventList, type);
         return eventJson;
     }
 
