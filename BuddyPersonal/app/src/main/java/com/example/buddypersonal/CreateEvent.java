@@ -67,6 +67,15 @@ public class CreateEvent extends AppCompatActivity implements AdapterView.OnItem
             endDate.setText((LocalStorage.privEventList.get(LocalStorage.privateEvent).getEndDate()));
             location.setText((LocalStorage.privEventList.get(LocalStorage.privateEvent).getLoc()));
             notes.setText((LocalStorage.privEventList.get(LocalStorage.privateEvent).getNotes()));
+        }else {
+            title.setText("");
+            startTime.setText("");
+            startDate.setText("");
+            endTime.setText("");
+            endDate.setText("");
+            location.setText("");
+            notes.setText("");
+
         }
 
         //TIME

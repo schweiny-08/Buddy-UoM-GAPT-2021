@@ -172,16 +172,16 @@ public class Login extends AppCompatActivity {
         ArrayList<EventModel> privEventArray = gson.fromJson(temp, privateEventListType);
 
         LocalStorage.privEventList = privEventArray; //populate local storage array list
-//
-//        //load public events into local arraylist
-//
-//        temp = readFromFile("public_events_file.txt", getApplicationContext()); //read from file, get json to string
-//
-//        Type publicEventListType = new TypeToken<ArrayList<PublicEventModel>>(){}.getType();
-//
-//        ArrayList<PublicEventModel> publicEventArray = gson.fromJson(temp, publicEventListType);
-//
-//        LocalStorage.eventList = publicEventArray; //populate local storage array list
+
+        //load public events into local arraylist
+
+        temp = readFromFile("public_events_file.txt", getApplicationContext()); //read from file, get json to string
+
+        Type publicEventListType = new TypeToken<ArrayList<PublicEventModel>>(){}.getType();
+
+        ArrayList<PublicEventModel> publicEventArray = gson.fromJson(temp, publicEventListType);
+
+        LocalStorage.eventList = publicEventArray; //populate local storage array list
 
     }
 

@@ -8,14 +8,18 @@ import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.content.Context;
 import android.content.Intent;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.MenuItem;
 import android.widget.Toast;
 
 import com.google.android.material.navigation.NavigationView;
 
+import java.io.IOException;
+import java.io.OutputStreamWriter;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 
@@ -46,9 +50,10 @@ public class VenueEvents extends AppCompatActivity implements NavigationView.OnN
         getSupportActionBar().setBackgroundDrawable(new ColorDrawable(getResources().getColor(R.color.map_toolbar)));
 
 
+        //hardCodedEvents();
         String strDate = "";
 
-        if(LocalStorage.selDate != "") {
+        if(LocalStorage.selDate.equals("")) {
             java.util.Calendar calendar = java.util.Calendar.getInstance();
             SimpleDateFormat mdformat = new SimpleDateFormat("dd/MMM/yyyy");
             strDate = mdformat.format(calendar.getTime());
@@ -71,13 +76,35 @@ public class VenueEvents extends AppCompatActivity implements NavigationView.OnN
 
     public void insertEvents(String temp){
         //TODO: when loading, it should check if the StartDate and StartTime have already elapsed
-        for(int i = 0;i<20;i++){
+        for(int i = 0;i<LocalStorage.eventList.size();i++){
 
-            if((LocalStorage.eventList.get(i).getStartDate().equals(temp) ) ) {
+            //if((LocalStorage.eventList.get(i).getStartDate().equals(temp) ) ) {
                 //match the date and the user IDs
                 PublicEventModel em = LocalStorage.eventList.get(i);
                 prModel.add(em);
-            }
+            //}
+        }
+    }
+
+    public void hardCodedEvents() {
+
+        PublicEventModel em = new PublicEventModel();
+        PublicEventModel em2 = new PublicEventModel();
+
+        LocalStorage.eventList.add(em);
+        LocalStorage.eventList.add(em2);
+
+        writeToFile(LocalStorage.getEventsJson(), getApplicationContext());
+    }
+
+    public static void writeToFile(String data, Context context) {
+        try {
+            OutputStreamWriter outputStreamWriter = new OutputStreamWriter(context.openFileOutput("public_events_file.txt", Context.MODE_PRIVATE));
+            outputStreamWriter.write(data);
+            outputStreamWriter.close();
+        }
+        catch (IOException e) {
+            Log.e("Exception", "File write failed: " + e.toString());
         }
     }
 
