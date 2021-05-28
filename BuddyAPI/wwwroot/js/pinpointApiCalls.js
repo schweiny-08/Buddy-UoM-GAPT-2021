@@ -135,7 +135,7 @@ function GetAllPinpoints() {
 
                 markerObj.marker.addListener("dblclick", function () {
                     const coordInfoWindow = new google.maps.InfoWindow();
-                    coordInfoWindow.setContent(String(data.pinpoint_Id));
+                    coordInfoWindow.setContent(String(data.pinpointName));
                     coordInfoWindow.setPosition(markerObj.marker.position);
                     coordInfoWindow.open(map);
                     
@@ -153,7 +153,6 @@ function GetAllPinpoints() {
 
                     document.getElementById("startPointName").value = markerObj.name;
                     document.getElementById("startId").value = markerObj.id;
-                    console.log(markerObj.id);
                 });
 
                 markerObj.marker.addListener("rightclick", function () {
@@ -167,6 +166,7 @@ function GetAllPinpoints() {
 
                 markers.push(markerObj);
                // id++;
+                document.getElementById('no-overlay').click();
             });
         }
     }
