@@ -13,6 +13,8 @@ function initMap() {
         center: ict,
         zoom: 19,
         gestureHandling: "greedy",
+        mapTypeId: 'satellite',
+        tilt: 0
     });
 
     //Creating an array of objects
@@ -288,6 +290,9 @@ function initMap() {
             if (document.getElementById('no-overlay').checked) {
                 level = -999;
 
+                for (let j = 0; j < markers.length; j++) {
+                    markers[j].marker.setMap(null);
+                }
                 map.overlayMapTypes.clear();
                 document.getElementById('status').innerHTML = "No Overlay";
             }
