@@ -59,7 +59,7 @@ public class VenueEvents extends AppCompatActivity implements NavigationView.OnN
         for(int i = 0;i<20;i++){
             PublicEventModel pem = new PublicEventModel();
             pem.setPuEventId(i);
-            pem.setArchitectId(i);
+            pem.setUsedId(i);
             pem.setSiteId(i);
             pem.setTitle("test"+i);
             pem.setStartTime("12:45");

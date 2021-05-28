@@ -54,11 +54,7 @@ public class Register extends AppCompatActivity implements AdapterView.OnItemSel
 
     Button contact;
 
-    //public Context context;
-
     private JsonPlaceHolderApi jsonPlaceHolderApi;
-
-    //static LocalStorage localstorage = new LocalStorage();
 
     String sName, sSurname, sDob, sEmail, sUsername, sPassword;
 
@@ -72,10 +68,6 @@ public class Register extends AppCompatActivity implements AdapterView.OnItemSel
                 .addConverterFactory(GsonConverterFactory.create())
                 .build();
         jsonPlaceHolderApi = retrofit.create(JsonPlaceHolderApi.class);
-
-        //context = getApplication().getBaseContext();
-
-//        Call<User>
 
         name = (EditText) findViewById(R.id.reg_et_name);
         surname = (EditText) findViewById(R.id.reg_et_surname);
@@ -274,12 +266,13 @@ public class Register extends AppCompatActivity implements AdapterView.OnItemSel
             Toast.makeText(Register.this, "This email has already been registered!", Toast.LENGTH_SHORT).show();
         } else if(!sPassword.equals(confPassword.getText().toString())) { //pass do not match
             Toast.makeText(Register.this, "Passwords do not match!", Toast.LENGTH_SHORT).show();
-        } else {
-
+        } else if(sPassword.length()<8) {
+            Toast.makeText(Register.this, "Password is too short", Toast.LENGTH_SHORT).show();
+        }
+        else {
             User user = new User(LocalStorage.usersList.size()+1, sUsername, 12345678, sEmail, sPassword, 0, sName, sSurname, sDob);
 
             LocalStorage.usersList.add(user);
-            //saveFile("user_file.json", LocalStorage.getUserJson());
             writeToFile(LocalStorage.getUserJson(), getApplicationContext());
 
             Call<User> call = jsonPlaceHolderApi.registerUser(user);
@@ -288,14 +281,14 @@ public class Register extends AppCompatActivity implements AdapterView.OnItemSel
                 public void onResponse(Call<User> call, Response<User> response) {
 
                     if (!response.isSuccessful()) {
-                        Toast.makeText(Register.this, "Code: " + response.code(), Toast.LENGTH_SHORT).show();
+                        //Toast.makeText(Register.this, "Code: " + response.code(), Toast.LENGTH_SHORT).show();
                     }
 //                User userResponse = response.body();
                 }
 
                 @Override
                 public void onFailure(Call<User> call, Throwable t) {
-                    Toast.makeText(Register.this, t.getMessage(), Toast.LENGTH_SHORT).show();
+                    //Toast.makeText(Register.this, t.getMessage(), Toast.LENGTH_SHORT).show();
 
                 }
             });
@@ -305,66 +298,14 @@ public class Register extends AppCompatActivity implements AdapterView.OnItemSel
         }
     }
 
-    private void writeToFile(String data, Context context) {
+    public static void writeToFile(String data, Context context) {
         try {
-            OutputStreamWriter outputStreamWriter = new OutputStreamWriter(context.openFileOutput("config.txt", Context.MODE_PRIVATE));
+            OutputStreamWriter outputStreamWriter = new OutputStreamWriter(context.openFileOutput("users_file.txt", Context.MODE_PRIVATE));
             outputStreamWriter.write(data);
             outputStreamWriter.close();
         }
         catch (IOException e) {
             Log.e("Exception", "File write failed: " + e.toString());
-        }
-    }
-
-    private String subFolder = "/userdata";
-    //user_file, event_file
-
-    public void saveFile(String file, String JsonObj) {
-        File cacheDir = null;
-        File appDirectory = null;
-
-        if (android.os.Environment.getExternalStorageState().
-                equals(android.os.Environment.MEDIA_MOUNTED)) {
-            cacheDir = getApplicationContext().getExternalCacheDir();
-            appDirectory = new File(cacheDir + subFolder);
-
-        } else {
-            cacheDir = getApplicationContext().getCacheDir();
-            String BaseFolder = cacheDir.getAbsolutePath();
-            appDirectory = new File(BaseFolder + subFolder);
-
-        }
-
-        if (appDirectory != null && !appDirectory.exists()) {
-            appDirectory.mkdirs();
-        }
-
-        File fileName = new File(appDirectory, file);
-
-        FileOutputStream fos = null;
-        ObjectOutputStream out = null;
-        try {
-
-            FileWriter filenew = new FileWriter(appDirectory + "/" + file);
-            filenew.write(JsonObj);
-            filenew.flush();
-            filenew.close();
-
-        } catch (IOException ex) {
-            ex.printStackTrace();
-        }  catch (Exception e) {
-            e.printStackTrace();
-        } finally {
-            try {
-                if (fos != null)
-                    fos.flush();
-                fos.close();
-                if (out != null)
-                    out.flush();
-                out.close();
-            } catch (Exception e) {
-
-            }
         }
     }
 

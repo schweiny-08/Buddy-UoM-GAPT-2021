@@ -23,7 +23,7 @@ public class ViewAccount extends AppCompatActivity implements NavigationView.OnN
     DrawerLayout drawerLayout;
     NavigationView navigationView;
 
-    EditText name, surname, email, username;
+    TextView name, surname, email, username;
 
     @SuppressLint("WrongViewCast")
     @Override
@@ -43,10 +43,10 @@ public class ViewAccount extends AppCompatActivity implements NavigationView.OnN
 
         getSupportActionBar().setBackgroundDrawable(new ColorDrawable(getResources().getColor(R.color.sys_toolbar)));
 
-        name = (EditText) findViewById(R.id.act_tv_name);
-        surname = (EditText) findViewById(R.id.act_tv_surname);
-        email = (EditText) findViewById(R.id.act_tv_email);
-        username = (EditText) findViewById(R.id.act_tv_username);
+        name = (TextView) findViewById(R.id.act_et_name);
+        surname = (TextView) findViewById(R.id.act_et_surname);
+        email = (TextView) findViewById(R.id.act_et_email);
+        username = (TextView) findViewById(R.id.act_et_username);
 
         name.setText(LocalStorage.usersList.get(LocalStorage.loggedInUser).getUName());
         surname.setText(LocalStorage.usersList.get(LocalStorage.loggedInUser).getUSurname());
@@ -60,6 +60,9 @@ public class ViewAccount extends AppCompatActivity implements NavigationView.OnN
     }
 
     public void delete(View view){
+        LocalStorage.usersList.remove(LocalStorage.loggedInUser); //remove user object from storage list
+        Register.writeToFile(LocalStorage.getUserJson(), getApplicationContext()); //save new modified list
+
         Intent intent = new Intent(ViewAccount.this, Login.class);
         startActivity(intent);
     }

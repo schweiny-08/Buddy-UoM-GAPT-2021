@@ -58,61 +58,16 @@ public class EditAccount extends AppCompatActivity{
             else if(!Register.checkUserValid(username.toString()))
             Toast.makeText(EditAccount.this, "This username has already been registered!", Toast.LENGTH_SHORT).show();
                 else{
-            saveFile("user_file.json", LocalStorage.getUserJson());
+
+            LocalStorage.usersList.get(LocalStorage.loggedInUser).setName(name.getText().toString());
+            LocalStorage.usersList.get(LocalStorage.loggedInUser).setSurname(surname.getText().toString());
+            LocalStorage.usersList.get(LocalStorage.loggedInUser).setEmail(email.getText().toString());
+            LocalStorage.usersList.get(LocalStorage.loggedInUser).setUsername(username.getText().toString());
+            Register.writeToFile(LocalStorage.getUserJson(), getApplicationContext());
+
             Intent intent = new Intent(EditAccount.this, ViewAccount.class);
             startActivity(intent);
         }
     }
 
-    private String subFolder = "/userdata";
-    //user_file, event_file
-
-    public void saveFile(String file, String JsonObj) {
-        File cacheDir = null;
-        File appDirectory = null;
-
-        if (android.os.Environment.getExternalStorageState().
-                equals(android.os.Environment.MEDIA_MOUNTED)) {
-            cacheDir = getApplicationContext().getExternalCacheDir();
-            appDirectory = new File(cacheDir + subFolder);
-
-        } else {
-            cacheDir = getApplicationContext().getCacheDir();
-            String BaseFolder = cacheDir.getAbsolutePath();
-            appDirectory = new File(BaseFolder + subFolder);
-
-        }
-
-        if (appDirectory != null && !appDirectory.exists()) {
-            appDirectory.mkdirs();
-        }
-
-        File fileName = new File(appDirectory, file);
-
-        FileOutputStream fos = null;
-        ObjectOutputStream out = null;
-        try {
-
-            FileWriter filenew = new FileWriter(appDirectory + "/" + file);
-            filenew.write(JsonObj);
-            filenew.flush();
-            filenew.close();
-
-        } catch (IOException ex) {
-            ex.printStackTrace();
-        }  catch (Exception e) {
-            e.printStackTrace();
-        } finally {
-            try {
-                if (fos != null)
-                    fos.flush();
-                fos.close();
-                if (out != null)
-                    out.flush();
-                out.close();
-            } catch (Exception e) {
-
-            }
-        }
-    }
 }

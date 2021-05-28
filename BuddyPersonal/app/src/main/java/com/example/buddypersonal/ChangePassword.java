@@ -33,9 +33,10 @@ public class ChangePassword extends AppCompatActivity {
         if ((TextUtils.isEmpty(currPass.getText().toString()))||(TextUtils.isEmpty(newPass.getText().toString()))||(TextUtils.isEmpty(confNewPass.getText().toString()))) {
             Toast.makeText(ChangePassword.this, "Please make sure you have filled the necessary credentials.", Toast.LENGTH_SHORT).show();
         }
-//        else if(){
-//            //current password matches the one in the database
-//        }
+        else if(newPass.getText().toString().equals(LocalStorage.usersList.get(LocalStorage.loggedInUser).getPassword())){
+            //current password matches the one in the database
+            Toast.makeText(ChangePassword.this, "New password cannot be old password.", Toast.LENGTH_SHORT).show();
+        }
         else if(newPass.getText().toString().length()<8){
             Toast.makeText(ChangePassword.this, "The passwords is too short.", Toast.LENGTH_SHORT).show();
         }
@@ -44,6 +45,9 @@ public class ChangePassword extends AppCompatActivity {
         }
         else{
             //update in the database
+            LocalStorage.usersList.get(LocalStorage.loggedInUser).setPassword(newPass.getText().toString());
+            Register.writeToFile(LocalStorage.getUserJson(), getApplicationContext());
+
             Toast.makeText(ChangePassword.this, "Password changed successfully.", Toast.LENGTH_SHORT).show();
             Intent intent = new Intent(ChangePassword.this, EditAccount.class);
             startActivity(intent);

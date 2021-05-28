@@ -19,6 +19,7 @@ public class LocalStorage {
 
     public static ArrayList<User> usersList = new ArrayList<User>(); //need to add new users to list to be saved
     public static ArrayList<PublicEventModel> eventList = new ArrayList<PublicEventModel>(); //need to add new public events to list to be saved
+    public static ArrayList<EventModel> privEventList = new ArrayList<EventModel>(); //need to add new private events list to be saved
 
     public static int loggedInUser = 0;
     public static int publicEvent = 0;
@@ -29,10 +30,6 @@ public class LocalStorage {
         loggedInUser = temp;
     }//change pointer and use existing getters n setters
 
-    //public static User getUser(int temp) {
-      //  return loggedInUser;
-    //}
-
     public static void setPublic(int temp) {
         publicEvent = temp;
     }//when an event is selected, use this method to update the choice
@@ -41,13 +38,13 @@ public class LocalStorage {
         privateEvent = temp;
     }//when an event is selected, use this method to update the private choice
 
-    //public static PublicEventModel getPublic(int temp) {
-      //  return publicEvent;
-    //}
+    public static PublicEventModel getPublic(int temp) {
+        return eventList.get(temp);
+    }
 
-    //public static EventModel getPrivate(int temp) {
-    //    return privateEvent;
-   // }
+    public static EventModel getPrivate(int temp) {
+        return privEventList.get(temp);
+    }
 
     //other than this use already existing getters and setters, eliminates redundant code
 
@@ -67,6 +64,11 @@ public class LocalStorage {
         return eventJson;
     }
 
-    //convert to json format using Gson Library
+    public static String getPrivEventsJson() {
+        Type type = new TypeToken<ArrayList<PublicEventModel>>(){}.getType();
+        String privEventJson = new Gson().toJson(privEventList, type);
+        return privEventJson;
+    }
 
+    //convert to json format using Gson Library
 }

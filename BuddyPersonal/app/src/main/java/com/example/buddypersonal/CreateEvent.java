@@ -9,10 +9,12 @@ import androidx.fragment.app.DialogFragment;
 
 import android.app.DatePickerDialog;
 import android.app.TimePickerDialog;
+import android.content.Context;
 import android.content.Intent;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
@@ -29,6 +31,7 @@ import java.io.FileOutputStream;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.ObjectOutputStream;
+import java.io.OutputStreamWriter;
 import java.text.DateFormat;
 import java.util.Calendar;
 import java.util.Date;
@@ -55,7 +58,6 @@ public class CreateEvent extends AppCompatActivity implements AdapterView.OnItem
         endDate = (TextView) findViewById(R.id.crt_evt_et_end_date);
         location = (EditText) findViewById(R.id.crt_evt_et_loc);
         notes = (EditText) findViewById(R.id.crt_evt_et_notes);
-
 
         //TIME
         startTime.setOnClickListener(new View.OnClickListener() {
@@ -121,7 +123,7 @@ public class CreateEvent extends AppCompatActivity implements AdapterView.OnItem
         else {
             Toast.makeText(CreateEvent.this, "Event has been successfully created.", Toast.LENGTH_SHORT).show();
 
-            int evid = LocalStorage.usersList.get(LocalStorage.loggedInUser).privateEvents.size()+1;
+            int evid = LocalStorage.privEventList.size()+1;
             int uid = LocalStorage.loggedInUser;
             String titl = title.getText().toString();
             String st = startTime.getText().toString();
@@ -131,10 +133,9 @@ public class CreateEvent extends AppCompatActivity implements AdapterView.OnItem
             String noti = notes.getText().toString();
             String loca = location.getText().toString();
 
-
             EventModel eventNew = new EventModel(evid, uid, titl, st, sd, et, ed, noti, loca); //according to parameters, to do
-            LocalStorage.usersList.get(LocalStorage.loggedInUser).addEvent(eventNew);
-            saveFile("user_file.json", LocalStorage.getUserJson()); //since is private event and private events are stored in user obj, so save the user list
+            LocalStorage.privEventList.add(eventNew); //add to array list
+            writeToFile(LocalStorage.getPrivEventsJson(), getApplicationContext()); //save list of private events to file
 
             Intent intent = new Intent(this, Itinerary.class);
             startActivity(intent);
@@ -214,7 +215,7 @@ public class CreateEvent extends AppCompatActivity implements AdapterView.OnItem
                 break;
             case R.id.nav_map:
                 Intent iMap = new Intent(CreateEvent.this, MapView.class);
-//                finish();
+
                 startActivity(iMap);
                 break;
             case R.id.nav_pu_events:
@@ -255,55 +256,14 @@ public class CreateEvent extends AppCompatActivity implements AdapterView.OnItem
         return true;
     }
 
-    private String subFolder = "/userdata";
-    //user_file, event_file
-
-    public void saveFile(String file, String JsonObj) {
-        File cacheDir = null;
-        File appDirectory = null;
-
-        if (android.os.Environment.getExternalStorageState().
-                equals(android.os.Environment.MEDIA_MOUNTED)) {
-            cacheDir = getApplicationContext().getExternalCacheDir();
-            appDirectory = new File(cacheDir + subFolder);
-
-        } else {
-            cacheDir = getApplicationContext().getCacheDir();
-            String BaseFolder = cacheDir.getAbsolutePath();
-            appDirectory = new File(BaseFolder + subFolder);
-
-        }
-
-        if (appDirectory != null && !appDirectory.exists()) {
-            appDirectory.mkdirs();
-        }
-
-        File fileName = new File(appDirectory, file);
-
-        FileOutputStream fos = null;
-        ObjectOutputStream out = null;
+    private void writeToFile(String data, Context context) {
         try {
-
-            FileWriter filenew = new FileWriter(appDirectory + "/" + file);
-            filenew.write(JsonObj);
-            filenew.flush();
-            filenew.close();
-
-        } catch (IOException ex) {
-            ex.printStackTrace();
-        }  catch (Exception e) {
-            e.printStackTrace();
-        } finally {
-            try {
-                if (fos != null)
-                    fos.flush();
-                fos.close();
-                if (out != null)
-                    out.flush();
-                out.close();
-            } catch (Exception e) {
-
-            }
+            OutputStreamWriter outputStreamWriter = new OutputStreamWriter(context.openFileOutput("priv_events_file.txt", Context.MODE_PRIVATE));
+            outputStreamWriter.write(data);
+            outputStreamWriter.close();
+        }
+        catch (IOException e) {
+            Log.e("Exception", "File write failed: " + e.toString());
         }
     }
 }

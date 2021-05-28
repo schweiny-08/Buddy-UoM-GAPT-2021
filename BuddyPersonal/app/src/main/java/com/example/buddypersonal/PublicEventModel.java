@@ -2,12 +2,12 @@ package com.example.buddypersonal;
 
 public class PublicEventModel {
 
-    private int puEventId, architectId, siteId;
+    private int puEventId, userId, siteId;
     private String title, startTime, startDate, endTime, endDate, location, description;
 
     public PublicEventModel() {
         this.puEventId = -1;
-        this.architectId = -1;
+        this.userId = -1;
         this.siteId = -1;
         this.title = "title";
         this.startTime = "startTime";
@@ -20,7 +20,7 @@ public class PublicEventModel {
 
     public PublicEventModel(int puid, int aid, int sid, String titl, String startTajm, String startDejt, String endTajm, String endDejt, String loca, String desc) {
         this.puEventId = puid;
-        this.architectId = aid;
+        this.userId = aid;
         this.siteId = sid;
         this.title = titl;
         this.startTime = startTajm;
@@ -39,12 +39,12 @@ public class PublicEventModel {
         this.puEventId = puEventId;
     }
 
-    public int getArchitectId() {
-        return architectId;
+    public int getUsedId() {
+        return userId;
     }
 
-    public void setArchitectId(int architectId) {
-        this.architectId = architectId;
+    public void setUsedId(int usedId) {
+        this.userId = usedId;
     }
 
     public int getSiteId() {

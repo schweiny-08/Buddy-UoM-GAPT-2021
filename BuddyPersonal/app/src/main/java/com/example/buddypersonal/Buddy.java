@@ -1,11 +1,13 @@
 package com.example.buddypersonal;
 
+import android.content.Context;
 import android.content.Intent;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Build;
 import android.os.Bundle;
 import android.speech.RecognizerIntent;
 import android.speech.tts.TextToSpeech;
+import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.EditText;
@@ -24,6 +26,9 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.google.android.material.navigation.NavigationView;
 import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
+
+import org.json.JSONException;
 
 import java.io.File;
 import java.io.FileInputStream;
@@ -33,8 +38,10 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
+import java.io.OutputStreamWriter;
 import java.io.Reader;
 import java.io.StreamCorruptedException;
+import java.lang.reflect.Type;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.text.SimpleDateFormat;
@@ -61,7 +68,7 @@ public class Buddy extends AppCompatActivity implements NavigationView.OnNavigat
     private static final int REQUEST_CODE_SPEECH_INPUT = 1000;
     //speech to text objects
 
-    HashMap<String, String> knowledge = new HashMap<String, String>();
+    static HashMap<String, String> knowledge = new HashMap<String, String>();
     String customAnswer = "";
     String customQuery = "";
     //buddy chat object
@@ -120,13 +127,6 @@ public class Buddy extends AppCompatActivity implements NavigationView.OnNavigat
         displayBotText(temp);
         ConvertToSpeech(temp);
 
-        buildKB();
-        try {
-            loadKB();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-
         drawerLayout = findViewById(R.id.bud_drawer);
         navigationView = findViewById(R.id.bud_nav);
 
@@ -137,6 +137,13 @@ public class Buddy extends AppCompatActivity implements NavigationView.OnNavigat
 
         navigationView.setNavigationItemSelectedListener(this);
         getSupportActionBar().setBackgroundDrawable(new ColorDrawable(getResources().getColor(R.color.bud_toolbar)));
+
+        buildKB();
+        try {
+            loadKB();
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
     }
 
     public String getLastUserMsg() {
@@ -176,6 +183,7 @@ public class Buddy extends AppCompatActivity implements NavigationView.OnNavigat
         knowledge.put("what is love","Baby don't hurt me.");
         knowledge.put("i love you", "We're just good *buddies* :)");
         //knowledge.put("What are you able to do?", "I can do.....");
+        //saveKB(getBuddyJson(), getApplicationContext());
     }
 
     public String getLastBotMsg() {
@@ -232,8 +240,14 @@ public class Buddy extends AppCompatActivity implements NavigationView.OnNavigat
                 recyclerView.smoothScrollToPosition(messageAdapter.getItemCount() - 1);
             userInput.setText("");
 
-            saveKB();
+            saveKB(getBuddyJson(), getApplicationContext());
         }
+    }
+
+    public String getBuddyJson() {
+        Type type = new TypeToken<HashMap<String,String>>(){}.getType();
+        String buddyJson = new Gson().toJson(knowledge, type);
+        return buddyJson;
     }
 
     public void displayBotText(String temp) { //send Bot Text.
@@ -274,124 +288,31 @@ public class Buddy extends AppCompatActivity implements NavigationView.OnNavigat
         return (pos >= numItems);
     } //chat screen method, check if last message is visible
 
-    private String subFolder = "/userdata";
-    private String file = "buddy_kb.json";
-
-    public String saveKB() {
-        File cacheDir = null;
-        File appDirectory = null;
-
-        String Json = new Gson().toJson(knowledge);
-
-        if (android.os.Environment.getExternalStorageState().
-                equals(android.os.Environment.MEDIA_MOUNTED)) {
-            cacheDir = getApplicationContext().getExternalCacheDir();
-            appDirectory = new File(cacheDir + subFolder);
-
-        } else {
-            cacheDir = getApplicationContext().getCacheDir();
-            String BaseFolder = cacheDir.getAbsolutePath();
-            appDirectory = new File(BaseFolder + subFolder);
-
-        }
-
-        if (appDirectory != null && !appDirectory.exists()) {
-            appDirectory.mkdirs();
-        }
-
-        File fileName = new File(appDirectory, file);
-
-        FileOutputStream fos = null;
-        ObjectOutputStream out = null;
+    private static void saveKB(String data, Context context) {
         try {
-            FileWriter filenew = new FileWriter(appDirectory + "/" + file);
-            filenew.write(Json);
-            filenew.flush();
-            filenew.close();
-        } catch (IOException ex) {
-            ex.printStackTrace();
-        }  catch (Exception e) {
-            e.printStackTrace();
-        } finally {
-            try {
-                if (fos != null)
-                    fos.flush();
-                fos.close();
-                if (out != null)
-                    out.flush();
-                out.close();
-            } catch (Exception e) {
-
-            }
+            OutputStreamWriter outputStreamWriter = new OutputStreamWriter(context.openFileOutput("buddy_file.txt", Context.MODE_PRIVATE));
+            outputStreamWriter.write(data);
+            outputStreamWriter.close();
         }
-
-        return "I saved my knowledge base.";
+        catch (IOException e) {
+            Log.e("Exception", "File write failed: " + e.toString());
+        }
     }
 
-    @RequiresApi(api = Build.VERSION_CODES.O)
-    public String loadKB() throws IOException {
-        File cacheDir = null;
-        File appDirectory = null;
-        if (android.os.Environment.getExternalStorageState().
-                equals(android.os.Environment.MEDIA_MOUNTED)) {
-            cacheDir = getApplicationContext().getExternalCacheDir();
-            appDirectory = new File(cacheDir + subFolder);
-        } else {
-            cacheDir = getApplicationContext().getCacheDir();
-            String BaseFolder = cacheDir.getAbsolutePath();
-            appDirectory = new File(BaseFolder + subFolder);
-        }
+    public void loadKB() throws JSONException {
 
-        if (appDirectory != null && !appDirectory.exists())
-            return "Knowledge base does not exist."; // File does not exist
+        //load knowledge base into local
 
-        /*File fileName = new File(appDirectory, file);
-
-        FileInputStream fis = null;
-        ObjectInputStream in = null;
-        try {
-            fis = new FileInputStream(fileName);
-            in = new ObjectInputStream(fis);
-            HashMap<String, String> myHashMap = (HashMap<String, String>) in.readObject();
-            knowledge = myHashMap;
-
-        } catch (FileNotFoundException e) {
-            e.printStackTrace();
-        } catch (StreamCorruptedException e) {
-            e.printStackTrace();
-        } catch (IOException e) {
-            e.printStackTrace();
-        } catch (ClassNotFoundException e) {
-            e.printStackTrace();
-        } catch (Exception e) {
-            e.printStackTrace();
-        } finally {
-
-            try {
-                if (fis != null) {
-                    fis.close();
-                }
-                if (in != null) {
-                    in.close();
-                }
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-        }*/
+        String temp = Login.readFromFile("buddy_file.txt", getApplicationContext()); //read from file, get json to string
 
         Gson gson = new Gson();
 
-        // create a reader
-        Reader reader = Files.newBufferedReader(Paths.get(subFolder+"/buddy_kb.json"));
+        Type buddyType = new TypeToken<HashMap<String, String>>() {
+        }.getType();
 
-        // convert JSON file to map
-        HashMap<String, String> map = gson.fromJson(reader, HashMap.class);
-        knowledge = map;
+        HashMap<String,String> buddyArray = gson.fromJson(temp, buddyType);
 
-        // close reader
-        reader.close();
-
-        return "I loaded my knowledge base.";
+        knowledge = buddyArray; //populate local storage array list
     }
 
     @Override
@@ -525,13 +446,11 @@ public class Buddy extends AppCompatActivity implements NavigationView.OnNavigat
     }
 
     public String greeting() {
-        String temp = "Hey Buddy!";
-
+        String temp = "Hey "+LocalStorage.usersList.get(LocalStorage.loggedInUser).getUName();
         //good morning buddy
         //good after buddy
         //whats up buddy
         //how can i help buddy
-
         return temp;
     }
 
@@ -574,11 +493,17 @@ public class Buddy extends AppCompatActivity implements NavigationView.OnNavigat
         if(Lquestion.equals("show me the itinerary"))
             return showIter();
 
+        if(Lquestion.equals("show me today's events"))
+            return showIter();
+
         if(Lquestion.equals("show me the settings"))
             return showSettings();
 
         if(Lquestion.equals("what time is it"))
             return getTime();
+
+        if(Lquestion.equals("what day is it"))
+            return getDate();
 
         if(Lquestion.equals("show me my profile"))
             return showProfile();

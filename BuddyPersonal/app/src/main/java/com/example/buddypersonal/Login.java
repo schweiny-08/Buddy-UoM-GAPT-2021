@@ -14,6 +14,7 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -29,6 +30,7 @@ import java.io.InputStreamReader;
 import java.io.ObjectInputStream;
 import java.io.OutputStreamWriter;
 import java.io.StreamCorruptedException;
+import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashMap;
@@ -36,7 +38,6 @@ import java.util.HashMap;
 public class Login extends AppCompatActivity {
 
     EditText email, password;
-
     Button contact;
 
     @Override
@@ -46,6 +47,7 @@ public class Login extends AppCompatActivity {
 
         email = (EditText) findViewById(R.id.log_et_email);
         password = (EditText) findViewById(R.id.log_et_password);
+        LocalStorage.loggedInUser = -1;
 
         contact = (Button) findViewById(R.id.log_btn_contact_us);
         contact.setOnClickListener(new View.OnClickListener() {
@@ -98,9 +100,8 @@ public class Login extends AppCompatActivity {
         else{
             Toast.makeText(Login.this, "Login Successful", Toast.LENGTH_SHORT).show();
             //update user id after validation
-            LocalStorage.setUser(temp);
+            LocalStorage.loggedInUser = temp;
             Intent intent = new Intent(this, Home.class);
-//            finish();
             startActivity(intent);
         }
     }
@@ -117,12 +118,12 @@ public class Login extends AppCompatActivity {
         startActivity(intent);
     }
 
-    private String readFromFile(Context context) {
+    public static String readFromFile(String file, Context context) {
 
         String ret = "";
 
         try {
-            InputStream inputStream = context.openFileInput("config.txt");
+            InputStream inputStream = context.openFileInput(file);
 
             if ( inputStream != null ) {
                 InputStreamReader inputStreamReader = new InputStreamReader(inputStream);
@@ -148,53 +149,40 @@ public class Login extends AppCompatActivity {
     }
 
     public void build_db() throws JSONException {
-        String temp = readFromFile(getApplicationContext());
-        ArrayList<User> tempusersList = new ArrayList<User>();
 
-        JSONArray jsonArray = new JSONArray(temp);
-        JSONObject jsnobject = new JSONObject(temp);
+        //load users into local arraylist
 
-        jsonArray = jsnobject.getJSONArray("locations");
-        for (int i = 0; i < jsonArray.length(); i++) {
-            JSONObject explrObject = jsonArray.getJSONObject(i);
-            String email = jsonArray.getJSONObject(i).getString("email");
-            String pass = jsonArray.getJSONObject(i).getString("password");
-            //array.getJSONObject(i).getString("privateEvents");
-            int role = jsonArray.getJSONObject(i).getInt("role_Id");
-            int tel = jsonArray.getJSONObject(i).getInt("telephone");
-            String dob = jsonArray.getJSONObject(i).getString("uDob");
-            String uname = jsonArray.getJSONObject(i).getString("uName");
-            String surn = jsonArray.getJSONObject(i).getString("uSurname");
-            int uid = jsonArray.getJSONObject(i).getInt("user_Id");
-            String user = jsonArray.getJSONObject(i).getString("username");
-        }
+        String temp = readFromFile("users_file.txt", getApplicationContext()); //read from file, get json to string
 
-//        JSONObject array = obj.getJSONObject();
-//        for(int i = 0 ; i < array.length() ; i++){
-//            //get parameters from json
-//            String email = array.getJSONObject(i).getString("email");
-//            String pass = array.getJSONObject(i).getString("password");
-//            //array.getJSONObject(i).getString("privateEvents");
-//            int role = array.getJSONObject(i).getInt("role_Id");
-//            int tel = array.getJSONObject(i).getInt("telephone");
-//            String dob = array.getJSONObject(i).getString("uDob");
-//            String uname = array.getJSONObject(i).getString("uName");
-//            String surn = array.getJSONObject(i).getString("uSurname");
-//            int uid = array.getJSONObject(i).getInt("user_Id");
-//            String user = array.getJSONObject(i).getString("username");
+        Gson gson = new Gson();
+
+        Type userListType = new TypeToken<ArrayList<User>>(){}.getType();
+
+        ArrayList<User> userArray = gson.fromJson(temp, userListType);
+
+        LocalStorage.usersList = userArray; //populate local storage array list
+
+        //load private events into local arraylist
+
+        temp = readFromFile("priv_events_file.txt", getApplicationContext()); //read from file, get json to string
+
+        Type privateEventListType = new TypeToken<ArrayList<EventModel>>(){}.getType();
+
+        ArrayList<EventModel> privEventArray = gson.fromJson(temp, privateEventListType);
+
+        LocalStorage.privEventList = privEventArray; //populate local storage array list
 //
-//            User usernew = new User(uid, user, tel, email, pass, role, uname, surn, dob);
-//            tempusersList.add(usernew);
-//        }
-
-        LocalStorage.usersList = tempusersList;
+//        //load public events into local arraylist
+//
+//        temp = readFromFile("public_events_file.txt", getApplicationContext()); //read from file, get json to string
+//
+//        Type publicEventListType = new TypeToken<ArrayList<PublicEventModel>>(){}.getType();
+//
+//        ArrayList<PublicEventModel> publicEventArray = gson.fromJson(temp, publicEventListType);
+//
+//        LocalStorage.eventList = publicEventArray; //populate local storage array list
 
     }
-
-    private String subFolder = "/userdata";
-    //user_file, event_file
-
-
 
     public int checkForMatch (String email, String pass) {
         //this was not our part to do. back end function

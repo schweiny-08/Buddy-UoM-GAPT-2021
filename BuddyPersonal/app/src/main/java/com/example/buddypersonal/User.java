@@ -4,13 +4,10 @@ import java.util.ArrayList;
 
 public class User {
 
-
     private String uName, uSurname, uDob;
 
     private Integer user_Id, telephone, role_Id;
     private String username, email, password;
-
-    public ArrayList<EventModel> privateEvents = new ArrayList<EventModel>();
 
     public Integer getId() {
         return user_Id;
@@ -35,6 +32,14 @@ public class User {
     public String getPassword() {
         return password;
     }
+
+    public void setUsername(String temp) {this.username = temp;}
+
+    public void setName(String temp) {this.uName = temp;}
+
+    public void setEmail(String temp) {this.email = temp;}
+
+    public void setSurname(String temp) {this.uSurname = temp;}
 
     public void setPassword(String temp) {
         this.password = temp;
@@ -76,7 +81,4 @@ public class User {
         return uDob;
     }
 
-    public void addEvent(EventModel event) {
-        privateEvents.add(event);
-    }
 }

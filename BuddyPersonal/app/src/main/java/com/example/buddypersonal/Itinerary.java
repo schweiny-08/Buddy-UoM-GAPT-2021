@@ -62,7 +62,12 @@ public class Itinerary extends AppCompatActivity implements NavigationView.OnNav
         getSupportActionBar().setBackgroundDrawable(new ColorDrawable(getResources().getColor(R.color.itn_toolbar)));
 
         popRecyclerView();
-        insertEvents();
+
+        java.util.Calendar calendar = java.util.Calendar.getInstance();
+        SimpleDateFormat mdformat = new SimpleDateFormat("dd/MMM/yyyy");
+        String strDate = mdformat.format(calendar.getTime());
+
+        insertEvents(strDate);
     }
 
     public void popRecyclerView(){
@@ -71,20 +76,30 @@ public class Itinerary extends AppCompatActivity implements NavigationView.OnNav
         recyclerView.setAdapter(itineraryAdapter);
     }
 
-    public void insertEvents(){
-        //TODO: when loading, it should check if the StartDate and StartTime have already elapsed
-        for(int i = 0;i<20;i++){
-            EventModel em = new EventModel();
-            em.setEventId(i);
-            em.setUserId(1);
-            em.setTitle("test"+i);
-            em.setStartTime("12:45");
-            em.setEndTime("14:00");
-            em.setStartDate("12/07/2021");
-            em.setEndDate("12/07/2021");
-            em.setLoc("somewhere"+i);
-            em.setNotes("something"+i);
-            prModel.add(em);
+    public void insertEvents(String date){
+        //TODO: when loading, it should check if the StartDate and StartTime have already elapsed, private events
+
+        for(int i = 0;i<LocalStorage.privEventList.size();i++){
+            //get today's, do by string data parameter
+            //string to date simpledateformat
+            //loop list, check date if date matches then load....
+            //EventModel em = new EventModel();
+//            em.setEventId(i);
+//            em.setUserId(1);
+//            em.setTitle("test"+i);
+//            em.setStartTime("12:45");
+//            em.setEndTime("14:00");
+//            em.setStartDate("12/07/2021");
+//            em.setEndDate("12/07/2021");
+//            em.setLoc("somewhere"+i);
+//            em.setNotes("something"+i);
+//            prModel.add(em);
+
+            if((LocalStorage.privEventList.get(i).getUserId() == LocalStorage.loggedInUser) && (LocalStorage.privEventList.get(i).getStartDate().equals(date))) {
+                //match the date and the user IDs
+                EventModel em = LocalStorage.privEventList.get(i);
+                prModel.add(em);
+            }
         }
     }
 
