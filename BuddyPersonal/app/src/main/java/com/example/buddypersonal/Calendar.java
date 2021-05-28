@@ -21,10 +21,14 @@ public class Calendar extends AppCompatActivity implements NavigationView.OnNavi
     DrawerLayout drawerLayout;
     NavigationView navigationView;
 
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_calendar);
+
+        LocalStorage.selDate = "";
 
         calendarView = (CalendarView) findViewById(R.id.calendarView);
         calendarView.setOnDateChangeListener(new CalendarView.OnDateChangeListener() {
@@ -34,6 +38,7 @@ public class Calendar extends AppCompatActivity implements NavigationView.OnNavi
                 String date = dayOfMonth + "/" + month + "/" + year;
                 Intent intent = new Intent(Calendar.this, Itinerary.class);
                 intent.putExtra("selected date", date);
+                LocalStorage.selDate = date;
                 startActivity(intent);
             }
         });
@@ -48,6 +53,7 @@ public class Calendar extends AppCompatActivity implements NavigationView.OnNavi
 
         navigationView.setNavigationItemSelectedListener(this);
         getSupportActionBar().setBackgroundDrawable(new ColorDrawable(getResources().getColor(R.color.itn_toolbar)));
+
     }
 
     @Override

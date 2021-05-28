@@ -62,10 +62,15 @@ public class Itinerary extends AppCompatActivity implements NavigationView.OnNav
         getSupportActionBar().setBackgroundDrawable(new ColorDrawable(getResources().getColor(R.color.itn_toolbar)));
 
         popRecyclerView();
+        String strDate = "";
 
-        java.util.Calendar calendar = java.util.Calendar.getInstance();
-        SimpleDateFormat mdformat = new SimpleDateFormat("dd/MMM/yyyy");
-        String strDate = mdformat.format(calendar.getTime());
+        if(LocalStorage.selDate != "") {
+            java.util.Calendar calendar = java.util.Calendar.getInstance();
+            SimpleDateFormat mdformat = new SimpleDateFormat("dd/MMM/yyyy");
+             strDate = mdformat.format(calendar.getTime());
+        }else {
+            strDate = LocalStorage.selDate;
+        }
 
         insertEvents(strDate);
         LocalStorage.privateEvent = -1;

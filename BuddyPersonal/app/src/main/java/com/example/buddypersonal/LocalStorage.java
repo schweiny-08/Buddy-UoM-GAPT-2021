@@ -24,6 +24,7 @@ public class LocalStorage {
     public static int loggedInUser = -1;
     public static int publicEvent = -1;
     public static int privateEvent = -1;
+    public static String selDate = "";
     //opted to use pointers instead of global vars
 
     public static void setUser(int temp) {

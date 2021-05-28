@@ -45,9 +45,19 @@ public class VenueEvents extends AppCompatActivity implements NavigationView.OnN
         navigationView.setNavigationItemSelectedListener(this);
         getSupportActionBar().setBackgroundDrawable(new ColorDrawable(getResources().getColor(R.color.map_toolbar)));
 
-        java.util.Calendar calendar = java.util.Calendar.getInstance();
-        SimpleDateFormat mdformat = new SimpleDateFormat("dd/MMM/yyyy");
-        String strDate = mdformat.format(calendar.getTime());
+
+        String strDate = "";
+
+        if(LocalStorage.selDate != "") {
+            java.util.Calendar calendar = java.util.Calendar.getInstance();
+            SimpleDateFormat mdformat = new SimpleDateFormat("dd/MMM/yyyy");
+            strDate = mdformat.format(calendar.getTime());
+        }else {
+            strDate = LocalStorage.selDate;
+        }
+
+        insertEvents(strDate);
+        LocalStorage.publicEvent = -1;
 
         popRecyclerView();
         insertEvents(strDate);
