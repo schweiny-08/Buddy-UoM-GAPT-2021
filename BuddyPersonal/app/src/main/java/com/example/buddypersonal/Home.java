@@ -47,6 +47,7 @@ public class Home extends AppCompatActivity implements NavigationView.OnNavigati
 
         navigationView.setNavigationItemSelectedListener(this);
         getSupportActionBar().setBackgroundDrawable(new ColorDrawable(getResources().getColor(R.color.sys_toolbar)));
+        LocalStorage.privateEvent = -1;
     }
 
     @Override

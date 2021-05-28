@@ -68,6 +68,7 @@ public class Itinerary extends AppCompatActivity implements NavigationView.OnNav
         String strDate = mdformat.format(calendar.getTime());
 
         insertEvents(strDate);
+        LocalStorage.privateEvent = -1;
     }
 
     public void popRecyclerView(){
@@ -95,7 +96,7 @@ public class Itinerary extends AppCompatActivity implements NavigationView.OnNav
 //            em.setNotes("something"+i);
 //            prModel.add(em);
 
-            if((LocalStorage.privEventList.get(i).getUserId() == LocalStorage.loggedInUser) && (LocalStorage.privEventList.get(i).getStartDate().equals(date))) {
+            if((LocalStorage.privEventList.get(i).getUserId() == LocalStorage.loggedInUser) ) {
                 //match the date and the user IDs
                 EventModel em = LocalStorage.privEventList.get(i);
                 prModel.add(em);
@@ -178,6 +179,7 @@ public class Itinerary extends AppCompatActivity implements NavigationView.OnNav
         intent.putExtra("vEndDate", prModel.get(position).getEndDate());
         intent.putExtra("vLocation", prModel.get(position).getLoc());
         intent.putExtra("vNotes", prModel.get(position).getNotes());
+        LocalStorage.privateEvent = prModel.get(position).getEventId()-1;
         startActivity(intent);
     }
 }

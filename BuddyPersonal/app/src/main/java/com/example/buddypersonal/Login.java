@@ -48,6 +48,7 @@ public class Login extends AppCompatActivity {
         email = (EditText) findViewById(R.id.log_et_email);
         password = (EditText) findViewById(R.id.log_et_password);
         LocalStorage.loggedInUser = -1;
+        LocalStorage.privateEvent = -1;
 
         contact = (Button) findViewById(R.id.log_btn_contact_us);
         contact.setOnClickListener(new View.OnClickListener() {

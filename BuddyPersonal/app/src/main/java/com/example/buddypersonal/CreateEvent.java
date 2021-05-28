@@ -59,6 +59,16 @@ public class CreateEvent extends AppCompatActivity implements AdapterView.OnItem
         location = (EditText) findViewById(R.id.crt_evt_et_loc);
         notes = (EditText) findViewById(R.id.crt_evt_et_notes);
 
+        if(LocalStorage.privateEvent >= 0) {
+            title.setText((LocalStorage.privEventList.get(LocalStorage.privateEvent).getTitle()));
+            startTime.setText((LocalStorage.privEventList.get(LocalStorage.privateEvent).getStartTime()));
+            startDate.setText((LocalStorage.privEventList.get(LocalStorage.privateEvent).getStartDate()));
+            endTime.setText((LocalStorage.privEventList.get(LocalStorage.privateEvent).getEndTime()));
+            endDate.setText((LocalStorage.privEventList.get(LocalStorage.privateEvent).getEndDate()));
+            location.setText((LocalStorage.privEventList.get(LocalStorage.privateEvent).getLoc()));
+            notes.setText((LocalStorage.privEventList.get(LocalStorage.privateEvent).getNotes()));
+        }
+
         //TIME
         startTime.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -123,8 +133,6 @@ public class CreateEvent extends AppCompatActivity implements AdapterView.OnItem
         else {
             Toast.makeText(CreateEvent.this, "Event has been successfully created.", Toast.LENGTH_SHORT).show();
 
-            int evid = LocalStorage.privEventList.size()+1;
-            int uid = LocalStorage.loggedInUser;
             String titl = title.getText().toString();
             String st = startTime.getText().toString();
             String sd = startDate.getText().toString();
@@ -133,8 +141,24 @@ public class CreateEvent extends AppCompatActivity implements AdapterView.OnItem
             String noti = notes.getText().toString();
             String loca = location.getText().toString();
 
-            EventModel eventNew = new EventModel(evid, uid, titl, st, sd, et, ed, noti, loca); //according to parameters, to do
-            LocalStorage.privEventList.add(eventNew); //add to array list
+            if (LocalStorage.privateEvent >= 0) { //existing event
+
+                LocalStorage.privEventList.get(LocalStorage.privateEvent).setTitle(titl);
+                LocalStorage.privEventList.get(LocalStorage.privateEvent).setStartTime(st);
+                LocalStorage.privEventList.get(LocalStorage.privateEvent).setStartDate(sd);
+                LocalStorage.privEventList.get(LocalStorage.privateEvent).setEndTime(et);
+                LocalStorage.privEventList.get(LocalStorage.privateEvent).setEndDate(ed);
+                LocalStorage.privEventList.get(LocalStorage.privateEvent).setNotes(noti);
+                LocalStorage.privEventList.get(LocalStorage.privateEvent).setLoc(loca);
+
+            }else { //create new event
+
+                int evid = LocalStorage.privEventList.size()+1;
+                int uid = LocalStorage.loggedInUser;
+
+                EventModel eventNew = new EventModel(evid, uid, titl, st, sd, et, ed, noti, loca); //according to parameters, to do
+                LocalStorage.privEventList.add(eventNew); //add to array list
+            }
             writeToFile(LocalStorage.getPrivEventsJson(), getApplicationContext()); //save list of private events to file
 
             Intent intent = new Intent(this, Itinerary.class);

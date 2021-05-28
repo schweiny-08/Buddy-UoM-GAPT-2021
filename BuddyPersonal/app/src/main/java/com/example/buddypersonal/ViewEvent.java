@@ -26,13 +26,13 @@ public class ViewEvent extends AppCompatActivity {
         notes = (TextView)findViewById(R.id.vew_evt_tv_notes_det);
 
         Intent intent = getIntent();
-        title.setText(intent.getStringExtra("iTitle"));
-        startTime.setText(intent.getStringExtra("iStartTime"));
-        startDate.setText(intent.getStringExtra("iStartDate"));
-        endTime.setText(intent.getStringExtra("iEntTime"));
-        endDate.setText(intent.getStringExtra("iEndDate"));
-        location.setText(intent.getStringExtra("iLocation"));
-        notes.setText(intent.getStringExtra("iNotes"));
+        title.setText(LocalStorage.privEventList.get(LocalStorage.privateEvent).getTitle());
+        startTime.setText(LocalStorage.privEventList.get(LocalStorage.privateEvent).getStartTime());
+        startDate.setText(LocalStorage.privEventList.get(LocalStorage.privateEvent).getStartDate());
+        endTime.setText(LocalStorage.privEventList.get(LocalStorage.privateEvent).getEndTime());
+        endDate.setText(LocalStorage.privEventList.get(LocalStorage.privateEvent).getEndDate());
+        location.setText(LocalStorage.privEventList.get(LocalStorage.privateEvent).getLoc());
+        notes.setText(LocalStorage.privEventList.get(LocalStorage.privateEvent).getNotes());
 
         getSupportActionBar().setBackgroundDrawable(new ColorDrawable(getResources().getColor(R.color.itn_toolbar)));
     }
@@ -47,7 +47,7 @@ public class ViewEvent extends AppCompatActivity {
     }
     
     public void edit(View view){
-//        Intent intent = new Intent(ViewEvent.this, CreateEvent.class);
+        Intent intent = new Intent(ViewEvent.this, CreateEvent.class);
 //        intent.putExtra("vEventId", prModel.get(position).getEventId());
 //        intent.putExtra("vUserId", prModel.get(position).getUserId());
 //        intent.putExtra("vTitle", prModel.get(position).getTitle());
@@ -58,6 +58,6 @@ public class ViewEvent extends AppCompatActivity {
 //        intent.putExtra("vLocation", prModel.get(position).getLoc());
 //        intent.putExtra("vNotes", prModel.get(position).getNotes());
 //        startActivity(intent);
-//        startActivity(intent);
+        startActivity(intent);
     }
 }

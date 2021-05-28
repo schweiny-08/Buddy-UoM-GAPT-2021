@@ -21,9 +21,9 @@ public class LocalStorage {
     public static ArrayList<PublicEventModel> eventList = new ArrayList<PublicEventModel>(); //need to add new public events to list to be saved
     public static ArrayList<EventModel> privEventList = new ArrayList<EventModel>(); //need to add new private events list to be saved
 
-    public static int loggedInUser = 0;
-    public static int publicEvent = 0;
-    public static int privateEvent = 0;
+    public static int loggedInUser = -1;
+    public static int publicEvent = -1;
+    public static int privateEvent = -1;
     //opted to use pointers instead of global vars
 
     public static void setUser(int temp) {

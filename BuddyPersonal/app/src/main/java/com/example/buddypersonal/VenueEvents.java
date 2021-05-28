@@ -16,6 +16,7 @@ import android.widget.Toast;
 
 import com.google.android.material.navigation.NavigationView;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 
 public class VenueEvents extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
@@ -44,8 +45,12 @@ public class VenueEvents extends AppCompatActivity implements NavigationView.OnN
         navigationView.setNavigationItemSelectedListener(this);
         getSupportActionBar().setBackgroundDrawable(new ColorDrawable(getResources().getColor(R.color.map_toolbar)));
 
+        java.util.Calendar calendar = java.util.Calendar.getInstance();
+        SimpleDateFormat mdformat = new SimpleDateFormat("dd/MMM/yyyy");
+        String strDate = mdformat.format(calendar.getTime());
+
         popRecyclerView();
-        insertEvents();
+        insertEvents(strDate);
     }
 
     public void popRecyclerView(){
@@ -54,21 +59,15 @@ public class VenueEvents extends AppCompatActivity implements NavigationView.OnN
         mRecyclerView.setAdapter(puEventAdapter);
     }
 
-    public void insertEvents(){
+    public void insertEvents(String temp){
         //TODO: when loading, it should check if the StartDate and StartTime have already elapsed
         for(int i = 0;i<20;i++){
-            PublicEventModel pem = new PublicEventModel();
-            pem.setPuEventId(i);
-            pem.setUsedId(i);
-            pem.setSiteId(i);
-            pem.setTitle("test"+i);
-            pem.setStartTime("12:45");
-            pem.setEndTime("14:00");
-            pem.setStartDate("12/07/2021");
-            pem.setEndDate("12/07/2021");
-            pem.setLocation("somewhere cooler"+i);
-            pem.setDescription("something cool"+i);
-            prModel.add(pem);
+
+            if((LocalStorage.eventList.get(i).getStartDate().equals(temp) ) ) {
+                //match the date and the user IDs
+                PublicEventModel em = LocalStorage.eventList.get(i);
+                prModel.add(em);
+            }
         }
     }
 

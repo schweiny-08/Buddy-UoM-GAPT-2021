@@ -32,9 +32,11 @@ public class ItineraryAdapter extends RecyclerView.Adapter<ItineraryAdapter.View
         viewHolder.endTime.setText(mEventModel.get(i).getEndTime());
         viewHolder.title.setText(mEventModel.get(i).getTitle());
     }
+
     public int getItemCount() {
         return mEventModel.size();
     }
+
     public static class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
 
         TextView startTime, endTime, title;
