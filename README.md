@@ -4,10 +4,10 @@
 Table of Contents:
 
  1. About the Project
-	 a. Built with
+ 	1. Built with
  2. Getting Started
-	 a. Prerequisites
-	 b. Running the Solution
+ 	1. Prerequisites
+ 	2.  Running the Solution
  3. Usage
  4.  Acknowledgements & Contacts
 
