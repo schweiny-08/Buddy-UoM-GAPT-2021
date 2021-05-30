@@ -14,6 +14,7 @@
         android:layout_height="0dp"
         android:layout_margin="0dp"
         android:src="@drawable/buddy_logo"
+        android:contentDescription="@string/app_logo"
         app:layout_constraintBottom_toTopOf="@+id/guideline6"
         app:layout_constraintEnd_toStartOf="@+id/guideline4"
         app:layout_constraintStart_toStartOf="@+id/guideline1"

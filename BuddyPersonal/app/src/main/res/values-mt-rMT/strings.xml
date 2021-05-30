@@ -86,4 +86,9 @@
     <string name="get_navigation">Ikseb Navigazzjoni</string>
     <string name="up">Fuq</string>
     <string name="down">Isfel</string>
+    <string name="buddy_sumbit">Issottometti l-Mistoqsija lil Buddy</string>
+    <string name="buddy_voice">Agħmel Mistoqsija bil-Vuċi lil Buddy</string>
+    <string name="ask_buddy">Saqsi lil Buddy</string>
+    <string name="app_logo">Logo ta\' Buddy Personal</string>
+    <string name="nav_drawer_icon">Ikona tal-Kexxun tan-Navigazzjoni</string>
 </resources>

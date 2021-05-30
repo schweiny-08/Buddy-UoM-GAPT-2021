@@ -19,7 +19,8 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:paddingRight="10dp"
-                android:src="@drawable/menu" />
+                android:src="@drawable/menu"
+                android:contentDescription="@string/nav_drawer_icon"/>
 
             <TextView
                 style="@style/Theme.System.toolbar"

@@ -87,4 +87,9 @@
     <string name="up">Up</string>
     <string name="down">Down</string>
     <string name="buddy" translatable="false">Buddy</string>
+    <string name="buddy_sumbit">Submit Query to Buddy</string>
+    <string name="buddy_voice">Make Voice Query to Buddy</string>
+    <string name="ask_buddy">Ask Buddy</string>
+    <string name="app_logo">Buddy Personal Logo</string>
+    <string name="nav_drawer_icon">Navigation Drawer Icon</string>
 </resources>

@@ -86,4 +86,9 @@
     <string name="get_navigation">" Obtener Navegación"</string>
     <string name="up">Arriba</string>
     <string name="down">Abajo</string>
+    <string name="buddy_sumbit">Enviar Consulta a Buddy</string>
+    <string name="buddy_voice">" Realizar Consulta de Voz a Buddy"</string>
+    <string name="ask_buddy">Pregúntale a Buddy</string>
+    <string name="app_logo">Logotipo de Buddy Personal</string>
+    <string name="nav_drawer_icon">" Icono de Cajón de Navegación"</string>
 </resources>
