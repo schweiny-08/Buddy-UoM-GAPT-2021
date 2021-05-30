@@ -15,9 +15,7 @@ namespace BuddyAPI.Models
 		[StringLength(50, ErrorMessage = "Pinpoint type name cannot be longer than 50 characters.")]
 		public string pinpointTypeName{ get; set; }
 
-		//[Required]
 		public string pinpointIcon { get; set; }
 
-		//public virtual ICollection<PinpointTypes> pinpointTypes { get; set; }
 	}
 }

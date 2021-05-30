@@ -57,7 +57,6 @@ namespace BuddyAPI.Controllers
         }
 
         // PUT: api/Pinpoints/5
-        // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPut("editPinpointById")]
         public async Task<IActionResult> PutPinpoints(int id, Pinpoints pinpoints)
         {
@@ -88,7 +87,6 @@ namespace BuddyAPI.Controllers
         }
 
         // POST: api/Pinpoints
-        // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPost("addPinpoint")]
         public async Task<ActionResult<Pinpoints>> PostPinpoints(Pinpoints pinpoints)
         {
@@ -114,17 +112,22 @@ namespace BuddyAPI.Controllers
             return NoContent();
         }
 
+        //Return boolean if Pinpoint Id exists in the database
         private bool PinpointsExists(int id)
         {
             return _context.Pinpoints.Any(e => e.pinpoint_Id == id);
         }
 
+
+        //Sets a session variable for Location via the string key
         [HttpPost("SetSessionLocation")]
         public void SetLocation(string key , Pinpoints pinpoint)
         {
             HttpContext.Session.SetObjectAsJson(key, pinpoint);
         }
         
+
+        //Retreive session variable based in the key inputted
         [HttpGet("GetSessionLocation")]
         public Pinpoints GetLocation(string key)
         {
@@ -132,6 +135,8 @@ namespace BuddyAPI.Controllers
             return pinpoint;
         }
         
+
+        //Returns a list of Pinpoints objects from start to end of the shortest path
         [HttpGet("GetNavigation")]
         public async Task<ActionResult<IEnumerable<Pinpoints>>> GetNavigation(int start, int end)
         {
@@ -140,6 +145,7 @@ namespace BuddyAPI.Controllers
         }
 
 
+        //Returns a list of Pinpoints Ids from start to end of the shortest path
         [HttpGet("GetNavigationId")]
         public async Task<ActionResult<IEnumerable<int>>> GetNavigationId(int start, int end)
         {

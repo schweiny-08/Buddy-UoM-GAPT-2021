@@ -20,6 +20,5 @@ namespace BuddyAPI.Models
 		[StringLength(150, ErrorMessage = "Desciption cannot be longer than 150 characters.")]
 		public string buildingDescription { get; set; }
 
-		//public virtual ICollection<Buildings> buildings { get; set; }
 	}
 }

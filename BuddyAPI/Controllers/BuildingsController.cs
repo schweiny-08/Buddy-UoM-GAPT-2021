@@ -54,7 +54,6 @@ namespace BuddyAPI.Controllers
         }
 
         // PUT: api/Buildings/5
-        // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPut("editBuildingById")]
         public async Task<IActionResult> PutBuildings(int id, Buildings buildings)
         {
@@ -85,7 +84,6 @@ namespace BuddyAPI.Controllers
         }
 
         // POST: api/Buildings
-        // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPost("addBuilding")]
         public async Task<ActionResult<Buildings>> PostBuildings(Buildings buildings)
         {

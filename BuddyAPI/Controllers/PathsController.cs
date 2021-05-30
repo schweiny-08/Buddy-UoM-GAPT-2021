@@ -21,8 +21,6 @@ namespace BuddyAPI.Controllers
             _context = context;
         }
 
-        
-
         // GET: api/Paths
         [HttpGet]
         public async Task<ActionResult<IEnumerable<Paths>>> GetPaths()
@@ -34,14 +32,13 @@ namespace BuddyAPI.Controllers
         [HttpGet("{id}")]
         public async Task<ActionResult<IEnumerable<int>>> GetPaths(int id)
         {
-            //var paths = await _context.Paths.FindAsync(a => a.pinpoint_Id == id || a.pinpoint_Id_2 == id);
-            //var paths2 = await _context.Paths.FirstOrDefaultAsync(a => a.pinpoint_Id == id2 && a.pinpoint_Id_2 == id);
+ 
             List<int> paths = new List<int>();
             foreach(var p in _context.Paths)
             {
                 if(p.pinpoint_Id == id)
                 {
-                    paths.Add(p.pinpoint_Id_2);
+                   paths.Add(p.pinpoint_Id_2);
                 }
                 else if(p.pinpoint_Id_2 == id)
                 {
@@ -49,28 +46,10 @@ namespace BuddyAPI.Controllers
                 }
             }
 
-            //for (int i = 0; i < 100; i++)
-            //{
-            //    _context.Paths[i] == id;
-            //}
-
-            //if (paths == null && paths2 == null)
-            //{
-            //    return NotFound();
-            //}
-            //else if (paths != null && paths2 == null)
-            //{
-            //    return paths;
-            //}
-            //else
-            //{
-            //    return paths2;
-            //}
             return paths;
         }
 
         // PUT: api/Paths/5
-        // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPut("{id}")]
         public async Task<IActionResult> PutPaths(int id, Paths paths)
         {
@@ -101,7 +80,6 @@ namespace BuddyAPI.Controllers
         }
 
         // POST: api/Paths
-        // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPost]
         public async Task<ActionResult<Paths>> PostPaths(Paths paths)
         {
@@ -142,13 +120,6 @@ namespace BuddyAPI.Controllers
                 _context.Paths.Remove(paths2);
             }
 
-            ////var paths = await _context.Paths.FindAsync(id);
-            //if (paths == null)
-            //{
-            //    return NotFound();
-            //}
-
-            //_context.Paths.Remove(paths);
             await _context.SaveChangesAsync();
 
             return NoContent();

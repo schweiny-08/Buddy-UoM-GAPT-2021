@@ -13,7 +13,6 @@ namespace BuddyAPI.ViewModels
         //Sets an object into a Session Variable
         public static void SetObjectAsJson(this ISession session, string key, object value)
         {
-            //object ser = null;
             session.SetString(key, JsonConvert.SerializeObject(value));
         }
 
@@ -25,6 +24,7 @@ namespace BuddyAPI.ViewModels
             return value == null ? default(T) : JsonConvert.DeserializeObject<T>(value);
         }
 
+        //Checks whether Session object with key already exists or not
        public static void SessionExists(this ISession session, string key)
         {
             var exists = session.Get(key);

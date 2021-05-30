@@ -22,7 +22,7 @@ namespace BuddyAPI.Controllers
         }
 
        
-
+        //GET: Itinerary via User Id
         [HttpGet("getAllItineraryEventsByUser")]
         public async Task<ActionResult<IEnumerable<Itineraries>>> GetItinerariesByUserId(int userId)
         {
@@ -36,6 +36,7 @@ namespace BuddyAPI.Controllers
             return itineraries;
         }
 
+        //GET: Itinerary via Event & User Id
         [HttpGet("getItineraryEventByUser")]
         public async Task<ActionResult<IEnumerable<Itineraries>>> GetItineraryEventByUserId(int eventId, int userId)
         {
@@ -49,6 +50,7 @@ namespace BuddyAPI.Controllers
             return itineraries;
         }
 
+        //GET: Itinerary via Private Event & User Id
         [HttpGet("getItineraryPrivateEventByUser")]
         public async Task<ActionResult<IEnumerable<Itineraries>>> GetItineraryPrivEventByUserId(int privEventId, int userId)
         {
@@ -64,7 +66,6 @@ namespace BuddyAPI.Controllers
         
 
         // PUT: api/Itineraries/5
-        // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPut("editItineraryById")]
         public async Task<IActionResult> PutItineraries(int id, Itineraries itineraries)
         {
@@ -95,20 +96,26 @@ namespace BuddyAPI.Controllers
         }
 
         // POST: api/Itineraries
-        // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPost("addItinerary")]
         public async Task<ActionResult<Itineraries>> PostItineraries(Itineraries itineraries)
         {
-            if (itineraries.PrivateEvent_Id != 0)
+            //Validation check to ensure that not a Private Event & an Event are trying to be added to the database
+             if (itineraries.Event_Id != 0 && itineraries.PrivateEvent_Id != 0)
+            {
+                return BadRequest("You can't add an event and a private event at the same time!");
+            }
+
+            //Inputting a new Itinerary for a Private Event
+           else if (itineraries.PrivateEvent_Id != 0)
             {
                 _context.Itineraries.Add(itineraries);
                 await _context.SaveChangesAsync();
                 return Ok();
-
-
             }
+            //Inputting a new Itinerary for a Event
             else if (itineraries.Event_Id != 0)
             {
+                //Check to ensure that Event is not already added to the Users Itinerary
                 if (this.GetItineraryEventByUserId(itineraries.Event_Id, itineraries.User_Id) != null)
                 {
                     _context.Itineraries.Add(itineraries);
@@ -120,10 +127,6 @@ namespace BuddyAPI.Controllers
                 {
                     return BadRequest("This event is already in your itinerary!");
                 }
-            }
-            else if (itineraries.Event_Id != 0 && itineraries.PrivateEvent_Id != 0)
-            {
-                return BadRequest("You can't add an event and a private event at the same time!");
             }
             else
             {
