@@ -9,6 +9,7 @@ namespace BuddyAPI
 {
     public class Navigation
     {
+        //initialising all neccessary objects and variables
         static BuddyAPIContext _context;
         List<Pinpoints> path = new();
         int userStart, userEnd, userStartFloorLvl, userEndFloorLvl = 0;
@@ -31,22 +32,20 @@ namespace BuddyAPI
             return Math.Sqrt(Math.Pow(Math.Abs(startLat - currLat), 2) + Math.Pow(Math.Abs(startLong - currLong), 2));
         }
 
-        public static double getFCost(double gcost, double hcost)
-        {
-            return gcost + hcost;
-        }
-
+        //converts pinpoint object to node
         public static GraphNode ConvertToNode(Pinpoints pin)
         {
             GraphNode node = new GraphNode(pin.pinpoint_Id, pin.longitude, pin.latitude, pin.floor_Id);
             return node;
         }
 
+        //returns pinpoint object of a specific ID
         public Pinpoints GetPinpointsObject(int id)
         {
             return _context.Pinpoints.FirstOrDefault(e => e.pinpoint_Id == id);
         }
 
+        //returns list of all pinpoints connected to a specific pinpoint
         public List<Pinpoints> GetConnectingPins(Pinpoints startPin)
         {
             List<Pinpoints> paths = new List<Pinpoints>();
@@ -69,24 +68,9 @@ namespace BuddyAPI
             return paths;
         }
 
-        public List<Pinpoints> GetConnectingStaircasePin(int id)
-        {
-            List<Pinpoints> connPins = GetConnectingPins(GetPinpointsObject(id));
-            List<Pinpoints> connStaircasePins = new List<Pinpoints>();
-            foreach (var c in connPins)
-            {
-                //connStairCasePin2 = GetPinpointsObject(p.pinpoint_Id_2);
-                if (c.pinpointType_Id == 4 || c.pinpointType_Id == 14)
-                {
-                    connStaircasePins.Add(c);
-                }
-            }
-            return connStaircasePins;
-        }
-
+        //returns the connected top staircase
         public Pinpoints GetConnectingStaircaseTop(Pinpoints start)
         {
-            //get pin type 14
             List<Pinpoints> connPins = GetConnectingPins(start);
             GraphNode connNode;
             Pinpoints topPin = new();
@@ -104,6 +88,7 @@ namespace BuddyAPI
             return topPin;
         }
 
+        //returns the connected bottom staircase
         public Pinpoints GetConnectingStaircaseBottom(Pinpoints start)
         {
             //get pin type 4
@@ -124,26 +109,19 @@ namespace BuddyAPI
             return topPin;
         }
 
-        public GraphNode GetMatchingNode(List<GraphNode> notVisited, int id)
-        {
-            return notVisited.Find(i => i.map_pinId == id);
-        }
-
-        public GraphNode GetNodeByFcost(List<GraphNode> notVisited, double fcost)
-        {
-            return notVisited.Find(i => i.fcost == fcost);
-        }
-
+        //returns the node with the corresponding H cost from the given list
         public GraphNode GetNodeByHcost(List<GraphNode> notVisited, double hcost)
         {
             return notVisited.Find(i => i.hcost == hcost);
         }
 
+        //returns the node with the corresponding G cost from the given list
         public GraphNode GetNodeByGcost(List<GraphNode> notVisited, double gcost)
         {
             return notVisited.Find(i => i.gcost == gcost);
         }
 
+        //returns a list of all top staircases
         public List<GraphNode> GetStaircasesTop()
         {
             List<Pinpoints> stairsTopPin = _context.Pinpoints.Where(e => e.pinpointType_Id == 14).ToList();
@@ -155,6 +133,7 @@ namespace BuddyAPI
             return stairsTopNodes;
         }
 
+        //returns a list of all bottom staircases
         public List<GraphNode> GetStaircasesBottom()
         {
             List<Pinpoints> stairsBottPin = _context.Pinpoints.Where(e => e.pinpointType_Id == 4).ToList();
@@ -166,44 +145,51 @@ namespace BuddyAPI
             return stairsBottNodes;
         }
 
+        //returns the corresponding floor level from the floor ID provided
         public int GetFloorLevel(int floorId)
         {
             return _context.Floor.FirstOrDefault(e => e.floor_Id == floorId).floorLevel;
         }
 
+        // MAIN NAVIGATION ALGORITHM
         public List<Pinpoints> CalculatePath(int startId, int endId)
         {
-            //creating nodes for current start and end IDs
+            //creating pinpoints for current start and end IDs
             Pinpoints startPin = GetPinpointsObject(startId);
             Pinpoints endPin = GetPinpointsObject(endId);
-            
+
+            //creating nodes for current start and end IDs
             GraphNode startNode = ConvertToNode(startPin);
             GraphNode endNode = ConvertToNode(endPin);
 
+            //setting the floor level for the start and end points
             startNode.setFloorLevel(GetFloorLevel(startPin.floor_Id));
             endNode.setFloorLevel(GetFloorLevel(endPin.floor_Id));
 
+            //storing the staircases in lists for future use
             List<GraphNode> staircasesTop = GetStaircasesTop();
             List<GraphNode> staircasesBottom = GetStaircasesBottom();
 
+            //creating empty Graphnode for stair nodes
             GraphNode stairs = new();
+            //creating empty pinpoints to store the next pin
             Pinpoints nextPin = new();
 
             //getting all connected nodes of the current node
             List<Pinpoints> connections = GetConnectingPins(startPin);
-            List<GraphNode> finalPath = new();
 
-
-            //creating visited and not visited lists for future path calculation
+            
+            //creating not visited lists for future path calculation
             List<GraphNode> notVisited = new();
-            List<GraphNode> Visited = new();
 
+            //creating node and pinpoint for connected staircase
             Pinpoints connStaircasePin = new();
             GraphNode connStaircaseNode = new();
+            
+            //creating empty node for next start point
             GraphNode nextStart = new();
-            //int nextStairCase;
 
-            //creating variables for floor levels
+            //creating variables for floor levels and next node ID
             int startFloorLevel = 0;
             int endFloorLevel = 0;
             int nextNodeId;
@@ -217,10 +203,11 @@ namespace BuddyAPI
             bool checkIfEnd = false;
 
             //adds the current start node to the path List
+            //this is the final path returned by the algorithm
             path.Add(startPin);
 
 
-            //checks if first iteration and if true stores the original user start and end points
+            //checks if first iteration and if true stores the original user start and end points and sets the floor level
             if (check == false)
             {
                 userStart = startId;
@@ -252,11 +239,17 @@ namespace BuddyAPI
                 {
                     //finding closest staircase bottom to start
                     staircasesBottom = staircasesBottom.FindAll(g => g.floorId == startNode.floorId);
+                    //iterating the list of bottom staircases and setting the G cost for each item
                     foreach (var s in staircasesBottom)
                     {
                         G = getGCost(startNode.map_lat, startNode.map_long, s.map_lat, s.map_long);
                         s.setG(G);
                     }
+                    /*
+                     * finding and storing the node with the minimum G cost to be stored as the end point
+                     * this is so that the algorithm knows that it has to direct the user to a staircase
+                     * first before attempting to go to the user selected end point
+                    */
                     minGCost = staircasesBottom.Min(g => g.gcost);
                     stairs = GetNodeByGcost(staircasesBottom, minGCost);
                     endNode = stairs;
@@ -271,19 +264,15 @@ namespace BuddyAPI
                         G = getGCost(startNode.map_lat, startNode.map_long, s.map_lat, s.map_long);
                         s.setG(G);
                     }
-                    //staircasesTop.Min(g => g.gcost);
                     minGCost = staircasesTop.Min(g => g.gcost);
                     stairs = GetNodeByGcost(staircasesTop, minGCost);
                     endNode = stairs;
                 }
             }
 
-            //check if the current node is the end node (path is complete)
+            //check if the current node is not the end node (path is incomplete)
             if (startNode.map_pinId != endNode.map_pinId)
-            {
-                //converting connections to an int list
-                //conn = connections.ToList();
-                
+            {                
                 //iterate through connections
                 foreach (var c in connections)
                 {
@@ -297,12 +286,14 @@ namespace BuddyAPI
                         break;
                     }
 
-                    //if connected node in current iteration is not in path (not visited)
+                    //if connected node in current iteration is not in path
+                    //ensures that if a node is already in the path it is not visited again to make sure there aren't any infinite loops
                     if (!path.Contains(path.FirstOrDefault(e => e.pinpoint_Id == node.map_pinId)))
                     {
-                        //if current node is a navigation node or the end node
+                        //if current node is a navigation node, the end node, a staircase or and entrance/exit to reduce unneccessary computation
                         if (c.pinpointType_Id == 15 || node.map_pinId == endNode.map_pinId || c.pinpointType_Id == 4 || c.pinpointType_Id == 14 || c.pinpointType_Id == 2)
                         {
+                            //skip current node if start and end floor level are the same and current node is a staircase
                             if (!(userStartPin.floor_Id == userEndPin.floor_Id && (c.pinpointType_Id == 4 || c.pinpointType_Id == 14)))
                             {
                                 //calculating distance of connected node to end node
@@ -315,6 +306,7 @@ namespace BuddyAPI
                     }
                 }
 
+                //as long as the algorithm hasn't arrived at the user selected end node
                 if (checkIfEnd == false)
                 {
                     //storing the lowest H Cost from the not visited list
@@ -326,13 +318,14 @@ namespace BuddyAPI
                     //getting node with corresponding ID and saving as the next node
                     nextPin = GetPinpointsObject(nextNodeId);
                 }
+                //if algorithm arrived at user selected end node
                 else
                 {
                     nextNodeId = userEnd;
                     nextPin = userEndPin;
                 }
 
-                //if current node is a navigation node or the end node
+                //if current node is a navigation node or the end node or user selected end node or an entrance/exit
                 if (nextPin.pinpointType_Id == 15 || nextPin.pinpoint_Id == endNode.map_pinId || nextPin.pinpoint_Id == userEndNode.map_pinId || nextPin.pinpointType_Id == 2)
                 {
                     //recursive call with the best option from connections passed as new start node ID
@@ -341,15 +334,17 @@ namespace BuddyAPI
             }
             //path calculation finished
             else
-            {                
-                
-                List<int> connStaircase = new List<int>();
+            {
+                //check if current start node is not the user selected end node
                 if (startNode.map_pinId != userEnd)
                 {
+                    //if start node is a staircase
                     if (startPin.pinpointType_Id == 4 || startPin.pinpointType_Id == 14)
                     {
+                        //if path went up
                         if(startNode.floorLevel < userEndNode.floorLevel)
                         {
+                            //find connected top staircase and pass that as new start node
                             connStaircasePin = GetConnectingStaircaseTop(startPin);
                             connStaircaseNode = ConvertToNode(connStaircasePin);
                             nextStart = connStaircaseNode;
@@ -364,14 +359,10 @@ namespace BuddyAPI
                         }
                     }
                 }
+                //current start node is the user selected end node meaning path calculation is finished
                 else
                 {
-                    ////iterating through path list
-                    //foreach (var o in path)
-                    //{
-                    //    //populating final path list with IDs of nodes in path
-                    //    finalPath.Add(o.map_pinId);
-                    //}
+                    //returning the calculated path
                     return path;
                 }
             }

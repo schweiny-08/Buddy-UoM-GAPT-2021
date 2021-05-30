@@ -21,7 +21,7 @@ namespace BuddyAPI.Controllers
             _context = context;
         }
 
-        
+
 
         // GET: api/Paths
         [HttpGet]
@@ -32,40 +32,21 @@ namespace BuddyAPI.Controllers
 
         // GET: api/Paths/5
         [HttpGet("{id}")]
+        //retrieves a list of IDs connected to the given ID
         public async Task<ActionResult<IEnumerable<int>>> GetPaths(int id)
         {
-            //var paths = await _context.Paths.FindAsync(a => a.pinpoint_Id == id || a.pinpoint_Id_2 == id);
-            //var paths2 = await _context.Paths.FirstOrDefaultAsync(a => a.pinpoint_Id == id2 && a.pinpoint_Id_2 == id);
             List<int> paths = new List<int>();
-            foreach(var p in _context.Paths)
+            foreach (var p in _context.Paths)
             {
-                if(p.pinpoint_Id == id)
+                if (p.pinpoint_Id == id)
                 {
                     paths.Add(p.pinpoint_Id_2);
                 }
-                else if(p.pinpoint_Id_2 == id)
+                else if (p.pinpoint_Id_2 == id)
                 {
                     paths.Add(p.pinpoint_Id);
                 }
             }
-
-            //for (int i = 0; i < 100; i++)
-            //{
-            //    _context.Paths[i] == id;
-            //}
-
-            //if (paths == null && paths2 == null)
-            //{
-            //    return NotFound();
-            //}
-            //else if (paths != null && paths2 == null)
-            //{
-            //    return paths;
-            //}
-            //else
-            //{
-            //    return paths2;
-            //}
             return paths;
         }
 
@@ -124,6 +105,7 @@ namespace BuddyAPI.Controllers
 
         // DELETE: api/Paths/5
         [HttpDelete("{id}")]
+        //deletes the given path of 2 pinpoints
         public async Task<IActionResult> DeletePaths(int id, int id2)
         {
             var paths = await _context.Paths.FirstOrDefaultAsync(a => a.pinpoint_Id == id && a.pinpoint_Id_2 == id2);
@@ -141,19 +123,12 @@ namespace BuddyAPI.Controllers
             {
                 _context.Paths.Remove(paths2);
             }
-
-            ////var paths = await _context.Paths.FindAsync(id);
-            //if (paths == null)
-            //{
-            //    return NotFound();
-            //}
-
-            //_context.Paths.Remove(paths);
             await _context.SaveChangesAsync();
 
             return NoContent();
         }
 
+        //checks if the given path exists
         private bool PathsExists(int id2, int id)
         {
             bool check1 = _context.Paths.Any(e => e.pinpoint_Id == id2 && e.pinpoint_Id_2 == id);
@@ -167,8 +142,6 @@ namespace BuddyAPI.Controllers
             {
                 return false;
             }
-
-
         }
     }
 }
