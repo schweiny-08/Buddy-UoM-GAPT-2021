@@ -1,4 +1,5 @@
-﻿var drawPathLvl0, drawPathLvlMin1, len, lat, lng;
+﻿//global variables
+var drawPathLvl0, drawPathLvlMin1, len, lat, lng;
 
 
 function calculatePath(start, end) {
@@ -14,27 +15,29 @@ function calculatePath(start, end) {
     var coordinatesLvlMin1 = [];
     var markerLvl0Ids = [];
     var markerLvlMin1Ids = [];
-    //var start = document.getElementById('startId').value;
-    //var end = document.getElementById('endId').value;
     let request = new XMLHttpRequest();
 
     document.getElementById('pastePath').innerHTML = 'Calculating path';
 
+    //sending a request to the navigation API with the user selected start and end nodes
     request.open('GET', 'https://localhost:' + port + '/api/pinpoints/GetNavigationId?start=' + start + '&end=' + end);
     request.send();
     request.onload = () => {
         path = JSON.parse(request.response);
         len = path.length;
         for (var i = 0; i < len; i++) {
+            //storing the path nodes
             pathMarkers[i] = markers.find(element => {
                 return element.id === path[i]
             });
-            //console.log(pathMarkers[i].level);
 
+            //if current path node is level 0
             if (pathMarkers[i].level == 0) {
+                //returning the position of the current marker and storing in array
                 markerListLvl0[countLvl0] = pathMarkers[i].marker.position + '';
                 markerLvl0Ids[countLvl0] = pathMarkers[i].id;
 
+                //formatting the coordinates and storing in lat lng variables
                 formattedCoord0[countLvl0] = markerListLvl0[countLvl0].replace(' ', '');
                 formattedCoord0[countLvl0] = markerListLvl0[countLvl0].split(', ');
                 formattedCoord0[countLvl0][0] = formattedCoord0[countLvl0][0].replace('(', '');
@@ -42,9 +45,9 @@ function calculatePath(start, end) {
                 lat = parseFloat(formattedCoord0[countLvl0][0]);
                 lng = parseFloat(formattedCoord0[countLvl0][1]);
 
+                //creating new Google Maps LatLng object with the latitude and longitude obtained above
                 coordinatesLvl0[countLvl0] = new google.maps.LatLng(lat, lng);
                 countLvl0++;
-                //console.log(coordinatesLvl0[i]);
             }
             else if (pathMarkers[i].level == -1) {
                 markerListLvlMin1[countLvlMin1] = pathMarkers[i].marker.position + '';
@@ -61,15 +64,15 @@ function calculatePath(start, end) {
                 countLvlMin1++;
             }
         }
-        //console.log(markerLvl0Ids);
-        //console.log(markerLvlMin1Ids);
+        //writing the path on the HTML page
         document.getElementById('pastePath').innerHTML = markerLvl0Ids + '<br>' + markerLvlMin1Ids;
 
-
+        //clearing the path if there already is one
         if (drawPathLvl0 != null) {
             drawPathLvl0.setMap(null);
         }
 
+        //creating the path object for Level 0 with the obtained coordinates
         drawPathLvl0 = new google.maps.Polyline({
             path: coordinatesLvl0,
             geodesic: true,
@@ -90,7 +93,7 @@ function calculatePath(start, end) {
             strokeWeight: 2,
         });
 
-
+        //draws the path of the current floor selected
         if (document.getElementById('level 0').checked) {
             drawPathLvlMin1.setMap(null);
             if (drawPathLvl0 != null) {
