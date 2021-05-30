@@ -5,6 +5,7 @@ public class EventModel {
     private int eventId, userId;
     private String title, startTime, startDate, endTime, endDate, notes, loc;
 
+    //Overloaded constructors
     public EventModel() {
         this.eventId = -1;
         this.userId = -1;
@@ -29,6 +30,7 @@ public class EventModel {
         this.loc = loca;
     }
 
+    //Getters and setters for the private event criteria
     public int getEventId() {
         return eventId;
     }

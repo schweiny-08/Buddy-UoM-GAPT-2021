@@ -66,14 +66,22 @@ public class ViewEventActivity extends AppCompatActivity implements NavigationVi
 
     public void cancel(View view) {
         Intent intent = new Intent(ViewEventActivity.this, EditEventActivity.class);
-        finish();
+        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
         startActivity(intent);
+        finish();
     }
 
+    //Deletes user from the system
     public void delete(View view) {
-        //delete event from itinerary
+        LocalStorage.eventList.remove(LocalStorage.privateEvent);
+        Toast.makeText(this, "Event has been deleted successfully.", Toast.LENGTH_SHORT).show();
+        Intent intent = new Intent(ViewEventActivity.this, ItineraryActivity.class);
+        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
+        startActivity(intent);
+        finish();
     }
 
+    //Redirects user to the EditEvent activity
     public void edit(View view) {
         Intent intent = new Intent(ViewEventActivity.this, EditEventActivity.class);
         intent.putExtra("eventParent", 1);
@@ -133,6 +141,10 @@ public class ViewEventActivity extends AppCompatActivity implements NavigationVi
                 startActivity(iBuddy);
                 break;
             case R.id.nav_logout:
+                Intent iLogin = new Intent(ViewEventActivity.this, LoginActivity.class);
+                iLogin.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
+                startActivity(iLogin);
+                finish();
                 Toast.makeText(this, "You have been logged out!", Toast.LENGTH_SHORT).show();
                 break;
             default:

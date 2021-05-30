@@ -1,17 +1,9 @@
 package com.example.buddypersonal;
 
-import androidx.annotation.NonNull;
-import androidx.appcompat.app.ActionBarDrawerToggle;
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.view.GravityCompat;
-import androidx.drawerlayout.widget.DrawerLayout;
-import androidx.fragment.app.DialogFragment;
-
 import android.app.DatePickerDialog;
 import android.app.TimePickerDialog;
 import android.content.Context;
 import android.content.Intent;
-import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.util.Log;
@@ -24,6 +16,13 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.TimePicker;
 import android.widget.Toast;
+
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.ActionBarDrawerToggle;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.view.GravityCompat;
+import androidx.drawerlayout.widget.DrawerLayout;
+import androidx.fragment.app.DialogFragment;
 
 import com.google.android.material.navigation.NavigationView;
 
@@ -57,6 +56,7 @@ public class EditEventActivity extends AppCompatActivity implements AdapterView.
         location = (EditText) findViewById(R.id.crt_evt_et_loc);
         notes = (EditText) findViewById(R.id.crt_evt_et_notes);
 
+        //In the case when an event is being edited, the calendar objects would need to be initialised so that the proper validations occur
         parent = getIntent().getIntExtra("eventParent", -1);
 
         if (LocalStorage.privateEvent >= 0) {
@@ -79,6 +79,7 @@ public class EditEventActivity extends AppCompatActivity implements AdapterView.
 
         //When the parent event is ViewEvent
         if(parent==1){
+            //Calendar object are initialised to the values found within the temporal TextViews
             String[] sCST = startTime.getText().toString().split(":");
             cST = Calendar.getInstance();
             cST.set(Calendar.YEAR, 0);
@@ -120,7 +121,7 @@ public class EditEventActivity extends AppCompatActivity implements AdapterView.
             cED.set(Calendar.MILLISECOND, 0);
         }
 
-        //TIME
+        //Click listeners for the temporal TextViews
         startTime.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -129,7 +130,6 @@ public class EditEventActivity extends AppCompatActivity implements AdapterView.
                 timePicker.show(getSupportFragmentManager(), "time picker");
             }
         });
-
         endTime.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -138,7 +138,6 @@ public class EditEventActivity extends AppCompatActivity implements AdapterView.
                 timePicker.show(getSupportFragmentManager(), "time end picker");
             }
         });
-
         startDate.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -147,7 +146,6 @@ public class EditEventActivity extends AppCompatActivity implements AdapterView.
                 datePicker.show(getSupportFragmentManager(), "date picker");
             }
         });
-
         endDate.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -173,6 +171,7 @@ public class EditEventActivity extends AppCompatActivity implements AdapterView.
         drawerLayout.openDrawer(GravityCompat.START);
     }
 
+    //Saves the new/updated event with the associated data
     public void createEvent(View view) {
         if ((TextUtils.isEmpty(title.getText().toString())) || (TextUtils.isEmpty(startTime.getText().toString())) || (TextUtils.isEmpty(startDate.getText().toString())) || (TextUtils.isEmpty(endTime.getText().toString())) || (TextUtils.isEmpty(endDate.getText().toString()))) {
             Toast.makeText(EditEventActivity.this, "Please make sure you have filled  the necessary credentials.", Toast.LENGTH_SHORT).show();
@@ -253,9 +252,12 @@ public class EditEventActivity extends AppCompatActivity implements AdapterView.
 
     public void exit(View view) {
         Intent intent = new Intent(this, ItineraryActivity.class);
+        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
         startActivity(intent);
+        finish();
     }
 
+    //The calendar object is set solely with the selected temporal data
     @Override
     public void onTimeSet(TimePicker view, int hourOfDay, int minute) {
         Calendar c = Calendar.getInstance();
@@ -320,48 +322,49 @@ public class EditEventActivity extends AppCompatActivity implements AdapterView.
         switch (menuItem.getItemId()) {
             case R.id.nav_settings:
                 Intent iSettings = new Intent(EditEventActivity.this, SettingsActivity.class);
-//                finish();
+                finish();
                 startActivity(iSettings);
                 break;
             case R.id.nav_home:
                 Intent iProfile = new Intent(EditEventActivity.this, HomeActivity.class);
-//                finish();
+                finish();
                 startActivity(iProfile);
                 break;
             case R.id.nav_map:
                 Intent iMap = new Intent(EditEventActivity.this, ViewMapActivity.class);
-
+                finish();
                 startActivity(iMap);
                 break;
             case R.id.nav_pu_events:
                 Intent iPuEvents = new Intent(EditEventActivity.this, VenueEventActivity.class);
-//                finish();
+                finish();
                 startActivity(iPuEvents);
                 break;
             case R.id.nav_itinerary:
                 Intent iItinerary = new Intent(EditEventActivity.this, ItineraryActivity.class);
-//                finish();
+                finish();
                 startActivity(iItinerary);
                 break;
             case R.id.nav_calendar:
                 Intent iCalendar = new Intent(EditEventActivity.this, CalendarActivity.class);
-//                finish();
+                finish();
                 startActivity(iCalendar);
                 break;
             case R.id.nav_cr_events:
                 Intent iCrEvents = new Intent(EditEventActivity.this, EditEventActivity.class);
-//                finish();
+                finish();
                 startActivity(iCrEvents);
                 break;
             case R.id.nav_buddy:
                 Intent iBuddy = new Intent(EditEventActivity.this, BuddyActivity.class);
-//                finish();
+                finish();
                 startActivity(iBuddy);
                 break;
             case R.id.nav_logout:
                 Intent iLogin = new Intent(EditEventActivity.this, LoginActivity.class);
-//                finish();
+                iLogin.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
                 startActivity(iLogin);
+                finish();
                 Toast.makeText(this, "You have been logged out!", Toast.LENGTH_SHORT).show();
                 break;
             default:

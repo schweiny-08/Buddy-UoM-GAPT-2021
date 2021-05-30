@@ -17,16 +17,19 @@ public class ItineraryAdapter extends RecyclerView.Adapter<ItineraryAdapter.View
     private ArrayList<EventModel> mEventModel = new ArrayList<>();
     private EventClickListener mEventClickListener;
 
+    //Constructor links the parameters for the arraylist and listener, with the local ones
     public ItineraryAdapter(ArrayList<EventModel> eventModel, EventClickListener eventClickListener) {
         this.mEventModel = eventModel;
         this.mEventClickListener = eventClickListener;
     }
 
+    //Passes the view to be replicated as well as its listener
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int i) {
         View view = LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.private_events, viewGroup, false);
         return new ViewHolder(view, mEventClickListener);
     }
 
+    //Populates the items with their respective data
     public void onBindViewHolder(@NonNull ViewHolder viewHolder, int i) {
         viewHolder.startTime.setText(mEventModel.get(i).getStartTime());
         viewHolder.endTime.setText(mEventModel.get(i).getEndTime());
@@ -42,6 +45,7 @@ public class ItineraryAdapter extends RecyclerView.Adapter<ItineraryAdapter.View
         TextView startTime, endTime, title;
         EventClickListener mEventClickListener;
 
+        //Constructor links the TextBoxes to objects in the ViewHolder class, as well as the listener
         public ViewHolder(@NonNull View itemView, EventClickListener eventClickListener) {
             super(itemView);
             startTime = itemView.findViewById(R.id.itn_start);
@@ -52,12 +56,14 @@ public class ItineraryAdapter extends RecyclerView.Adapter<ItineraryAdapter.View
             itemView.setOnClickListener(this);
         }
 
+        //To call the listener
         @Override
         public void onClick(View v) {
             mEventClickListener.onEventClick(getAdapterPosition());
         }
     }
 
+    //Interface for the item click listener
     public interface EventClickListener {
         void onEventClick(int position);
     }

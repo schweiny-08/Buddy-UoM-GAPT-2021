@@ -5,17 +5,18 @@ public class PublicEventModel {
     private int puEventId, userId, siteId;
     private String title, startTime, startDate, endTime, endDate, location, description;
 
+    //Overloaded constructors
     public PublicEventModel() {
         this.puEventId = -1;
         this.userId = -1;
         this.siteId = -1;
-        this.title = "title";
-        this.startTime = "startTime";
-        this.startDate = "startDate";
-        this.endTime = "endTime";
-        this.endDate = "endDate";
-        this.location = "loc";
-        this.description = "description";
+        this.title = "Title";
+        this.startTime = "8:00";
+        this.startDate = "28/06/2021";
+        this.endTime = "9:00";
+        this.endDate = "28/06/2021";
+        this.location = "Zoom";
+        this.description = "Demonstration of app";
     }
 
     public PublicEventModel(int puid, int aid, int sid, String titl, String startTajm, String startDejt, String endTajm, String endDejt, String loca, String desc) {
@@ -31,6 +32,7 @@ public class PublicEventModel {
         this.description = desc;
     }
 
+    //Getters and setters for the private event criteria
     public int getPuEventId() {
         return puEventId;
     }

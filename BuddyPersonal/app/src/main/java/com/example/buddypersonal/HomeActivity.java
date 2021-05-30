@@ -60,46 +60,50 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
         switch (menuItem.getItemId()) {
             case R.id.nav_settings:
                 Intent iSettings = new Intent(HomeActivity.this, SettingsActivity.class);
-//                finish();
+                finish();
                 startActivity(iSettings);
                 break;
             case R.id.nav_home:
                 Intent iProfile = new Intent(HomeActivity.this, HomeActivity.class);
-//                finish();
+                finish();
                 startActivity(iProfile);
                 break;
             case R.id.nav_map:
                 Intent iMap = new Intent(HomeActivity.this, ViewMapActivity.class);
-//                finish();
+                finish();
                 startActivity(iMap);
                 break;
             case R.id.nav_pu_events:
                 Intent iPuEvents = new Intent(HomeActivity.this, VenueEventActivity.class);
-//                finish();
+                finish();
                 startActivity(iPuEvents);
                 break;
             case R.id.nav_itinerary:
                 Intent iItinerary = new Intent(HomeActivity.this, ItineraryActivity.class);
-//                finish();
+                finish();
                 startActivity(iItinerary);
                 break;
             case R.id.nav_calendar:
                 Intent iCalendar = new Intent(HomeActivity.this, CalendarActivity.class);
-//                finish();
+                finish();
                 startActivity(iCalendar);
                 break;
             case R.id.nav_cr_events:
                 Intent iCrEvents = new Intent(HomeActivity.this, EditEventActivity.class);
-//                finish();
+                finish();
                 startActivity(iCrEvents);
                 break;
             case R.id.nav_buddy:
                 Intent iBuddy = new Intent(HomeActivity.this, BuddyActivity.class);
-//                finish();
+                finish();
                 startActivity(iBuddy);
                 break;
             case R.id.nav_logout:
                 Toast.makeText(this, "You have been logged out!", Toast.LENGTH_SHORT).show();
+                Intent iLogin = new Intent(HomeActivity.this, LoginActivity.class);
+                iLogin.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
+                startActivity(iLogin);
+                finish();
                 break;
             default:
                 break;
@@ -108,18 +112,21 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
         return true;
     }
 
+    //Redirects user to the Map view activity
     public void map(View view) {
         Intent intent = new Intent(this, ViewMapActivity.class);
         finish();
         startActivity(intent);
     }
 
+    //Redirects user to the Itinerary
     public void itinerary(View view) {
         Intent intent = new Intent(this, ItineraryActivity.class);
         finish();
         startActivity(intent);
     }
 
+    //Redirects the suer to the Buddy cha-bot view
     public void buddy(View view) {
         Intent intent = new Intent(this, BuddyActivity.class);
         finish();

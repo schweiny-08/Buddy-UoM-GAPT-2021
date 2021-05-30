@@ -10,6 +10,7 @@ import java.util.Calendar;
 
 public class DatePickerFragment extends DialogFragment{
 
+    //When the fragment is called, the default date is set to the current date
     @Override
     public Dialog onCreateDialog(Bundle savedInstanceState) {
         final Calendar c = Calendar.getInstance();

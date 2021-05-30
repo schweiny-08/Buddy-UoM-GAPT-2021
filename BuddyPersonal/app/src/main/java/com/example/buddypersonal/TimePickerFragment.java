@@ -11,6 +11,7 @@ import java.util.Calendar;
 
 public class TimePickerFragment extends DialogFragment {
 
+    //When the fragment is called, the default time is set to the current time
     @Override
     public Dialog onCreateDialog(Bundle savedInstanceState) {
         final Calendar c = Calendar.getInstance();

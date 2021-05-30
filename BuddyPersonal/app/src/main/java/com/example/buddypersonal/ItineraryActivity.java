@@ -111,45 +111,49 @@ public class ItineraryActivity extends AppCompatActivity implements NavigationVi
         switch (menuItem.getItemId()) {
             case R.id.nav_settings:
                 Intent iSettings = new Intent(ItineraryActivity.this, SettingsActivity.class);
-//                finish();
+                finish();
                 startActivity(iSettings);
                 break;
             case R.id.nav_home:
                 Intent iProfile = new Intent(ItineraryActivity.this, HomeActivity.class);
-//                finish();
+                finish();
                 startActivity(iProfile);
                 break;
             case R.id.nav_map:
                 Intent iMap = new Intent(ItineraryActivity.this, ViewMapActivity.class);
-//                finish();
+                finish();
                 startActivity(iMap);
                 break;
             case R.id.nav_pu_events:
                 Intent iPuEvents = new Intent(ItineraryActivity.this, VenueEventActivity.class);
-//                finish();
+                finish();
                 startActivity(iPuEvents);
                 break;
             case R.id.nav_itinerary:
                 Intent iItinerary = new Intent(ItineraryActivity.this, ItineraryActivity.class);
-//                finish();
+                finish();
                 startActivity(iItinerary);
                 break;
             case R.id.nav_calendar:
                 Intent iCalendar = new Intent(ItineraryActivity.this, CalendarActivity.class);
-//                finish();
+                finish();
                 startActivity(iCalendar);
                 break;
             case R.id.nav_cr_events:
                 Intent iCrEvents = new Intent(ItineraryActivity.this, EditEventActivity.class);
-//                finish();
+                finish();
                 startActivity(iCrEvents);
                 break;
             case R.id.nav_buddy:
                 Intent iBuddy = new Intent(ItineraryActivity.this, BuddyActivity.class);
-//                finish();
+                finish();
                 startActivity(iBuddy);
                 break;
             case R.id.nav_logout:
+                Intent iLogin = new Intent(ItineraryActivity.this, LoginActivity.class);
+                iLogin.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
+                startActivity(iLogin);
+                finish();
                 Toast.makeText(this, "You have been logged out!", Toast.LENGTH_SHORT).show();
                 break;
             default:
@@ -162,15 +166,6 @@ public class ItineraryActivity extends AppCompatActivity implements NavigationVi
     @Override
     public void onEventClick(int position) {
         Intent intent = new Intent(ItineraryActivity.this, ViewEventActivity.class);
-        intent.putExtra("vEventId", prModel.get(position).getEventId());
-        intent.putExtra("vUserId", prModel.get(position).getUserId());
-        intent.putExtra("vTitle", prModel.get(position).getTitle());
-        intent.putExtra("vStartTime", prModel.get(position).getStartTime());
-        intent.putExtra("vStartDate", prModel.get(position).getStartDate());
-        intent.putExtra("vEndTime", prModel.get(position).getEndTime());
-        intent.putExtra("vEndDate", prModel.get(position).getEndDate());
-        intent.putExtra("vLocation", prModel.get(position).getLoc());
-        intent.putExtra("vNotes", prModel.get(position).getNotes());
         LocalStorage.privateEvent = prModel.get(position).getEventId() - 1;
         startActivity(intent);
     }

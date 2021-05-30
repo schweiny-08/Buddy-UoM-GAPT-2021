@@ -40,12 +40,14 @@ public class LoginActivity extends AppCompatActivity {
         LocalStorage.loggedInUser = -1;
         LocalStorage.privateEvent = -1;
 
+
+        //Contact button to be able send dynamic security code
         contact = (Button) findViewById(R.id.log_btn_contact_us);
         contact.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent=new Intent(Intent.ACTION_SEND);
-                String[] recipients={"buddy_customer@gmail.com"};
+                Intent intent = new Intent(Intent.ACTION_SEND);
+                String[] recipients = {"buddy_customer@gmail.com"};
                 intent.putExtra(Intent.EXTRA_EMAIL, recipients);
                 //intent.putExtra(Intent.EXTRA_SUBJECT,"Subject text here...");
                 //intent.putExtra(Intent.EXTRA_TEXT,"Body of the content here...");
@@ -57,10 +59,12 @@ public class LoginActivity extends AppCompatActivity {
         });
     }
 
+    //Checks if an email is of a valid format
     boolean isEmailValid(CharSequence email) {
         return android.util.Patterns.EMAIL_ADDRESS.matcher(email).matches();
     }
 
+    //Validations for actual login process and redirection to the Home activity
     public void login(View view) {
 
         try {
@@ -73,20 +77,16 @@ public class LoginActivity extends AppCompatActivity {
 
         int temp = checkForMatch(email.getText().toString(), password.getText().toString()); //check for email and password match, returns user id. returns -1 if not found.
 
-        if ((TextUtils.isEmpty(email.getText().toString()))||(TextUtils.isEmpty(password.getText().toString()))) {
+        if ((TextUtils.isEmpty(email.getText().toString())) || (TextUtils.isEmpty(password.getText().toString()))) {
             Toast.makeText(LoginActivity.this, "Please make sure you have entered the necessary credentials.", Toast.LENGTH_SHORT).show();
-        }
-        else if (!isEmailValid(email.getText().toString())){
+        } else if (!isEmailValid(email.getText().toString())) {
             Toast.makeText(LoginActivity.this, "The email you provided is invalid.", Toast.LENGTH_SHORT).show();
-        }
-        else if(password.getText().toString().length()<8){
+        } else if (password.getText().toString().length() < 8) {
             Toast.makeText(LoginActivity.this, "The passwords is too short.", Toast.LENGTH_SHORT).show();
-        }
-        else if(temp == -1) {
+        } else if (temp == -1) {
             //when email and password do not match a registered set.
             Toast.makeText(LoginActivity.this, "The credentials do not match any existing account.", Toast.LENGTH_SHORT).show();
-        }
-        else{
+        } else {
             Toast.makeText(LoginActivity.this, "Login Successful", Toast.LENGTH_SHORT).show();
             //update user id after validation
             LocalStorage.loggedInUser = temp;
@@ -95,12 +95,14 @@ public class LoginActivity extends AppCompatActivity {
         }
     }
 
+    //Redirects user to the Register activity
     public void register(View view) {
         Intent intent = new Intent(this, RegisterActivity.class);
         finish();
         startActivity(intent);
     }
 
+    //Redirects user to the ForgotPassword activity
     public void forgotPassword(View view) {
         Intent intent = new Intent(this, ForgotPasswordActivity.class);
         finish();
@@ -114,21 +116,20 @@ public class LoginActivity extends AppCompatActivity {
         try {
             InputStream inputStream = context.openFileInput(file);
 
-            if ( inputStream != null ) {
+            if (inputStream != null) {
                 InputStreamReader inputStreamReader = new InputStreamReader(inputStream);
                 BufferedReader bufferedReader = new BufferedReader(inputStreamReader);
                 String receiveString = "";
                 StringBuilder stringBuilder = new StringBuilder();
 
-                while ( (receiveString = bufferedReader.readLine()) != null ) {
+                while ((receiveString = bufferedReader.readLine()) != null) {
                     stringBuilder.append("\n").append(receiveString);
                 }
 
                 inputStream.close();
                 ret = stringBuilder.toString();
             }
-        }
-        catch (FileNotFoundException e) {
+        } catch (FileNotFoundException e) {
             Log.e("login activity", "File not found: " + e.toString());
         } catch (IOException e) {
             Log.e("login activity", "Can not read file: " + e.toString());
@@ -145,7 +146,8 @@ public class LoginActivity extends AppCompatActivity {
 
         Gson gson = new Gson();
 
-        Type userListType = new TypeToken<ArrayList<User>>(){}.getType();
+        Type userListType = new TypeToken<ArrayList<User>>() {
+        }.getType();
 
         ArrayList<User> userArray = gson.fromJson(temp, userListType);
 
@@ -155,7 +157,8 @@ public class LoginActivity extends AppCompatActivity {
 
         temp = readFromFile("priv_events_file.txt", getApplicationContext()); //read from file, get json to string
 
-        Type privateEventListType = new TypeToken<ArrayList<EventModel>>(){}.getType();
+        Type privateEventListType = new TypeToken<ArrayList<EventModel>>() {
+        }.getType();
 
         ArrayList<EventModel> privEventArray = gson.fromJson(temp, privateEventListType);
 
@@ -165,7 +168,8 @@ public class LoginActivity extends AppCompatActivity {
 
         temp = readFromFile("public_events_file.txt", getApplicationContext()); //read from file, get json to string
 
-        Type publicEventListType = new TypeToken<ArrayList<PublicEventModel>>(){}.getType();
+        Type publicEventListType = new TypeToken<ArrayList<PublicEventModel>>() {
+        }.getType();
 
         ArrayList<PublicEventModel> publicEventArray = gson.fromJson(temp, publicEventListType);
 
@@ -173,12 +177,12 @@ public class LoginActivity extends AppCompatActivity {
 
     }
 
-    public int checkForMatch (String email, String pass) {
+    public int checkForMatch(String email, String pass) {
         //this was not our part to do. back end function
         int i = 0;
-        while(i>-1 && i<LocalStorage.usersList.size()) {
-            if(LocalStorage.usersList.get(i).getEmail().equals(email)) {
-                if(LocalStorage.usersList.get(i).getPassword().equals(pass)) {
+        while (i > -1 && i < LocalStorage.usersList.size()) {
+            if (LocalStorage.usersList.get(i).getEmail().equals(email)) {
+                if (LocalStorage.usersList.get(i).getPassword().equals(pass)) {
                     return i;
                 }
             }

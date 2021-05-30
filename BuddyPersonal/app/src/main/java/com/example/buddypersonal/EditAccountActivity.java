@@ -1,21 +1,20 @@
 package com.example.buddypersonal;
 
-import androidx.annotation.NonNull;
-import androidx.appcompat.app.ActionBarDrawerToggle;
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.view.GravityCompat;
-import androidx.drawerlayout.widget.DrawerLayout;
-import androidx.recyclerview.widget.RecyclerView;
-
 import android.annotation.SuppressLint;
 import android.content.Intent;
-import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Toast;
+
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.ActionBarDrawerToggle;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.view.GravityCompat;
+import androidx.drawerlayout.widget.DrawerLayout;
+import androidx.recyclerview.widget.RecyclerView;
 
 import com.google.android.material.navigation.NavigationView;
 
@@ -59,11 +58,13 @@ public class EditAccountActivity extends AppCompatActivity implements Navigation
         drawerLayout.openDrawer(GravityCompat.START);
     }
 
+    //Redirects to the ChangePassword activity
     public void changePassword(View view) {
         Intent intent = new Intent(EditAccountActivity.this, ChangePasswordActivity.class);
         startActivity(intent);
     }
 
+    //Saves the users updated data
     public void save(View view) {
 
         if (!RegisterActivity.checkEmailValid(email.toString()))
@@ -79,7 +80,9 @@ public class EditAccountActivity extends AppCompatActivity implements Navigation
             RegisterActivity.writeToFile(LocalStorage.getUserJson(), getApplicationContext());
 
             Intent intent = new Intent(EditAccountActivity.this, ViewAccountActivity.class);
+            intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
             startActivity(intent);
+            finish();
         }
     }
 
@@ -97,46 +100,50 @@ public class EditAccountActivity extends AppCompatActivity implements Navigation
         switch (menuItem.getItemId()) {
             case R.id.nav_settings:
                 Intent iSettings = new Intent(EditAccountActivity.this, SettingsActivity.class);
-//                finish();
+                finish();
                 startActivity(iSettings);
                 break;
             case R.id.nav_home:
                 Intent iProfile = new Intent(EditAccountActivity.this, HomeActivity.class);
-//                finish();
+                finish();
                 startActivity(iProfile);
                 break;
             case R.id.nav_map:
                 Intent iMap = new Intent(EditAccountActivity.this, ViewMapActivity.class);
-//                finish();
+                finish();
                 startActivity(iMap);
                 break;
             case R.id.nav_pu_events:
                 Intent iPuEvents = new Intent(EditAccountActivity.this, VenueEventActivity.class);
-//                finish();
+                finish();
                 startActivity(iPuEvents);
                 break;
             case R.id.nav_itinerary:
                 Intent iItinerary = new Intent(EditAccountActivity.this, ItineraryActivity.class);
-//                finish();
+                finish();
                 startActivity(iItinerary);
                 break;
             case R.id.nav_calendar:
                 Intent iCalendar = new Intent(EditAccountActivity.this, CalendarActivity.class);
-//                finish();
+                finish();
                 startActivity(iCalendar);
                 break;
             case R.id.nav_cr_events:
                 Intent iCrEvents = new Intent(EditAccountActivity.this, EditEventActivity.class);
-//                finish();
+                finish();
                 startActivity(iCrEvents);
                 break;
             case R.id.nav_buddy:
                 Intent iBuddy = new Intent(EditAccountActivity.this, BuddyActivity.class);
-//                finish();
+                finish();
                 startActivity(iBuddy);
                 break;
             case R.id.nav_logout:
                 Toast.makeText(this, "You have been logged out!", Toast.LENGTH_SHORT).show();
+                Intent iLogin = new Intent(EditAccountActivity.this, LoginActivity.class);
+                iLogin.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
+                startActivity(iLogin);
+                finish();
                 break;
             default:
                 break;

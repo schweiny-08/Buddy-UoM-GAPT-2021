@@ -14,15 +14,18 @@ public class VenueEventAdapter extends RecyclerView.Adapter<VenueEventAdapter.Vi
 
     private ArrayList<PublicEventModel> mPuEModel = new ArrayList<>();
 
+    //Constructor links the parameters for the arraylist with the local one
     public VenueEventAdapter(ArrayList<PublicEventModel> eventModel) {
         this.mPuEModel = eventModel;
     }
 
+    //Passes the view to be replicated
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int i) {
         View view = LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.public_events, viewGroup, false);
         return new ViewHolder(view);
     }
 
+    //Populates the items with their respective data
     public void onBindViewHolder(@NonNull ViewHolder viewHolder, int i) {
         viewHolder.startTime.setText(mPuEModel.get(i).getStartTime());
         viewHolder.endTime.setText(mPuEModel.get(i).getEndTime());
@@ -40,6 +43,7 @@ public class VenueEventAdapter extends RecyclerView.Adapter<VenueEventAdapter.Vi
 
         TextView startTime, endTime, title, location, description;
 
+        //Constructor links the TextBoxes to objects in the ViewHolder class
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
             startTime = itemView.findViewById(R.id.ven_start);

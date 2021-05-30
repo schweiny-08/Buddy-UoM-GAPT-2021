@@ -112,8 +112,9 @@ public class CalendarActivity extends AppCompatActivity implements NavigationVie
                 break;
             case R.id.nav_logout:
                 Intent iLogin = new Intent(CalendarActivity.this, LoginActivity.class);
-                finish();
+                iLogin.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
                 startActivity(iLogin);
+                finish();
                 Toast.makeText(this, "You have been logged out!", Toast.LENGTH_SHORT).show();
                 break;
             default:

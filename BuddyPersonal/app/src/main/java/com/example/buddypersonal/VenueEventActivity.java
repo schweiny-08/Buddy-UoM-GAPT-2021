@@ -126,48 +126,49 @@ public class VenueEventActivity extends AppCompatActivity implements NavigationV
         switch (menuItem.getItemId()) {
             case R.id.nav_settings:
                 Intent iSettings = new Intent(VenueEventActivity.this, SettingsActivity.class);
-//                finish();
+                finish();
                 startActivity(iSettings);
                 break;
             case R.id.nav_home:
                 Intent iProfile = new Intent(VenueEventActivity.this, HomeActivity.class);
-//                finish();
+                finish();
                 startActivity(iProfile);
                 break;
             case R.id.nav_map:
                 Intent iMap = new Intent(VenueEventActivity.this, ViewMapActivity.class);
-//                finish();
+                finish();
                 startActivity(iMap);
                 break;
             case R.id.nav_pu_events:
                 Intent iPuEvents = new Intent(VenueEventActivity.this, VenueEventActivity.class);
-//                finish();
+                finish();
                 startActivity(iPuEvents);
                 break;
             case R.id.nav_itinerary:
                 Intent iItinerary = new Intent(VenueEventActivity.this, ItineraryActivity.class);
-//                finish();
+                finish();
                 startActivity(iItinerary);
                 break;
             case R.id.nav_calendar:
                 Intent iCalendar = new Intent(VenueEventActivity.this, CalendarActivity.class);
-//                finish();
+                finish();
                 startActivity(iCalendar);
                 break;
             case R.id.nav_cr_events:
                 Intent iCrEvents = new Intent(VenueEventActivity.this, EditEventActivity.class);
-//                finish();
+                finish();
                 startActivity(iCrEvents);
                 break;
             case R.id.nav_buddy:
                 Intent iBuddy = new Intent(VenueEventActivity.this, BuddyActivity.class);
-//                finish();
+                finish();
                 startActivity(iBuddy);
                 break;
             case R.id.nav_logout:
                 Intent iLogin = new Intent(VenueEventActivity.this, LoginActivity.class);
-//                finish();
+                iLogin.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
                 startActivity(iLogin);
+                finish();
                 Toast.makeText(this, "You have been logged out!", Toast.LENGTH_SHORT).show();
                 break;
             default:

@@ -129,6 +129,7 @@ public class RegisterActivity extends AppCompatActivity implements AdapterView.O
 
     }
 
+    //Checks if an email is of a valid format
     boolean isEmailValid(CharSequence email) {
         return android.util.Patterns.EMAIL_ADDRESS.matcher(email).matches();
     }
@@ -137,6 +138,7 @@ public class RegisterActivity extends AppCompatActivity implements AdapterView.O
         registerUser();
     }
 
+    //Validations for registration process and redirection to the Login activity
     private void registerUser() {
 
         sName = name.getText().toString();
