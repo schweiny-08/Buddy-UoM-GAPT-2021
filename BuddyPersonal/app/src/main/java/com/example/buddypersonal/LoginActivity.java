@@ -4,7 +4,6 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Context;
 import android.content.Intent;
-import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.util.Log;
@@ -16,26 +15,17 @@ import android.widget.Toast;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 
-import org.json.JSONArray;
 import org.json.JSONException;
-import org.json.JSONObject;
 
 import java.io.BufferedReader;
-import java.io.File;
-import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
-import java.io.ObjectInputStream;
-import java.io.OutputStreamWriter;
-import java.io.StreamCorruptedException;
 import java.lang.reflect.Type;
 import java.util.ArrayList;
-import java.util.Collection;
-import java.util.HashMap;
 
-public class Login extends AppCompatActivity {
+public class LoginActivity extends AppCompatActivity {
 
     EditText email, password;
     Button contact;
@@ -65,8 +55,6 @@ public class Login extends AppCompatActivity {
                 startActivity(Intent.createChooser(intent, "Send mail"));
             }
         });
-
-        getSupportActionBar().setBackgroundDrawable(new ColorDrawable(getResources().getColor(R.color.sys_toolbar)));
     }
 
     boolean isEmailValid(CharSequence email) {
@@ -86,35 +74,35 @@ public class Login extends AppCompatActivity {
         int temp = checkForMatch(email.getText().toString(), password.getText().toString()); //check for email and password match, returns user id. returns -1 if not found.
 
         if ((TextUtils.isEmpty(email.getText().toString()))||(TextUtils.isEmpty(password.getText().toString()))) {
-            Toast.makeText(Login.this, "Please make sure you have entered the necessary credentials.", Toast.LENGTH_SHORT).show();
+            Toast.makeText(LoginActivity.this, "Please make sure you have entered the necessary credentials.", Toast.LENGTH_SHORT).show();
         }
         else if (!isEmailValid(email.getText().toString())){
-            Toast.makeText(Login.this, "The email you provided is invalid.", Toast.LENGTH_SHORT).show();
+            Toast.makeText(LoginActivity.this, "The email you provided is invalid.", Toast.LENGTH_SHORT).show();
         }
         else if(password.getText().toString().length()<8){
-            Toast.makeText(Login.this, "The passwords is too short.", Toast.LENGTH_SHORT).show();
+            Toast.makeText(LoginActivity.this, "The passwords is too short.", Toast.LENGTH_SHORT).show();
         }
         else if(temp == -1) {
             //when email and password do not match a registered set.
-            Toast.makeText(Login.this, "The credentials do not match any existing account.", Toast.LENGTH_SHORT).show();
+            Toast.makeText(LoginActivity.this, "The credentials do not match any existing account.", Toast.LENGTH_SHORT).show();
         }
         else{
-            Toast.makeText(Login.this, "Login Successful", Toast.LENGTH_SHORT).show();
+            Toast.makeText(LoginActivity.this, "Login Successful", Toast.LENGTH_SHORT).show();
             //update user id after validation
             LocalStorage.loggedInUser = temp;
-            Intent intent = new Intent(this, Home.class);
+            Intent intent = new Intent(this, HomeActivity.class);
             startActivity(intent);
         }
     }
 
     public void register(View view) {
-        Intent intent = new Intent(this, Register.class);
+        Intent intent = new Intent(this, RegisterActivity.class);
         finish();
         startActivity(intent);
     }
 
     public void forgotPassword(View view) {
-        Intent intent = new Intent(this, ForgotPassword.class);
+        Intent intent = new Intent(this, ForgotPasswordActivity.class);
         finish();
         startActivity(intent);
     }

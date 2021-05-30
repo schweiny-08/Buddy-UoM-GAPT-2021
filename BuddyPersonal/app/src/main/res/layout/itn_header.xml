@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.appcompat.widget.Toolbar xmlns:android="http://schemas.android.com/apk/res/android"
     android:id="@+id/nav_toolbar"
-    style="@style/Theme.System.toolbar"
+    style="@style/Theme.Itinerary.toolbar"
     android:layout_width="match_parent"
     android:layout_height="?actionBarSize">
 
@@ -14,18 +14,19 @@
             android:layout_height="match_parent">
 
             <ImageView
+                android:id="@+id/drawer_icon"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:src="@drawable/menu"
                 android:layout_gravity="center"
-                android:paddingRight="10dp"/>
+                android:paddingRight="10dp"
+                android:src="@drawable/menu" />
 
             <TextView
-                style="@style/Theme.System.toolbar"
+                style="@style/Theme.Itinerary.toolbar"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@string/app_name"
-                android:layout_gravity="center"/>
+                android:layout_gravity="center"
+                android:text="@string/app_name" />
         </LinearLayout>
 
     </RelativeLayout>

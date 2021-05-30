@@ -8,21 +8,17 @@ import androidx.drawerlayout.widget.DrawerLayout;
 
 import android.content.Context;
 import android.content.Intent;
-import android.content.res.Configuration;
 import android.content.res.Resources;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.Button;
 import android.widget.RadioButton;
 import android.widget.Toast;
 
 import com.google.android.material.navigation.NavigationView;
 
-import java.util.Locale;
-
-public class Accessibility extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
+public class AccessibilityActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
 
     Context context;
     Resources resources;
@@ -38,7 +34,7 @@ public class Accessibility extends AppCompatActivity implements NavigationView.O
         eng.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                context = LocaleHelper.setLocale(Accessibility.this, "en");
+                context = LocaleHelper.setLocale(AccessibilityActivity.this, "en");
                 resources = context.getResources();
 
 //                Locale locale = new Locale("en-rEN");
@@ -52,7 +48,7 @@ public class Accessibility extends AppCompatActivity implements NavigationView.O
         malt.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                context = LocaleHelper.setLocale(Accessibility.this, "mt");
+                context = LocaleHelper.setLocale(AccessibilityActivity.this, "mt");
                 resources = context.getResources();
 
 //                Locale locale = new Locale("mt-rMT");
@@ -66,7 +62,7 @@ public class Accessibility extends AppCompatActivity implements NavigationView.O
         span.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                context = LocaleHelper.setLocale(Accessibility.this, "es");
+                context = LocaleHelper.setLocale(AccessibilityActivity.this, "es");
                 resources = context.getResources();
 
 //                Locale locale = new Locale("es-rES");
@@ -84,11 +80,10 @@ public class Accessibility extends AppCompatActivity implements NavigationView.O
         drawerLayout.addDrawerListener(toggle);
         toggle.syncState();
         navigationView.setNavigationItemSelectedListener(this);
-        getSupportActionBar().setBackgroundDrawable(new ColorDrawable(getResources().getColor(R.color.sys_toolbar)));
     }
 
     public void save(View view){
-        Intent intent = new Intent(Accessibility.this, Settings.class);
+        Intent intent = new Intent(AccessibilityActivity.this, SettingsActivity.class);
         startActivity(intent);
     }
 
@@ -106,47 +101,47 @@ public class Accessibility extends AppCompatActivity implements NavigationView.O
     public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
         switch(menuItem.getItemId()){
             case R.id.nav_settings:
-                Intent iSettings = new Intent(Accessibility.this, Settings.class);
+                Intent iSettings = new Intent(AccessibilityActivity.this, SettingsActivity.class);
 //                finish();
                 startActivity(iSettings);
                 break;
             case R.id.nav_home:
-                Intent iProfile = new Intent(Accessibility.this, Home.class);
+                Intent iProfile = new Intent(AccessibilityActivity.this, HomeActivity.class);
 //                finish();
                 startActivity(iProfile);
                 break;
             case R.id.nav_map:
-                Intent iMap = new Intent(Accessibility.this, MapView.class);
+                Intent iMap = new Intent(AccessibilityActivity.this, ViewMapActivity.class);
 //                finish();
                 startActivity(iMap);
                 break;
             case R.id.nav_pu_events:
-                Intent iPuEvents = new Intent(Accessibility.this, VenueEvents.class);
+                Intent iPuEvents = new Intent(AccessibilityActivity.this, VenueEventActivity.class);
 //                finish();
                 startActivity(iPuEvents);
                 break;
             case R.id.nav_itinerary:
-                Intent iItinerary = new Intent(Accessibility.this, Itinerary.class);
+                Intent iItinerary = new Intent(AccessibilityActivity.this, ItineraryActivity.class);
 //                finish();
                 startActivity(iItinerary);
                 break;
             case R.id.nav_calendar:
-                Intent iCalendar = new Intent(Accessibility.this, Calendar.class);
+                Intent iCalendar = new Intent(AccessibilityActivity.this, CalendarActivity.class);
 //                finish();
                 startActivity(iCalendar);
                 break;
             case R.id.nav_cr_events:
-                Intent iCrEvents = new Intent(Accessibility.this, CreateEvent.class);
+                Intent iCrEvents = new Intent(AccessibilityActivity.this, EditEventActivity.class);
 //                finish();
                 startActivity(iCrEvents);
                 break;
             case R.id.nav_buddy:
-                Intent iBuddy = new Intent(Accessibility.this, Buddy.class);
+                Intent iBuddy = new Intent(AccessibilityActivity.this, BuddyActivity.class);
 //                finish();
                 startActivity(iBuddy);
                 break;
             case R.id.nav_logout:
-                Intent iLogin = new Intent(Accessibility.this, Login.class);
+                Intent iLogin = new Intent(AccessibilityActivity.this, LoginActivity.class);
 //                finish();
                 startActivity(iLogin);
                 Toast.makeText(this, "You have been logged out!", Toast.LENGTH_SHORT).show();

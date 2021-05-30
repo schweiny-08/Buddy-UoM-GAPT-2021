@@ -1,16 +1,15 @@
 package com.example.buddypersonal;
 
 import android.content.Intent;
-import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.view.MenuItem;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBarDrawerToggle;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.widget.Toolbar;
 import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -22,7 +21,7 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 
-public class Itinerary extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener, ItineraryAdapter.EventClickListener{
+public class ItineraryActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener, ItineraryAdapter.EventClickListener {
 
     private TextView dateTimeDisplay;
     private Calendar calendar;
@@ -35,7 +34,7 @@ public class Itinerary extends AppCompatActivity implements NavigationView.OnNav
 
     DrawerLayout drawerLayout;
     NavigationView navigationView;
-    Toolbar toolbar;
+    ImageView navDrawer;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -43,8 +42,9 @@ public class Itinerary extends AppCompatActivity implements NavigationView.OnNav
         setContentView(R.layout.activity_itinerary);
 
         recyclerView = findViewById(R.id.recyclerViewItin);
+        navDrawer = findViewById(R.id.drawer_icon);
 
-        dateTimeDisplay = (TextView)findViewById(R.id.itn_tv_curr_date);
+        dateTimeDisplay = (TextView) findViewById(R.id.itn_tv_curr_date);
         calendar = Calendar.getInstance();
 
         simpleDateFormat = new SimpleDateFormat("dd/MM/yyyy");
@@ -58,17 +58,16 @@ public class Itinerary extends AppCompatActivity implements NavigationView.OnNav
         drawerLayout.addDrawerListener(toggle);
         toggle.syncState();
         navigationView.setNavigationItemSelectedListener(this);
-
-        getSupportActionBar().setBackgroundDrawable(new ColorDrawable(getResources().getColor(R.color.itn_toolbar)));
+        navDrawer.setOnClickListener(view -> openDrawer());
 
         popRecyclerView();
         String strDate = "";
 
-        if(LocalStorage.selDate != "") {
+        if (LocalStorage.selDate != "") {
             java.util.Calendar calendar = java.util.Calendar.getInstance();
             SimpleDateFormat mdformat = new SimpleDateFormat("dd/MMM/yyyy");
-             strDate = mdformat.format(calendar.getTime());
-        }else {
+            strDate = mdformat.format(calendar.getTime());
+        } else {
             strDate = LocalStorage.selDate;
         }
 
@@ -76,89 +75,77 @@ public class Itinerary extends AppCompatActivity implements NavigationView.OnNav
         LocalStorage.privateEvent = -1;
     }
 
-    public void popRecyclerView(){
+    public void openDrawer() {
+        drawerLayout.openDrawer(GravityCompat.START);
+    }
+
+    public void popRecyclerView() {
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
         itineraryAdapter = new ItineraryAdapter(prModel, this);
         recyclerView.setAdapter(itineraryAdapter);
     }
 
-    public void insertEvents(String date){
-        //TODO: when loading, it should check if the StartDate and StartTime have already elapsed, private events
-
-        for(int i = 0;i<LocalStorage.privEventList.size();i++){
-            //get today's, do by string data parameter
-            //string to date simpledateformat
-            //loop list, check date if date matches then load....
-            //EventModel em = new EventModel();
-//            em.setEventId(i);
-//            em.setUserId(1);
-//            em.setTitle("test"+i);
-//            em.setStartTime("12:45");
-//            em.setEndTime("14:00");
-//            em.setStartDate("12/07/2021");
-//            em.setEndDate("12/07/2021");
-//            em.setLoc("somewhere"+i);
-//            em.setNotes("something"+i);
-//            prModel.add(em);
-
-            if((LocalStorage.privEventList.get(i).getUserId() == LocalStorage.loggedInUser) ) {
-                //match the date and the user IDs
-                EventModel em = LocalStorage.privEventList.get(i);
-                prModel.add(em);
+    public void insertEvents(String date) {
+        for (int i = 0; i < LocalStorage.privEventList.size(); i++) {
+            //match the users ID and the current date
+            if ((LocalStorage.privEventList.get(i).getUserId() == LocalStorage.loggedInUser)) {
+                if((LocalStorage.privEventList.get(i).getStartDate().equals(date))) {
+                    EventModel em = LocalStorage.privEventList.get(i);
+                    prModel.add(em);
+                }
             }
         }
     }
 
     @Override
     public void onBackPressed() {
-        if(drawerLayout.isDrawerOpen(GravityCompat.START)){
+        if (drawerLayout.isDrawerOpen(GravityCompat.START)) {
             drawerLayout.closeDrawer(GravityCompat.START);
-        }
-        else {
+        } else {
             super.onBackPressed();
         }
     }
 
     @Override
     public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
-        switch(menuItem.getItemId()){
+        switch (menuItem.getItemId()) {
             case R.id.nav_settings:
-                Intent iSettings = new Intent(Itinerary.this, Settings.class);
+                Intent iSettings = new Intent(ItineraryActivity.this, SettingsActivity.class);
 //                finish();
                 startActivity(iSettings);
                 break;
             case R.id.nav_home:
-                Intent iProfile = new Intent(Itinerary.this, Home.class);
+                Intent iProfile = new Intent(ItineraryActivity.this, HomeActivity.class);
 //                finish();
                 startActivity(iProfile);
                 break;
             case R.id.nav_map:
-                Intent iMap = new Intent(Itinerary.this, MapView.class);
+                Intent iMap = new Intent(ItineraryActivity.this, ViewMapActivity.class);
 //                finish();
                 startActivity(iMap);
                 break;
             case R.id.nav_pu_events:
-                Intent iPuEvents = new Intent(Itinerary.this, VenueEvents.class);
+                Intent iPuEvents = new Intent(ItineraryActivity.this, VenueEventActivity.class);
 //                finish();
                 startActivity(iPuEvents);
                 break;
             case R.id.nav_itinerary:
-                Intent iItinerary = new Intent(Itinerary.this, Itinerary.class);
+                Intent iItinerary = new Intent(ItineraryActivity.this, ItineraryActivity.class);
 //                finish();
                 startActivity(iItinerary);
                 break;
             case R.id.nav_calendar:
-                Intent iCalendar = new Intent(Itinerary.this, com.example.buddypersonal.Calendar.class);
+                Intent iCalendar = new Intent(ItineraryActivity.this, CalendarActivity.class);
 //                finish();
                 startActivity(iCalendar);
                 break;
             case R.id.nav_cr_events:
-                Intent iCrEvents = new Intent(Itinerary.this, CreateEvent.class);
+                Intent iCrEvents = new Intent(ItineraryActivity.this, EditEventActivity.class);
 //                finish();
                 startActivity(iCrEvents);
                 break;
             case R.id.nav_buddy:
-                Intent iBuddy = new Intent(Itinerary.this, Buddy.class);
+                Intent iBuddy = new Intent(ItineraryActivity.this, BuddyActivity.class);
 //                finish();
                 startActivity(iBuddy);
                 break;
@@ -174,7 +161,7 @@ public class Itinerary extends AppCompatActivity implements NavigationView.OnNav
 
     @Override
     public void onEventClick(int position) {
-        Intent intent = new Intent(Itinerary.this, ViewEvent.class);
+        Intent intent = new Intent(ItineraryActivity.this, ViewEventActivity.class);
         intent.putExtra("vEventId", prModel.get(position).getEventId());
         intent.putExtra("vUserId", prModel.get(position).getUserId());
         intent.putExtra("vTitle", prModel.get(position).getTitle());
@@ -184,7 +171,7 @@ public class Itinerary extends AppCompatActivity implements NavigationView.OnNav
         intent.putExtra("vEndDate", prModel.get(position).getEndDate());
         intent.putExtra("vLocation", prModel.get(position).getLoc());
         intent.putExtra("vNotes", prModel.get(position).getNotes());
-        LocalStorage.privateEvent = prModel.get(position).getEventId()-1;
+        LocalStorage.privateEvent = prModel.get(position).getEventId() - 1;
         startActivity(intent);
     }
 }

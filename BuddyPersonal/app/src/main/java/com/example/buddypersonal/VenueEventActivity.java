@@ -10,10 +10,10 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Context;
 import android.content.Intent;
-import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.MenuItem;
+import android.widget.ImageView;
 import android.widget.Toast;
 
 import com.google.android.material.navigation.NavigationView;
@@ -23,14 +23,15 @@ import java.io.OutputStreamWriter;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 
-public class VenueEvents extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
+public class VenueEventActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
 
     RecyclerView mRecyclerView;
-    VenueEventsAdapter puEventAdapter;
+    VenueEventAdapter puEventAdapter;
     public ArrayList<PublicEventModel> prModel = new ArrayList<>();
 
     DrawerLayout drawerLayout;
     NavigationView navigationView;
+    ImageView navDrawer;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -38,26 +39,26 @@ public class VenueEvents extends AppCompatActivity implements NavigationView.OnN
         setContentView(R.layout.activity_venue_events);
 
         mRecyclerView = findViewById(R.id.recyclerViewVen);
-
         drawerLayout = findViewById(R.id.ven_evt_drawer);
         navigationView = findViewById(R.id.ven_evt_nav);
+        navDrawer = findViewById(R.id.drawer_icon);
 
         navigationView.bringToFront();
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(this, drawerLayout, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
         drawerLayout.addDrawerListener(toggle);
         toggle.syncState();
         navigationView.setNavigationItemSelectedListener(this);
-        getSupportActionBar().setBackgroundDrawable(new ColorDrawable(getResources().getColor(R.color.map_toolbar)));
+        navDrawer.setOnClickListener(view -> openDrawer());
 
 
-        //hardCodedEvents();
+        hardCodedEvents();
         String strDate = "";
 
-        if(LocalStorage.selDate.equals("")) {
+        if (LocalStorage.selDate.equals("")) {
             java.util.Calendar calendar = java.util.Calendar.getInstance();
             SimpleDateFormat mdformat = new SimpleDateFormat("dd/MMM/yyyy");
             strDate = mdformat.format(calendar.getTime());
-        }else {
+        } else {
             strDate = LocalStorage.selDate;
         }
 
@@ -68,20 +69,24 @@ public class VenueEvents extends AppCompatActivity implements NavigationView.OnN
         insertEvents(strDate);
     }
 
-    public void popRecyclerView(){
+    public void openDrawer() {
+        drawerLayout.openDrawer(GravityCompat.START);
+    }
+
+    public void popRecyclerView() {
         mRecyclerView.setLayoutManager(new LinearLayoutManager(this));
-        puEventAdapter = new VenueEventsAdapter(prModel);
+        puEventAdapter = new VenueEventAdapter(prModel);
         mRecyclerView.setAdapter(puEventAdapter);
     }
 
-    public void insertEvents(String temp){
+    public void insertEvents(String temp) {
         //TODO: when loading, it should check if the StartDate and StartTime have already elapsed
-        for(int i = 0;i<LocalStorage.eventList.size();i++){
+        for (int i = 0; i < LocalStorage.eventList.size(); i++) {
 
             //if((LocalStorage.eventList.get(i).getStartDate().equals(temp) ) ) {
-                //match the date and the user IDs
-                PublicEventModel em = LocalStorage.eventList.get(i);
-                prModel.add(em);
+            //match the date and the user IDs
+            PublicEventModel em = LocalStorage.eventList.get(i);
+            prModel.add(em);
             //}
         }
     }
@@ -102,67 +107,65 @@ public class VenueEvents extends AppCompatActivity implements NavigationView.OnN
             OutputStreamWriter outputStreamWriter = new OutputStreamWriter(context.openFileOutput("public_events_file.txt", Context.MODE_PRIVATE));
             outputStreamWriter.write(data);
             outputStreamWriter.close();
-        }
-        catch (IOException e) {
+        } catch (IOException e) {
             Log.e("Exception", "File write failed: " + e.toString());
         }
     }
 
     @Override
     public void onBackPressed() {
-        if(drawerLayout.isDrawerOpen(GravityCompat.START)){
+        if (drawerLayout.isDrawerOpen(GravityCompat.START)) {
             drawerLayout.closeDrawer(GravityCompat.START);
-        }
-        else {
+        } else {
             super.onBackPressed();
         }
     }
 
     @Override
     public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
-        switch(menuItem.getItemId()){
+        switch (menuItem.getItemId()) {
             case R.id.nav_settings:
-                Intent iSettings = new Intent(VenueEvents.this, Settings.class);
+                Intent iSettings = new Intent(VenueEventActivity.this, SettingsActivity.class);
 //                finish();
                 startActivity(iSettings);
                 break;
             case R.id.nav_home:
-                Intent iProfile = new Intent(VenueEvents.this, Home.class);
+                Intent iProfile = new Intent(VenueEventActivity.this, HomeActivity.class);
 //                finish();
                 startActivity(iProfile);
                 break;
             case R.id.nav_map:
-                Intent iMap = new Intent(VenueEvents.this, MapView.class);
+                Intent iMap = new Intent(VenueEventActivity.this, ViewMapActivity.class);
 //                finish();
                 startActivity(iMap);
                 break;
             case R.id.nav_pu_events:
-                Intent iPuEvents = new Intent(VenueEvents.this, VenueEvents.class);
+                Intent iPuEvents = new Intent(VenueEventActivity.this, VenueEventActivity.class);
 //                finish();
                 startActivity(iPuEvents);
                 break;
             case R.id.nav_itinerary:
-                Intent iItinerary = new Intent(VenueEvents.this, Itinerary.class);
+                Intent iItinerary = new Intent(VenueEventActivity.this, ItineraryActivity.class);
 //                finish();
                 startActivity(iItinerary);
                 break;
             case R.id.nav_calendar:
-                Intent iCalendar = new Intent(VenueEvents.this, Calendar.class);
+                Intent iCalendar = new Intent(VenueEventActivity.this, CalendarActivity.class);
 //                finish();
                 startActivity(iCalendar);
                 break;
             case R.id.nav_cr_events:
-                Intent iCrEvents = new Intent(VenueEvents.this, CreateEvent.class);
+                Intent iCrEvents = new Intent(VenueEventActivity.this, EditEventActivity.class);
 //                finish();
                 startActivity(iCrEvents);
                 break;
             case R.id.nav_buddy:
-                Intent iBuddy = new Intent(VenueEvents.this, Buddy.class);
+                Intent iBuddy = new Intent(VenueEventActivity.this, BuddyActivity.class);
 //                finish();
                 startActivity(iBuddy);
                 break;
             case R.id.nav_logout:
-                Intent iLogin = new Intent(VenueEvents.this, Login.class);
+                Intent iLogin = new Intent(VenueEventActivity.this, LoginActivity.class);
 //                finish();
                 startActivity(iLogin);
                 Toast.makeText(this, "You have been logged out!", Toast.LENGTH_SHORT).show();

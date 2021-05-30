@@ -5,7 +5,7 @@
     style="@style/Theme.System.background"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".Login">
+    tools:context=".LoginActivity">
 
     <ImageView
         android:id="@+id/log_img_logo"

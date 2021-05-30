@@ -2,7 +2,6 @@ package com.example.buddypersonal;
 
 import android.content.Context;
 import android.content.Intent;
-import android.graphics.drawable.ColorDrawable;
 import android.os.Build;
 import android.os.Bundle;
 import android.speech.RecognizerIntent;
@@ -12,6 +11,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -30,29 +30,17 @@ import com.google.gson.reflect.TypeToken;
 
 import org.json.JSONException;
 
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
-import java.io.FileWriter;
 import java.io.IOException;
-import java.io.ObjectInputStream;
-import java.io.ObjectOutputStream;
 import java.io.OutputStreamWriter;
-import java.io.Reader;
-import java.io.StreamCorruptedException;
 import java.lang.reflect.Type;
-import java.nio.file.Files;
-import java.nio.file.Paths;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Locale;
 import java.util.Set;
 
-public class Buddy extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener{
+public class BuddyActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener{
 
     static EditText userInput;
     static RecyclerView recyclerView;
@@ -75,6 +63,7 @@ public class Buddy extends AppCompatActivity implements NavigationView.OnNavigat
 
     DrawerLayout drawerLayout;
     NavigationView navigationView;
+    ImageView navDrawer;
 
     @RequiresApi(api = Build.VERSION_CODES.O)
     @Override
@@ -87,6 +76,8 @@ public class Buddy extends AppCompatActivity implements NavigationView.OnNavigat
         enterButton = findViewById(R.id.EnterBtn);
 
         recyclerView = findViewById(R.id.conversation);
+        navDrawer = findViewById(R.id.drawer_icon);
+        navDrawer.setOnClickListener(view -> openDrawer());
 
         responseMessageList = new ArrayList<>();  // chat history
         messageAdapter = new MessageAdapter(responseMessageList, this);
@@ -136,7 +127,6 @@ public class Buddy extends AppCompatActivity implements NavigationView.OnNavigat
         toggle.syncState();
 
         navigationView.setNavigationItemSelectedListener(this);
-        getSupportActionBar().setBackgroundDrawable(new ColorDrawable(getResources().getColor(R.color.bud_toolbar)));
 
         buildKB();
         try {
@@ -144,6 +134,10 @@ public class Buddy extends AppCompatActivity implements NavigationView.OnNavigat
         } catch (JSONException e) {
             e.printStackTrace();
         }
+    }
+
+    public void openDrawer() {
+        drawerLayout.openDrawer(GravityCompat.START);
     }
 
     public String getLastUserMsg() {
@@ -183,7 +177,7 @@ public class Buddy extends AppCompatActivity implements NavigationView.OnNavigat
         knowledge.put("what is love","Baby don't hurt me.");
         knowledge.put("i love you", "We're just good *buddies* :)");
         //knowledge.put("What are you able to do?", "I can do.....");
-        //saveKB(getBuddyJson(), getApplicationContext());
+        saveKB(getBuddyJson(), getApplicationContext());
     }
 
     public String getLastBotMsg() {
@@ -303,7 +297,7 @@ public class Buddy extends AppCompatActivity implements NavigationView.OnNavigat
 
         //load knowledge base into local
 
-        String temp = Login.readFromFile("buddy_file.txt", getApplicationContext()); //read from file, get json to string
+        String temp = LoginActivity.readFromFile("buddy_file.txt", getApplicationContext()); //read from file, get json to string
 
         Gson gson = new Gson();
 
@@ -326,21 +320,21 @@ public class Buddy extends AppCompatActivity implements NavigationView.OnNavigat
     }
 
     public String showIter() {
-        Intent iter = new Intent (this, Itinerary.class);
+        Intent iter = new Intent (this, ItineraryActivity.class);
         finish();
         startActivity(iter);
         return "I wonder what's planned for today";
     }
 
     public String showSettings() {
-        Intent setts = new Intent (this, Settings.class);
+        Intent setts = new Intent (this, SettingsActivity.class);
         finish();
         startActivity(setts);
         return "Of course!";
     }
 
     public String showMap() {
-        Intent map = new Intent (this, MapView.class);
+        Intent map = new Intent (this, ViewMapActivity.class);
         finish();
         startActivity(map);
         return "Sure thing!";
@@ -350,47 +344,47 @@ public class Buddy extends AppCompatActivity implements NavigationView.OnNavigat
     public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
         switch(menuItem.getItemId()){
             case R.id.nav_settings:
-                Intent iSettings = new Intent(Buddy.this, Settings.class);
+                Intent iSettings = new Intent(BuddyActivity.this, SettingsActivity.class);
 //                finish();
                 startActivity(iSettings);
                 break;
             case R.id.nav_home:
-                Intent iProfile = new Intent(Buddy.this, Home.class);
+                Intent iProfile = new Intent(BuddyActivity.this, HomeActivity.class);
 //                finish();
                 startActivity(iProfile);
                 break;
             case R.id.nav_map:
-                Intent iMap = new Intent(Buddy.this, MapView.class);
+                Intent iMap = new Intent(BuddyActivity.this, ViewMapActivity.class);
 //                finish();
                 startActivity(iMap);
                 break;
             case R.id.nav_pu_events:
-                Intent iPuEvents = new Intent(Buddy.this, VenueEvents.class);
+                Intent iPuEvents = new Intent(BuddyActivity.this, VenueEventActivity.class);
 //                finish();
                 startActivity(iPuEvents);
                 break;
             case R.id.nav_itinerary:
-                Intent iItinerary = new Intent(Buddy.this, Itinerary.class);
+                Intent iItinerary = new Intent(BuddyActivity.this, ItineraryActivity.class);
 //                finish();
                 startActivity(iItinerary);
                 break;
             case R.id.nav_calendar:
-                Intent iCalendar = new Intent(Buddy.this, Calendar.class);
+                Intent iCalendar = new Intent(BuddyActivity.this, CalendarActivity.class);
 //                finish();
                 startActivity(iCalendar);
                 break;
             case R.id.nav_cr_events:
-                Intent iCrEvents = new Intent(Buddy.this, CreateEvent.class);
+                Intent iCrEvents = new Intent(BuddyActivity.this, EditEventActivity.class);
 //                finish();
                 startActivity(iCrEvents);
                 break;
             case R.id.nav_buddy:
-                Intent iBuddy = new Intent(Buddy.this, Buddy.class);
+                Intent iBuddy = new Intent(BuddyActivity.this, BuddyActivity.class);
 //                finish();
                 startActivity(iBuddy);
                 break;
             case R.id.nav_logout:
-                Intent iLogin = new Intent(Buddy.this, Login.class);
+                Intent iLogin = new Intent(BuddyActivity.this, LoginActivity.class);
 //                finish();
                 startActivity(iLogin);
                 Toast.makeText(this, "You have been logged out!", Toast.LENGTH_SHORT).show();
@@ -418,28 +412,28 @@ public class Buddy extends AppCompatActivity implements NavigationView.OnNavigat
     }
 
     public String forgotPass() {
-        Intent pass = new Intent (this, ForgotPassword.class);
+        Intent pass = new Intent (this, ForgotPasswordActivity.class);
         finish();
         startActivity(pass);
         return "No worries. We can fix that.";
     }
 
     public String showProfile() {
-        Intent prof = new Intent (this, ViewAccount.class);
+        Intent prof = new Intent (this, ViewAccountActivity.class);
         finish();
         startActivity(prof);
         return "Sure thing!";
     }
 
     public String createEv() {
-        Intent ev = new Intent (this, CreateEvent.class);
+        Intent ev = new Intent (this, EditEventActivity.class);
         finish();
         startActivity(ev);
         return "What's new?";
     }
 
     public String goHome() {
-        Intent home = new Intent (this, Home.class);
+        Intent home = new Intent (this, HomeActivity.class);
         finish();
         startActivity(home);
         return "Next stop: Home";

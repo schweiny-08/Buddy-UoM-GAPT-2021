@@ -2,15 +2,15 @@
 <androidx.drawerlayout.widget.DrawerLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/vew_act_drawer"
-    style="@style/Theme.System.background"
+    android:id="@+id/crt_evt_drawer"
+    style="@style/Theme.Itinerary.background"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:fitsSystemWindows="true"
-    tools:context=".ViewAccountActivity">
+    tools:context=".EditEventActivity">
 
     <com.google.android.material.navigation.NavigationView
-        android:id="@+id/vew_act_nav"
+        android:id="@+id/crt_evt_nav"
         android:layout_width="wrap_content"
         android:layout_height="match_parent"
         android:layout_gravity="start"
@@ -22,7 +22,7 @@
 
         <include
             android:id="@+id/header"
-            layout="@layout/sys_header"
+            layout="@layout/itn_header"
             android:layout_width="0dp"
             android:layout_height="0dp"
             app:layout_constraintBottom_toTopOf="@+id/guideline"
@@ -42,127 +42,182 @@
             android:layout_height="match_parent">
 
             <TextView
-                android:id="@+id/act_tv_title"
-                style="@style/Theme.System.title"
+                android:id="@+id/crt_evt_title"
+                style="@style/Theme.Itinerary.titles"
                 android:layout_width="0dp"
                 android:layout_height="0dp"
-                android:text="@string/account"
+                android:text="@string/event"
                 app:layout_constraintBottom_toTopOf="@+id/guideline33"
-                app:layout_constraintEnd_toStartOf="@+id/guideline19"
-                app:layout_constraintStart_toStartOf="@+id/guideline18"
+                app:layout_constraintEnd_toStartOf="@+id/guideline4"
+                app:layout_constraintStart_toStartOf="@+id/guideline1"
                 app:layout_constraintTop_toTopOf="@+id/guideline5" />
 
             <TextView
-                android:id="@+id/act_tv_name"
-                style="@style/Theme.System.textbackground"
+                android:id="@+id/crt_evt_tv_title"
+                style="@style/Theme.Itinerary.textbackground"
                 android:layout_width="0dp"
                 android:layout_height="0dp"
-                android:text="@string/col_name"
+                android:text="@string/col_title"
                 app:layout_constraintBottom_toTopOf="@+id/guideline35"
                 app:layout_constraintEnd_toStartOf="@+id/guideline2"
                 app:layout_constraintStart_toStartOf="@+id/guideline1"
                 app:layout_constraintTop_toTopOf="@+id/guideline34" />
 
             <TextView
-                android:id="@+id/act_tv_surname"
-                style="@style/Theme.System.textbackground"
+                android:id="@+id/crt_evt_tv_start_time"
+                style="@style/Theme.Itinerary.textbackground"
                 android:layout_width="0dp"
                 android:layout_height="0dp"
-                android:text="@string/col_surname"
+                android:text="@string/col_start_time"
                 app:layout_constraintBottom_toTopOf="@+id/guideline37"
                 app:layout_constraintEnd_toStartOf="@+id/guideline2"
                 app:layout_constraintStart_toStartOf="@+id/guideline1"
                 app:layout_constraintTop_toTopOf="@+id/guideline36" />
 
             <TextView
-                android:id="@+id/act_tv_email"
-                style="@style/Theme.System.textbackground"
+                android:id="@+id/crt_evt_tv_end_time"
+                style="@style/Theme.Itinerary.textbackground"
                 android:layout_width="0dp"
                 android:layout_height="0dp"
-                android:text="@string/col_email"
+                android:text="@string/col_end_time"
                 app:layout_constraintBottom_toTopOf="@+id/guideline6"
                 app:layout_constraintEnd_toStartOf="@+id/guideline2"
                 app:layout_constraintStart_toStartOf="@+id/guideline1"
                 app:layout_constraintTop_toTopOf="@+id/guideline38" />
 
             <TextView
-                android:id="@+id/act_tv_username"
-                style="@style/Theme.System.textbackground"
+                android:id="@+id/crt_evt_tv_loc"
+                style="@style/Theme.Itinerary.textbackground"
                 android:layout_width="0dp"
                 android:layout_height="0dp"
-                android:text="@string/col_username"
+                android:text="@string/col_location"
                 app:layout_constraintBottom_toTopOf="@+id/guideline8"
                 app:layout_constraintEnd_toStartOf="@+id/guideline2"
                 app:layout_constraintStart_toStartOf="@+id/guideline1"
                 app:layout_constraintTop_toTopOf="@+id/guideline7" />
 
             <TextView
-                android:id="@+id/act_et_name"
-                style="@style/Theme.System.et"
+                android:id="@+id/crt_evt_tv_notes"
+                style="@style/Theme.Itinerary.textbackground"
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:text="@string/col_notes"
+                app:layout_constraintBottom_toTopOf="@+id/guideline20"
+                app:layout_constraintEnd_toStartOf="@+id/guideline2"
+                app:layout_constraintStart_toStartOf="@+id/guideline1"
+                app:layout_constraintTop_toTopOf="@+id/guideline9" />
+
+            <EditText
+                android:id="@+id/crt_evt_et_title"
+                style="@style/Theme.Itinerary.et"
                 android:layout_width="0dp"
                 android:layout_height="0dp"
                 android:ems="10"
+                android:hint="@string/title"
+                android:inputType="textPersonName"
                 app:layout_constraintBottom_toTopOf="@+id/guideline35"
                 app:layout_constraintEnd_toStartOf="@+id/guideline4"
                 app:layout_constraintStart_toStartOf="@+id/guideline3"
                 app:layout_constraintTop_toTopOf="@+id/guideline34" />
 
             <TextView
-                android:id="@+id/act_et_surname"
-                style="@style/Theme.System.et"
+                android:id="@+id/crt_evt_et_start_time"
+                style="@style/Theme.Itinerary.et"
                 android:layout_width="0dp"
                 android:layout_height="0dp"
                 android:ems="10"
+                android:hint="@string/start_time"
                 app:layout_constraintBottom_toTopOf="@+id/guideline37"
-                app:layout_constraintEnd_toStartOf="@+id/guideline4"
+                app:layout_constraintEnd_toStartOf="@+id/guideline14"
                 app:layout_constraintStart_toStartOf="@+id/guideline3"
                 app:layout_constraintTop_toTopOf="@+id/guideline36" />
 
             <TextView
-                android:id="@+id/act_et_email"
-                style="@style/Theme.System.et"
+                android:id="@+id/crt_evt_et_start_date"
+                style="@style/Theme.Itinerary.et"
                 android:layout_width="0dp"
                 android:layout_height="0dp"
                 android:ems="10"
-                app:layout_constraintBottom_toTopOf="@+id/guideline6"
+                android:hint="@string/start_date"
+                app:layout_constraintBottom_toTopOf="@+id/guideline37"
                 app:layout_constraintEnd_toStartOf="@+id/guideline4"
+                app:layout_constraintStart_toStartOf="@+id/guideline15"
+                app:layout_constraintTop_toTopOf="@+id/guideline36" />
+
+            <TextView
+                android:id="@+id/crt_evt_et_end_time"
+                style="@style/Theme.Itinerary.et"
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:ems="10"
+                android:hint="@string/end_time"
+                app:layout_constraintBottom_toTopOf="@+id/guideline6"
+                app:layout_constraintEnd_toStartOf="@+id/guideline14"
                 app:layout_constraintStart_toStartOf="@+id/guideline3"
                 app:layout_constraintTop_toTopOf="@+id/guideline38" />
 
             <TextView
-                android:id="@+id/act_et_username"
-                style="@style/Theme.System.et"
+                android:id="@+id/crt_evt_et_end_date"
+                style="@style/Theme.Itinerary.et"
                 android:layout_width="0dp"
                 android:layout_height="0dp"
                 android:ems="10"
+                android:hint="@string/end_date"
+                app:layout_constraintBottom_toTopOf="@+id/guideline6"
+                app:layout_constraintEnd_toStartOf="@+id/guideline4"
+                app:layout_constraintStart_toStartOf="@+id/guideline15"
+                app:layout_constraintTop_toTopOf="@+id/guideline38" />
+
+            <EditText
+                android:id="@+id/crt_evt_et_loc"
+                style="@style/Theme.Itinerary.et"
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:ems="10"
+                android:hint="@string/location"
+                android:inputType="text"
                 app:layout_constraintBottom_toTopOf="@+id/guideline8"
                 app:layout_constraintEnd_toStartOf="@+id/guideline4"
                 app:layout_constraintStart_toStartOf="@+id/guideline3"
                 app:layout_constraintTop_toTopOf="@+id/guideline7" />
 
-            <Button
-                android:id="@+id/act_bt_delete"
-                style="@style/Theme.System.button"
+            <EditText
+                android:id="@+id/crt_evt_et_notes"
+                style="@style/Theme.Itinerary.et"
                 android:layout_width="0dp"
                 android:layout_height="0dp"
-                android:onClick="delete"
-                android:text="@string/delete"
-                app:layout_constraintBottom_toTopOf="@+id/guideline20"
-                app:layout_constraintEnd_toStartOf="@+id/guideline2"
-                app:layout_constraintStart_toStartOf="@+id/guideline1"
-                app:layout_constraintTop_toTopOf="@+id/guideline9" />
-
-            <Button
-                android:id="@+id/act_bt_save"
-                style="@style/Theme.System.button"
-                android:layout_width="0dp"
-                android:layout_height="0dp"
-                android:onClick="edit"
-                android:text="@string/edit"
-                app:layout_constraintBottom_toTopOf="@+id/guideline20"
+                android:ems="10"
+                android:hint="@string/notes"
+                android:inputType="textMultiLine"
+                android:gravity="top|left"
+                app:layout_constraintBottom_toTopOf="@+id/guideline39"
                 app:layout_constraintEnd_toStartOf="@+id/guideline4"
                 app:layout_constraintStart_toStartOf="@+id/guideline3"
                 app:layout_constraintTop_toTopOf="@+id/guideline9" />
+
+            <Button
+                android:id="@+id/crt_evt_bt_cancel"
+                style="@style/Theme.Itinerary.button"
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:onClick="exit"
+                android:text="@string/cancel"
+                app:layout_constraintBottom_toTopOf="@+id/guideline17"
+                app:layout_constraintEnd_toStartOf="@+id/guideline2"
+                app:layout_constraintStart_toStartOf="@+id/guideline1"
+                app:layout_constraintTop_toTopOf="@+id/guideline16" />
+
+            <Button
+                android:id="@+id/crt_evt_bt_save"
+                style="@style/Theme.Itinerary.button.small"
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:onClick="createEvent"
+                android:text="@string/save"
+                app:layout_constraintBottom_toTopOf="@+id/guideline17"
+                app:layout_constraintEnd_toStartOf="@+id/guideline4"
+                app:layout_constraintStart_toStartOf="@+id/guideline13"
+                app:layout_constraintTop_toTopOf="@+id/guideline16" />
 
             <androidx.constraintlayout.widget.Guideline
                 android:id="@+id/guideline1"
@@ -225,7 +280,7 @@
                 android:layout_width="0dp"
                 android:layout_height="0dp"
                 android:orientation="horizontal"
-                app:layout_constraintGuide_percent="0.47" />
+                app:layout_constraintGuide_percent="0.45" />
 
             <androidx.constraintlayout.widget.Guideline
                 android:id="@+id/guideline12"
@@ -256,6 +311,13 @@
                 app:layout_constraintGuide_percent="0.515" />
 
             <androidx.constraintlayout.widget.Guideline
+                android:id="@+id/guideline16"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                app:layout_constraintGuide_percent="0.92" />
+
+            <androidx.constraintlayout.widget.Guideline
                 android:id="@+id/guideline17"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -281,7 +343,7 @@
                 android:layout_width="0dp"
                 android:layout_height="0dp"
                 android:orientation="horizontal"
-                app:layout_constraintGuide_percent="0.53" />
+                app:layout_constraintGuide_percent="0.51" />
 
             <androidx.constraintlayout.widget.Guideline
                 android:id="@+id/guideline33"
@@ -316,7 +378,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
-                app:layout_constraintGuide_percent="0.30" />
+                app:layout_constraintGuide_percent="0.3" />
 
             <androidx.constraintlayout.widget.Guideline
                 android:id="@+id/guideline38"
@@ -324,6 +386,14 @@
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
                 app:layout_constraintGuide_percent="0.31" />
+
+            <androidx.constraintlayout.widget.Guideline
+                android:id="@+id/guideline39"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                app:layout_constraintGuide_percent="0.57" />
+
         </androidx.constraintlayout.widget.ConstraintLayout>
     </androidx.constraintlayout.widget.ConstraintLayout>
 </androidx.drawerlayout.widget.DrawerLayout>

@@ -1,6 +1,5 @@
 package com.example.buddypersonal;
 
-import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -11,11 +10,11 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.ArrayList;
 
-public class VenueEventsAdapter extends RecyclerView.Adapter<VenueEventsAdapter.ViewHolder> {
+public class VenueEventAdapter extends RecyclerView.Adapter<VenueEventAdapter.ViewHolder> {
 
     private ArrayList<PublicEventModel> mPuEModel = new ArrayList<>();
 
-    public VenueEventsAdapter(ArrayList<PublicEventModel> eventModel) {
+    public VenueEventAdapter(ArrayList<PublicEventModel> eventModel) {
         this.mPuEModel = eventModel;
     }
 

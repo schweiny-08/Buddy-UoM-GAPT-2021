@@ -12,7 +12,7 @@ import android.widget.Toast;
 import java.util.ArrayList;
 import java.util.Random;
 
-public class ForgotPassword extends AppCompatActivity {
+public class ForgotPasswordActivity extends AppCompatActivity {
 
     int code = 0000;
 
@@ -20,13 +20,11 @@ public class ForgotPassword extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_forgot_password);
-
-        getSupportActionBar().setBackgroundDrawable(new ColorDrawable(getResources().getColor(R.color.sys_toolbar)));
     }
 
     public void resetPassword(View view){
         Toast.makeText(this, "Your password has been successfully reset.", Toast.LENGTH_SHORT).show();
-        Intent intent = new Intent(this, Login.class);
+        Intent intent = new Intent(this, LoginActivity.class);
         startActivity(intent);
     }
 
@@ -45,7 +43,7 @@ public class ForgotPassword extends AppCompatActivity {
             ArrayList<String> toEmailList = new ArrayList<String>();
             toEmailList.add(recipient);
 
-            new SendMailTask(ForgotPassword.this).execute("buddypersonal21@gmail.com",
+            new SendMailTask(ForgotPasswordActivity.this).execute("buddypersonal21@gmail.com",
                     "GAPT2021", toEmailList, "Your Buddy Personal Password Code Is Here", "Your code is "+code);
         } catch (Exception e) {
             Log.e("SendMail", e.getMessage(), e);
