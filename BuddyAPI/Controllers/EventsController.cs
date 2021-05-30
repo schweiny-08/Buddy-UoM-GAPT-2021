@@ -29,6 +29,7 @@ namespace BuddyAPI.Controllers
             return await _context.Events.ToListAsync();
         }
 
+        // GET: api/Events?start=10/10/2020&end=12/10/2020
         [HttpGet("getEventsByTimeFrame")]
         public async Task<ActionResult<IEnumerable<Events>>> GetEvents(DateTime start, DateTime end) {
             var events = await _context.Events.Where(e => e.StartTime >= start && e.StartTime <= end || e.EndTime >= start && e.EndTime <= end).ToListAsync();
@@ -54,7 +55,6 @@ namespace BuddyAPI.Controllers
         }
 
         // PUT: api/Events/5
-        // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPut("editEventById")]
         public async Task<IActionResult> PutEvents(int id, Events events)
         {
@@ -87,7 +87,6 @@ namespace BuddyAPI.Controllers
         }
 
         // POST: api/Events
-        // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPost("addEvent")]
         public async Task<ActionResult<Events>> PostEvents([Bind("Pinpoint_Id,EventName,EventDescription,StartTime,EndTime")] Events events)
         {
@@ -127,6 +126,8 @@ namespace BuddyAPI.Controllers
             return CreatedAtAction("GetEvents", new { id = events.Event_Id }, events);
         }
 
+
+        //GET : Event via Pinpoint Id
         [HttpGet ("GetEventByPinpoint")]
         private IEnumerable<Events> GetEventByPinpoint(int pinpointId)
         {
@@ -151,13 +152,14 @@ namespace BuddyAPI.Controllers
 
             return NoContent();
         }
-
+        
+        //Returns boolean if Event Id exists within the database or not
         private bool EventsExists(int id)
         {
             return _context.Events.Any(e => e.Event_Id == id);
         }
 
-        //Checks if current user logged in has Admin / Architect Priveleges
+        //Checks if current user logged in has Admin / Architect Privileges
         private void AdminPrivileges()
         {
             HttpContext.Session.SessionExists("UserLoggedIn");

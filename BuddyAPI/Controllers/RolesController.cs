@@ -78,7 +78,6 @@ namespace BuddyAPI.Controllers
         }
 
         // POST: api/Roles
-        // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPost("addRole")]
         public async Task<ActionResult<Roles>> PostRoles(Roles roles)
         {

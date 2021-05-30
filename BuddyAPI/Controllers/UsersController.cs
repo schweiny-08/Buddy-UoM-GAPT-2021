@@ -32,8 +32,6 @@ namespace BuddyAPI.Controllers
         [HttpGet("getAllUsers")]
         public async Task<ActionResult<IEnumerable<User>>> GetUsers()
         {
-            //var BuddyApiContextRoles = _context.User.Include(u => u.Roles);
-            //return await BuddyApiContextRoles.ToListAsync();
             return await _context.User.ToListAsync();
         }
 
@@ -42,10 +40,6 @@ namespace BuddyAPI.Controllers
         [HttpGet("getUserById")]
         public async Task<ActionResult<User>> GetUser(int id)
         {
-
-            //var user = await _context.User
-            //   .Include(i => i.Roles)
-            //   .FirstOrDefaultAsync(i => i.User_Id == id);
             var user = await _context.User.FindAsync(id);
 
             if (user == null)
@@ -57,7 +51,6 @@ namespace BuddyAPI.Controllers
         }
 
         // PUT: api/Users/5
-        // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPut("editUserById")]
         public async Task<IActionResult> PutUser(int id, User user)
         {
@@ -139,6 +132,7 @@ namespace BuddyAPI.Controllers
 
                     if (dbUser.Password == password)
                     {
+                        //Saves User object as a Session Variable
                         HttpContext.Session.SetObjectAsJson("UserLoggedIn", dbUser);
                         return CreatedAtAction(nameof(GetUser), new { id = dbUser.User_Id }, dbUser);
                     }
@@ -160,6 +154,7 @@ namespace BuddyAPI.Controllers
             }
         }
 
+        //GET: Session User object
         [HttpGet ("GetSession")]
         public User GetSession()
         {
@@ -169,6 +164,7 @@ namespace BuddyAPI.Controllers
             return currentUser;
         }
 
+        //Removes current seesion of User logged in
         [HttpGet ("Logout")]
         public string Logout()
         {
@@ -182,17 +178,20 @@ namespace BuddyAPI.Controllers
 
         }
 
-
+        //Returns boolean if User exists in the Database
         private bool UserExists(int id)
         {
             return _context.User.Any(e => e.User_Id == id);
         }
 
+        //Returns User object if email exists within the database
         private User EmailExists(string email)
         {
             return _context.User.FirstOrDefault(e => e.Email == email);
         }
 
+
+        //Hashes password 
         private string HashPassword(string Email, string Password)
         {
             byte[] salt = Encoding.ASCII.GetBytes(Email);

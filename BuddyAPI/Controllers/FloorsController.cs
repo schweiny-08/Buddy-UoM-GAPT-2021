@@ -42,6 +42,7 @@ namespace BuddyAPI.Controllers
             return floor;
         }
 
+        //GET: Floor via floor level
         [HttpGet("getFloorByLevel")]
         public async Task<ActionResult<Floor>> GetFloorByLevel(int level) {
             var floor = _context.Floor.FirstOrDefault(f => f.floorLevel == level);
@@ -53,7 +54,6 @@ namespace BuddyAPI.Controllers
         }
 
         // PUT: api/Floors/5
-        // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPut("editFloorById")]
         public async Task<IActionResult> PutFloor(int id, Floor floor)
         {
@@ -84,7 +84,6 @@ namespace BuddyAPI.Controllers
         }
 
         // POST: api/Floors
-        // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPost("addFloor")]
         public async Task<ActionResult<Floor>> PostFloor(Floor floor)
         {

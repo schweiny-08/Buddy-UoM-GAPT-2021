@@ -46,7 +46,6 @@ namespace BuddyAPI.Controllers
         }
 
         // PUT: api/PrivateEvents/5
-        // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPut("editPrivateEventById")]
         public async Task<IActionResult> PutPrivateEvents(int id, PrivateEvents privateEvents)
         {
@@ -80,7 +79,6 @@ namespace BuddyAPI.Controllers
 
 
         // POST: api/Events
-        // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPost("addPrivateEvent")]
         public async Task<ActionResult<PrivateEvents>> PostPrivateEvent([Bind("Pinpoint_Id,PrivateEventName,PrivateEventDescription,StartTime,EndTime")] PrivateEvents privateEvents)
         {
@@ -107,20 +105,24 @@ namespace BuddyAPI.Controllers
             await _context.SaveChangesAsync();
 
             privateEvents = _context.PrivateEvents.OrderBy(pe => pe.PrivateEvent_Id).Last();
+
             Itineraries itineraries = new Itineraries();
             itineraries.PrivateEvent_Id = privateEvents.PrivateEvent_Id;
+
             User user = HttpContext.Session.GetObjectFromJson<User>("UserLoggedIn");
             itineraries.User_Id = user.User_Id;
 
+            //As Private event is created to the database the PrivateEventID & the UserId are transferred to the Itiniraries
+            //Controller to store a new Itinerary row
             ItinerariesController itinerariesController = new ItinerariesController(_context);
             await itinerariesController.PostItineraries(itineraries);
             return Ok("Private Event has been created and added to your itinerary");
         }
 
+
         private IEnumerable<PrivateEvents> GetEventByPinpoint(int pinpointId)
         {
             return _context.PrivateEvents.Where(e => e.Pinpoint_Id == pinpointId);
-
         }
 
         private IEnumerable<Itineraries> GetEventFromItineraries(int userid)
@@ -145,6 +147,8 @@ namespace BuddyAPI.Controllers
             return NoContent();
         }
 
+
+        //Return boolean of Pinpoint if it exists in the database
         private bool PrivateEventsExists(int id)
         {
             return _context.PrivateEvents.Any(e => e.PrivateEvent_Id == id);

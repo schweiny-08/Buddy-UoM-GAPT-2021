@@ -43,7 +43,6 @@ namespace BuddyAPI.Controllers
         }
 
         // PUT: api/Hazards/5
-        // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPut("editHazardById")]
         public async Task<IActionResult> PutHazard(int id, Hazard hazard)
         {
@@ -74,12 +73,12 @@ namespace BuddyAPI.Controllers
         }
 
         // POST: api/Hazards
-        // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPost("addHazard")]
         public async Task<ActionResult<Hazard>> PostHazard(Hazard hazard)
         {
             var existingHazard = _context.Hazard.FirstOrDefault(h => h.hazardType == hazard.hazardType);
 
+            //Validation check to retreive if Hazard Type already exists within the database
             if (existingHazard != null && existingHazard.hazardType.Equals(hazard.hazardType, StringComparison.OrdinalIgnoreCase))
                 return BadRequest("Hazard with same type already exists!");
 

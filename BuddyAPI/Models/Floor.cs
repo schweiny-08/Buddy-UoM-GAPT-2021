@@ -21,6 +21,5 @@ namespace BuddyAPI.Models
 		public string floorDescription { get; set; }
 		public string floorImage { get; set; }
 
-		//public virtual ICollection<Floor> floors { get; set; }
 	}
 }

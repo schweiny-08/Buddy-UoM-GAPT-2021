@@ -21,8 +21,6 @@ namespace BuddyAPI.Controllers
             _context = context;
         }
 
-
-
         // GET: api/Paths
         [HttpGet]
         public async Task<ActionResult<IEnumerable<Paths>>> GetPaths()
@@ -35,23 +33,24 @@ namespace BuddyAPI.Controllers
         //retrieves a list of IDs connected to the given ID
         public async Task<ActionResult<IEnumerable<int>>> GetPaths(int id)
         {
+
             List<int> paths = new List<int>();
             foreach (var p in _context.Paths)
             {
                 if (p.pinpoint_Id == id)
                 {
-                    paths.Add(p.pinpoint_Id_2);
+                   paths.Add(p.pinpoint_Id_2);
                 }
                 else if (p.pinpoint_Id_2 == id)
                 {
                     paths.Add(p.pinpoint_Id);
                 }
             }
+
             return paths;
         }
 
         // PUT: api/Paths/5
-        // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPut("{id}")]
         public async Task<IActionResult> PutPaths(int id, Paths paths)
         {
@@ -82,7 +81,6 @@ namespace BuddyAPI.Controllers
         }
 
         // POST: api/Paths
-        // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPost]
         public async Task<ActionResult<Paths>> PostPaths(Paths paths)
         {
@@ -123,6 +121,7 @@ namespace BuddyAPI.Controllers
             {
                 _context.Paths.Remove(paths2);
             }
+
             await _context.SaveChangesAsync();
 
             return NoContent();
