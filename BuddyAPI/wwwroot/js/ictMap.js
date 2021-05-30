@@ -6,7 +6,7 @@ const iconBase = "../images/MarkerIcons/";
 var map;
 var startNode = null, endNode = null;
 
-//Creating the map centred over UOM with default zoom level 15
+//Creating the map centred over UOM with default zoom level 19 and the necessary settings
 function initMap() {
     const ict = new google.maps.LatLng(35.901810199007215, 14.485197413626922);
     map = new google.maps.Map(document.getElementById("map"), {
@@ -17,25 +17,6 @@ function initMap() {
         tilt: 0
     });
 
-    //Creating an array of objects
-    //Object with level and googleMarker
-    //var markers = [
-    //    { level: 0, marker: new google.maps.Marker({ position: { lat: 35.901810199007214, lng: 15.485197413626921 }, map, title: "Level 0 Marker" }) },
-    //   { level: -1, marker: new google.maps.Marker({ position: { lat: 34.901810199007216, lng: 14.485197413626923 }, map, title: "Level -1 Marker" }) }
-    //]; 
-
-
-    const coordInfoWindow = new google.maps.InfoWindow();
-    coordInfoWindow.setContent(createInfoWindowContent(ict, map.getZoom()));
-    coordInfoWindow.setPosition(ict);
-    //coordInfoWindow.open(map);
-    //event listener that fires when zoom level changes
-    map.addListener("zoom_changed", () => {
-        coordInfoWindow.setContent(
-            createInfoWindowContent(ict, map.getZoom())
-        );
-        //coordInfoWindow.open(map);
-    });
     //setting the bounds of UOM. Bounds [zoom][coord.x][coord.y]
     //bounds are generated from map tiler folder structure when tiles are created
     const bounds = {
@@ -61,25 +42,9 @@ function initMap() {
         ],
     };
 
-    //const bounds2 = {
-    //    19: [
-    //        [283239, 283240],
-    //        [206056, 206057],
-    //    ],
-    //    20: [
-    //        [566478, 566480],
-    //        [412112, 412115],
-    //    ],
-    //    21: [
-    //        [1132957, 1132960],
-    //        [824225, 824231],
-    //    ],
-    //};
-
     //https://developers.google.com/maps/documentation/javascript/examples/maptype-image-overlay#maps_maptype_image_overlay-javascript
+
     //creating the imageMapType for the image to be overlayed over the map
-
-
     const ictLvlMinOne = new google.maps.ImageMapType({
         getTileUrl: function (coord, zoom) {
             //if statement to not render the image if outside the bounds or outside the max/min zoom levels
@@ -112,7 +77,6 @@ function initMap() {
 
     const ictLvlZero = new google.maps.ImageMapType({
         getTileUrl: function (coord, zoom) {
-            //if statement to not render the image if outside the bounds or outside the max/min zoom levels
             if (
                 zoom < 18 ||
                 zoom > 22 ||
@@ -123,8 +87,6 @@ function initMap() {
             ) {
                 return "";
             }
-            //returning the required tiles by requesting the specific png images
-            //link is according to the port being used 
             return [
                 "https://localhost:",
                 port,
@@ -172,7 +134,6 @@ function initMap() {
 
     const ictLvlOne = new google.maps.ImageMapType({
         getTileUrl: function (coord, zoom) {
-            //if statement to not render the image if outside the bounds or outside the max/min zoom levels
             if (
                 zoom < 18 ||
                 zoom > 22 ||
@@ -183,8 +144,6 @@ function initMap() {
             ) {
                 return "";
             }
-            //returning the required tiles by requesting the specific png images
-            //link is according to the port being used 
             return [
                 "https://localhost:",
                 port,
@@ -200,12 +159,18 @@ function initMap() {
         tileSize: new google.maps.Size(256, 256),
     });
 
+    //storing index.html radio buttons
     var radio = document.forms["level-selector"].elements["level"];
+    //looping through radio buttons to know when clicked
     for (var i = 0; i < radio.length; i++) {
         radio[i].onclick = function () {
+
+            //if Level -2 is selected
             if (document.getElementById('level -2').checked) {
+                //setting level variable to current level
                 level = -2;
 
+                //clear and change the overlay to display level -2 and write "Level -2 Parking" to let user know
                 map.overlayMapTypes.clear();
                 map.overlayMapTypes.push(ictLvlMinTwo);
                 document.getElementById('status').innerHTML = "Level -2 Parking";
@@ -222,10 +187,10 @@ function initMap() {
             if (document.getElementById('level -1').checked) {
                 level = -1;
 
+                //showing the path on the current level only
                 if (drawPathLvl0 != null) {
                     drawPathLvl0.setMap(null);
                 }
-
                 if (drawPathLvlMin1 != null) {
                     drawPathLvlMin1.setMap(map);
                 }
@@ -234,7 +199,6 @@ function initMap() {
                 map.overlayMapTypes.push(ictLvlMinOne);
                 document.getElementById('status').innerHTML = "Level -1";
 
-                //Show appropriate markers
                 for (let j = 0; j < markers.length; j++) {
                     if (markers[j].level == -1) {
                         markers[j].marker.setMap(map);
@@ -259,7 +223,6 @@ function initMap() {
                 map.overlayMapTypes.push(ictLvlZero);
                 document.getElementById('status').innerHTML = "Level 0";
 
-                //Show appropriate markers
                 for (let j = 0; j < markers.length; j++) {
                     if (markers[j].level == 0) {
                         markers[j].marker.setMap(map);
@@ -267,7 +230,7 @@ function initMap() {
                         markers[j].marker.setMap(null);
                     }
                 }
-                
+
             }
 
             if (document.getElementById('level 1').checked) {
@@ -277,7 +240,6 @@ function initMap() {
                 map.overlayMapTypes.push(ictLvlOne);
                 document.getElementById('status').innerHTML = "Level 1";
 
-                //Show appropriate markers
                 for (let j = 0; j < markers.length; j++) {
                     if (markers[j].level == 1) {
                         markers[j].marker.setMap(map);
@@ -290,6 +252,8 @@ function initMap() {
             if (document.getElementById('no-overlay').checked) {
                 level = -999;
 
+                //clearing the markers and overlay
+
                 for (let j = 0; j < markers.length; j++) {
                     markers[j].marker.setMap(null);
                 }
@@ -299,68 +263,60 @@ function initMap() {
         }
     }
 
-    // Adds marker when user clicks on map
-    map.addListener("click", (mapsMouseEvent) => {
-        //addMarker(map, mapsMouseEvent)
+    // Adds marker when user clicks on map. Used to create new pinpoints (architect)
 
-    });
+    //map.addListener("click", (mapsMouseEvent) => {
+    //    addMarker(map, mapsMouseEvent)
+    //});
 }
 
+//adding a marker
 function addMarker(map, mapsMouseEvent) {
-        var marker = new google.maps.Marker({
-            position: mapsMouseEvent.latLng,
-            //icon: iconBase+"NavNode.png",
-            map,
-            title: "Lecture Room"
-        });
+    var marker = new google.maps.Marker({
+        position: mapsMouseEvent.latLng,
+        //icon: iconBase+"NavNode.png",
+        map,
+        title: "Lecture Room"
+    });
 
 
-        //Add listener to the marker to splice element from array and remove from map on rightclick
-        marker.addListener("rightclick", function () {
-            for (let i = 0; i < markers.length; i++) {
-                if (markers[i].marker == marker) {
-                    //alert("IN IF STATEMENT");
-                    //delete markers[i];
-                    markers.splice(i, 1);
-                    marker.setMap(null);
-                    console.log(markers);
-                }
+    //Add listener to the marker to splice element from array and remove from map on rightclick
+    marker.addListener("rightclick", function () {
+        for (let i = 0; i < markers.length; i++) {
+            if (markers[i].marker == marker) {
+                //alert("IN IF STATEMENT");
+                //delete markers[i];
+                markers.splice(i, 1);
+                marker.setMap(null);
+                console.log(markers);
             }
-        });
-
-
-        /*marker.addListener("dblclick", (mapsMouseEvent) => {
-            if (startNode == null)
-                startNode = marker;
-            else
-                endNode = marker;
-
-        });*/
-
-        var markerObj = {
-            id: id, level: level, marker: marker
         }
+    });
 
-        markers.push(markerObj);
+    //creating marker object with relevant data
+    var markerObj = {
+        id: id, level: level, marker: marker
+    }
 
-        //calling the pinpoint window function
-        //pinpointWindow(map, mapsMouseEvent);
+    //adding marker object to marker array
+    markers.push(markerObj);
 
-        id++;
+    id++;
 
-        console.log("LAT" + JSON.stringify(marker.position.lng()));
 
-// Adding entrance/exit
-        //AddPinpoint(
-        //    4, //pp type
-        //    3, //floor id
-        //    marker.position.lat(),
-        //    marker.position.lng(),
-        //    1, //hazard id
-        //    "Stair Bott", //title
-        //    "Staircase Bottom" //description
-        //);
+    //settings to determine what type of pinpoint the new pinpoint is
+    /*
+    AddPinpoint(
+        4, //pp type
+        3, //floor id
+        marker.position.lat(),
+        marker.position.lng(),
+        1, //hazard id
+        "Stair Bott", //title
+        "Staircase Bottom" //description
+    );
 
-           //export { markers, markerObj};
+    export { markers, markerObj };
+    */
 }
 
