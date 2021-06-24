@@ -187,7 +187,7 @@ public class RegisterActivity extends AppCompatActivity implements AdapterView.O
 
                 }
             });
-            Toast.makeText(RegisterActivity.this, "User has been successdully registered!", Toast.LENGTH_SHORT).show();
+            Toast.makeText(RegisterActivity.this, "User has been successfully registered!", Toast.LENGTH_SHORT).show();
             Intent intent = new Intent(RegisterActivity.this, LoginActivity.class);
             startActivity(intent);
         }

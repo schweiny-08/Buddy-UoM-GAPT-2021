@@ -109,7 +109,7 @@ public class LoginActivity extends AppCompatActivity {
         startActivity(intent);
     }
 
-    public static String readFromFile(String file, Context context) {
+    public String readFromFile(String file, Context context) {
 
         String ret = "";
 
@@ -130,6 +130,7 @@ public class LoginActivity extends AppCompatActivity {
                 ret = stringBuilder.toString();
             }
         } catch (FileNotFoundException e) {
+            RegisterActivity.writeToFile("",getApplicationContext());
             Log.e("login activity", "File not found: " + e.toString());
         } catch (IOException e) {
             Log.e("login activity", "Can not read file: " + e.toString());
