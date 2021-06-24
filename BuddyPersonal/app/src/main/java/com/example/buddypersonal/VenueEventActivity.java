@@ -66,7 +66,6 @@ public class VenueEventActivity extends AppCompatActivity implements NavigationV
         LocalStorage.publicEvent = -1;
 
         popRecyclerView();
-        insertEvents(strDate);
     }
 
     public void openDrawer() {
@@ -93,13 +92,12 @@ public class VenueEventActivity extends AppCompatActivity implements NavigationV
 
     public void hardCodedEvents() {
 
-        PublicEventModel em = new PublicEventModel();
-        PublicEventModel em2 = new PublicEventModel();
+        for(int i = 0; i<9; i++){
+            PublicEventModel em = new PublicEventModel(i,i,i,"Event "+i, "0"+i+":00", "28/06/21", i+12+":00", "28/06/21", "UoM", "Description goes here");
+            LocalStorage.eventList.add(em);
+        }
 
-        LocalStorage.eventList.add(em);
-        LocalStorage.eventList.add(em2);
-
-        writeToFile(LocalStorage.getEventsJson(), getApplicationContext());
+        //writeToFile(LocalStorage.getEventsJson(), getApplicationContext());
     }
 
     public static void writeToFile(String data, Context context) {

@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.ImageView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -18,6 +19,7 @@ public class AccessibilityActivity extends AppCompatActivity implements Navigati
 
     DrawerLayout drawerLayout;
     NavigationView navigationView;
+    ImageView navDrawer;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -25,6 +27,7 @@ public class AccessibilityActivity extends AppCompatActivity implements Navigati
         setContentView(R.layout.activity_accessibility);
 
         drawerLayout = findViewById(R.id.acc_drawer);
+        navDrawer = findViewById(R.id.drawer_icon);
         navigationView = findViewById(R.id.acc_nav);
 
         navigationView.bringToFront();
@@ -32,12 +35,17 @@ public class AccessibilityActivity extends AppCompatActivity implements Navigati
         drawerLayout.addDrawerListener(toggle);
         toggle.syncState();
         navigationView.setNavigationItemSelectedListener(this);
+
+        navDrawer.setOnClickListener(view -> openDrawer());
     }
 
     //Mimics saving accessibility preferences
     public void save(View view) {
         Intent intent = new Intent(AccessibilityActivity.this, SettingsActivity.class);
         startActivity(intent);
+    }
+    public void openDrawer() {
+        drawerLayout.openDrawer(GravityCompat.START);
     }
 
     @Override

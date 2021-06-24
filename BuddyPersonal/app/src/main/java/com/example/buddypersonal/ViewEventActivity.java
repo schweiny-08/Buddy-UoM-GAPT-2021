@@ -73,11 +73,12 @@ public class ViewEventActivity extends AppCompatActivity implements NavigationVi
 
     //Deletes user from the system
     public void delete(View view) {
-        LocalStorage.eventList.remove(LocalStorage.privateEvent);
+        LocalStorage.privEventList.remove(LocalStorage.privateEvent);
         Toast.makeText(this, "Event has been deleted successfully.", Toast.LENGTH_SHORT).show();
         Intent intent = new Intent(ViewEventActivity.this, ItineraryActivity.class);
         intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
         startActivity(intent);
+        LoginActivity.writeToFile("priv_events_file.txt", LocalStorage.getPrivEventsJson(), getApplicationContext());
         finish();
     }
 

@@ -47,9 +47,7 @@ public class ItineraryActivity extends AppCompatActivity implements NavigationVi
         dateTimeDisplay = (TextView) findViewById(R.id.itn_tv_curr_date);
         calendar = Calendar.getInstance();
 
-        simpleDateFormat = new SimpleDateFormat("dd/MM/yyyy");
-        date = simpleDateFormat.format(calendar.getTime());
-        dateTimeDisplay.setText(date);
+
 
         drawerLayout = findViewById(R.id.itn_drawer);
         navigationView = findViewById(R.id.itn_nav);
@@ -61,18 +59,19 @@ public class ItineraryActivity extends AppCompatActivity implements NavigationVi
         navDrawer.setOnClickListener(view -> openDrawer());
 
         popRecyclerView();
-        String strDate = "";
 
-        if (LocalStorage.selDate != "") {
-            java.util.Calendar calendar = java.util.Calendar.getInstance();
-            SimpleDateFormat mdformat = new SimpleDateFormat("dd/MMM/yyyy");
-            strDate = mdformat.format(calendar.getTime());
-        } else {
-            strDate = LocalStorage.selDate;
+        if(LocalStorage.selDate.equals(null) || LocalStorage.selDate.equals("")) {
+            simpleDateFormat = new SimpleDateFormat("dd/MM/yyyy");
+            date = simpleDateFormat.format(calendar.getTime());
+            dateTimeDisplay.setText(date);
+            insertEvents(date);
+        }else {
+            dateTimeDisplay.setText(LocalStorage.selDate);
+            insertEvents(LocalStorage.selDate);
         }
 
-        insertEvents(strDate);
         LocalStorage.privateEvent = -1;
+        LocalStorage.selDate = "";
     }
 
     public void openDrawer() {

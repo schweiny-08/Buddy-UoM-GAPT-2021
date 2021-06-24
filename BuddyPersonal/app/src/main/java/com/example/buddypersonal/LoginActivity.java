@@ -22,6 +22,7 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.io.OutputStreamWriter;
 import java.lang.reflect.Type;
 import java.util.ArrayList;
 
@@ -130,7 +131,7 @@ public class LoginActivity extends AppCompatActivity {
                 ret = stringBuilder.toString();
             }
         } catch (FileNotFoundException e) {
-            RegisterActivity.writeToFile("",getApplicationContext());
+            writeToFile(file, "",getApplicationContext());
             Log.e("login activity", "File not found: " + e.toString());
         } catch (IOException e) {
             Log.e("login activity", "Can not read file: " + e.toString());
@@ -167,15 +168,25 @@ public class LoginActivity extends AppCompatActivity {
 
         //load public events into local arraylist
 
-        temp = readFromFile("public_events_file.txt", getApplicationContext()); //read from file, get json to string
+        //temp = readFromFile("public_events_file.txt", getApplicationContext()); //read from file, get json to string
 
-        Type publicEventListType = new TypeToken<ArrayList<PublicEventModel>>() {
-        }.getType();
+        //Type publicEventListType = new TypeToken<ArrayList<PublicEventModel>>() {
+        //}.getType();
 
-        ArrayList<PublicEventModel> publicEventArray = gson.fromJson(temp, publicEventListType);
+        //ArrayList<PublicEventModel> publicEventArray = gson.fromJson(temp, publicEventListType);
 
-        LocalStorage.eventList = publicEventArray; //populate local storage array list
+        //LocalStorage.eventList = publicEventArray; //populate local storage array list
 
+    }
+
+    public static void writeToFile(String file, String data, Context context) {
+        try {
+            OutputStreamWriter outputStreamWriter = new OutputStreamWriter(context.openFileOutput(file, Context.MODE_PRIVATE));
+            outputStreamWriter.write(data);
+            outputStreamWriter.close();
+        } catch (IOException e) {
+            Log.e("Exception", "File write failed: " + e.toString());
+        }
     }
 
     public int checkForMatch(String email, String pass) {

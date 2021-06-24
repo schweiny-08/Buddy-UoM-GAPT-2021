@@ -27,14 +27,20 @@ public class CalendarActivity extends AppCompatActivity implements NavigationVie
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_calendar);
 
-        LocalStorage.selDate = "";
+        //LocalStorage.selDate = "";
 
         calendarView = (CalendarView) findViewById(R.id.calendarView);
         calendarView.setOnDateChangeListener(new CalendarView.OnDateChangeListener() {
             @Override
             public void onSelectedDayChange(@NonNull CalendarView view, int year, int month, int dayOfMonth) {
                 //get data related to the specific date chosen
-                String date = dayOfMonth + "/" + month + "/" + year;
+                String date = "";
+                if(month<10) {
+                    date = dayOfMonth + "/0" + (month + 1) + "/" + year;
+                }else {
+                    date = dayOfMonth + "/" + (month+1) + "/" + year;
+                }
+
                 Intent intent = new Intent(CalendarActivity.this, ItineraryActivity.class);
                 intent.putExtra("selected date", date);
                 LocalStorage.selDate = date;
